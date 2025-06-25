@@ -1,3 +1,14 @@
-# Introduction
+# Introduction {.unnumbered}
 
-Well, quantum computing. Really trendy topic. Fancy as it might be there are some really cool things we can learn from trying to challenge the _status quo_. Let's see if we can get our heads around what quantum computing is and how to work with it.
+Well, quantum computing. Really trendy topic. Although it is not the only unconventional computing paradigm out there:
+
+* Quantum Computing
+* [Neuromorphic computing](https://www.intel.la/content/www/xl/es/research/neuromorphic-computing.html)
+* [Analog computing](https://the-analog-thing.org/)
+* [Probabilistic computing](https://www.purdue.edu/p-bit/)
+* [Thermodynamic computing](https://www.normalcomputing.com/blog-posts/scaling-thermodynamic-computing)
+* [Biological computing](https://news.mit.edu/2016/biological-circuit-cells-remember-respond-stimuli-0721)
+
+Fancy as it might be there are some really cool things we can learn from trying to challenge the _status quo_. It is not the first paradigm aiming to dethrone classical computing - yes, we will need to do that distinction from now on - but it is certainly the one that has progressed the most. We do have quantum computers, computers the open public can use and that are already fighting in some critical areas making people nervous about it.
+
+Let's see if we can get our heads around what quantum computing is and how to work with it. Let's start 🎉
