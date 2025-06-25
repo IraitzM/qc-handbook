@@ -1,19 +1,19 @@
 # Getting started
 
-What is quantum computing? Well, nothing but a new paradigm to perform computation. It is based on the formalism of **quantum physics** and even though it might be challenging to grasp at first, just some basic linear algebra might help on understanding the basics. The rest, is pure engineering.
+What is quantum computing? Well, nothing but a new paradigm to perform computation. It is based on the formalism of **quantum physics** and even though it might be challenging to grasp at first, just some basic linear algebra might help you understanding the basics. I will try to show it by examples in Python so that it is less challenging and more hands-on.
 
-Classical computing also embraces physics but at a much higher abstraction level. Boolean algebra made possible an universal set of operations to produce the algorithms we do use on a daily basis. Then, being able to manufacture bits as voltages made possible to build machines capable of following that boolean algebra. The rest is history.
+Classical computing also embraces physics but at a much higher abstraction level. [Boolean algebra](https://en.wikipedia.org/wiki/Boolean_algebra) made possible an universal set of operations to produce the algorithms we do use on a daily basis. Then, being able to manufacture bits as voltages made possible to build machines capable of following that algebra. The rest is history.
 
-The main idea behind quantum computing is that, instead of working at a macroscopic level as we are used to, by using quantum states on some physical mean we could benefit from those effects inherent to quantum physics. Be leveraging the these lower level effects some really complex calculations could be performed more efficiently. _Superposition_, _interference_ and _entanglement_ are key to most of the speedups claimed in the literature, and we will try to understand how we can work with those.
+The main idea behind quantum computing is that, instead of working at a macroscopic level as we are used to, by using quantum states on some physical mean we could benefit from the effects inherent to quantum physics to perform computation in _different ways_. By leveraging the those effects some really complex calculations could be performed more efficiently. _Superposition_, _interference_ and _entanglement_ are the key to most of the speedups claimed in the literature, and we will try to understand how we can work with those.
 
 This is part of the recent history of the field and future roadmap.
 <figure markdown>
   ![QC timeline](assets/timeline.png)
 </figure>
 
-The main concept leveraged by quantum computers is the ability to act over quantum states. A quantum state is no other thing than a mathematical description of the probability distribution for the potential outcome after measurement upon a system. It sounds tricky but in general we could think of it as a normed vector. Let's try with the most simple example, a coin. 
+The main concept leveraged by quantum computers is the ability to act over quantum states. A quantum state is no other thing than a mathematical description of the probability distribution for the potential outcome after performing a measurement upon a system. It sounds tricky.
 
-Well, the quantum version of a coin looks like:
+Think about it as a normed vector (vector of _length_ 1). Let's try with the most simple example, a coin. Well, the quantum version of a coin looks like:
 
 $$
 |\phi\rangle = \left[
