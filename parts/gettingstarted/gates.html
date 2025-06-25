@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quantum gates – Quantum Computing Handbook</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/gettingstarted/simulations.html" rel="next">
+<link href="../../parts/gettingstarted/basics.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-591d5bc14b3e665d51226608c3fdc156.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/gettingstarted/qc-intro.html">Getting started</a></li><li class="breadcrumb-item"><a href="../../parts/gettingstarted/gates.html">Quantum gates</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Quantum Computing Handbook</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quantum gates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simulations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Hardware</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Libraries</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-hall-of-gates" id="toc-the-hall-of-gates" class="nav-link active" data-scroll-target="#the-hall-of-gates">The Hall of Gates</a>
+  <ul class="collapse">
+  <li><a href="#not-gate-x" id="toc-not-gate-x" class="nav-link" data-scroll-target="#not-gate-x">NOT-gate (X)</a></li>
+  <li><a href="#hadamard-h" id="toc-hadamard-h" class="nav-link" data-scroll-target="#hadamard-h">Hadamard (H)</a></li>
+  </ul></li>
+  <li><a href="#rotating-quantum-states" id="toc-rotating-quantum-states" class="nav-link" data-scroll-target="#rotating-quantum-states">Rotating quantum states</a></li>
+  <li><a href="#native-gates" id="toc-native-gates" class="nav-link" data-scroll-target="#native-gates">Native gates</a></li>
+  <li><a href="#multi-qubit-systems" id="toc-multi-qubit-systems" class="nav-link" data-scroll-target="#multi-qubit-systems">Multi-qubit systems</a>
+  <ul class="collapse">
+  <li><a href="#control-not-cnot" id="toc-control-not-cnot" class="nav-link" data-scroll-target="#control-not-cnot">Control-NOT (CNOT)</a></li>
+  <li><a href="#entanglement" id="toc-entanglement" class="nav-link" data-scroll-target="#entanglement">Entanglement</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/gettingstarted/qc-intro.html">Getting started</a></li><li class="breadcrumb-item"><a href="../../parts/gettingstarted/gates.html">Quantum gates</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Quantum gates</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Now that we know how our states might look like</p>
+<p><span class="math display">\[
+|\phi\rangle = \left[
+\begin{array}{c}
+\alpha \\
+\beta
+\end{array}
+\right]
+\]</span></p>
+<p>would be relevant to understand how we can operate on them. Quantum computers, like classical computers, use logical gates to do their work. In this case, gates are operations that take our initial state and convert it into a different quantum state. Classical regime is poor in this sense as allowed changes are only between 0 and 1, but quantum states and qubits allow for much more information to be represented. That makes quantum logical gates also more complex and rich.</p>
+<p><span class="math display">\[
+U|\psi\rangle \rightarrow |\phi\rangle
+\]</span></p>
+<p>But in this case, these gates are specific to the quantum regime. We will find some similarities like in the case of the not gate and some particular cases like the Hadamard gate.</p>
+<p>A quantum gate is a frame to describe the quantum process taking a quantum state at time <span class="math inline">\(t\)</span> to the one at <span class="math inline">\(t+1\)</span>. For a closed quantum system the operator that describes the evolution of the system can be described with <span class="math inline">\(e^{-i\int H dt/\hbar}\)</span>, which is a unitary operator based on the Hamiltonian that describes the dynamics of the system. What is a Hamiltonian you ask? Well, this video may be of interest then:</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BusR0WQ_Gxo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Just take into account that, if we ignore the global phase of the quantum state, we can suppose all the quantum gates to be special unitary operations, i.e., the determinant of them is 1. This is so that the obtained state falls into the surface of the bloch sphere (otherwise we enter a much more complex territory).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Time Evolution Postulate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A pure state <span class="math inline">\(|\psi(t_0)\rangle\)</span> in a Hilbert space <span class="math inline">\(\mathcal{H}\)</span> can evolve to another state <span class="math inline">\(|\psi(t)\rangle\)</span> given by the time evolution operator <span class="math inline">\(U(t,t_0)\)</span></p>
+<p><span class="math display">\[
+|\psi(t)\rangle = U(t,t_0)|\psi(t_0)\rangle
+\]</span></p>
+<p>where <span class="math inline">\(U(t,t_0)\)</span> is the unitary transformation on the initial state of a closed system (with special case <span class="math inline">\(U(t_0,t_0)=I\)</span>). The time evolution is governed by the Schrödinger equation - yes, the one with the cat -</p>
+<p><span class="math display">\[
+i\frac{d}{dt}|\psi(t)\rangle = \hat{H}|\psi(t)\rangle \rightarrow |\psi(t)\rangle = e^{-i\hat{H}t}|\psi(0)\rangle
+\]</span></p>
+<p>here <span class="math inline">\(\hat{H}\)</span> is a self adjoint operator also known as the Hamiltonian. <span class="math inline">\(\hat{H}\)</span> is an observable associated to the energy of the system and governs the dynamics of a given state relating to previously mentioned <span class="math inline">\(U\)</span> as <span class="math inline">\(U(t) = e^{-(i/\hbar)t\hat{H}}\)</span> following Stone’s theorem.</p>
+</div>
+</div>
+<section id="the-hall-of-gates" class="level2">
+<h2 class="anchored" data-anchor-id="the-hall-of-gates">The Hall of Gates</h2>
+<p>As in classical computing, some key gates need to be known. The <span class="math inline">\(NAND\)</span> being an universal boolean logic gate as it can create all the other options required to render boolean logic, we should introduce some of the core gates when talking about quantum computing and the universality of those gates.</p>
+<section id="not-gate-x" class="level3">
+<h3 class="anchored" data-anchor-id="not-gate-x">NOT-gate (X)</h3>
+<p>The not gate (<span class="math inline">\(X\)</span> as the operator gate and <span class="math inline">\(\sigma_x\)</span> if expressed as a Pauli matrix) is one of the most basic concepts in computing. A classical operation that takes the bit in a position (0 or 1) to its opposite. But, <em>quantum not</em> extends that basic concept to the complexity of the quantum regime. The operator can be represented by a matrix like the following one:</p>
+<p><span class="math display">\[
+X = \left[
+\begin{array}{cc}
+0 &amp; 1 \\
+1 &amp; 0
+\end{array}
+\right]
+\]</span></p>
+<p>Then, the operation <span class="math inline">\(X|0\rangle = |1\rangle\)</span> can be validated by the simple multiplication of the matrix of the gate by the quantum state:</p>
+<p><span class="math display">\[
+X|0\rangle = \left[
+\begin{array}{cc}
+0 &amp; 1 \\
+1 &amp; 0
+\end{array}
+\right]\left[
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right] = \left[
+\begin{array}{c}
+0 \\
+1
+\end{array}
+\right] = |1\rangle
+\]</span></p>
+<p>But if we perform this very simple example with the generic case for <span class="math inline">\(|\psi\rangle\)</span></p>
+<p><span class="math display">\[
+X|\psi\rangle = X(\alpha|0\rangle + \beta |1\rangle) = \left[
+\begin{array}{cc}
+0 &amp; 1 \\
+1 &amp; 0
+\end{array}
+\right]\left[
+\begin{array}{c}
+\alpha \\
+\beta
+\end{array}
+\right] = \left[
+\begin{array}{c}
+\beta \\
+\alpha
+\end{array}
+\right] = \beta|0\rangle + \alpha |1\rangle = |\phi\rangle
+\]</span></p>
+<p>we have basically created a new state where its outcome probabilities have been shifted. Therefore, the <span class="math inline">\(X\)</span> operation can be used to shift the state ratter than perform a mere coin flipping. This gets more interesting looking at some specific gates like the Hadamard gate.</p>
+</section>
+<section id="hadamard-h" class="level3">
+<h3 class="anchored" data-anchor-id="hadamard-h">Hadamard (H)</h3>
+<p>Its matrix representation is</p>
+<p><span class="math display">\[
+H = \frac{1}{\sqrt{2}}\left[
+\begin{array}{cc}
+1 &amp; 1 \\
+1 &amp; -1
+\end{array}
+\right]
+\]</span></p>
+<p>And its effect…</p>
+<p><span class="math display">\[
+H|0\rangle = \frac{1}{\sqrt{2}}\left[
+\begin{array}{cc}
+1 &amp; 1 \\
+1 &amp; -1
+\end{array}
+\right]\left[
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right] = \frac{1}{\sqrt{2}}\left[
+\begin{array}{c}
+1 \\
+1
+\end{array}
+\right] = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle = |+\rangle
+\]</span></p>
+<p>basically it allows as to switch the axis of the bloch sphere and work on the superposition of the states on the <span class="math inline">\(Z\)</span> axis.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/bloch2.png" class="img-fluid figure-img"></p>
+<figcaption>Bloch sphere</figcaption>
+</figure>
+</div>
+</figure>
+</section>
+</section>
+<section id="rotating-quantum-states" class="level2">
+<h2 class="anchored" data-anchor-id="rotating-quantum-states">Rotating quantum states</h2>
+<p>In essence, we will see that many gates what they offer us is simply rotations over the three main axes of the bloch sphere:</p>
+<p><span class="math display">\[
+R_x(\theta) = \left(
+    \begin{array}{cc}
+        \cos(\frac{\theta}{2}) &amp; -i\sin(\frac{\theta}{2}) \\
+        -i\sin(\frac{\theta}{2}) &amp; \cos(\frac{\theta}{2})
+    \end{array}
+    \right)
+\]</span></p>
+<p><span class="math display">\[
+R_y(\theta) = \left(
+    \begin{array}{cc}
+        \cos(\frac{\theta}{2}) &amp; -\sin(\frac{\theta}{2}) \\
+        \sin(\frac{\theta}{2}) &amp; \cos(\frac{\theta}{2})
+    \end{array}
+    \right)
+\]</span></p>
+<p><span class="math display">\[
+R_z(\theta) = \left(
+    \begin{array}{cc}
+        e^{-i\frac{\theta}{2}} &amp; 0 \\
+        0 &amp; e^{i\frac{\theta}{2}}
+    \end{array}
+    \right)
+\]</span></p>
+<p>making the general case <span class="math inline">\(R_M(\theta) = \exp^{(−i\theta M/2)}\)</span> where <span class="math inline">\(M \in \{X,Y,Z\};\)</span> being those three the Pauli gates the Pauli matrices <span class="math inline">\(\sigma_x, \sigma_y \text{ and } \sigma_z\)</span>. Actually the literature will quote a more generic case which will be given by the following gate operator</p>
+<p><span class="math display">\[
+U(\theta, \phi, \lambda) = \left( \begin{array}{cc}
+        \cos(\frac{\theta}{2}) &amp; -e^{i\lambda}\sin(\frac{\theta}{2})\\
+        e^{i\phi}\sin(\frac{\theta}{2}) &amp; e^{i(\phi+\lambda)}\cos(\frac{\theta}{2})
+    \end{array} \right)
+\]</span></p>
+<p>which maps to previous gates following the relationship <span class="math inline">\(U(\theta,0,0) = R_y(\theta)\)</span>, <span class="math inline">\(U(0,0,\lambda) = R_z(\lambda)\)</span> and <span class="math inline">\(U(\theta,-\frac{\pi}{2},\frac{\pi}{2}) = R_x(\theta)\)</span></p>
+</section>
+<section id="native-gates" class="level2">
+<h2 class="anchored" data-anchor-id="native-gates">Native gates</h2>
+<p>Quantum Computing is a mathematical framework that allows for all kind of gates to be designed but in many cases depending on the <em>manufacturer</em> of the device the set of gates we can use may differ. We will need to find the combination of gates that will produce our desired action by using the gates each device is equipped with. Also called <em>native</em> gates.</p>
+<p>The native gate set is the gate set, one and two-qubit gates, that should be used to translate any theoretical operator or action from the mathematical framework to be physical action that can be performed, decomposing the original action into different operations or better expressed, <em>transpiling</em> the circuit.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+You won’t believe this but…
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Actually, two of the most basic gates, the Hadamard and CNOT gate, do not exist. We always need to find translations for those fundamental operations when dealing with hardware.</p>
+</div>
+</div>
+</div>
+Our circuit:
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ghz.webp" class="img-fluid figure-img"></p>
+<figcaption>Some circuit</figcaption>
+</figure>
+</div>
+</figure>
+<p><span class="math inline">\(H\)</span> represents the Hadamard gate and the other two blue ones, the <em>Control-NOT</em> gate as the basis for generating entangled states.</p>
+<p>No device can implement natively at least to the best of our knowledge. Therefore, in order to apply that gate own needs to apply <em>native</em> gates that produce the same action or unitary matrix.</p>
+What can run on IBM devices if we convert it to
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ghz-transpiled.webp" class="img-fluid figure-img"></p>
+<figcaption>Transpiled circuit</figcaption>
+</figure>
+</div>
+</figure>
+<p>We will see this in more detail later when we review <a href="../hardware">hardware providers</a> and their actual implementation.</p>
+</section>
+<section id="multi-qubit-systems" class="level1">
+<h1>Multi-qubit systems</h1>
+<p>We have explored what a single qubit quantum state may look like and how to operate on it using quantum gates. Now, let’s scale up our system by adding more qubits. The composition of a quantum system with more than qubits will render a quantum state that is obtained after performing the <em>tensor product</em> - or <a href="https://en.wikipedia.org/wiki/Kronecker_product">Kronecker product</a> - of its units.</p>
+<p><span class="math display">\[
+|0\rangle \otimes |0\rangle = \left[
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right] \otimes \left[
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right] = \left[
+\begin{array}{c}
+1 \times \left[
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right] \\
+0 \times \left[
+\begin{array}{c}
+1 \\
+0
+\end{array}
+\right]
+\end{array}
+\right] = \left[
+\begin{array}{c}
+1 \\
+0 \\
+0 \\
+0
+\end{array}
+\right] = |00\rangle
+\]</span></p>
+<p>Therefore, to operate with those systems our gates will need to scale up as well. Identity matrix (<span class="math inline">\(I\)</span>) will become our ally so that we can compose gates the operate in que same quantum system regime.</p>
+<p><span class="math display">\[
+I \otimes X = \left[
+\begin{array}{c}
+1 &amp; 0\\
+0 &amp; 1
+\end{array}
+\right] \otimes \left[
+\begin{array}{c}
+0 &amp; 1\\
+1 &amp; 0
+\end{array}
+\right] = \left[
+\begin{array}{cc}
+1 \times \left[\begin{array}{c}
+0 &amp; 1\\
+1 &amp; 0
+\end{array}\right] &amp;
+0 \times \left[\begin{array}{c}
+0 &amp; 1\\
+1 &amp; 0
+\end{array}\right] \\
+0 \times \left[\begin{array}{c}
+0 &amp; 1\\
+1 &amp; 0
+\end{array}\right] &amp;
+1 \times \left[\begin{array}{c}
+0 &amp; 1\\
+1 &amp; 0
+\end{array}\right]
+\end{array}
+\right] = \left[
+\begin{array}{cccc}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+\right]
+\]</span></p>
+<p>Now we should just need to create the product between the quantum state and the operation to understand the effect of it.</p>
+<p><span class="math display">\[
+(I \otimes X)|00\rangle = \left[
+\begin{array}{cccc}
+0 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+\right]\left[
+\begin{array}{c}
+1 \\
+0 \\
+0 \\
+0
+\end{array}
+\right] = \left[
+\begin{array}{c}
+0 \\
+1 \\
+0 \\
+0
+\end{array}
+\right] = |01\rangle
+\]</span></p>
+<section id="control-not-cnot" class="level2">
+<h2 class="anchored" data-anchor-id="control-not-cnot">Control-NOT (CNOT)</h2>
+<p>One interesting gate to be implemented in this regime is the control not or CNOT gate. This acts on the target qubit only if the first qubit is at <span class="math inline">\(|1\rangle\)</span> state. It does not require any classical measurement or observation, meaning the control qubit still holds its quantumness after gate operation. This is critical to the good functioning of the system otherwise any classical action would affect the quantum state making it purely classical.</p>
+<p><span class="math display">\[
+CNOT|00\rangle = \left[
+\begin{array}{cccc}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+\right]\left[
+\begin{array}{c}
+1 \\
+0 \\
+0 \\
+0
+\end{array}
+\right] = \left[
+\begin{array}{c}
+1 \\
+0 \\
+0 \\
+0
+\end{array}
+\right] = |00\rangle
+\]</span></p>
+<p><span class="math display">\[
+CNOT|10\rangle = \left[
+\begin{array}{cccc}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+\right]\left[
+\begin{array}{c}
+0 \\
+0 \\
+1 \\
+0
+\end{array}
+\right] = \left[
+\begin{array}{c}
+0 \\
+0 \\
+0 \\
+1
+\end{array}
+\right] = |11\rangle
+\]</span></p>
+<p>But what does there happen when it gets applied to a superposed state.</p>
+<p><span class="math display">\[
+CNOT|+0\rangle = \left[
+\begin{array}{cccc}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{array}
+\right]\left[
+\begin{array}{c}
+\frac{1}{\sqrt{2}} \\
+0 \\
+\frac{1}{\sqrt{2}} \\
+0
+\end{array}
+\right] = \left[
+\begin{array}{c}
+\frac{1}{\sqrt{2}} \\
+0 \\
+0 \\
+\frac{1}{\sqrt{2}}
+\end{array}
+\right] = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
+\]</span></p>
+<p>Quite interesting. Have you tried decomposing this state into the tensor product of the quantum state of the two qubits?</p>
+<p>It is fine, because it is not possible. This is what it is called an <strong>entangled</strong> state. One particular benefit of this states is that by measuring only one of those qubits we know the value of the second one without any need for measurement. We cannot act on one party without affecting the whole system, but we also know the condition of the other party by observing just one. This is what Einstein called <em>spooky actions at a distance</em> and are critical to the scalability of the quantum algorithms.</p>
+</section>
+<section id="entanglement" class="level2">
+<h2 class="anchored" data-anchor-id="entanglement">Entanglement</h2>
+<p>Entangled states are critical for some of the quantum algorithms allowing us to outperform (theoretically at least) classical computing. The most basic (and probably best known) entangled states are the Bell states or EPR pairs.</p>
+<p><span class="math display">\[
+|\Phi^{+}\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle) \quad |\Phi^{-}\rangle = \frac{1}{\sqrt{2}}(|00\rangle - |11\rangle)
+\]</span></p>
+<p><span class="math display">\[
+|\Psi^{+}\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle) \quad |\Psi^{-}\rangle = \frac{1}{\sqrt{2}}(|10\rangle - |10\rangle)
+\]</span></p>
+<p>Entangled states are behind some of the key algorithms in communication protocols such as Quantum Teleportation or Superdense coding or behind the post-quantum cryptography proposals, like the Quantum Key Distribution. But they are also relevant for computations as we will see in the following sections.</p>
+<p>I know, too much theory. Let’s try to execute some examples to make it more clear.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/iraitzm\.github\.io\/qc-handbook\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../parts/gettingstarted/basics.html" class="pagination-link" aria-label="Basics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Basics</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../parts/gettingstarted/simulations.html" class="pagination-link" aria-label="Simulations">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simulations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Iraitz Montalbán</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/IraitzM">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/iraitzmontalban/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
