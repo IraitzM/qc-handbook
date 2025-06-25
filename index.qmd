@@ -1,0 +1,7 @@
+# Preface {.unnumbered}
+
+You may wonder, another book about Quantum Computing? Well, by telling it from a different perspective it may help others grasp the idea but it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field and master it. Also, it costs nothing so, no harm done.
+
+## About me
+
+Mi name is Iraitz Montalbán, Computer Scientist by background I started in the field of Quantum Computing by chance, while doing an internship in 2010 there were some guys doing something called _quantum computing_, which was a mathematical framework back then. I kept my interest in the field and ended up doing a masters on Quantum Computing Technologies at UPM and working with some startups in the field.
