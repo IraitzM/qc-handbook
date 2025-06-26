@@ -1,0 +1,7 @@
+# Hybrid solvers
+
+Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve. 
+
+Think about Shor's algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventions Factorization algorithm.
+
+_pending_
