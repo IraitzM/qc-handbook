@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basics – Quantum Computing Handbook</title>
+<title>Appendix B — Hybrid solvers – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../parts/gettingstarted/gates.html" rel="next">
-<link href="../../parts/gettingstarted/qc-intro.html" rel="prev">
-<link href="../../cover.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./libraries.html" rel="prev">
+<link href="./cover.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,35 +70,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -112,7 +82,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/gettingstarted/qc-intro.html">Getting started</a></li><li class="breadcrumb-item"><a href="../../parts/gettingstarted/basics.html">Basics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./libraries.html">Appendices</a></li><li class="breadcrumb-item"><a href="./hybridsolvers.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +97,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Quantum Computing Handbook</a> 
+      <a href="./">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/IraitzM/qc-handbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -143,19 +113,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="./parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -164,19 +134,19 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link active">
+  <a href="./parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum gates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
   </div>
 </li>
@@ -184,7 +154,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -199,13 +169,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
@@ -221,18 +191,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#qubits-and-states" id="toc-qubits-and-states" class="nav-link active" data-scroll-target="#qubits-and-states">Qubits and states</a></li>
-  <li><a href="#superposition" id="toc-superposition" class="nav-link" data-scroll-target="#superposition">Superposition</a></li>
-  <li><a href="#measurement" id="toc-measurement" class="nav-link" data-scroll-target="#measurement">Measurement</a></li>
+  <li><a href="#hybrid-annealers" id="toc-hybrid-annealers" class="nav-link active" data-scroll-target="#hybrid-annealers"><span class="header-section-number">B.1</span> Hybrid Annealers</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/gettingstarted/qc-intro.html">Getting started</a></li><li class="breadcrumb-item"><a href="../../parts/gettingstarted/basics.html">Basics</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./libraries.html">Appendices</a></li><li class="breadcrumb-item"><a href="./hybridsolvers.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Basics</h1>
+<h1 class="title">Appendix B — Hybrid solvers</h1>
 </div>
 
 
@@ -249,137 +217,25 @@ window.Quarto = {
 </header>
 
 
-<p>The main concept leveraged by quantum computers is the ability to act over quantum states. A quantum state is no other thing than a mathematical description of the probability distribution for the potential outcome after performing a measurement upon a system. It sounds tricky but it is simpler than it sounds, bare with me.</p>
-<section id="qubits-and-states" class="level2">
-<h2 class="anchored" data-anchor-id="qubits-and-states">Qubits and states</h2>
-<p>A quantum computer is a device capable of manipulating quantum states in a specific manner. A quantum state is like a complete description of everything you could possibly know about a tiny physical system, a particle, such as an electron or photon, at any given moment. Think of it this way: imagine you have a coin spinning in the air. While it’s spinning, you can’t say it’s definitively heads or tails - it’s in a state of being “both” until it lands. A quantum state is similar, but for particles that are unimaginably small.</p>
-<p>These states are represented as a normed vector (vector of <em>length</em> 1) as the probability of outcomes should add up to one (meaning, certainty). Let’s try with the most basic one, a system of a single unit state. The quantum version of a coin looks like:</p>
-<p><span class="math display">\[
-|\phi\rangle = \left[
-\begin{array}{c}
-\alpha \\
-\beta
-\end{array}
-\right]
-\]</span></p>
-<p>being this the minimum representation of a quantum state: a unit norm vector <span class="math inline">\(\in \mathbb{C}^2\)</span> whose physical realization is known as the <strong>qubit</strong>. Qubits do not exists (like bit as a matter of fact), these concepts are pure mathematical constructions that have a specific meaning. In our case, the minimum unit we can manipulate in our quantum computer.</p>
-<p>It represents the two extremes the system can be at and their <strong>probability amplitudes</strong>. It means we will observe one or the other if we measure the system and those probabilities must add up to one - <span class="math inline">\(|\alpha|^2+|\beta|^2 = 1\)</span> - given that there is certainty that the system exists in one of those options.</p>
-<p>This state can be decomposed into basic components, the two extreme cases previously mentioned or mathematically speaking, <strong>basis states</strong>. This is relevant as when it comes to quantum computers, our minimal unit will be expressed on its computational basis: <span class="math display">\[
-|0\rangle = \left[
-\begin{array}{c}
-1 \\
-0
-\end{array}
-\right]
-\quad
-|1\rangle = \left[
-\begin{array}{c}
-0 \\
-1
-\end{array}
-\right]
-\]</span></p>
-<p>We use this simplified <a href="https://en.wikipedia.org/wiki/Bra%E2%80%93ket_notation">Dirac notation</a> just to make it shorter to write, otherwise we will take much of the space writing vectors an matrices. It is funny because those two column vectors will be translated to the already known 0 and 1 bit when we read the state from a classical computer. Classical computers only work with <em>bits</em> so no matter what we do at a quantum level, everything will be then reduced to a set of 0s and 1s. But we will deal with this later when we talk about <a href="#measurement">measurements</a>.</p>
-<p>Thus previous state can be described in our qubit unit as:</p>
-<p><span class="math display">\[
-|\phi\rangle =
-\alpha |0\rangle +
-\beta |1\rangle = \left[
-\begin{array}{c}
-\alpha \\
-\beta
-\end{array}
-\right],
-\]</span></p>
-<p>meaning our quantum state’s potential outcomes are <span class="math inline">\(|0\rangle\)</span> with probability <span class="math inline">\(|\alpha|^2\)</span> and <span class="math inline">\(|\beta|^2\)</span> odds for <span class="math inline">\(|1\rangle\)</span>. How do we know the actual outcome of our state? Well, we need to <a href="#measurement">measure</a>. This is done by projecting our state over one of those basis states, so the complex conjugate of previous vectors is used to know how likely each option is.</p>
-<p><span class="math display">\[
-\langle 0 | = \left[
-\begin{array}{cc}
-1 &amp; 0
-\end{array}
-\right]
-\quad
-\langle 1 | = \left[
-\begin{array}{cc}
-0 &amp; 1
-\end{array}
-\right]
-\]</span></p>
-<p>By projecting our state into this basis vectors we would obtain:</p>
-<p><span class="math display">\[
-|\langle 0 |\psi\rangle|^2 = \left|\left[
-\begin{array}{cc}
-1 &amp; 0
-\end{array}
-\right]\left[
-\begin{array}{c}
-\alpha \\
-\beta
-\end{array}
-\right]\right|^2 = |\alpha|^2
-\]</span></p>
-<p>So we don’t actually evaluate the state, but we use a basis vector to see “how close” our state is to this option that is part of the basis states we are considering.</p>
-<p>And here we found one of the first strange things about <em>qubits</em> in comparison to <em>bits</em>. Being 0 and 1 the basic states of a bit, its physical realization can only be in on of those states while qubits can be <em>partially</em> in more than one state creating a <strong>superposition</strong> of states.</p>
-</section>
-<section id="superposition" class="level2">
-<h2 class="anchored" data-anchor-id="superposition">Superposition</h2>
-<p>This is one of the trickiest things to get when first approaching quantum computing as it is not so intuitive from our macroscopic perspective. It is also often misunderstood, we will try to make it clear. This is an example of a superposed state</p>
-<p><span class="math display">\[
-|\phi\rangle =
-\alpha |0\rangle +
-\beta |1\rangle.
-\]</span></p>
-<p>The state is a superposed, meaning is a coin spinning in the air and we do not know which state it will reveal when we stop it to look. Our ability to perceive it is limited by the measurement procedure itself, which also alters the condition of the system (stops the coin from spinning), but it is in a set of probabilities during the spinning that is not entirely tied to one specific option (heads or tails).</p>
-<p>We need to project our quantum state into one of the two potential states we can obtain (<span class="math inline">\(|0\rangle\)</span> or <span class="math inline">\(|1\rangle\)</span>). Sadly, when measuring only classical bits can be obtained (0 or 1) into our conventional machines (like the laptop or phone you are using right now), so no probability amplitude, no phase… quantum information gets lost in the measurement process and we end up with classical (boring) information.</p>
-<p>In order to fully understand the state while spinning we toss the coin several times and check each time which state we get. With that we plot the outcome of probabilities in a graph. The <em>probability histogram</em> is created after a sequence of quantum state creations and measurements we often call <strong>SHOTS</strong>. With that we get an idea on how the coin look <em>while spinning</em>.</p>
-<figure class="figure">
+<p>Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve.</p>
+<p>Think about Shor’s algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that tep there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.</p>
+<p>A more detailed explanation can be found in <a href="https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring">IBM’s documentation</a> but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.</p>
+<section id="hybrid-annealers" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="hybrid-annealers"><span class="header-section-number">B.1</span> Hybrid Annealers</h2>
+<p>This is the idea behind some of the services we found available today. On one side, we have the pioneers of the Quantum Computing cloud services, D-Wave and their <a href="https://docs.dwavequantum.com/en/latest/industrial_optimization/leap_hybrid.html">LeapHybrid Solvers</a>.</p>
+<p>Their hybrid approach also allows to tackle beyond QUBO problems, like:</p>
+<ul>
+<li>Non-linear problems</li>
+<li>Constrained Quadratic problems</li>
+<li>Discrete Quadratic problems</li>
+</ul>
+<p>Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by <a href="https://www.quantagonia.com/">Quantagonia</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../assets/cointoss.png" class="img-fluid figure-img"></p>
-<figcaption>Coin toss</figcaption>
+<p><img src="assets/quantagonia.png" class="img-fluid figure-img"></p>
+<figcaption>Quantagonia Dashboard</figcaption>
 </figure>
 </div>
-</figure>
-<p>For a series of measurements we have seen <span class="math inline">\(|0\rangle\)</span> state 50.6% and <span class="math inline">\(|1\rangle\)</span> state 49.4%. Definitely, looks superposed to me. It is difficult to see from were we stand, but quantum state holds a lot more information than this simple binary choice. In fact, both <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are complex numbers, that is why <em>bloch sphere</em> renders a more in detail expression of the state of a qubit. Sadly for us this is something we will never perceive from a real device but it does help while building the formalism or creating algorithms in our heads.</p>
-<p>All posible states will be part of the surface of that sphere, this is the potential of a single qubit. Not bad.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/bloch.gif" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Bloch sphere</figcaption>
-</figure>
-</div>
-</figure>
-<p>Quantum states can therefore be expressed also as if we consider the polar coordinate:¡s</p>
-<p><span class="math display">\[
-|\phi\rangle = \cos (\theta/2) |0\rangle + e^{i\phi} \sin (\theta/2)|1\rangle
-\]</span></p>
-<p>which represent the sphere coordinates on the surface of the <em>bloch sphere</em>. It is more evident in this case that rendering simple bits will actually remove most of the information (like phase) contained in the states when operating with them in the quantum regime.</p>
-</section>
-<section id="measurement" class="level2">
-<h2 class="anchored" data-anchor-id="measurement">Measurement</h2>
-<p>Measuring quantum states is a necessary condition to extract information out of it, but by doing so we affect the system due to the collapse of the wave function. I know, too technical.</p>
-<p>Ok, so when we observe a quantum state we can only see one of the potential outcomes, the one we observe actualy. And this affects the system, meaning when we look at it it collapses to the state we have observed and no longer exsits as a probability ditribution but as a certainty.</p>
-<p>The action we use to observe the quantum state is by means of <strong>Observables</strong> (self-adjoint operators). These are used to project the measurement of a given quantum state to one of its <em>eigenvalues</em>. Using the closeness between quantum state and eigenvectors of the observable we can measure what is the overlap between those. The eigenvectors of the observable form an orthonormal basis for the Hilbert space, therefore each measure corresponds to a mapping to the eigenvectors comprising the basis. I know, this is a little bit too technical but just think about the observable as a pair of tinted glasses, if glasses have a green-<em>ish</em> color, everything will look some sort of green: dark green for black or light green for white. It is kind of like that. Kind of.</p>
-<p>We will see that a common observable used is the Pauli <span class="math inline">\(\sigma_z\)</span> matrix</p>
-<p><span class="math display">\[
-\sigma_z = \left[
-\begin{array}{cc}
-1 &amp; 0 \\
-0 &amp; -1
-\end{array}
-\right]
-\]</span></p>
-<p>We can decompose it on its eigenvectors and eigenvalues so that</p>
-<p><span class="math display">\[
-\sigma_z|0\rangle = 1|0\rangle \rightarrow \sigma_z|1\rangle = -1|1\rangle.
-\]</span></p>
-<p>Therefore, any potential measurement will be mapped to one of those two eigenvectors and its eigenvalue used as the outcome of the measurement. The basis set shown above is often known as the <strong>computational basis</strong> and it will become relevant when we move to actual implementations.</p>
-<p>From our previous state <span class="math inline">\(|\phi\rangle = \alpha |0\rangle + \beta |1\rangle\)</span> and perform a measurement over the computational basis (<span class="math inline">\(|0\rangle,|1\rangle\)</span>) where evidently the outcome would be <span class="math inline">\(|0\rangle\)</span> with <span class="math inline">\(|\alpha|^2\)</span> probability or <span class="math inline">\(|1\rangle\)</span> with <span class="math inline">\(|\beta|^2\)</span> probability. But more importantly, a single measurement, no matter how complex, entangled or superposed our state might be, will only be able to recover classical bits mapping two previously seen states (<span class="math inline">\(|0\rangle \rightarrow 0\)</span> and <span class="math inline">\(|1\rangle \rightarrow 1\)</span>).</p>
-<p>What happens after measurement is performed? Well, that is the trickiest part as the process of measuring obliges to our quantum state to position itself and make a choice. This means our quantum state after measurement will no longer be in a superposition state and will be the outcome of the previous measurement <span class="math inline">\(|0\rangle\)</span> for the remaining time period.</p>
-<p>In order to fully grasp the statistics of the state we should find way to reproduce the state and perform enough measurements, so we can characterize its actual condition as much as we can out of the measurement statistics it presents. Measuring in the basis <span class="math inline">\(\{|0\rangle, |1\rangle\}\)</span> (also called computational basis) may not be enough to capture the actual state. Therefore, a basis change is needed, but we will see that quantum devices only offer computational basis as the measuring basis. That means in certain cases we will need to rotate our qubits so that the basis change is artificially done.</p>
-<p>If we would like to measure in the <span class="math inline">\(\{|+\rangle, |-\rangle\}\)</span> basis then a rotation of <span class="math inline">\(-\pi / 2\)</span> in the Y axis will be needed. <span class="math inline">\(\{|i\rangle, |-i\rangle\}\)</span> basis will require then a rotation over X axis of <span class="math inline">\(\pi / 2\)</span>. That way we get to shift the reference point and measure according to our target axis.</p>
-<p>Next thing is to operate on those things, let’s see how gates differ from our knowledge from classical computing.</p>
 
 
 </section>
@@ -786,14 +642,11 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/gettingstarted/qc-intro.html" class="pagination-link" aria-label="Getting started">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting started</span>
+      <a href="./libraries.html" class="pagination-link" aria-label="Software packages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/gettingstarted/gates.html" class="pagination-link" aria-label="Quantum gates">
-        <span class="nav-page-text">Quantum gates</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
