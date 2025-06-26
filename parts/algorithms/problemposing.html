@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Appendix B — Hybrid solvers – Quantum Computing Handbook</title>
+<title>Problem posing – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +20,84 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./libraries.html" rel="prev">
-<link href="./cover.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/algorithms/quboformulations.html" rel="next">
+<link href="../../parts/algorithms/aqc.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -70,6 +126,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./libraries.html">Appendices</a></li><li class="breadcrumb-item"><a href="./hybridsolvers.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/adiabatic.html">parts/algorithms/optimization.qmd</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/problemposing.html">Problem posing</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantum Computing Handbook</a> 
+      <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/IraitzM/qc-handbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -113,19 +198,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -134,19 +219,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum gates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
   </div>
 </li>
@@ -163,31 +248,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">First realizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service providers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Current offering</span></a>
   </div>
 </li>
@@ -204,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/complexity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/complexity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Types of algorithms</span></a>
   </div>
 </li>
@@ -212,40 +297,40 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">parts/algorithms/optimization.qmd</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Adiabatic Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/aqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/aqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">AQC in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Problem posing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/quboformulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/quboformulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QUBO formulation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/usingexistingframeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/usingexistingframeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">D-Wave and its ecosystem</span></span></a>
   </div>
 </li>
@@ -253,28 +338,28 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
@@ -290,16 +375,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hybrid-annealers" id="toc-hybrid-annealers" class="nav-link active" data-scroll-target="#hybrid-annealers"><span class="header-section-number">B.1</span> Hybrid Annealers</a></li>
+  <li><a href="#qubo-and-ising-models" id="toc-qubo-and-ising-models" class="nav-link active" data-scroll-target="#qubo-and-ising-models">QUBO and Ising models</a></li>
+  <li><a href="#mapping-the-problem" id="toc-mapping-the-problem" class="nav-link" data-scroll-target="#mapping-the-problem">Mapping the problem</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./libraries.html">Appendices</a></li><li class="breadcrumb-item"><a href="./hybridsolvers.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/adiabatic.html">parts/algorithms/optimization.qmd</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/problemposing.html">Problem posing</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix B — Hybrid solvers</h1>
+<h1 class="title">Problem posing</h1>
 </div>
 
 
@@ -316,27 +402,131 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve.</p>
-<p>Think about Shor’s algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that tep there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.</p>
-<p>A more detailed explanation can be found in <a href="https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring">IBM’s documentation</a> but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.</p>
-<section id="hybrid-annealers" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="hybrid-annealers"><span class="header-section-number">B.1</span> Hybrid Annealers</h2>
-<p>This is the idea behind some of the services we found available today. On one side, we have the pioneers of the Quantum Computing cloud services, D-Wave and their <a href="https://docs.dwavequantum.com/en/latest/industrial_optimization/leap_hybrid.html">LeapHybrid Solvers</a>.</p>
-<p>Their hybrid approach also allows to tackle beyond QUBO problems, like:</p>
-<ul>
-<li>Non-linear problems</li>
-<li>Constrained Quadratic problems</li>
-<li>Discrete Quadratic problems</li>
-</ul>
-<p>Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by <a href="https://www.quantagonia.com/">Quantagonia</a>.</p>
+<p>Let’s explore a bit how D-Wave provides this service at scale. D-Wave’s technology is based on superconducting qubits, so they must keep their machines at 12mk temperature regime in order to maintain the <em>quantumness</em> of the system. Their machines are governed by an already fixed Hamiltonian that looks like:</p>
+<p><span class="math display">\[
+H_{dwave} = -\frac{A(s)}{2}\left( \sum_i \sigma_x^i \right) + \frac{B(s)}{2}\left( \sum_i h_i \sigma_z^i + \sum_{i&gt;j} J_{ij} \sigma_z^i \sigma_z^j \right)
+\]</span></p>
+<p>where <span class="math inline">\(\sigma_{x,z}^i\)</span> are the Pauli matrices operating on qubit <span class="math inline">\(i\)</span> and <span class="math inline">\(h\)</span> and <span class="math inline">\(J\)</span> are problem related variables. So as you can see most of the selection has already been done. We won’t enter into more details for the moment but for those interested in how this is done more in detail do not hesitate goring through the <a href="https://docs.dwavesys.com/docs/latest/c_qpu_annealing.html">additional information</a>.</p>
+<p>But how do you transform any classical combinatorial problem into a Hamiltonian that fits into this form? This is what we are going to focus on for the next section.</p>
+<section id="qubo-and-ising-models" class="level2">
+<h2 class="anchored" data-anchor-id="qubo-and-ising-models">QUBO and Ising models</h2>
+<p>We already discussed the Ising model and its potential limitations in terms of only managing quadratic relationships between variables. This is also limited by the hardware, so we will need to understand the way in which our classically formulated optimization problem may fit into this somehow <em>fixed</em> formulations.</p>
+<p>Let’s start with a simple example of the following form:</p>
+<p><span class="math display">\[
+\max_x \sum_i a_i x_i \quad
+s.t. \quad \sum_i b_i x_i = c
+\]</span></p>
+<p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(b_i\)</span> are free variables and <span class="math inline">\(c\)</span> is a hard constraint. <span class="math inline">\(x_i \in \{0, 1\}\)</span> will be a mask over the selection on which variables should be selected to maximize our objective function. Why <strong>binary</strong> variables, well, in the end we can only obtain bit strings when reading our quantum states, so it seems sensible to make those the target variables of our problem.</p>
+<p>Immediately comes up is the management of restrictions as we will only be able to evaluate the energy level of the system so every bit of information will need to be handled within the objective function itself. That requires us to introduce constraints as regularization terms affecting the objective function in case of not being satisfied</p>
+<p><span class="math display">\[
+\sum_i b_i x_i = c \quad \rightarrow \quad \left( \sum_i x_i b_i - c\right)^2,
+\]</span></p>
+<p>being the power needed to value any deviation (negative or positive) from our target value <span class="math inline">\(c\)</span>. These terms need to be conditioned by weight operators so that the problem is regularized, balancing between cost and regularization terms as follows</p>
+<p><span class="math display">\[
+\max_x \theta_1 \left( \sum_i a_i x_i \right) - \theta_2 \left( \sum_i x_i b_i - c\right)^2.
+\]</span></p>
+<p>Therefore, <strong>unconstrained</strong>.</p>
+<p>Additionally, our solvers will only be able to minimize the energy of the Hamiltonian so we should pose it as a minimization problem.</p>
+<p><span class="math display">\[
+\min_x \theta_2 \left( \sum_i x_i b_i - c\right)^2 - \theta_1 \left( \sum_i a_i x_i \right)
+\]</span></p>
+<p>With this it should be easy to see hot we can convert this problem into its <strong>Quadratic Unconstrained Binary Optimization (QUBO)</strong> form</p>
+<p><span class="math display">\[
+\min_x x^TQx + k.
+\]</span></p>
+<p>Here <span class="math inline">\(Q\)</span> represents the value matrix between each pair of variables (with the notion of <span class="math inline">\(x_i^2 = x_i\)</span>) and the offset constant <span class="math inline">\(k\)</span> (which will be added to the final result but does not affect the optimality search).</p>
+<p>One interesting fact about this formulation is that it contains linear relations (<span class="math inline">\(Q_{ii}x_i\)</span>) and quadratic for off diagonal terms (<span class="math inline">\(Q_{ij}x_ix_j \text{ for } i\ne j\)</span>).We could pose it on its scalar form as well</p>
+<p><span class="math display">\[
+\min_x \sum_i a_i x_i + \sum_i \sum_{j\ne i} b_{ij} x_i x_j + k
+\]</span></p>
+<p>which can be directly related to previously seen Ising type of Hamiltonian by the transformation <span class="math inline">\(x_i \in \{0,1\}\)</span> to <span class="math inline">\(s_i = \pm 1\)</span>.</p>
+<p>One clear limitation from the Ising formulation (or the native Hamiltonian of the target device) is the limitation for quadratic terms (<span class="math inline">\(x_ix_j\)</span>) so no high-order relationship between variables can be implemented as a general norm. Also, binary characterization is needed, no continuous variable can be introduced within the problem as it is. Of course, there are ways to tackle problems that may require this modifications but it may need an extra effort when mapping our non-QUBO problem to the device.</p>
+<p>D-Wave already envisioned a way to ease this tasks, so it provides libraries and functionalities that should help with part of the work to be done. Particularly, transforming from one shape to another and submitting problems to their devices (or trying to solve them locally).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyqubo <span class="im">import</span> Spin</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>s1, s2, s3, s4 <span class="op">=</span> Spin(<span class="st">"s1"</span>), Spin(<span class="st">"s2"</span>), Spin(<span class="st">"s3"</span>), Spin(<span class="st">"s4"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Hamiltonian</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> (<span class="dv">4</span><span class="op">*</span>s1 <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>s2 <span class="op">+</span> <span class="dv">7</span><span class="op">*</span>s3 <span class="op">+</span> s4)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># model creation</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> H.<span class="bu">compile</span>()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># QUBO request (to_ising() exists as well )</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>qubo, offset <span class="op">=</span> model.to_qubo()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>pprint(qubo)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>{(<span class="st">'s1'</span>, <span class="st">'s1'</span>): <span class="op">-</span><span class="fl">160.0</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s1'</span>, <span class="st">'s2'</span>): <span class="fl">64.0</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s1'</span>, <span class="st">'s3'</span>): <span class="fl">224.0</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s1'</span>, <span class="st">'s4'</span>): <span class="fl">32.0</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s2'</span>, <span class="st">'s2'</span>): <span class="op">-</span><span class="fl">96.0</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s2'</span>, <span class="st">'s3'</span>): <span class="fl">112.0</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s2'</span>, <span class="st">'s4'</span>): <span class="fl">16.0</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s3'</span>, <span class="st">'s3'</span>): <span class="op">-</span><span class="fl">196.0</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s3'</span>, <span class="st">'s4'</span>): <span class="fl">56.0</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s4'</span>, <span class="st">'s4'</span>): <span class="op">-</span><span class="fl">52.0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://pyqubo.readthedocs.io/en/latest/">PyQUBO documentation</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dimod.qubo_to_ising({(<span class="st">'x1'</span>, <span class="st">'x1'</span>): <span class="op">-</span><span class="dv">22</span>, (<span class="st">'x2'</span>, <span class="st">'x2'</span>): <span class="op">-</span><span class="dv">6</span>, (<span class="st">'x3'</span>, <span class="st">'x3'</span>): <span class="op">-</span><span class="dv">14</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                     (<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="dv">20</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="dv">28</span>},</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                     offset<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>({<span class="st">'x1'</span>: <span class="fl">1.0</span>, <span class="st">'x2'</span>: <span class="fl">2.0</span>, <span class="st">'x3'</span>: <span class="fl">0.0</span>}, {(<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="fl">5.0</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="fl">7.0</span>}, <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://docs.ocean.dwavesys.com/en/stable/docs_dimod/">dimod documentation</a></p>
+<p>Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in <a href="../../hybridsolvers.ipynb">B Hybrid Solvers</a></p>
+</section>
+<section id="mapping-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-the-problem">Mapping the problem</h2>
+<p>Ideally, after this initial conversion has been done, the only piece missing is the submission of our job to one of those solvers enabled by our preferred quantum annealing service provider. But hardware might require additional tweaks.</p>
+We will need to get a little bit used to the transformation between different formulations for a given problem.
+<figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="assets/quantagonia.png" class="img-fluid figure-img"></p>
-<figcaption>Quantagonia Dashboard</figcaption>
+<p><img src="../../assets/model-comparison.png" class="img-fluid figure-img"></p>
+<figcaption>Model comparison</figcaption>
 </figure>
 </div>
+</figure>
+<p>But more importantly, as those may represent any <span class="math inline">\(i\)</span> <span class="math inline">\(j\)</span> indexes to be connected, the hardware may not present all required connections, in particular in all-to-all cases. Trapped ions make it easy but the rest, require tweaking.</p>
+<p><strong>Embedding</strong></p>
+<p>Looking at the connectivity of the chip, if an index represents a red ball and each line gets tuned by the values in our problem <span class="math inline">\(q_{ij}\)</span>, how can we tune those that have no red line between them?</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/dwave-chip.png" class="img-fluid figure-img"></p>
+<figcaption>DWave chip architecture</figcaption>
+</figure>
+</div>
+</figure>
+<p><a href="https://docs.dwavesys.com/docs/latest/c_gs_4.html#getting-started-topologies">QPU Architecture</a></p>
+<p>We might need to find ways to connect qubits that are not directly connected and in D-Wave services we can chain connected qubits so that we could place the potential value of a distant qubit in linked different locations of a chip. This is done by artificially introducing additional variables that are mapped to qubits whose value should align to the qubit they are chained to. A visual representation of this would look like</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/dwave-chain.png" class="img-fluid figure-img"></p>
+<figcaption>DWave chain</figcaption>
+</figure>
+</div>
+</figure>
+<p>That way if we look to solve our three variable problem into a 4 qubit chip, we might see more than three qubit related readout being reported.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/chained-solution.png" class="img-fluid figure-img"></p>
+<figcaption>Chained solution</figcaption>
+</figure>
+</div>
+</figure>
+<p>In above example, 0 and 5 qubits are linked to the same problem variable so they should report same bit readout but qubit <em>chains</em> can break and therefore we will need to play with the chain strength to avoid any invalid solution.</p>
+<p>Sadly for us, the embedding of densely connected problems comes with the overhead of chaining a lot of physical qubits so we can make all those all-to-all connections that are not native to the device. In fact, we can check that the encoding they have made (by they we mean the people from D-Wave) we can see the maximum number of qubits of the problems encoded in hardware is in the order of 60 to 100. But is this using thousands of qubits? Yes, this is how bad the overhead can get <span class="citation" data-cites="cai2014practicalheuristicfindinggraph">(<a href="../../references.html#ref-cai2014practicalheuristicfindinggraph" role="doc-biblioref">Cai, Macready, and Roy 2014</a>)</span>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cai2014practicalheuristicfindinggraph" class="csl-entry" role="listitem">
+Cai, Jun, William G. Macready, and Aidan Roy. 2014. <span>“A Practical Heuristic for Finding Graph Minors.”</span> <a href="https://arxiv.org/abs/1406.2741">https://arxiv.org/abs/1406.2741</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -741,11 +931,14 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./libraries.html" class="pagination-link" aria-label="Software packages">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span>
+      <a href="../../parts/algorithms/aqc.html" class="pagination-link" aria-label="AQC in practice">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">AQC in practice</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../parts/algorithms/quboformulations.html" class="pagination-link" aria-label="QUBO formulation">
+        <span class="nav-page-text">QUBO formulation</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
