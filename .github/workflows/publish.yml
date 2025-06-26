@@ -17,19 +17,13 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: "Set up Python"
+      - name: Install Python and Dependencies
         uses: actions/setup-python@v5
         with:
-          python-version-file: ".python-version"
-
-      - name: Install the project
-        run: uv sync --locked --all-extras --dev
-
-      - name: Activate virtualenv
-        run: echo PATH=${GITHUB_WORKSPACE}/.venv/bin:$PATH >> $GITHUB_ENV
+          python-version: '3.12'
+          cache: 'pip'
+      - run: pip install jupyter
+      - run: pip install -r requirements.txt
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
