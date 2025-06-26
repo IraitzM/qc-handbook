@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – Quantum Computing Handbook</title>
+<title>Machine types – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +20,64 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./parts/gettingstarted/qc-intro.html" rel="next">
-<link href="./index.html" rel="prev">
-<link href="./cover.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/computers/serviceproviders.html" rel="next">
+<link href="../../parts/computers/technology.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +106,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/machinetypes.html">Machine types</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -98,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantum Computing Handbook</a> 
+      <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/IraitzM/qc-handbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -114,19 +178,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -135,19 +199,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum gates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
   </div>
 </li>
@@ -164,31 +228,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">First realizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Machine types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service providers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Current offering</span></a>
   </div>
 </li>
@@ -196,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -211,13 +275,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
@@ -228,15 +292,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#analog-devices" id="toc-analog-devices" class="nav-link active" data-scroll-target="#analog-devices">Analog devices</a></li>
+  <li><a href="#quantum-annealers" id="toc-quantum-annealers" class="nav-link" data-scroll-target="#quantum-annealers">Quantum Annealers</a></li>
+  <li><a href="#digital-quantum-computers" id="toc-digital-quantum-computers" class="nav-link" data-scroll-target="#digital-quantum-computers">Digital quantum computers</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/machinetypes.html">Machine types</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction</h1>
+<h1 class="title">Machine types</h1>
 </div>
 
 
@@ -253,19 +325,88 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Well, quantum computing. Really trendy topic. Although it is not the only unconventional computing paradigm out there:</p>
+<p>We have talked about how the hardware works but not all Quantum Computers work in the same way. Just talking about pure quantum computers three main types of computers can be found.</p>
+<section id="analog-devices" class="level2">
+<h2 class="anchored" data-anchor-id="analog-devices">Analog devices</h2>
+<p>Like in the very beginning of computers, managing analog signals is the natural way to start when trying to domesticate physical phenomena to reproduce a particular set of steps. There do exist machines with well characterized qubits but requiring a specific way to interact with them. This is the case of neutral atom platforms, a Hamiltonian is provided that acts on the system and our duty is to define the signals that will drive the system towards the solution of our problem. These atoms are well defined qubits but manipulating them according to the mathematical framework can be challenging, therefore it is easier (in some sense) to drive the whole system by signal manipulation (hence analog computation).</p>
+<p>The Hamiltonian on those devices looks as follows,</p>
+<p><span class="math display">\[
+\frac{\mathcal{H}(t)}{\hbar} = \sum_j \frac{\Omega_j(t)}{2} \left( e^{i \phi_j(t) } | 0_j \rangle  \langle 1_j | + e^{-i \phi_j(t) } | 1_j \rangle  \langle 0_j | \right) - \sum_j \Delta_j(t) \hat{n}_j + \sum_{j &lt; k} V_{jk} \hat{n}_j \hat{n}_k,
+\]</span></p>
+<p>where <span class="math inline">\(|0_i\rangle\)</span>, <span class="math inline">\(|1_i\rangle\)</span>, and <span class="math inline">\(\hat{n}_i = 0|0_i\rangle\langle0_i|+1|1_i\rangle\langle1_i|\)</span> refer to qubits <span class="math inline">\(i\)</span> position for a given space. Defining algorithms requires manipulating the time-traces of the Hamiltonian parameters <span class="math inline">\(\Omega_i(t)\)</span>, <span class="math inline">\(\phi_i(t)\)</span>, and <span class="math inline">\(\Delta_i(t)\)</span>. The Rabi term <span class="math inline">\(\Omega\)</span> and detuning <span class="math inline">\(\Delta\)</span> introduce energy scales that compete with the geometrically controlled scale <span class="math inline">\(V_{ij}\)</span>.</p>
+<p>These machines natively solve a mathematical problem called, <em>maximum independent set</em>. Each atom has a blockade radius that prevents to atoms (qubits) being active at the same time (both being <span class="math inline">\(|1\rangle\)</span>). If we are able to encode our problem, the machine could without effort compute the most efficient points in a map where one should place specific assets based on their surroundings. More on about this on <a href="https://queracomputing.github.io/Bloqade.jl/dev/tutorials/1.blockade/main/">QuEra’s documentation site</a></p>
+<p>Look at this reference on how to interact with QuEra devices using Amazon Braket service and their <a href="https://docs.aws.amazon.com/braket/latest/developerguide/braket-quera-submitting-analog-program-aquila.html">SDK</a>. It is easier than it looks but one needs to definitely know how to translate the problem to be solved to that formulation. These devices are often limited to a set of mathematical problems that requires users to think how their actual business problem may fit into those setups. As an example, here is a candidate problem on where to place antennas in Boston to minimize the cost but maximize coverage.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/bostonantennaplacement.png" class="img-fluid figure-img"></p>
+<figcaption>Boston Antenna placement</figcaption>
+</figure>
+</div>
+</figure>
 <ul>
-<li>Quantum Computing</li>
-<li><a href="https://www.intel.la/content/www/xl/es/research/neuromorphic-computing.html">Neuromorphic computing</a></li>
-<li><a href="https://the-analog-thing.org/">Analog computing</a></li>
-<li><a href="https://www.purdue.edu/p-bit/">Probabilistic computing</a></li>
-<li><a href="https://www.normalcomputing.com/blog-posts/scaling-thermodynamic-computing">Thermodynamic computing</a></li>
-<li><a href="https://news.mit.edu/2016/biological-circuit-cells-remember-respond-stimuli-0721">Biological computing</a></li>
+<li><a href="https://github.com/QuEraComputing/QuEra-braket-examples/blob/main/OptimizationTutorial/AWS_nonadiabatic_optimization_demo.ipynb">Example</a> for above picture</li>
+<li>General on MIS for neutral atoms: <a href="https://arxiv.org/pdf/2109.03517.pdf">https://arxiv.org/pdf/2109.03517.pdf</a></li>
 </ul>
-<p>Fancy as it might be there are some really cool things we can learn from trying to challenge the <em>status quo</em>. It is not the first paradigm aiming to dethrone classical computing - yes, we will need to do that distinction from now on - but it is certainly the one that has progressed the most. We do have quantum computers, computers the open public can use and that are already fighting in some critical areas making people nervous about it.</p>
-<p>Let’s see if we can get our heads around what quantum computing is and how to work with it. Let’s start 🎉</p>
+<p>Most likely, as it has happened with the rest of the machines, they will grow into the direction of digitized operation. A hint on previously mentioned <em>native</em> gates: defining a set of parameters that translated our device Hamiltonian to the gates we would like to use, is part of the magic many hardware providers perform through programming frameworks so that we don’t have to worry too much about it.</p>
+</section>
+<section id="quantum-annealers" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-annealers">Quantum Annealers</h2>
+<p>In 1998, Hideyoshi Nishimoru from Tokyo University demonstrated that quantum annealing could outperform classical annealing techniques used up to that moment for optimization and combinatorial tasks. Quantum Annealers work by starting the system at a know state and by performing little perturbations to the system provide the solution to a target state. Its universality has been proven</p>
+<p>Adiabatic quantum computing (AQC) is a model of computation that uses quantum mechanical processes operating under adiabatic conditions. As a form of universal quantum computation, AQC employs the principles of <strong>superposition, tunneling, and entanglement</strong> that manifest in quantum physical systems.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/adiabatic-pic.png" class="img-fluid figure-img"></p>
+<figcaption>Adiabatic evolution of ground state</figcaption>
+</figure>
+</div>
+</figure>
+<p>D-Wave, was one of the first ones to produce a commercially available quantum computer with <em>thousands of qubits</em>. A clear milestone in the path towards commercially making it viable.</p>
+<p>A big caveat of this machine, is that it can only work using the adiabatic evolution as the main process. This means we can only govern the inner workings of the machine up to a point. Annealers work in precise manner so they do not allow for the flexibility digitized computers do, making them closer to an analog machine with restricted programming ability.</p>
+<p>These machines are able to solve a complex problem indeed. In general any Quadratic Unconstrained Binary Optimization (QUBO) problem fits into the general framework of using annealers to solve the minimum energy state for a Ising type of problem:</p>
+<p><span class="math display">\[
+H = -\sum_{\langle i j \rangle} J s_i s_j - \sum_j h s_j.
+\]</span></p>
+<p>We will see this more in detail when covering the inner workings of annealers but, think that if your problem fits into this type of mathematical formulation, you may find an ally when it comes to Quantum Annealers.</p>
+</section>
+<section id="digital-quantum-computers" class="level2">
+<h2 class="anchored" data-anchor-id="digital-quantum-computers">Digital quantum computers</h2>
+<p>In order to provide certain level of universality when it comes to operations, digitization of the interactions with the quantum computer and the states it encodes has become a critical path towards quantum device commercialization. Managing Hamiltonians is still necessary but the way in which these need to be introduced into the machine could be handled by atomic operations (logical gates) with which we can compose higher level operators or create more complex dynamics taking us closer to how classical computers operate, enabling incremental instruction addition and higher level abstractions.</p>
+<p>Digitized computers work by enabling a set of digitized operations so that we can implement our routines. The initial state of the system would still be <span class="math inline">\(|00...0\rangle\)</span> so if we would like to transform this state into <span class="math inline">\(|11..1\rangle\)</span> we should find the Hamiltonian that does it.</p>
+<p>A not operation, like in classical computers, is one of the basic actions: <span class="math display">\[
+X^{\otimes n} |0\rangle^{\otimes n} = |1\rangle^{\otimes n}
+\]</span></p>
+<p>A simple composition of <span class="math inline">\(X\)</span> (not) operation on each qubit. Therefore, we could express it in a pictorial way:</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/xcirc.png" class="img-fluid figure-img"></p>
+<figcaption><span class="math inline">\(\sigma_x\)</span> circuit</figcaption>
+</figure>
+</div>
+</figure>
+<p>That way it is quite simple to understand what are the atomic operations required and have a programming language that abstracts us from signals and pulses.</p>
+<p>As an example, a unitary transformation characterized by <span class="math inline">\(U = Z_1 \otimes Z_2\)</span> leads to a simple implementation</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>OPENQASM <span class="fl">2.0</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>include <span class="st">"qelib1.inc"</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>qreg q[<span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rz(pi<span class="op">/</span><span class="dv">2</span>) q[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>rz(pi<span class="op">/</span><span class="dv">2</span>) q[<span class="dv">1</span>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/zcirc.png" class="img-fluid figure-img"></p>
+<figcaption><span class="math inline">\(\sigma_z\)</span> circuit</figcaption>
+</figure>
+</div>
+</figure>
+<p>This approach makes <em>programming</em> these machines really close to the way in which classical devices were programmed in the early days.</p>
+<p>We should pay attention though that this <em>logical</em> framework is often complicated to represent by physical means, therefore we will see some discrepancies when we start looking into what are called <em>native</em> gates. This will become clear when we start with our exercises against real hardware. Let’s keep the joy of playing with quantum simulators for now.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -669,13 +810,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="../../parts/computers/technology.html" class="pagination-link" aria-label="Technology">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Technology</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parts/gettingstarted/qc-intro.html" class="pagination-link" aria-label="Getting started">
-        <span class="nav-page-text">Getting started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/computers/serviceproviders.html" class="pagination-link" aria-label="Service providers">
+        <span class="nav-page-text">Service providers</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

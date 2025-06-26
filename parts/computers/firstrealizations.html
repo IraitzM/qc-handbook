@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – Quantum Computing Handbook</title>
+<title>First realizations – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +20,49 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./parts/gettingstarted/qc-intro.html" rel="next">
-<link href="./index.html" rel="prev">
-<link href="./cover.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/computers/technology.html" rel="next">
+<link href="../../parts/gettingstarted/simulations.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +91,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">First realizations</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -98,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantum Computing Handbook</a> 
+      <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/IraitzM/qc-handbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -114,19 +163,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -135,19 +184,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum gates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
   </div>
 </li>
@@ -164,31 +213,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">First realizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service providers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Current offering</span></a>
   </div>
 </li>
@@ -196,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -211,13 +260,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
@@ -228,15 +277,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#building-the-thing" id="toc-building-the-thing" class="nav-link active" data-scroll-target="#building-the-thing">Building the thing</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">First realizations</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction</h1>
+<h1 class="title">First realizations</h1>
 </div>
 
 
@@ -253,19 +308,68 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Well, quantum computing. Really trendy topic. Although it is not the only unconventional computing paradigm out there:</p>
+<p>Motivated by Shor’s algorithm <span class="citation" data-cites="shor1994algorithms">(<a href="../../references.html#ref-shor1994algorithms" role="doc-biblioref">Shor 1994</a>)</span>, during late 90s there was quite some motivation to provide a physical realization of what up to that moment was mostly theoretical work.</p>
+<p>Any two-level physical system could be a good candidate for a qubit but we need to a find a physical realization that allows for operation and performing the set of tasks we could consider an algorithm.</p>
+<p>In 1998, using nuclear magnetic resonance (NMR) both Oxford University and Stanford achieved the first implementations of two qubit algorithms <span class="citation" data-cites="chuang1998experimental">(<a href="../../references.html#ref-chuang1998experimental" role="doc-biblioref">Chuang, Gershenfeld, and Kubinec 1998</a>)</span>. More or less in the same period, Yasunobu Nakamura and Jaw-Shen Tsai demonstrated how a superconducting chip can be used as a qubit by controlling the current through it <span class="citation" data-cites="nakamura2001rabi">(<a href="../../references.html#ref-nakamura2001rabi" role="doc-biblioref">Nakamura, Pashkin, and Tsai 2001</a>)</span>.</p>
+<p>2007 is known to be a key date as the first <strong>transmon</strong> was born. It is the equivalent of the transistor in the quantum regime <span class="citation" data-cites="koch2007charge">(<a href="../../references.html#ref-koch2007charge" role="doc-biblioref">Koch et al. 2007</a>)</span>. So first qubits exist since early 2000 which is not much but from manufacturing a qubit to building a whole computer… that is a long road.</p>
+<p>Many metrics will be used to compare different devices and realizations in following sections so better get them clear now.</p>
+<p><strong>T1 time</strong></p>
+<p>Also known as the <strong>relaxation time</strong>, identifies how much time it would take a qubit to transition from an excited state (<span class="math inline">\(|1\rangle\)</span>) to its ground state (<span class="math inline">\(|0\rangle\)</span>). T1 time is not an actual time from state to state but rather identifies the time in which a state might transition and flips states once exited (<span class="math inline">\(P(|1\rangle) = e^{-\frac{t}{T1}}\)</span>).</p>
+<p><strong>T2 time</strong></p>
+<p>Known as the <strong>phase coherence</strong> time. Basically quantifies the time in which the phase associated to a state is stable.</p>
+<p><span class="math display">\[
+|+\rangle = \frac{|0\rangle + |1\rangle}{\sqrt{2}} \quad \xrightarrow[T2]{} \quad |-\rangle = \frac{|0\rangle -|1\rangle}{\sqrt{2}}
+\]</span></p>
+<p>These two time-metrics characterize our qubits <strong>coherence time</strong>, the time in which our qubits are actually qubits and not classical bits playing tricks on us.</p>
+<p>Another measure we will often refer to is the <strong>fidelity</strong>. Basically it measures the gap between theoretical state and physical outcome as a qubit quality metric. Fidelity attends to the more general state of closeness between two quantum states but in this following sections it will provide a measure to understand how well each operation renders the expected result.</p>
+<p><span class="math display">\[
+F(\rho, \sigma) = |\langle \psi | \phi \rangle | ^2
+\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+NOTE
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is the case just when considering both states to be pure</p>
+</div>
+</div>
+<section id="building-the-thing" class="level2">
+<h2 class="anchored" data-anchor-id="building-the-thing">Building the thing</h2>
+<p>There is more than one type of quantum computer. Actually we yet don’t know the one that will win the podium, but the race is interesting at this point. The physical realization conditions many aspects of the whole machine so it is relevant to understand a bit of their inner workings so that we can select the most appropriate option.</p>
+<p>There is one general definition of how a quantum computer may look like and it is given by the <strong>DiVincenzo criteria</strong> <span class="citation" data-cites="divincenzo1997topics">(<a href="../../references.html#ref-divincenzo1997topics" role="doc-biblioref">DiVincenzo 1997</a>)</span>.</p>
 <ul>
-<li>Quantum Computing</li>
-<li><a href="https://www.intel.la/content/www/xl/es/research/neuromorphic-computing.html">Neuromorphic computing</a></li>
-<li><a href="https://the-analog-thing.org/">Analog computing</a></li>
-<li><a href="https://www.purdue.edu/p-bit/">Probabilistic computing</a></li>
-<li><a href="https://www.normalcomputing.com/blog-posts/scaling-thermodynamic-computing">Thermodynamic computing</a></li>
-<li><a href="https://news.mit.edu/2016/biological-circuit-cells-remember-respond-stimuli-0721">Biological computing</a></li>
+<li>Must be scalable and well characterized qubits.</li>
+<li>System may be able to be initialized (<span class="math inline">\(|00...\rangle\)</span> state is the common choice)</li>
+<li>Qubit coherence time must be much larger than the actuation time</li>
+<li>Enable a universal set of gates/operations</li>
+<li>Capable of measuring from specific qubits</li>
 </ul>
-<p>Fancy as it might be there are some really cool things we can learn from trying to challenge the <em>status quo</em>. It is not the first paradigm aiming to dethrone classical computing - yes, we will need to do that distinction from now on - but it is certainly the one that has progressed the most. We do have quantum computers, computers the open public can use and that are already fighting in some critical areas making people nervous about it.</p>
-<p>Let’s see if we can get our heads around what quantum computing is and how to work with it. Let’s start 🎉</p>
+<p>With this recipe many platforms have been proposed using different physical realizations for the technology.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-chuang1998experimental" class="csl-entry" role="listitem">
+Chuang, Isaac L, Neil Gershenfeld, and Mark Kubinec. 1998. <span>“Experimental Implementation of Fast Quantum Searching.”</span> <em>Physical Review Letters</em> 80 (15): 3408.
+</div>
+<div id="ref-divincenzo1997topics" class="csl-entry" role="listitem">
+DiVincenzo, David P. 1997. <span>“Topics in Quantum Computers.”</span> In <em>Mesoscopic Electron Transport</em>, 657–77. Springer.
+</div>
+<div id="ref-koch2007charge" class="csl-entry" role="listitem">
+Koch, Jens, Terri M Yu, Jay Gambetta, Andrew A Houck, David I Schuster, Johannes Majer, Alexandre Blais, Michel H Devoret, Steven M Girvin, and Robert J Schoelkopf. 2007. <span>“Charge-Insensitive Qubit Design Derived from the Cooper Pair Box.”</span> <em>Physical Review A—Atomic, Molecular, and Optical Physics</em> 76 (4): 042319.
+</div>
+<div id="ref-nakamura2001rabi" class="csl-entry" role="listitem">
+Nakamura, Y, Yu A Pashkin, and Jaw Shen Tsai. 2001. <span>“Rabi Oscillations in a Josephson-Junction Charge Two-Level System.”</span> <em>Physical Review Letters</em> 87 (24): 246601.
+</div>
+<div id="ref-shor1994algorithms" class="csl-entry" role="listitem">
+Shor, Peter W. 1994. <span>“Algorithms for Quantum Computation: Discrete Logarithms and Factoring.”</span> In <em>Proceedings 35th Annual Symposium on Foundations of Computer Science</em>, 124–34. Ieee.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -669,13 +773,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="../../parts/gettingstarted/simulations.html" class="pagination-link" aria-label="Simulations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Simulations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parts/gettingstarted/qc-intro.html" class="pagination-link" aria-label="Getting started">
-        <span class="nav-page-text">Getting started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/computers/technology.html" class="pagination-link" aria-label="Technology">
+        <span class="nav-page-text">Technology</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

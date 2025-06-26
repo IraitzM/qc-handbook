@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – Quantum Computing Handbook</title>
+<title>Technology – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,29 +20,49 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./parts/gettingstarted/qc-intro.html" rel="next">
-<link href="./index.html" rel="prev">
-<link href="./cover.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/computers/machinetypes.html" rel="next">
+<link href="../../parts/computers/firstrealizations.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,6 +91,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/technology.html">Technology</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -98,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantum Computing Handbook</a> 
+      <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/IraitzM/qc-handbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -114,19 +163,19 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -135,19 +184,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum gates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
   </div>
 </li>
@@ -164,31 +213,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">First realizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Technology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service providers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/currentoffering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Current offering</span></a>
   </div>
 </li>
@@ -196,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -211,13 +260,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
@@ -228,15 +277,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#superconducting-chips" id="toc-superconducting-chips" class="nav-link active" data-scroll-target="#superconducting-chips">Superconducting chips</a></li>
+  <li><a href="#trapped-ions" id="toc-trapped-ions" class="nav-link" data-scroll-target="#trapped-ions">Trapped ions</a></li>
+  <li><a href="#neutral-atoms" id="toc-neutral-atoms" class="nav-link" data-scroll-target="#neutral-atoms">Neutral atoms</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/technology.html">Technology</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction</h1>
+<h1 class="title">Technology</h1>
 </div>
 
 
@@ -253,19 +310,160 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Well, quantum computing. Really trendy topic. Although it is not the only unconventional computing paradigm out there:</p>
+<p>In order to create a machine that is able to execute the mathematical framework described by quantum computation, different technologies can be used.</p>
+<section id="superconducting-chips" class="level2">
+<h2 class="anchored" data-anchor-id="superconducting-chips">Superconducting chips</h2>
+<p>Superconducting qubits are implemented using macroscopic elements build using a LC electrical circuit. The effect of an electrical resonator is observed at specific work temperatures below 15mK which requires building quite large dilution refrigerators. One of the main disadvantages of this technology is their susceptibility to environment noise (sources being dielectric of surrounding metal or surrounding energy radiations) that cause short coherence times.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/superconducting-qubit.gif" class="img-fluid figure-img"></p>
+<figcaption>Superconducting</figcaption>
+</figure>
+</div>
+</figure>
+<p>Probably one of the most mature implementations when it comes to qubit realization. Companies like IBM, Intel, Google or D-Wave base their devices in this technology. The most popular qubit, the transmon, offers coherence times between 50 and 100 <span class="math inline">\(\mu\)</span>s with operation times in the order of nanoseconds (fastest: 18 ns demonstration in 2019). This leaves an operation ratio of <span class="math inline">\(10^{4}\)</span> satisfying 3rd DiVincenzo criteria. Qubit fidelity reach the 99.95% with experiments reporting 99.66% for two qubit gate in 2016.</p>
+<p>Works by controlling the current flow through the superconducting circuit and those current flows can be operated using microwave pulses. Different pulse configurations (length, amplitude or phase) represent the potential digitized gates one could find.</p>
+<p>Circuit topology is often limited to nearest-neighbor couplings, which limits the implementation of densely connected algorithms.</p>
+<p>These devices can handle up to 433 qubits (IBM’s Osprey architecture) on their digital version but D-Wave’s annealing machine counts with up to 8000 qubits to be used.</p>
+<center>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Provider</th>
+<th style="text-align: center;">Max. Qubits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D-Wave</td>
+<td style="text-align: center;">8000</td>
+</tr>
+<tr class="even">
+<td>IBM</td>
+<td style="text-align: center;">433</td>
+</tr>
+<tr class="odd">
+<td>Rigetti</td>
+<td style="text-align: center;">80</td>
+</tr>
+<tr class="even">
+<td>OQC</td>
+<td style="text-align: center;">32</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p>To know a bit more about the inner workings, go to <a href="https://pennylane.ai/qml/demos/tutorial_sc_qubits">Xanadu’s thorough explanation</a>.</p>
+</section>
+<section id="trapped-ions" class="level2">
+<h2 class="anchored" data-anchor-id="trapped-ions">Trapped ions</h2>
+<p>Initially proposed by Cirac and Zoller <span class="citation" data-cites="cirac1995quantum">(<a href="../../references.html#ref-cirac1995quantum" role="doc-biblioref">Cirac and Zoller 1995</a>)</span>, ions are confined into traps making up the quantum computer composed of those.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ion-trap.png" class="img-fluid figure-img"></p>
+<figcaption>Ion trap</figcaption>
+</figure>
+</div>
+</figure>
+<p>Pairs of internal electronic states of ions are implemented as the base qubit states <span class="math inline">\(|0\rangle\)</span> and <span class="math inline">\(|1\rangle\)</span>. They can be any combination of long-lived levels, differentiated by the separation of their energy levels. The 2 most predominant ones are hyperfine levels, separated by gigahertz frequencies; and optical levels, separated by frequencies of hundreds of terahertz.</p>
+<p>After the ions are loaded into their traps, the qubits are optically pumped into the fiducial state of <span class="math inline">\(|1\rangle\)</span>. The methodology of gate operation via state transition is dependent on the type of trapped-ion qubit. For optical qubits, a laser with a resonant frequency equal to the state transition is used whereas gate operations on hyperfine qubits can be performed either with lasers using stimulated Raman Coupling or with microwaves directly addressing the giga-hertz energy level splitting.</p>
+<p>The state-dependent readout is carried out by lasers as well. Using contemporary methods, readout fidelities of over 99.9% have been achieved within microseconds <span class="citation" data-cites="myerson2008high crain2019high">(<a href="../../references.html#ref-myerson2008high" role="doc-biblioref">Myerson et al. 2008</a>; <a href="../../references.html#ref-crain2019high" role="doc-biblioref">Crain et al. 2019</a>)</span>.</p>
+<p>Ion-traps count with a virtual all-to-all connectivity that allows for any qubit to qubit interaction. Shortcomings can be attributed to the decrease of the speed and fidelity of 2 qubit gates as the number of ions in the chain increases though. As the size of the ion chain increases, its mass increases as does the average distance between ions. This in turn leads to a decrease in the coupling strength between arbitrary ions, causing a decrease in speed of 2 qubit gates. Fidelity decreases due to the increased susceptibility among the normal modes used to mediate the 2-qubit interaction to unwanted spectral crosstalk interaction, as well as to noise-induced heating in the system if the gates take longer.</p>
+<p>A way to circumvent this problem is to break up the long linear chain into smaller modules, and it is still the barrier many device manufacturers in this regime need to work on.</p>
+<center>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Provider</th>
+<th style="text-align: center;">Max. Qubits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IonQ</td>
+<td style="text-align: center;">23</td>
+</tr>
+<tr class="even">
+<td>Quantinuum</td>
+<td style="text-align: center;">32</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p>More on their current specs can be found in their sites or cloud provider sites:</p>
 <ul>
-<li>Quantum Computing</li>
-<li><a href="https://www.intel.la/content/www/xl/es/research/neuromorphic-computing.html">Neuromorphic computing</a></li>
-<li><a href="https://the-analog-thing.org/">Analog computing</a></li>
-<li><a href="https://www.purdue.edu/p-bit/">Probabilistic computing</a></li>
-<li><a href="https://www.normalcomputing.com/blog-posts/scaling-thermodynamic-computing">Thermodynamic computing</a></li>
-<li><a href="https://news.mit.edu/2016/biological-circuit-cells-remember-respond-stimuli-0721">Biological computing</a></li>
+<li><a href="https://ionq.com/resources/ionq-aria-practical-performance">IonQ</a></li>
+<li><a href="https://assets.website-files.com/62b9d45fb3f64842a96c9686/6459acc9b999bb7fb526c4bf_Quantinuum%20H2%20Product%20Data%20Sheet.pdf">Quantinuum</a></li>
 </ul>
-<p>Fancy as it might be there are some really cool things we can learn from trying to challenge the <em>status quo</em>. It is not the first paradigm aiming to dethrone classical computing - yes, we will need to do that distinction from now on - but it is certainly the one that has progressed the most. We do have quantum computers, computers the open public can use and that are already fighting in some critical areas making people nervous about it.</p>
-<p>Let’s see if we can get our heads around what quantum computing is and how to work with it. Let’s start 🎉</p>
+<p>More in detail information <a href="https://pennylane.ai/qml/demos/tutorial_trapped_ions">thanks to Xanadu</a>.</p>
+</section>
+<section id="neutral-atoms" class="level2">
+<h2 class="anchored" data-anchor-id="neutral-atoms">Neutral atoms</h2>
+<p>Proposed around 2000, the basic concept lies in using atoms or neutral alkali metals like Rubidium (Rb) trapped in optical arrays. By laser cooling the atoms in an array to near absolute zero temperatures, traps using magnetic fields or lasers allows for rearrangement of the atoms within the lattice. Atom’s own structure represents the two level system we are looking for therefore a one-to-one mapping is done between the atom and the qubit we would like to manufacture.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/atom-lattice.png" class="img-fluid figure-img"></p>
+<figcaption>Neutral atoms</figcaption>
+</figure>
+</div>
+</figure>
+<p>Single-qubit gate operations are achieved by driving atomic transitions using laser beams tightly focused on a single atom, or by microwaves, for which the targeted atom’s resonance needs to be shifted using magnetic fields or laser beams. Two-qubit gates would seem to be a hindrance for neutral atom qubits due to their weak interactions with each other; however, this problem is solved by exciting atoms to Rydberg states. A Rydberg atom exhibits a strong dipolar interaction and produces a phenomenon known as the Rydberg blockade, which prohibits more than one atom in a small volume from being simultaneously excited to a Rydberg state. This can be used to produce entanglement between two atoms using a three pulse sequence. The readout of the neutral atom array is typically done by taking a fluorescence image at the end of the computational process. It is performed such that each atom in the state <span class="math inline">\(|0\rangle\)</span> will appear bright, whereas atoms in the state <span class="math inline">\(|1\rangle\)</span> remain dark.</p>
+<p>The arrangement of atoms in any type of 2D or even 3D structures makes problem mapping and qubit coupling flexible enough so that potentially any problem may fit into those devices. The main problem comes on the realization of two-qubit gates with high enough fidelity. Single-qubit operations reach 99.9% fidelity while two-qubit gates have been extensively studied boosting the initial 80% achieved in early 2016 to the reported 96.5% in 2019 <span class="citation" data-cites="levine2019parallel">(<a href="../../references.html#ref-levine2019parallel" role="doc-biblioref">Levine et al. 2019</a>)</span>. This is still an ongoing effort that limits the operability and universality of coding as most of the platforms require some kind of analog encoding as opposed to the logical abstraction others can provide.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/pasqal.png" class="img-fluid figure-img"></p>
+<figcaption>Pasqal</figcaption>
+</figure>
+</div>
+</figure>
+<p>Qubit coherence times are in the order of seconds, with and operation regime of <span class="math inline">\(\mu\)</span>seconds (approx. ratio <span class="math inline">\(10^7\)</span>). They also count with the ability to operate simultaneously in different atom clusters, enabling operation overlapping as opposed to ion-traps.</p>
+<center>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Provider</th>
+<th style="text-align: center;">Max. Qubits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pasqal</td>
+<td style="text-align: center;">~300</td>
+</tr>
+<tr class="even">
+<td>QuEra</td>
+<td style="text-align: center;">256</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p>Some specs on both hardware providers:</p>
+<ul>
+<li><a href="https://www.pasqal.com/hardware">Pasqal</a></li>
+<li><a href="https://www.quera.com/aquila">QuEra</a></li>
+</ul>
+<p>And easy to read and in detail vision of this technology, once again, <a href="https://pennylane.ai/qml/demos/tutorial_neutral_atoms">thanks to Xanadu</a>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-cirac1995quantum" class="csl-entry" role="listitem">
+Cirac, Juan I, and Peter Zoller. 1995. <span>“Quantum Computations with Cold Trapped Ions.”</span> <em>Physical Review Letters</em> 74 (20): 4091.
+</div>
+<div id="ref-crain2019high" class="csl-entry" role="listitem">
+Crain, Stephen, Clinton Cahall, Geert Vrijsen, Emma E Wollman, Matthew D Shaw, Varun B Verma, Sae Woo Nam, and Jungsang Kim. 2019. <span>“High-Speed Low-Crosstalk Detection of a 171Yb+ Qubit Using Superconducting Nanowire Single Photon Detectors.”</span> <em>Communications Physics</em> 2 (1): 97.
+</div>
+<div id="ref-levine2019parallel" class="csl-entry" role="listitem">
+Levine, Harry, Alexander Keesling, Giulia Semeghini, Ahmed Omran, Tout T Wang, Sepehr Ebadi, Hannes Bernien, et al. 2019. <span>“Parallel Implementation of High-Fidelity Multiqubit Gates with Neutral Atoms.”</span> <em>Physical Review Letters</em> 123 (17): 170503.
+</div>
+<div id="ref-myerson2008high" class="csl-entry" role="listitem">
+Myerson, AH, DJ Szwer, SC Webster, DTC Allcock, MJ Curtis, G Imreh, JA Sherman, DN Stacey, AM Steane, and DM Lucas. 2008. <span>“High-Fidelity Readout of Trapped-Ion Qubits.”</span> <em>Physical Review Letters</em> 100 (20): 200502.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -669,13 +867,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="../../parts/computers/firstrealizations.html" class="pagination-link" aria-label="First realizations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">First realizations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parts/gettingstarted/qc-intro.html" class="pagination-link" aria-label="Getting started">
-        <span class="nav-page-text">Getting started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/computers/machinetypes.html" class="pagination-link" aria-label="Machine types">
+        <span class="nav-page-text">Machine types</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
