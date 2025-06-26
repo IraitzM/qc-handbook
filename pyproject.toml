@@ -16,4 +16,5 @@ dependencies = [
     "pylatexenc>=2.10",
     "seaborn>=0.13.2",
     "qiskit-aer>=0.17.1",
+    "pdflatex>=0.1.3",
 ]
