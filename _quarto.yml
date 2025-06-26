@@ -35,6 +35,14 @@ book:
       - parts/gettingstarted/gates.qmd
       - parts/gettingstarted/simulations.qmd
 
+    - part: "Building a quantum computer"
+      chapters:
+      - parts/computers/firstrealizations.md
+      - parts/computers/technology.md
+      - parts/computers/machinetypes.md
+      - parts/computers/serviceproviders.md
+      - parts/computers/currentoffering.md
+
     - references.qmd
   appendices:
     - libraries.md
