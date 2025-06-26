@@ -1,0 +1,32 @@
+# Optimization {.unnumbered}
+
+Optimization and operations research (OR) represent powerful analytical approaches that help businesses make better decisions by finding the best possible solutions to complex problems. At its core, optimization involves _maximizing_ or _minimizing_ an objective (such as profit, cost, or efficiency) while satisfying various constraints and limitations that real-world business situations impose.
+
+In the business world, optimization problems are everywhere. Companies need to determine the most cost-effective way to distribute products across multiple warehouses, allocate limited budgets across marketing channels, schedule employees to meet service requirements, or decide which products to manufacture given resource constraints. Operations research provides the mathematical framework and computational tools to tackle these challenges systematically.
+
+The value proposition for businesses is compelling: optimization can reduce costs, increase revenues, improve customer service, and enhance operational efficiency. For instance, airlines use optimization to set prices and manage seat inventory, logistics companies optimize delivery routes to minimize fuel costs and time, and manufacturers optimize production schedules to maximize throughput while minimizing waste.
+
+## Types of Optimization
+
+Different business problems require different optimization techniques, each suited to specific mathematical structures. These are particularized depending on the shape of the problem and its constraints.
+
+For example, if our problem has a convex shape (meaning it looks like a bowl), the there is an entire field dedicated to it.
+
+* [Convex Optimization](https://en.wikipedia.org/wiki/Convex_optimization): studies the case when the objective function is convex (minimization) or concave (maximization) and the constraint set is convex. This can be viewed as a particular case of nonlinear programming or as generalization of linear or convex quadratic programming.
+    * [Linear Programming](https://en.wikipedia.org/wiki/Linear_programming) (LP) handles problems where both the objective function and constraints are linear relationships. This is ideal for resource allocation problems, such as determining the optimal product mix to maximize profit given limited raw materials and production capacity.
+    * [Quadratic Programming](https://en.wikipedia.org/wiki/Quadratic_programming) (QP) addresses situations where the objective function contains quadratic terms, often appearing in portfolio optimization where risk (measured as variance) needs to be balanced against expected returns.
+* [Nonlinear Programming](https://en.wikipedia.org/wiki/Nonlinear_programming) tackles problems with nonlinear objective functions or constraints, common in engineering design, pricing strategies, and situations where economies or diseconomies of scale exist.
+* Stochastic Programming addresses uncertainty by incorporating probabilistic elements, useful for supply chain planning under demand uncertainty or financial planning with market volatility.
+
+
+But depending on the variables to be used, for example restricting to a specific set of values, other specifications can be found:
+
+* [Integer Programming](https://en.wikipedia.org/wiki/Integer_programming) (IP) where all variables must be integer values.
+* [Mixed-Integer Programming](https://en.wikipedia.org/wiki/Integer_programming) (MIP) combines continuous and discrete decision variables, making it perfect for problems involving yes/no decisions alongside quantity decisions. Examples include facility location problems (whether to open a warehouse) combined with distribution decisions (how much to ship).
+* [Binary Optimization](https://en.wikipedia.org/wiki/Integer_programming) (BO) is a special case of Integer programming where only to values are allowd for our variables, 0 or 1, hence the name binary.
+
+These last problems often required a relaxed version of the problem where we solve using solvers suited for previous optimization techniques and then we iterate adding restrictions to approximate our goal. This technique is known as [Branch-and-Bound](https://en.wikipedia.org/wiki/Branch_and_bound).
+
+The choice of optimization approach depends on the problem structure, data availability, and computational requirements. Modern businesses increasingly rely on these techniques as competitive advantages, using sophisticated software and algorithms to solve problems that would be impossible to address through intuition or simple heuristics alone. The key is matching the right optimization tool to the specific business challenge at hand.
+
+Knowing binary optimization is a challenging task and quantum computers took a chance as binary problems fall already in their nature.
