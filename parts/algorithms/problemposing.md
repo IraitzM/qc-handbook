@@ -104,7 +104,7 @@ dimod.qubo_to_ising({('x1', 'x1'): -22, ('x2', 'x2'): -6, ('x3', 'x3'): -14,
 
 [dimod documentation](https://docs.ocean.dwavesys.com/en/stable/docs_dimod/)
 
-Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in [B Hybrid Solvers](../../hybridsolvers.ipynb)
+Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in [B Hybrid Solvers](../../hybridsolvers.qmd)
 
 ## Mapping the problem
 
