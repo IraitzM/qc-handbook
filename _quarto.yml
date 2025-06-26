@@ -6,9 +6,17 @@ book:
   cover-image: cover.png
   favicon: cover.png
   site-url: https://iraitzm.github.io/qc-handbook/
+  repo-url: https://github.com/IraitzM/qc-handbook
   author: "Iraitz Montalbán"
   date: "6/25/2025"
   page-navigation: true
+  search: true
+  sharing: [linkedin]
+  sidebar:
+    content: auto
+    pinned: false
+    style: docked
+    background: light
   page-footer: 
     left: "Copyright 2025, Iraitz Montalbán" 
     right: 
@@ -25,17 +33,55 @@ book:
       chapters:
       - parts/gettingstarted/basics.qmd
       - parts/gettingstarted/gates.qmd
-      - parts/gettingstarted/simulations.ipynb
-    - part: "Hardware"
+      - parts/gettingstarted/simulations.qmd
+
+    - part: "Building a quantum computer"
+      chapters:
+      - parts/computers/firstrealizations.md
+      - parts/computers/technology.md
+      - parts/computers/machinetypes.md
+      - parts/computers/serviceproviders.md
+      - parts/computers/currentoffering.md
+
+    - part: "Optimization"
+      chapters:
+      - parts/algorithms/complexity.md
+      - parts/algorithms/adiabatic.md
+      - parts/algorithms/aqc.ipynb
+      - parts/algorithms/problemposing.md
+      - parts/algorithms/quboformulations.ipynb
+      - parts/algorithms/usingexistingframeworks.ipynb
+    
+    - part: "Training circuits"
+      chapters:
+      - parts/algorithms/digitizedaqc.md
+      - parts/algorithms/examplesfordaqc.ipynb
+      - parts/algorithms/variational.md
+      - parts/algorithms/vqe.md
+      - parts/algorithms/optimizingcircuits.ipynb
+      - parts/algorithms/qaoa.md
+      - parts/algorithms/qaoaexample.ipynb
+      - parts/algorithms/extras.md
+
+    - part: "Quantum Machine Learning"
+      chapters:
+      - parts/qml/index.md
+      - parts/qml/embedding.md
+      - parts/qml/featuremaps.md
+      - parts/qml/kernels.md
+      - parts/qml/qnns.md
+      - parts/qml/challenges.md
+
     - references.qmd
   appendices:
     - libraries.md
-
+    - hybridsolvers.ipynb
 
 bibliography: references.bib
 
 format:
   html:
+    number-depth: 2
     theme: 
      - cosmo
      - style.scss

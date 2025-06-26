@@ -1,0 +1,19 @@
+[project]
+name = "qc-handbook"
+version = "0.1.0"
+description = "A handbook to understand what can be done with current Quantum Computers"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.3",
+    "numpy>=2.3.1",
+    "pyyaml>=6.0.2",
+    "qiskit>=2.1.0",
+    "qutip-qip>=0.4.1",
+    "qutip>=5.2.0",
+    "sympy>=1.14.0",
+    "pylatexenc>=2.10",
+    "seaborn>=0.13.2",
+    "qiskit-aer>=0.17.1",
+]

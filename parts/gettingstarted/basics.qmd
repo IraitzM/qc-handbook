@@ -2,9 +2,11 @@
 
 The main concept leveraged by quantum computers is the ability to act over quantum states. A quantum state is no other thing than a mathematical description of the probability distribution for the potential outcome after performing a measurement upon a system. It sounds tricky but it is simpler than it sounds, bare with me.
 
-## Qubits
+## Qubits and states
 
-Think about quantum states as a normed vector (vector of _length_ 1). Let's try with the most basic one, a system of a single unit state. The quantum version of a coin looks like:
+A quantum computer is a device capable of manipulating quantum states in a specific manner. A quantum state is like a complete description of everything you could possibly know about a tiny physical system, a particle, such as an electron or photon, at any given moment. Think of it this way: imagine you have a coin spinning in the air. While it's spinning, you can't say it's definitively heads or tails - it's in a state of being "both" until it lands. A quantum state is similar, but for particles that are unimaginably small.
+
+These states are represented as a normed vector (vector of _length_ 1) as the probability of outcomes should add up to one (meaning, certainty). Let's try with the most basic one, a system of a single unit state. The quantum version of a coin looks like:
 
 $$
 |\phi\rangle = \left[
@@ -15,11 +17,11 @@ $$
 \right]
 $$
 
-being this the minimum representation of a quantum state: a unit norm vector $\in \mathbb{C}^2$ whose physical realization is known as the **qubit**.
+being this the minimum representation of a quantum state: a unit norm vector $\in \mathbb{C}^2$ whose physical realization is known as the **qubit**. Qubits do not exists (like bit as a matter of fact), these concepts are pure mathematical constructions that have a specific meaning. In our case, the minimum unit we can manipulate in our quantum computer.
 
-It represents the two extremes the system can be at and their probability amplitudes. It means we will observe one or the other if we observe the system and those probabilities must add up to one - $|\alpha|^2+|\beta|^2 = 1$ - given that there is certainty that the system exists and we can observe it.
+It represents the two extremes the system can be at and their **probability amplitudes**. It means we will observe one or the other if we measure the system and those probabilities must add up to one - $|\alpha|^2+|\beta|^2 = 1$ - given that there is certainty that the system exists in one of those options.
 
-This state can be decomposed into basic components, basis states. This is relevant as when it comes to quantum computers, our minimal unit will be expressed on its computational basis:
+This state can be decomposed into basic components, the two extreme cases previously mentioned or mathematically speaking, **basis states**. This is relevant as when it comes to quantum computers, our minimal unit will be expressed on its computational basis:
 $$
 |0\rangle = \left[
 \begin{array}{c}
@@ -51,7 +53,7 @@ $$
 \right],
 $$
 
-meaning our quantum state's potential outcomes are $|0\rangle$ with probability $|\alpha|^2$ and $|\beta|^2$ odds for $|1\rangle$. How do we know the actual outcome of our state? Well, we need to measure. This is done by projecting it over one of those states, so the complex conjugate of previous vectors can be used for that.
+meaning our quantum state's potential outcomes are $|0\rangle$ with probability $|\alpha|^2$ and $|\beta|^2$ odds for $|1\rangle$. How do we know the actual outcome of our state? Well, we need to [measure](#measurement). This is done by projecting our state over one of those basis states, so the complex conjugate of previous vectors is used to know how likely each option is.
 
 $$
 \langle 0 | = \left[
@@ -67,7 +69,7 @@ $$
 \right]
 $$
 
-so by projecting our state into this basis vectors we would obtain:
+By projecting our state into this basis vectors we would obtain:
 
 $$
 |\langle 0 |\psi\rangle|^2 = \left|\left[
@@ -82,7 +84,7 @@ $$
 \right]\right|^2 = |\alpha|^2
 $$
 
-So we don't actually evaluate the state, but we use a basis vector to see "how close" our state is to this state that is part of our basis set.
+So we don't actually evaluate the state, but we use a basis vector to see "how close" our state is to this option that is part of the basis states we are considering.
 
 And here we found one of the first strange things about *qubits* in comparison to *bits*. Being 0 and 1 the basic states of a bit, its physical realization can only be in on of those states while qubits can be _partially_ in more than one state creating a **superposition** of states.
 
@@ -96,30 +98,31 @@ $$
 \beta |1\rangle.
 $$
 
-The state is a superposed, no question on that, but our ability to perceive it is limited by the measurement procedure itself. We need to project our quantum state into one of the two potential states we can obtain ($|0\rangle$ or $|1\rangle$). Sadly, when measuring only classical bits can be obtained (0 or 1) into our conventional machines, so no probability amplitude, no phase... information gets lost in the measurement process.
+The state is a superposed, meaning is a coin spinning in the air and we do not know which state it will reveal when we stop it to look. Our ability to perceive it is limited by the measurement procedure itself, which also alters the condition of the system (stops the coin from spinning), but it is in a set of probabilities during the spinning that is not entirely tied to one specific option (heads or tails).
 
-The _probability histogram_ is created after a sequence of quantum state creations and measurements we often call **SHOTS**.
+We need to project our quantum state into one of the two potential states we can obtain ($|0\rangle$ or $|1\rangle$). Sadly, when measuring only classical bits can be obtained (0 or 1) into our conventional machines (like the laptop or phone you are using right now), so no probability amplitude, no phase... quantum information gets lost in the measurement process and we end up with classical (boring) information.
+
+In order to fully understand the state while spinning we toss the coin several times and check each time which state we get. With that we plot the outcome of probabilities in a graph. The _probability histogram_ is created after a sequence of quantum state creations and measurements we often call **SHOTS**. With that we get an idea on how the coin look _while spinning_.
 
 <figure markdown>
 ![Coin toss](../../assets/cointoss.png)
 </figure>
 
-For a series of measurements we have seen $|0\rangle$ state 50.6% and $|1\rangle$ state 49.4%. Definitely, looks superposed to me. It is hardly perceived in the classical regime were every basis state will be interpreted as its complementary classical bit, but quantum state holds a lot of information more than this simple binary choice. 
+For a series of measurements we have seen $|0\rangle$ state 50.6% and $|1\rangle$ state 49.4%. Definitely, looks superposed to me. It is difficult to see from were we stand, but quantum state holds a lot more information than this simple binary choice. In fact, both $\alpha$ and $\beta$ are complex numbers, that is why _bloch sphere_ renders a more in detail expression of the state of a qubit. Sadly for us this is something we will never perceive from a real device but it does help while building the formalism or creating algorithms in our heads.
 
-In fact, both $\alpha$ and $\beta$ are complex numbers, that is why _bloch sphere_ renders a more in detail expression of the state of a qubit. Sadly for us this is something we will never perceive from a real device but helps while building the formalism or creating algorithms.
+All posible states will be part of the surface of that sphere, this is the potential of a single qubit. Not bad.
 
 <figure markdown>
 ![Bloch sphere](../../assets/bloch.gif){ width=60% }
 </figure>
 
-Quantum states can therefore be expressed also as:
+Quantum states can therefore be expressed also as if we consider the polar coordinate:¡s
 
 $$
 |\phi\rangle = \cos (\theta/2) |0\rangle + e^{i\phi} \sin (\theta/2)|1\rangle
 $$
 
-which represents the sphere coordinates on the surface of the _bloch sphere_. It is more evident in this case that rendering simple bits will actually remove most of the information contained in the states when operating with them in the quantum regime.
-
+which represent the sphere coordinates on the surface of the _bloch sphere_. It is more evident in this case that rendering simple bits will actually remove most of the information (like phase) contained in the states when operating with them in the quantum regime.
 
 ## Measurement
 

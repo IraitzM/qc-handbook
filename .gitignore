@@ -1,2 +1,6 @@
+# Python
+.venv
+
+# Quarto
 /.quarto/
 /_book/
