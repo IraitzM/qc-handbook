@@ -38,7 +38,7 @@ book:
     - references.qmd
   appendices:
     - libraries.md
-    - hybridsolvers.ipynb
+    - hybridsolvers.qmd
 
 bibliography: references.bib
 

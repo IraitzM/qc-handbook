@@ -2,6 +2,20 @@
 
 Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve. 
 
-Think about Shor's algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventions Factorization algorithm.
+Think about Shor's algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that tep there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.
 
-_pending_
+A more detailed explanation can be found in [IBM's documentation](https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring) but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.
+
+## Hybrid Annealers
+
+This is the idea behind some of the services we found available today. On one side, we have the pioneers of the Quantum Computing cloud services, D-Wave and their [LeapHybrid Solvers](https://docs.dwavequantum.com/en/latest/industrial_optimization/leap_hybrid.html).
+
+Their hybrid approach also allows to tackle beyond QUBO problems, like:
+
+* Non-linear problems
+* Constrained Quadratic problems
+* Discrete Quadratic problems
+
+Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by [Quantagonia](https://www.quantagonia.com/).
+
+![Quantagonia Dashboard](assets/quantagonia.png)
