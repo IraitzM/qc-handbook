@@ -13,6 +13,7 @@ book:
   search: true
   sharing: [linkedin]
   sidebar:
+    collapse-level: 1
     content: auto
     pinned: false
     style: docked
@@ -42,6 +43,18 @@ book:
       - parts/computers/machinetypes.md
       - parts/computers/serviceproviders.md
       - parts/computers/currentoffering.md
+
+    - part: "Algorithms"
+      chapters:
+      - parts/algorithms/complexity.md
+
+    - part: parts/algorithms/optimization.qmd
+      chapters:
+      - parts/algorithms/adiabatic.md
+      - parts/algorithms/aqc.qmd
+      - parts/algorithms/problemposing.md
+      - parts/algorithms/quboformulations.qmd
+      - parts/algorithms/usingexistingframeworks.ipynb
 
     - references.qmd
   appendices:
