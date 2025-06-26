@@ -28,6 +28,11 @@ jobs:
       - name: Install the project
         run: uv sync --locked --all-extras --dev
 
+      - name: Activate virtualenv
+        run: |
+          . .venv/bin/activate
+          echo PATH=$PATH >> $GITHUB_ENV
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
