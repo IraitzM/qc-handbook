@@ -1,0 +1,7 @@
+# Tuning circuits
+
+Finding the right set of parameters, like the right scheduling function in the case of annealers, can be a real challenge. In particular when there is little knowledge about the problem evolution itself.
+
+The Adiabatic theorem states that the gap has to be _small enough_ so that no transition happens between the ground state and any higher energy level state. But what does it mean small enough? How can we design the shape of the scheduling function so that acts in the right places during the evolution?
+
+That takes us into a field that has gon wild: Training Quantum Circuits or using Parameterized Quantum Circuits (PQCs) and optimization techniques to find the right parameter setups. But first we need to generalize beyond what a specific machine can do, this will be our first challenge and the first benefit on going abstract with gate-based computers.
