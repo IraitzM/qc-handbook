@@ -35,6 +35,7 @@ book:
       - parts/gettingstarted/basics.qmd
       - parts/gettingstarted/gates.qmd
       - parts/gettingstarted/simulations.qmd
+      - parts/gettingstarted/classicalqc.qmd
 
     - part: "Building a quantum computer"
       chapters:
@@ -55,6 +56,14 @@ book:
       - parts/algorithms/problemposing.md
       - parts/algorithms/quboformulations.qmd
       - parts/algorithms/usingexistingframeworks.ipynb
+      - parts/algorithms/otherconsiderations.md
+
+    - part: parts/algorithms/trainingcircuits.qmd
+      chapters:
+      - parts/algorithms/digitizedaqc.md
+      - parts/algorithms/examplesfordaqc.qmd
+      - parts/algorithms/variational.qmd
+      - parts/algorithms/vqe.md
 
     - references.qmd
   appendices:

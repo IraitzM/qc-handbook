@@ -1,0 +1,64 @@
+# Classical resources {.unnumbered}
+
+So, now you know how a simulator works. Essentially performs the mathematical operations we expect a quantum computer will do. but there are quite some nuances on the way in which we do this. For example, it is not the same to use a _simulator_ or an _emulator_. 
+
+A _simulator_ performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it was what the ideal machine should do. An _emulator_ on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show how the same actions performed by a phisical machine would look like.
+
+## Simulators
+
+The actions we performed in [previous exercise](simulations.qmd) were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as State Vector simulator (dah!) and it is common on some of the most used SDKs.
+
+A less common approach is the usage of the **Density Matrix** simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it).
+
+The **Matrix Product State** simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision level. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method.
+
+```{python}
+import numpy as np
+
+# Import Qiskit
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+from qiskit.visualization import plot_histogram, plot_state_city
+import qiskit.quantum_info as qi
+
+# Create circuit
+circ = QuantumCircuit(2)
+circ.h(0)
+circ.cx(0, 1)
+circ.measure_all()
+
+# Increase shots to reduce sampling variance
+shots = 10000
+
+# Statevector simulation method
+sim_statevector = AerSimulator(method='statevector')
+job_statevector = sim_statevector.run(circ, shots=shots)
+counts_statevector = job_statevector.result().get_counts(0)
+
+# Density Matrix simulation method
+sim_density = AerSimulator(method='density_matrix')
+job_density = sim_density.run(circ, shots=shots)
+counts_density = job_density.result().get_counts(0)
+
+# Matrix Product State simulation method
+sim_mps = AerSimulator(method='matrix_product_state')
+job_mps = sim_mps.run(circ, shots=shots)
+counts_mps = job_mps.result().get_counts(0)
+
+plot_histogram([counts_statevector, counts_density, counts_mps],
+               title='Counts for different simulation methods',
+               legend=[ 'statevector',
+                       'density_matrix',
+                       'matrix_product_state'])
+```
+
+Qiskit is not the only SDK we will be using so it is good to know this very same simulation techniques exist when, for example, using [Pennylane](https://pennylane.ai/) you will have access to several [devices](https://pennylane.ai/devices/) including:
+
+* `default.qubit` for state vector simulation
+* `default.mixed` for dealing with mixed states
+* `default.tensor` for MPS type of simulation using [QUIMB](https://quimb.readthedocs.io/en/latest/index.html) under the hood
+
+And many more. They also include nice simulators for GPU based simulation, based on [NVIDIA cuQuantum SDK](https://developer.nvidia.com/cuquantum-sdk) via [Lightning](https://www.xanadu.ai/products/lightning/) which will be really helpfull when we start talking about [training circuits](../algorithms/optimizingcircuits.ipynb).
+
+Let's keep it simple for now and deal with what algorithms we will implement.
+

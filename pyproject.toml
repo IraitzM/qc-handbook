@@ -21,4 +21,5 @@ dependencies = [
     "dwave-ocean-sdk>=8.4.0",
     "dwave-neal>=0.6.0",
     "pyqubo>=1.5.0",
+    "pennylane>=0.41.1",
 ]
