@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Service providers – Quantum Computing Handbook</title>
+<title>Tuning circuits – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../parts/computers/currentoffering.html" rel="next">
-<link href="../../parts/computers/machinetypes.html" rel="prev">
+<link href="../../parts/algorithms/digitizedaqc.html" rel="next">
+<link href="../../parts/algorithms/otherconsiderations.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/serviceproviders.html">Service providers</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Tuning circuits</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -161,13 +161,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Building a quantum computer</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
@@ -188,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service providers</span></a>
   </div>
 </li>
@@ -266,13 +266,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tuning circuits</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link">
@@ -333,32 +333,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#direct-service-providers" id="toc-direct-service-providers" class="nav-link active" data-scroll-target="#direct-service-providers">Direct service providers</a>
-  <ul class="collapse">
-  <li><a href="#d-wave" id="toc-d-wave" class="nav-link" data-scroll-target="#d-wave">D-Wave</a></li>
-  <li><a href="#ibm" id="toc-ibm" class="nav-link" data-scroll-target="#ibm">IBM</a></li>
-  </ul></li>
-  <li><a href="#cloud-hosted-services" id="toc-cloud-hosted-services" class="nav-link" data-scroll-target="#cloud-hosted-services">Cloud hosted services</a>
-  <ul class="collapse">
-  <li><a href="#amazon-braket" id="toc-amazon-braket" class="nav-link" data-scroll-target="#amazon-braket">Amazon Braket</a></li>
-  <li><a href="#microsoft-azure" id="toc-microsoft-azure" class="nav-link" data-scroll-target="#microsoft-azure">Microsoft Azure</a></li>
-  <li><a href="#direct-providers" id="toc-direct-providers" class="nav-link" data-scroll-target="#direct-providers">Direct providers</a></li>
-  </ul></li>
-  <li><a href="#third-party-providers" id="toc-third-party-providers" class="nav-link" data-scroll-target="#third-party-providers">Third party providers</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Building a quantum computer</a></li><li class="breadcrumb-item"><a href="../../parts/computers/serviceproviders.html">Service providers</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Service providers</h1>
+<h1 class="title">Tuning circuits</h1>
 </div>
 
 
@@ -375,118 +358,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Most of these machines cannot be purchased; or their cost would be way beyond any potential return of investment. They are quite expensive and require active maintenance so, lucky for us, we do count with the ability to interact with remote machines from our workstations. That way we can <em>rent</em> their usage and let others do the nasty work of maintenance. Most hardware providers offer their quantum computing machines as a service, so we can ask for computation time and send our circuits/algorithms to be executed on those. This was really common for Universities and research institutions when requesting time on a supercomputing or HPC resource but since the creation of the cloud it is also a well extended practice between data and analytics departments where ephemeral resources may make sense to be used due to the experimental nature of a given initiative.</p>
-<p>We will guide on how these services can be enabled from players providing themselves the service as well as cloud providers where a wider variety of machines can be found.</p>
-<section id="direct-service-providers" class="level2">
-<h2 class="anchored" data-anchor-id="direct-service-providers">Direct service providers</h2>
-<section id="d-wave" class="level3">
-<h3 class="anchored" data-anchor-id="d-wave">D-Wave</h3>
-<p>D-Wave is known to be one of the first companies to make their quantum computers commercially available (2011). This Canadian niche player built quantum annealing machines so that people could… buy them? Well probably that was part of their intention, but these are big expensive machines yet to prove their usefulness. Luckily in 2018 they released their cloud solution <a href="https://cloud.dwavesys.com/leap/login">DWave Leap</a>.</p>
-<p>Their cloud access allows some free time on these machines so that users can evaluate their usefulness and advantage to solve specific problems.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/dwave-leap.png" class="img-fluid figure-img"></p>
-<figcaption>DWave Leap</figcaption>
-</figure>
-</div>
-</figure>
-<p>The dashboard offers information about the remaining available usage time and there are options to open a browser based Integrated Development Environment (IDE) or access the documentation for use cases that may help get started with this service.</p>
-<p>We already discussed that Quantum Annealers are a different type of beast, so they might require different ways to instruct what to do. That is why DWave had to leverage also Python based Software Development Kits so that people could interact with their machines (exclusively).</p>
-<p><a href="https://docs.ocean.dwavesys.com/en/latest/overview/install.html">Ocean software stack</a></p>
-<p>By attaching a GitHub account the initial 20 min. access is extended to a monthly time allowance where their purely quantum devices as well as hybrid solvers will be available.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/dwave-devices.png" class="img-fluid figure-img"></p>
-<figcaption>DWave devices</figcaption>
-</figure>
-</div>
-</figure>
-</section>
-<section id="ibm" class="level3">
-<h3 class="anchored" data-anchor-id="ibm">IBM</h3>
-<p>IBM has been involved since the early days in the development of quantum computers. Superconducting chips are at the core of what they can provide, and probably you have already seen some images on how their machines look like, so now you know what is inside this huge cylinder.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/ibm-system-one.png" class="img-fluid figure-img"></p>
-<figcaption>IBM System One</figcaption>
-</figure>
-</div>
-</figure>
-<p>It is said that IBM representatives asked at a conference how many of the attendees would actually interact with a quantum computing service to send their experiments if IBM would allow for such access. Apparently a huge amount of people raised their hands and that gave birth to IBM’s Quantum Computing platform <a href="https://www.ibm.com/quantum">https://www.ibm.com/quantum)</a> and the framework that enabled the communication and experiment implementation, Qiskit.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/ibm-quantum.png" class="img-fluid figure-img"></p>
-<figcaption>IBM Quantum</figcaption>
-</figure>
-</div>
-</figure>
-<p>We could either use online resources available there, such as the Quantum Lab (a Jupyter based IDE) or get the API token to interact from our local machine by means of Qiskit. Same devices will be available for our experiments in both cases.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/ibm-devices.png" class="img-fluid figure-img"></p>
-<figcaption>IBM devices</figcaption>
-</figure>
-</div>
-</figure>
-</section>
-</section>
-<section id="cloud-hosted-services" class="level2">
-<h2 class="anchored" data-anchor-id="cloud-hosted-services">Cloud hosted services</h2>
-<p>Not all companies have the ability to develop and maintain an online customer facing service as their focus may be more on the hardware development side, and they could benefit from partnerships where this is done by a third party. Cloud providers already aware of this, decided to step in and create a service so that others could host their quantum computing services.</p>
-<section id="amazon-braket" class="level3">
-<h3 class="anchored" data-anchor-id="amazon-braket">Amazon Braket</h3>
-<p>AWS created a service called Amazon Braket so that people already using their cloud services could simply add quantum computing resources as an extra to their current stack. It offers similar experience to IBM’s or DWave, but the main benefit is the access to devices other than IBM’s or DWave’s.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/aws-devices.png" class="img-fluid figure-img"></p>
-<figcaption>AWS devices</figcaption>
-</figure>
-</div>
-</figure>
-<p>One can use their Software Development Kit (Braket SDK) which could be necessary for some devices not providing digitized gates but in general, due to the agreement on digitized instructions there it does exist an integration between both languages Amazon Braket SDK and IBM’s Qiskit.</p>
-</section>
-<section id="microsoft-azure" class="level3">
-<h3 class="anchored" data-anchor-id="microsoft-azure">Microsoft Azure</h3>
-<p>Similarly, Azure created a service that provides access to a set of devices some of them only being accessible in this platform (Quantinuum for example). Quantum Workspaces is the name, and it also offers a Jupyter based IDE for online experimentation.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/azure-devices.png" class="img-fluid figure-img"></p>
-<figcaption>Azure devices</figcaption>
-</figure>
-</div>
-</figure>
-<p>Microsoft created their own quantum computing framework called Q# but given the maturity of Qiskit, plugins do exist so that programmers won’t need to switch frameworks.</p>
-</section>
-<section id="direct-providers" class="level3">
-<h3 class="anchored" data-anchor-id="direct-providers">Direct providers</h3>
-<p>Some companies, like IonQ, do provide direct access to their simulators, emulators and devices via their cloud hosted service. This is the case of <a href="https://ionq.com/quantum-cloud">IonQ’s Cloud</a> service. Anyone can sign up and request access to the simulators and QPUs available there.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/ionq-cloud.png" class="img-fluid figure-img"></p>
-<figcaption>IonQ Cloud</figcaption>
-</figure>
-</div>
-</figure>
-</section>
-</section>
-<section id="third-party-providers" class="level2">
-<h2 class="anchored" data-anchor-id="third-party-providers">Third party providers</h2>
-<p>There do exist some intermediary providers that position themselves between the hardware access and the developer experience. Definitely interesting to look at their offering as it evolves:</p>
-<ul>
-<li><a href="https://strangeworks.com/">Strangeworks</a></li>
-<li><a href="https://www.qbraid.com/">qBraid</a></li>
-</ul>
+<p>Finding the right set of parameters, like the right scheduling function in the case of annealers, can be a real challenge. In particular when there is little knowledge about the problem evolution itself.</p>
+<p>The Adiabatic theorem states that the gap has to be <em>small enough</em> so that no transition happens between the ground state and any higher energy level state. But what does it mean small enough? How can we design the shape of the scheduling function so that acts in the right places during the evolution?</p>
+<p>That takes us into a field that has gon wild: Training Quantum Circuits or using Parameterized Quantum Circuits (PQCs) and optimization techniques to find the right parameter setups. But first we need to generalize beyond what a specific machine can do, this will be our first challenge and the first benefit on going abstract with gate-based computers.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -890,13 +766,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/computers/machinetypes.html" class="pagination-link" aria-label="Machine types">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Machine types</span>
+      <a href="../../parts/algorithms/otherconsiderations.html" class="pagination-link" aria-label="Other considerations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Other considerations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/computers/currentoffering.html" class="pagination-link" aria-label="Current offering">
-        <span class="nav-page-text">Current offering</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/algorithms/digitizedaqc.html" class="pagination-link" aria-label="Introduction to digitization">
+        <span class="nav-page-text">Introduction to digitization</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

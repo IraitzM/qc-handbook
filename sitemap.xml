@@ -2,110 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/index.html</loc>
-    <lastmod>2025-06-27T10:40:48.540Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/intro.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/gettingstarted/qc-intro.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/gettingstarted/basics.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/gettingstarted/gates.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/gettingstarted/simulations.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/gettingstarted/classicalqc.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/computers/firstrealizations.html</loc>
-    <lastmod>2025-06-27T10:40:48.542Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/computers/technology.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/computers/machinetypes.html</loc>
-    <lastmod>2025-06-27T10:40:48.542Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/computers/serviceproviders.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/computers/currentoffering.html</loc>
-    <lastmod>2025-06-27T10:40:48.542Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/complexity.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/optimization.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/adiabatic.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/aqc.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/problemposing.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/quboformulations.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/usingexistingframeworks.html</loc>
-    <lastmod>2025-06-27T10:40:48.542Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/otherconsiderations.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
+  </url>
+  <url>
+    <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/trainingcircuits.html</loc>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/digitizedaqc.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/examplesfordaqc.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/variational.html</loc>
-    <lastmod>2025-06-27T10:40:48.542Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/parts/algorithms/vqe.html</loc>
-    <lastmod>2025-06-27T10:40:48.542Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.753Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/references.html</loc>
-    <lastmod>2025-06-27T10:40:48.543Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.754Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/libraries.html</loc>
-    <lastmod>2025-06-27T10:40:48.541Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
   <url>
     <loc>https://iraitzm.github.io/qc-handbook/hybridsolvers.html</loc>
-    <lastmod>2025-06-27T10:40:48.540Z</lastmod>
+    <lastmod>2025-06-27T10:44:41.752Z</lastmod>
   </url>
 </urlset>
