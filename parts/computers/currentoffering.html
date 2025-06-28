@@ -581,7 +581,7 @@ SWAP = \left[
 </div>
 <p>Simple actions like layout selection, trying to select those qubits with less error on them or surrounding qubits might be simple and powerful enough for small circuits but it gets challenging on real use cases where depth and connectivity increase significantly.</p>
 <p><strong>Error correction</strong></p>
-<p>Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to fault-tolerant device. the trick here is that our qubits will be a logical representation of what we have seen until now</p>
+<p>Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to fault-tolerant device. The trick here is that our qubits will be a logical representation of what we have seen until now</p>
 <p><span class="math display">\[
 |0\rangle_L = |000000000\rangle
 \]</span></p>
@@ -592,7 +592,7 @@ SWAP = \left[
 <figcaption>Shor’s error code</figcaption>
 </figure>
 </div>
-<p>Fault Tolerant Quantum Computing would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to million qubits needed for meaningful computation (see <a href="https://quantumai.google/learn/map">Google’s journey map</a>).</p>
+<p><strong>Fault Tolerant Quantum Computing</strong> would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to million qubits needed for meaningful computation (see <a href="https://quantumai.google/learn/map">Google’s journey map</a>).</p>
 <p>Therefore, we need to invest some time on manual error fixing and mitigation. Even though these techniques may sound complex, current status of frameworks such as Qiskit may help <a href="https://docs.quantum-computing.ibm.com/optimize">bridge the gap</a>.</p>
 </section>
 <section id="additional-means" class="level3">

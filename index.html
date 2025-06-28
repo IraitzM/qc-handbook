@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -383,7 +403,14 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1><p><img src="cover.png" title="Quantum Computing Handbook" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>You may wonder, another book about Quantum Computing? Well, by telling it from a different perspective it may help people coming from different fields (meaning, non-physicists) grasp the idea behind quantum computing. This is also a work for myself, as it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field you are trying to master.</p>
+<p>You may wonder, another book about Quantum Computing? More documentation? We already have:</p>
+<ul>
+<li><a href="https://docs.quantum.ibm.com/guides/hello-world">Qiskit documentation</a></li>
+<li>DWave’s documentation around <a href="https://docs.dwavequantum.com/en/latest/index.html">optimization</a></li>
+<li>Pennylane for <a href="https://pennylane.ai/qml">QML and simulation</a> and <a href="https://pennylane.ai/codebook/learning-paths">codebooks</a></li>
+<li>Even some relevant works that go in detail on this, books and stuff <span class="citation" data-cites="dewolf2023quantumcomputinglecturenotes nielsen2010quantum yanofsky2008quantum">(<a href="references.html#ref-dewolf2023quantumcomputinglecturenotes" role="doc-biblioref">Wolf 2023</a>; <a href="references.html#ref-nielsen2010quantum" role="doc-biblioref">Nielsen and Chuang 2010</a>; <a href="references.html#ref-yanofsky2008quantum" role="doc-biblioref">Yanofsky and Mannucci 2008</a>)</span></li>
+</ul>
+<p>Well, by telling it from a different perspective it may help people coming from different fields (meaning, non-physicists) grasp the idea behind quantum computing. This is also a work for myself, as it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field you are trying to master.</p>
 <p>Also, it costs nothing so, no harm done. Code snippets are easier to maintain so hopefully, everything will work with the latest versions. I hope you enjoy reading it as much as I have learned creating it.</p>
 <section id="about-me" class="level2">
 <h2 class="anchored" data-anchor-id="about-me">About me</h2>
@@ -391,6 +418,17 @@ ul.task-list li input[type="checkbox"] {
 <p>Fill free to <a href="https://www.linkedin.com/in/iraitzmontalban/">keep in touch</a>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-nielsen2010quantum" class="csl-entry" role="listitem">
+Nielsen, Michael A, and Isaac L Chuang. 2010. <em>Quantum Computation and Quantum Information</em>. Cambridge university press.
+</div>
+<div id="ref-dewolf2023quantumcomputinglecturenotes" class="csl-entry" role="listitem">
+Wolf, Ronald de. 2023. <span>“Quantum Computing: Lecture Notes.”</span> <a href="https://arxiv.org/abs/1907.09415">https://arxiv.org/abs/1907.09415</a>.
+</div>
+<div id="ref-yanofsky2008quantum" class="csl-entry" role="listitem">
+Yanofsky, Noson S, and Mirco A Mannucci. 2008. <em>Quantum Computing for Computer Scientists</em>. Cambridge University Press.
+</div>
+</div>
 </section>
 </section>
 
