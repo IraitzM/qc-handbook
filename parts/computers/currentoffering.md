@@ -143,7 +143,7 @@ Simple actions like layout selection, trying to select those qubits with less er
 
 **Error correction**
 
-Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to fault-tolerant device. the trick here is that our qubits will be a logical representation of what we have seen until now
+Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to fault-tolerant device. The trick here is that our qubits will be a logical representation of what we have seen until now
 
 $$
 |0\rangle_L = |000000000\rangle
@@ -153,7 +153,7 @@ And therefore, operations should also be modified to represent the actions on al
 
 ![Shor's error code](../../assets/shorcode.png){width=60%}
 
-Fault Tolerant Quantum Computing would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to million qubits needed for meaningful computation (see [Google's journey map](https://quantumai.google/learn/map)). 
+**Fault Tolerant Quantum Computing** would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to million qubits needed for meaningful computation (see [Google's journey map](https://quantumai.google/learn/map)). 
 
 Therefore, we need to invest some time on manual error fixing and mitigation. Even though these techniques may sound complex, current status of frameworks such as Qiskit may help [bridge the gap](https://docs.quantum-computing.ibm.com/optimize).
 

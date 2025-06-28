@@ -1,6 +1,13 @@
 # Preface {.unnumbered}
 
-You may wonder, another book about Quantum Computing? Well, by telling it from a different perspective it may help people coming from different fields (meaning, non-physicists) grasp the idea behind quantum computing. This is also a work for myself, as it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field you are trying to master.
+You may wonder, another book about Quantum Computing? More documentation? We already have:
+
+* [Qiskit documentation](https://docs.quantum.ibm.com/guides/hello-world)
+* DWave's documentation around [optimization](https://docs.dwavequantum.com/en/latest/index.html)
+* Pennylane for [QML and simulation](https://pennylane.ai/qml) and [codebooks](https://pennylane.ai/codebook/learning-paths)
+* Even some relevant works that go in detail on this, books and stuff [@dewolf2023quantumcomputinglecturenotes; @nielsen2010quantum; @yanofsky2008quantum]
+
+Well, by telling it from a different perspective it may help people coming from different fields (meaning, non-physicists) grasp the idea behind quantum computing. This is also a work for myself, as it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field you are trying to master.
 
 Also, it costs nothing so, no harm done. Code snippets are easier to maintain so hopefully, everything will work with the latest versions. I hope you enjoy reading it as much as I have learned creating it.
 

@@ -31,7 +31,7 @@ Most likely, as it has happened with the rest of the machines, they will grow in
 
 In 1998, Hideyoshi Nishimoru from Tokyo University demonstrated that quantum annealing could outperform classical annealing techniques used up to that moment for optimization and combinatorial tasks. Quantum Annealers work by starting the system at a know state and by performing little perturbations to the system provide the solution to a target state. Its universality has been proven 
 
-Adiabatic quantum computing (AQC) is a model of computation that uses quantum mechanical processes operating under adiabatic conditions. As a form of universal quantum computation, AQC employs the principles of **superposition, tunneling, and entanglement** that manifest in quantum physical systems.
+[Adiabatic quantum computing (AQC)](../algorithms/adiabatic.md) is a model of computation that uses quantum mechanical processes operating under adiabatic conditions. As a form of universal quantum computation, AQC employs the principles of **superposition, tunneling, and entanglement** that manifest in quantum physical systems.
 
 <figure markdown>
 ![Adiabatic evolution of ground state](../../assets/adiabatic-pic.png)
