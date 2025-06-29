@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Other considerations – Quantum Computing Handbook</title>
+<title>Challenges – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../parts/algorithms/trainingcircuits.html" rel="next">
-<link href="../../parts/algorithms/usingexistingframeworks.html" rel="prev">
+<link href="../../parts/algorithms/complexity.html" rel="next">
+<link href="../../parts/computers/serviceproviders.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -112,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/optimization.html">Optimization</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/otherconsiderations.html">Other considerations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Quantum Computers</a></li><li class="breadcrumb-item"><a href="../../parts/computers/challenges.html">Challenges</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -190,13 +210,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Quantum Computers</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
@@ -223,7 +243,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/computers/challenges.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/challenges.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Challenges</span></a>
   </div>
 </li>
@@ -250,11 +270,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../parts/algorithms/optimization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimization</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
@@ -287,7 +307,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/algorithms/otherconsiderations.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../parts/algorithms/otherconsiderations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Other considerations</span></a>
   </div>
 </li>
@@ -379,17 +399,22 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#non-binary-variables" id="toc-non-binary-variables" class="nav-link active" data-scroll-target="#non-binary-variables">Non-binary variables</a></li>
-  <li><a href="#beyond-qubo" id="toc-beyond-qubo" class="nav-link" data-scroll-target="#beyond-qubo">Beyond QUBO</a></li>
+  <li><a href="#considerations" id="toc-considerations" class="nav-link active" data-scroll-target="#considerations">Considerations</a>
+  <ul class="collapse">
+  <li><a href="#quantum-devices" id="toc-quantum-devices" class="nav-link" data-scroll-target="#quantum-devices">Quantum devices</a></li>
+  <li><a href="#transpilation" id="toc-transpilation" class="nav-link" data-scroll-target="#transpilation">Transpilation</a></li>
+  <li><a href="#noise-and-errors" id="toc-noise-and-errors" class="nav-link" data-scroll-target="#noise-and-errors">Noise and errors</a></li>
+  <li><a href="#additional-means" id="toc-additional-means" class="nav-link" data-scroll-target="#additional-means">Additional means</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/optimization.html">Optimization</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/otherconsiderations.html">Other considerations</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Quantum Computers</a></li><li class="breadcrumb-item"><a href="../../parts/computers/challenges.html">Challenges</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Other considerations</h1>
+<h1 class="title">Challenges</h1>
 </div>
 
 
@@ -406,32 +431,203 @@ window.Quarto = {
 </header>
 
 
-<p>most of what we saw relates to binary optimization but there are two things we may need or want to work on as well:</p>
-<ul>
-<li>Non-binary variables</li>
-<li>Beyond quadratic models</li>
-</ul>
-<section id="non-binary-variables" class="level2">
-<h2 class="anchored" data-anchor-id="non-binary-variables">Non-binary variables</h2>
-<p>Many problems require continuous variables so in order to be solvable by quantum computers, or at least Quantum Annealers, we might need to transform that numerical precision into bins.</p>
-<p>So, if we take the example of the portfolio optimization problem, assuming a percentage of the available money goes to different assets (not just binary decisions if we invest or not) we will need to reformulate it, so imaging that instead of</p>
+<p>This is a tricky one, even though we love working with quantum computers, the key aspect is being able to solve <em>efficiently</em> a given problem. And, at this stage, there are many competitors doing a great job at solving problems without the need for quantum computers, and it is important that while this field evolves we make the most out of their colleagues. All those, <em>quantum-inspired</em> and <em>quantum-adjacent</em> technologies.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/nisq.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Technology landscape</figcaption>
+</figure>
+</div>
+</figure>
+<p>From this family we have focused until now into the last bit, the <strong>Noisy Intermediate-Scale Quantum (NISQ)</strong> bit, the one related to actual quantum hardware but that does not mean those techniques and devices inspired by the challenges quantum mechanical systems pose are less than the actual hardware. In fact, one of the main problems to claim quantum advantage is the constant improvement and refinement of classical devices solving the same problems.</p>
+<p>We highly recommend looking into <strong>classical</strong> and <strong>quantum-inspired</strong> solutions before jumping into the complexities of dealing with quantum hardware. There are really interesting results when it comes to classically emulating this formalism in the range of 10s to 100s of qubits and also hybrid approaches benefiting from specific aspects of the quantum domain, but heavily relying on classical processes (like Shor’s algorithm in fact).</p>
+<p>You have been warned!</p>
+<section id="considerations" class="level2">
+<h2 class="anchored" data-anchor-id="considerations">Considerations</h2>
+<p>Before we enter into more cumbersome and obscure techniques, lets understand the context in which we are trying to use Quantum Computing to outperform classical means. It is not a fair comparison as we count with almost 70 years of development in the classical regime while quantum computers even though have been used for almost 25 years since the first realization of the qubit, might require some extra work until a similar status of maturity and confidence is reached.</p>
+<p>Following section will try to make the reader conscious about some of the issues they might face and how to tackle them, with a particular interest on Digital Quantum Computers.</p>
+<section id="quantum-devices" class="level3">
+<h3 class="anchored" data-anchor-id="quantum-devices">Quantum devices</h3>
+<p>We have seen many different devices exist but, even between the ones that are based on same technology we will find discrepancies on how they implement their operations. When this operations are fully parameterized we call them Gates but even though engineering makes a substantial effort bridging the gap between theoretical framework and physical reality, we might need to make our part as well.</p>
+<section id="coupling-maps" class="level4">
+<h4 class="anchored" data-anchor-id="coupling-maps">Coupling maps</h4>
+<p>Coupling map refers to the connectivity between qubits. Most of our problems will be mapped to those qubits and we will need to define the strength of the action with respect to neighboring qubits. This ability to encode the interactions is reflected in the physical connection between the qubits on a given device and it is called the <strong>coupling map</strong>.</p>
+<p>As an example, this is the coupling map of Rigetti:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/rigetti.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Rigetti Aspen topology</figcaption>
+</figure>
+</div>
+<p>And this one belongs to IonQ’s Aria:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ionq-aria.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>IonQ Aria topology</figcaption>
+</figure>
+</div>
+<p>Seems like ino-traps may be a better fit to combinatorial optimization problems as they already count with all-to-all connectivity, but they lack the scale of superconducting devices. So, can we make anything to virtually connect those qubits on Rigetti’s device all-to-all?</p>
+<p><strong>SWAP gates</strong></p>
+<p>The SWAP gate affects two qubits by interchanging their state, such that</p>
 <p><span class="math display">\[
-\max \sum_i r_ix_i - \sum_i \sum_j c_{ij}x_ix_j \\
-\text{ s. t. } \sum_i b_ix_i \le B
-\]</span> where <span class="math inline">\(x_i \in \{0, 1\}\)</span>, you need to define a variable <span class="math inline">\(w_i \in \mathbb{R}\)</span>. In order for that to work on a quantum computer, you will need to define your problem so that</p>
-<p><span class="math display">\[
-w_i = \sum_{p=0}^{K} \frac{1}{2^p} x_{i,p}
-\]</span> so that <span class="math inline">\(w_i\)</span> is the linear combination of weights <span class="math inline">\(\{\frac{1}{2^0}, \frac{1}{2^1}, \frac{1}{2^2}, \dots, \frac{1}{2^p} \}\)</span>. We will need to define the precision we would like and that also affects the number of qubits required to solve our problem. If the binary case required one qubit per asset, now we need <span class="math inline">\(p\)</span> qubits per asset, which might be challenging for large problems.</p>
-</section>
-<section id="beyond-qubo" class="level2">
-<h2 class="anchored" data-anchor-id="beyond-qubo">Beyond QUBO</h2>
-<p>The limitation to quadratic terms might not be suitable for all soft of problems. We may want to extend our problem so that for example, covers a three-parti relationship</p>
-<p><span class="math display">\[
-\max \sum_i a_ix_i - \sum_i \sum_j b_{ij}x_i, x_j + \sum_i \sum_j \sum_k c_{ijk}x_ix_jx_k.
+SWAP|\phi\rangle|\psi\rangle = |\psi\rangle|\phi\rangle,
 \]</span></p>
-<p>That extra three-party relation adds a whole new level of complexity as it requires either a three party gate (like de Toffoli gate) in systems that do not go beyond two-qubit gates. So we will need to decompose this interaction into several new two body terms, exploding the resources required. This are defined as <a href="https://docs.dwavequantum.com/en/latest/quantum_research/reformulating.html#non-quadratic-higher-degree-polynomials">Higher-Order Unconstainer Binary Optimization (HUBO) problems</a>.</p>
+<p>and its matrix form looks as follows</p>
+<p><span class="math display">\[
+SWAP = \left[
+\begin{array}{cccc}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right].
+\]</span></p>
+<p>By iteratively applying this gates we can come up with a logical all-to-all connectivity even on sparsely connected devices. Swap strategies are quite common in the literature in particular when using superconducting devices. Different approaches can be found in the literature, and we will see in practice how it ends up being on reality, but in 2022 <span class="citation" data-cites="Weidenfeller_2022">(<a href="../../references.html#ref-Weidenfeller_2022" role="doc-biblioref">Weidenfeller et al. 2022</a>)</span> they showed how adding interchanging SWAP layers produces an virtual all to all connectivity with minimal depth increase.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/swapstrategies.png" class="img-fluid figure-img"></p>
+<figcaption>Swap strategy</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/swapstrategies2.png" class="img-fluid figure-img"></p>
+<figcaption>Swaping for full connectivity</figcaption>
+</figure>
+</div>
+<p>They we will simply need to introduce an appropriate amount of SWAP gates when needed according to our target device coupling map. The downside of it is that our circuit depth will increase, more operations are added, but that is not bad, is it?</p>
+</section>
+<section id="native-gates" class="level4">
+<h4 class="anchored" data-anchor-id="native-gates">Native gates</h4>
+<p>Our logical framework for quantum computing lands into different devices. As we already mentioned when discussing different device technologies, the actuation over the qubits is performed in different ways:</p>
+<ul>
+<li>Superconducting qubits use microwave pulses</li>
+<li>Ion traps use lasers</li>
+<li>Neutral atoms use lasers as well, in a slightly different manner</li>
+</ul>
+<p>Therefore all operations need to find a translation that maps logical gates with the expected outcome of it, meaning a calibrated pulse needs to be found that renders the expected result. Following is the example of the Hadamard gate on a given qubit</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/hadamardpulse.png" class="img-fluid figure-img"></p>
+<figcaption>Hadamard pulse</figcaption>
+</figure>
+</div>
+<p>A Gaussian shape pulse of 128 system cycle unit duration and an amplitude of 0.1. If this was the level required to work, probably less people would embrace quantum computing, therefore most companies offer an already calibrated set of operations that even though they are not the whole set of gates of the formalism, sets a basic and universal set of operations so that any logical circuit can be transform to those native gates.</p>
+<p>If we access any of the IBM Quantum Computing devices we can see how they already show relevant information where we can encounter those natively accessible gates named as the <em>basis gates</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ibm_perth_info.png" class="img-fluid figure-img"></p>
+<figcaption>IBM Perth information</figcaption>
+</figure>
+</div>
+<ul>
+<li>ID is the identity operation</li>
+<li>X is the NOT gate and <a href="https://qiskit.org/documentation/stubs/qiskit.circuit.library.SXGate.html">SX</a>, the <span class="math inline">\(\sqrt{X}\)</span></li>
+<li>RZ is the rotation over the <span class="math inline">\(Z\)</span> axis given an angle <span class="math inline">\(\theta\)</span></li>
+<li>CX is our only two-qubit gate and represents the CNOT</li>
+</ul>
+<p>Then, if we only have a CNOT gate how could we implement the SWAP gates we needed in order to create an all-to-all connected circuit? Tricky as it might be we need to find a way to decompose our logical gates into the gates we have available <span class="citation" data-cites="gokhale2021fasterreliablequantumswaps">(<a href="../../references.html#ref-gokhale2021fasterreliablequantumswaps" role="doc-biblioref">Gokhale et al. 2021</a>)</span>.</p>
+</section>
+</section>
+<section id="transpilation" class="level3">
+<h3 class="anchored" data-anchor-id="transpilation">Transpilation</h3>
+<p>Transpilation refers to the systematic approach of changing a logical circuit to fit under the basis gates and coupling map for a given device. Reminds to the old compilation step needed in computer programs to fit a given architecture but in this case, given that still converts our source code in a different source-code, transpilation is the appropriate name.</p>
+<p>These logical steps, once transpiled can be interpreted by the device knowing the type of pulse that needs to be sent to each qubit to represent the requested operation.</p>
+<p>IBM counts with one of the most mature transpilation modules out there and it is often used to translate the logical circuits to specifications for other devices. It is composed by different circuit <em>passes</em> focusing on fixing specific issues between logical circuit and physical device.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ibmpasses.png" class="img-fluid figure-img"></p>
+<figcaption>Passes for circuit transpilation using Qiskit</figcaption>
+</figure>
+</div>
+<p>At the end you will see the representation fo the pulsed schedule that is finally submitted to the deive following the architecture layer as in the image below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ibmpulse.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Layers from logical circuit to actual pulses</figcaption>
+</figure>
+</div>
+<p>More on this can be found on <a href="https://qiskit.org/documentation/tutorials/circuits_advanced/04_transpiler_passes_and_passmanager.html">IBM’s documentation</a></p>
+</section>
+<section id="noise-and-errors" class="level3">
+<h3 class="anchored" data-anchor-id="noise-and-errors">Noise and errors</h3>
+<p>And if that wasn’t enough, quantum devices are far from perfect when performing operations. Operations not always turn out as expected due to:</p>
+<ul>
+<li>Measurement or Readout error</li>
+<li>Operation error rates</li>
+</ul>
+<p>And given the limited coupling ability and native gate translation, more operations than initially expected ones need to be added to the final circuit. The more operations we have, the more error we will add at the end state.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ibm-jakarta.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>IBM Jakarta</figcaption>
+</figure>
+</div>
+<p>All this goes against the effort we have put when trying to solve our problem accurately using quantum computers. Lucky for us, there is people researching on how these effects can be minimized or suppressed, so let’s see a couple of examples. It is also relevant to clarify the lingo as it might get messy. They are trying to take us to the <strong>Fault-Tolerant Quantum Computing</strong> era. Some of the areas people are working on will be highlighted below.</p>
+<p><strong>Error suppression</strong></p>
+<p>Error suppression aims to leverage knowledge about the system and its fundamental errors to suppress their effect when someone runs a given circuit on those devices. It is often found at a fundamental level, really close o the hardware itself and should be easy to abstract the final user from these actions as they mostly require little knowledge about the executing circuit.</p>
+<p>A clear example of these techniques is <em>Dynamical Decoupling</em>. A techniques that introduces operations when qubits are idling so that they do not get affected by the surrounding qubtis and operations taking place.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/ddqiskit.png" class="img-fluid figure-img"></p>
+<figcaption>Pulse scheme for dynamical decoupling</figcaption>
+</figure>
+</div>
+<p>Derivative Removal by Adiabatic Gate (DRAG) as an additional example, adds a component to the standard pulse shape to reduce qubits entering states higher than the 0 and 1 states we use for calculations. These techniques aim to fix fundamental issues related to the physical implementation.</p>
+<p><strong>Error mitigation</strong></p>
+<p>These techniques try to diminish the effect of noise during the execution by compensating for the systematic issues of the device itself. We could statistically characterize the systematic error upon redout and compensate for it after execution of the circuit.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/readoutmitigation.png" class="img-fluid figure-img"></p>
+<figcaption>Redout error</figcaption>
+</figure>
+</div>
+<p>Or when expectation value is the obtained value, characterize the noise level and extrapolate the value we would have obtained in absence of noise for a given device.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/zne.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Zero noise extrapolation (ZNE)</figcaption>
+</figure>
+</div>
+<p>Simple actions like layout selection, trying to select those qubits with less error on them or surrounding qubits might be simple and powerful enough for small circuits but it gets challenging on real use cases where depth and connectivity increase significantly.</p>
+<p><strong>Error correction</strong></p>
+<p>Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to fault-tolerant device. The trick here is that our qubits will be a logical representation of what we have seen until now</p>
+<p><span class="math display">\[
+|0\rangle_L = |000000000\rangle
+\]</span></p>
+<p>And therefore, operations should also be modified to represent the actions on all physical qubits behind our logical actions. Below example is one of the canonical examples of error correcting codes designed by Peter Shor.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/shorcode.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Shor’s error code</figcaption>
+</figure>
+</div>
+<p><strong>Fault Tolerant Quantum Computing</strong> would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to million qubits needed for meaningful computation (see <a href="https://quantumai.google/learn/map">Google’s journey map</a>).</p>
+<p>Therefore, we need to invest some time on manual error fixing and mitigation. Even though these techniques may sound complex, current status of frameworks such as Qiskit may help <a href="https://docs.quantum-computing.ibm.com/optimize">bridge the gap</a>.</p>
+</section>
+<section id="additional-means" class="level3">
+<h3 class="anchored" data-anchor-id="additional-means">Additional means</h3>
+<p>Well, I hope this wasn’t too intense. We got down to the inner workings of available Quantum Services and listed some of the impediments we might face when moving to actual devices. We did focus on Digital Quantum Computers being the ones that allow to move beyond the service offered by Quantum Annealers but does not require so much understanding as Analog Quantum Computers.</p>
+<p>Being aware of the techniques that can be used we also showed how easy it is to implement those on actual devices on IBM’s Qiskit Runtime. Other cloud providers may enable other devices but will require additional knowledge on how to implement those techniques. We can benefit of some of the methods made available by Unitary Fund’s open-source community or niche players like Q-Ctrl:</p>
+<ul>
+<li><a href="https://mitiq.readthedocs.io/en/stable/">Mitiq</a></li>
+<li><a href="https://q-ctrl.com/fire-opal">Fire Opal</a></li>
+<li><a href="https://superstaq.readthedocs.io/en/latest/">Superstaq</a></li>
+</ul>
+<p>Most likely quantum computing service providers will increase the abstraction making easier to implement algorithms in real hardware but for the moment, some work still needs to be done on our end as we saw. Let’s stick to simulators and emulators for now.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-gokhale2021fasterreliablequantumswaps" class="csl-entry" role="listitem">
+Gokhale, Pranav, Teague Tomesh, Martin Suchara, and Frederic T. Chong. 2021. <span>“Faster and More Reliable Quantum SWAPs via Native Gates.”</span> <a href="https://arxiv.org/abs/2109.13199">https://arxiv.org/abs/2109.13199</a>.
+</div>
+<div id="ref-Weidenfeller_2022" class="csl-entry" role="listitem">
+Weidenfeller, Johannes, Lucia C. Valor, Julien Gacon, Caroline Tornow, Luciano Bello, Stefan Woerner, and Daniel J. Egger. 2022. <span>“Scaling of the Quantum Approximate Optimization Algorithm on Superconducting Qubit Based Hardware.”</span> <em>Quantum</em> 6 (December): 870. <a href="https://doi.org/10.22331/q-2022-12-07-870">https://doi.org/10.22331/q-2022-12-07-870</a>.
+</div>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -836,13 +1032,13 @@ w_i = \sum_{p=0}^{K} \frac{1}{2^p} x_{i,p}
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/algorithms/usingexistingframeworks.html" class="pagination-link" aria-label="D-Wave and its ecosystem">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">D-Wave and its ecosystem</span></span>
+      <a href="../../parts/computers/serviceproviders.html" class="pagination-link" aria-label="Service providers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Service providers</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/algorithms/trainingcircuits.html" class="pagination-link" aria-label="Tuning circuits">
-        <span class="nav-page-text">Tuning circuits</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/algorithms/complexity.html" class="pagination-link" aria-label="Types of algorithms">
+        <span class="nav-page-text">Types of algorithms</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
