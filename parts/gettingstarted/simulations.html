@@ -456,7 +456,7 @@ window.Quarto = {
 <section id="from-scratch" class="level2">
 <h2 class="anchored" data-anchor-id="from-scratch">From scratch</h2>
 <p>We would easily create basic vector structures for our <em>quantum framework</em>. The minimum unit is the qubit and in order to frame the potential quantum states it may hold we would need to create the computational basis set <span class="math inline">\(\{|0\rangle, |1\rangle \}\)</span>.</p>
-<div id="c019b676" class="cell" data-execution_count="1">
+<div id="807469d8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -473,7 +473,7 @@ window.Quarto = {
 \]</span></p>
 </div>
 </div>
-<div id="7a403d8a" class="cell" data-execution_count="2">
+<div id="d4a00bca" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>one <span class="op">=</span> [[<span class="dv">0</span>], [<span class="dv">1</span>]]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>one, prefix<span class="op">=</span><span class="st">'|1</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -502,7 +502,7 @@ H = \frac{1}{\sqrt{2}}\left[
 \end{array}
 \right]
 \]</span></p>
-<div id="028914b3" class="cell" data-execution_count="3">
+<div id="e858a2b6" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [[<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">1</span>,<span class="dv">0</span>]]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>X, prefix<span class="op">=</span><span class="st">'X = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -516,7 +516,7 @@ X =
 \]</span></p>
 </div>
 </div>
-<div id="233a43f7" class="cell" data-execution_count="4">
+<div id="9eada5f7" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hadamard <span class="op">=</span> np.dot((<span class="dv">1</span><span class="op">/</span>(np.sqrt(<span class="dv">2</span>))), [[<span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>hadamard, prefix<span class="op">=</span><span class="st">'H = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,7 +531,7 @@ H =
 </div>
 </div>
 <p>Well, it is already taking shape. We can test if the outcome matches our expectations.</p>
-<div id="5d0bd355" class="cell" data-execution_count="5">
+<div id="fcaaa8f4" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>superposition <span class="op">=</span> np.dot(hadamard, zero)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>superposition, prefix<span class="op">=</span><span class="st">'H|0</span><span class="ch">\\</span><span class="st">rangle = |+</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -545,7 +545,7 @@ H|0\rangle = |+\rangle =
 \]</span></p>
 </div>
 </div>
-<div id="f2e0eeab" class="cell" data-execution_count="6">
+<div id="a8ea26b2" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>one <span class="op">=</span> np.dot(X, zero)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>one, prefix<span class="op">=</span><span class="st">'X|0</span><span class="ch">\\</span><span class="st">rangle = |1</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -566,7 +566,7 @@ X|0\rangle = |1\rangle =
 |\Psi^{+}\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle) \quad |\Psi^{-}\rangle = \frac{1}{\sqrt{2}}(|10\rangle - |10\rangle)
 \]</span></p>
 <p>We will need the CNOT gate for this.</p>
-<div id="d6be03f0" class="cell" data-execution_count="7">
+<div id="69b73777" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>CNOT <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>]]</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>CNOT, prefix<span class="op">=</span><span class="st">'CNOT = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -583,7 +583,7 @@ CNOT =
 </div>
 </div>
 <p>With this we will create a two qubit system, apply the Hadamard gate to the first one and the CNOT gate with the conrol over the first qubit as well.</p>
-<div id="f29dfc6d" class="cell" data-execution_count="8">
+<div id="59c8fee1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial state</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>init_state <span class="op">=</span> np.kron(zero, zero)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -594,7 +594,7 @@ CNOT =
 <p><span class="math display">\[
 CNOT (I\otimes H)|00\rangle = |\Phi^{+}\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle
 \]</span></p>
-<div id="b34b5ba5" class="cell" data-execution_count="9">
+<div id="bffa2b88" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>psi_1 <span class="op">=</span> np.dot(HI, init_state)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>psi <span class="op">=</span> np.dot(CNOT, psi_1)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -617,7 +617,7 @@ CNOT (I\otimes H)|00\rangle = |\Phi^{+}\rangle = \frac{1}{\sqrt{2}}(|00\rangle +
 <section id="qutip" class="level2">
 <h2 class="anchored" data-anchor-id="qutip">QuTip</h2>
 <p>Of course, we are not the first ones with this need, so there do exist some quite useful libraries in this domain. <a href="https://qutip.org/">QuTiP</a> might be one of the most used ones (at least for us, Python enthusiasts).</p>
-<div id="20c4b84a" class="cell" data-execution_count="10">
+<div id="cbf58076" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Qobj, mesolve</span>
@@ -643,7 +643,7 @@ CNOT (I\otimes H)|00\rangle = |\Phi^{+}\rangle = \frac{1}{\sqrt{2}}(|00\rangle +
 <span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># \psi = H\psi_0</span></span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>evolution <span class="op">=</span> mesolve(u_generator, one_zero, times)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fb1bdf6c" class="cell" data-execution_count="11">
+<div id="ce8cc756" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>evolution.states[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>Quantum object: dims=[[2, 2], [1]], shape=(4, 1), type='ket', dtype=Dense
@@ -654,7 +654,7 @@ Qobj data =
  [0.]]</code></pre>
 </div>
 </div>
-<div id="b7b158b2" class="cell" data-execution_count="12">
+<div id="951abec8" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>evolution.states[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>Quantum object: dims=[[2, 2], [1]], shape=(4, 1), type='ket', dtype=Dense
@@ -665,7 +665,7 @@ Qobj data =
  [0.02447175-0.15450855j]]</code></pre>
 </div>
 </div>
-<div id="b00a3ca4" class="cell" data-execution_count="13">
+<div id="facc2600" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>evolution.states[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>Quantum object: dims=[[2, 2], [1]], shape=(4, 1), type='ket', dtype=Dense
@@ -677,7 +677,7 @@ Qobj data =
 </div>
 </div>
 <p>Let’s go by steps.</p>
-<div id="bd7213cc" class="cell" data-execution_count="14">
+<div id="c0a0073a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> basis, tensor</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>one <span class="op">=</span> basis(<span class="dv">2</span>,<span class="dv">1</span>)</span>
@@ -694,7 +694,7 @@ Qobj data =
  [0.]]</code></pre>
 </div>
 </div>
-<div id="e3731ebf" class="cell" data-execution_count="15">
+<div id="90b29eee" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip.qip.operations <span class="im">import</span> cnot</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cnot_matrix <span class="op">=</span> cnot().full()</span>
@@ -707,7 +707,7 @@ Qobj data =
 </div>
 </div>
 <p>In fact, it allows us to do more than just the simple operations we envisioned. For example, we could generate the whole evolution over a period of time of the <span class="math inline">\(U\)</span> unitary generated for our Hamiltonian.</p>
-<div id="8d3795fe" class="cell" data-execution_count="16">
+<div id="732f4ca4" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> identity</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip.qip.operations <span class="im">import</span> hadamard_transform</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -723,7 +723,7 @@ Qobj data =
  [ 0.70710678  0.         -0.70710678  0.        ]]</code></pre>
 </div>
 </div>
-<div id="8eb1f00f" class="cell" data-execution_count="17">
+<div id="cc016b06" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Qobj, mesolve</span>
@@ -738,7 +738,7 @@ Qobj data =
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>times <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>)</span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>evolution <span class="op">=</span> mesolve(u_generator, init_state, times)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d896412d" class="cell" data-execution_count="18">
+<div id="ca3e04a2" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>evolution.states[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>Quantum object: dims=[[2, 2], [1]], shape=(4, 1), type='ket', dtype=Dense
@@ -749,7 +749,7 @@ Qobj data =
  [0.]]</code></pre>
 </div>
 </div>
-<div id="7e429f7b" class="cell" data-execution_count="19">
+<div id="829732ce" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>evolution.states[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>Quantum object: dims=[[2, 2], [1]], shape=(4, 1), type='ket', dtype=Dense
@@ -760,7 +760,7 @@ Qobj data =
  [ 0.04788161-0.05462701j]]</code></pre>
 </div>
 </div>
-<div id="cd79f729" class="cell" data-execution_count="20">
+<div id="10c6c1b3" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>evolution.states[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>Quantum object: dims=[[2, 2], [1]], shape=(4, 1), type='ket', dtype=Dense
@@ -771,7 +771,7 @@ Qobj data =
  [ 7.07106828e-01+6.69439574e-08j]]</code></pre>
 </div>
 </div>
-<div id="f3a07e93" class="cell" data-execution_count="21">
+<div id="4356fc5b" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>psi <span class="op">=</span> np.<span class="bu">round</span>(evolution.states[<span class="op">-</span><span class="dv">1</span>].full(), decimals <span class="op">=</span> <span class="dv">5</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -790,7 +790,7 @@ Qobj data =
 <p>Looks like <span class="math inline">\(\frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\)</span> but due to numerical imprecisions we wil get this type of ugly structures in between. We will need to familiarize with those artifacts as <em>noise</em> when using hardware will produce similar numerical artifacts.</p>
 <p>Well, having a theoretical framework may be a good option for simulating and doing some local experimentation but that will reach soon limitations when trying to scale it up. Our classical device won’t be able to perform the whole system calculations and we might need to switch to actual quantum computers doing those. Therefore, we need to find a way to o so.</p>
 <p>This is why some manufacturers have invested time and effort on creating open-source frameworks to be adopted by the community (and position themselves). Companies such as <a href="https://qiskit.org/">IBM</a> or <a href="https://github.com/aws/amazon-braket-sdk-python">AWS</a> have leveraged their own version that also allows for these programs to be sent to an end device that will perform the set of operations.</p>
-<div id="92b571c7" class="cell" data-execution_count="22">
+<div id="eb9b7f55" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>, <span class="dv">2</span>)</span>
@@ -812,26 +812,26 @@ Qobj data =
 <h2 class="anchored" data-anchor-id="qiskit">Qiskit</h2>
 <p>Qiskit is IBM’s quantum computing toolkit the enables interaction with their devices. Let’s first start replicating the theoretical basis and then move forward up to device simulation.</p>
 <p>Opflow is the framework section dedicated to provide the pieces to perform previous computations.</p>
-<div id="4f55645f" class="cell" data-execution_count="23">
+<div id="73b9d0ac" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>Zero <span class="op">=</span> Statevector.from_label(<span class="st">'0'</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>One <span class="op">=</span> Statevector.from_label(<span class="st">'1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c66a83b7" class="cell" data-execution_count="24">
+<div id="0616737c" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> Zero.probabilities()</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Probability of measuring 0: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(probs[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Probability of measuring 0: 1.0</code></pre>
 </div>
 </div>
-<div id="f6e046bd" class="cell" data-execution_count="25">
+<div id="32535c1f" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Probability of measuring 1: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(probs[<span class="dv">1</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Probability of measuring 1: 0.0</code></pre>
 </div>
 </div>
-<div id="878b7844" class="cell" data-execution_count="26">
+<div id="e7242d44" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>Plus <span class="op">=</span> Statevector.from_label(<span class="st">'+'</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Plus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -840,14 +840,14 @@ Qobj data =
             dims=(2,))</code></pre>
 </div>
 </div>
-<div id="a60bcfeb" class="cell" data-execution_count="27">
+<div id="cf08082e" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>Plus.probabilities()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([0.5, 0.5])</code></pre>
 </div>
 </div>
 <p>Qiskit tends to understand everything in terms of circuits. But in essence we can request the actual operation being performed there and check that the Hadamard action over a <span class="math inline">\(|0\rangle\)</span> state (the initial state) provides the <span class="math inline">\(|+\rangle\)</span> state as expected.</p>
-<div id="90dee6cb" class="cell" data-execution_count="28">
+<div id="a4d4d532" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>Plus.data, prefix<span class="op">=</span><span class="st">'|+</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="28">
 <p><span class="math display">\[
@@ -859,7 +859,7 @@ Qobj data =
 </div>
 </div>
 <p>What would be the outcome of it?</p>
-<div id="1b3ce4af" class="cell" data-execution_count="29">
+<div id="60bd779f" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> Plus.probabilities()</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Probability of measuring 0: </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(probs[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -867,27 +867,27 @@ Qobj data =
 </div>
 </div>
 <p>This is the expected outcome for the <span class="math inline">\(\langle 0 | \psi \rangle\)</span> operation. But we can mimic it as well.</p>
-<div id="f1587c34" class="cell" data-execution_count="30">
+<div id="9f270b95" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">abs</span>(np.dot(Zero.data, Plus.data.T)<span class="op">**</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.4999999999999999</code></pre>
 </div>
 </div>
 <p>Similarly gate operations can be used.</p>
-<div id="42d8f406" class="cell" data-execution_count="31">
+<div id="7a59786c" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Pauli</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> Pauli(<span class="st">'X'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And what is the amplitude of <span class="math inline">\(|1\rangle\)</span> after the <span class="math inline">\(X|0\rangle\)</span> operation?</p>
-<div id="b6c5bd04" class="cell" data-execution_count="32">
+<div id="1c7177c7" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>Zero.evolve(X) <span class="op">==</span> One</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>Qiskit orders bits in a specific manner so some gates may look different but is just a matter of ordering when applying the operations.</p>
-<div id="98a6fc92" class="cell" data-execution_count="33">
+<div id="ce0f0f2a" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> UnitaryGate</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>matrix <span class="op">=</span> [[<span class="fl">1.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>],</span>
@@ -900,14 +900,14 @@ Qobj data =
 <p><span class="math display">\[
 CNOT (I\otimes H)|00\rangle = |\Phi^{+}\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle
 \]</span></p>
-<div id="7507ef65" class="cell" data-execution_count="34">
+<div id="311bcb02" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Zero <span class="op">^</span> Zero)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Statevector([1.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],
             dims=(2, 2))</code></pre>
 </div>
 </div>
-<div id="90c79f95" class="cell" data-execution_count="35">
+<div id="9d8cf9ba" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>)</span>
@@ -922,7 +922,7 @@ q_1: ─────
           </pre>
 </div>
 </div>
-<div id="4b0dc3a0" class="cell" data-execution_count="36">
+<div id="b71fef25" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Operator</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Operator(qc).data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -933,20 +933,20 @@ q_1: ─────
  [ 0.        +0.j  0.        +0.j  0.70710678+0.j -0.70710678+0.j]]</code></pre>
 </div>
 </div>
-<div id="c912b9f4" class="cell" data-execution_count="37">
+<div id="531bf3e6" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>(Zero <span class="op">^</span> Zero).evolve(qc).data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>array([0.70710678+0.j, 0.70710678+0.j, 0.        +0.j, 0.        +0.j])</code></pre>
 </div>
 </div>
-<div id="d22e0780" class="cell" data-execution_count="38">
+<div id="ea7c66b2" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>bell_state <span class="op">=</span> (Zero <span class="op">^</span> Zero).evolve(qc).evolve(CNOT)</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>bell_state.data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>array([0.70710678+0.j, 0.        +0.j, 0.        +0.j, 0.70710678+0.j])</code></pre>
 </div>
 </div>
-<div id="db94ad34" class="cell" data-execution_count="39">
+<div id="292bd90d" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>bell_state.data, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="39">
 <p><span class="math display">\[
@@ -958,7 +958,7 @@ q_1: ─────
 </div>
 </div>
 <p>Of course the gate-based nature of IBM devices makes it more natural to directly code our approach as a gate based circuit.</p>
-<div id="b4e82b99" class="cell" data-execution_count="40">
+<div id="97488c99" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>)</span>
@@ -975,19 +975,19 @@ q_1: ─────
 </div>
 </div>
 <p>Most likelly moving forward, this pictorical approach will ease the abstraction but is good to know that, the formalism is still there.</p>
-<div id="c312638b" class="cell" data-execution_count="41">
+<div id="42804699" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Math:'</span>, (Zero <span class="op">^</span> Zero).evolve(qc).probabilities())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Math: [0.5 0.  0.  0.5]</code></pre>
 </div>
 </div>
 <p>Of course qiskit offers some other nice ways to simulate and visualize the results.</p>
-<div id="a07aaf48" class="cell" data-execution_count="42">
+<div id="c72945e6" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2a74322a" class="cell" data-execution_count="43">
+<div id="c0dbbf5f" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_state_qsphere</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>plot_state_qsphere(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -999,7 +999,7 @@ q_1: ─────
 </div>
 </div>
 </div>
-<div id="db0dc0bd" class="cell" data-execution_count="44">
+<div id="d42d5f75" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_bloch_multivector</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1012,7 +1012,7 @@ q_1: ─────
 </div>
 </div>
 <p>In order to simulate the actual action of the circuit we will need to add some classical registers and measurement operations.</p>
-<div id="2b87b226" class="cell" data-execution_count="45">
+<div id="b12da8d4" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>circuit <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>circuit <span class="op">=</span> circuit.compose(qc)</span>
@@ -1028,7 +1028,7 @@ q_1: ─────
 </div>
 </div>
 </div>
-<div id="ece4f439" class="cell" data-execution_count="46">
+<div id="ef36fdff" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_aer <span class="im">import</span> AerSimulator</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the quantum circuit</span></span>
@@ -1038,10 +1038,10 @@ q_1: ─────
 <span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(circuit)</span>
 <span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'00': 529, '11': 471}</code></pre>
+<pre><code>{'00': 498, '11': 502}</code></pre>
 </div>
 </div>
-<div id="e2f2e8dd" class="cell" data-execution_count="47">
+<div id="02cb779f" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>plot_histogram(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1060,12 +1060,12 @@ q_1: ─────
 <p><span class="math display">\[
 \frac{1}{2}|00\rangle + \frac{1}{2}|01\rangle + \frac{1}{2}|10\rangle + \frac{1}{2}|11\rangle
 \]</span></p>
-<div id="5570f8a9" class="cell" data-execution_count="48">
+<div id="855e57e9" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>)</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># HERE GOES YOUR CIRCUIT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ff54158f" class="cell" data-execution_count="49">
+<div id="98f801b4" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1077,7 +1077,7 @@ q_1: ─────
 </div>
 </div>
 </div>
-<div id="d2bcd939" class="cell" data-execution_count="50">
+<div id="86f9f505" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>plot_state_qsphere(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <div>
@@ -1087,7 +1087,7 @@ q_1: ─────
 </div>
 </div>
 </div>
-<div id="a48a2a67" class="cell" data-execution_count="51">
+<div id="063a8bee" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>circuit <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>, <span class="dv">2</span>)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>circuit <span class="op">=</span> circuit.compose(qc)</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>circuit.measure([<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">0</span>,<span class="dv">1</span>])</span>

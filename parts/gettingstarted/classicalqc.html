@@ -438,7 +438,7 @@ div.csl-indent {
 <p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as State Vector simulator (dah!) and it is common on some of the most used SDKs.</p>
 <p>A less common approach is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it).</p>
 <p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision level. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method.</p>
-<div id="41c85033" class="cell" data-execution_count="1">
+<div id="985b128a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Qiskit</span></span>
@@ -490,7 +490,7 @@ div.csl-indent {
 <li><code>default.mixed</code> for dealing with mixed states</li>
 <li><code>default.tensor</code> for MPS type of simulation using <a href="https://quimb.readthedocs.io/en/latest/index.html">QUIMB</a> under the hood</li>
 </ul>
-<p>And many more. They also include nice simulators for GPU based simulation, based on <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum SDK</a> via <a href="https://www.xanadu.ai/products/lightning/">Lightning</a> which will be really helpful when we start talking about <a href="../algorithms/optimizingcircuits.ipynb">training circuits</a>.</p>
+<p>And many more. They also include nice simulators for GPU based simulation, based on <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum SDK</a> via <a href="https://www.xanadu.ai/products/lightning/">Lightning</a> which will be really helpful when we start talking about <a href="../../parts/algorithms/optimizingcircuits.html">training circuits</a>.</p>
 <p>If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like <a href="https://tensornetwork.org/">TensorNetwork.org</a> to look into useful resources and some nice references to get deeper into the field <span class="citation" data-cites="biamonte2017tensornetworksnutshell">(<a href="../../references.html#ref-biamonte2017tensornetworksnutshell" role="doc-biblioref">Biamonte and Bergholm 2017</a>)</span>.</p>
 <p>Let’s keep it simple for now and deal with algorithm implementations.</p>
 
