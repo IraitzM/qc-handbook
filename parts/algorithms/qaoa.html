@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../references.html" rel="next">
+<link href="../../parts/algorithms/qaoaexample.html" rel="next">
 <link href="../../parts/algorithms/optimizingcircuits.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -373,6 +393,35 @@ window.Quarto = {
  <span class="menu-text">Quantum Approximate Optimization Algorithm</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QAOA in partice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final remarks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/qml/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data embedding</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -383,13 +432,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
@@ -434,7 +483,7 @@ window.Quarto = {
 </header>
 
 
-<p>Quantum Approximate Optimization Algorithm (QAOA) inherits directly from the concept of annealing and gradually approaching the ground state of our target Hamiltonian. It also can be seen as a particular case of VQE where the ansatz is already defined by Quantum Annealing. If we carefully analyze the composition of digitized version of the annealing algorithm we can identify three main blocks.</p>
+<p>Quantum Approximate Optimization Algorithm (QAOA) inherits its structure from the concept of <a href="../../parts/algorithms/adiabatic.html">Adiabatic Quantum Computing</a> simply digitizing the steps required to drive the initial state into the solution of the problem to be solved <span class="citation" data-cites="farhi2014quantum">(<a href="../../references.html#ref-farhi2014quantum" role="doc-biblioref">Farhi, Goldstone, and Gutmann 2014</a>)</span>. It also can be seen as a particular case of VQE where the ansatz is already defined by the quantum annealing scheme. If we carefully analyze the composition of the annealing algorithm we can identify three main blocks that essentially compose the QAOA circuit.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -443,9 +492,16 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>The initial and final Hamiltonian blocks (<span class="math inline">\(H_i\)</span> and <span class="math inline">\(H_f\)</span>) are the ones that get propagated according to the trotterization.</p>
-<p>But we could probably come up with a better selection of parameters that minimizes the length of this evolution. If we take a large <span class="math inline">\(n\)</span> in our Suzuki-Trotter approximation we could move beyond the coherent threshold of a machine and setting static time-lapses for the whole evolution might not be the best approach to approximate the target evolution (which we do not fully know). One crucial point researchers focus on is generating the shallowest version of this evolution as the shorter it gets less error gets accumulated. We refer as the <strong>depth</strong> of the circuit to the maximal length it reaches considering every set of gates that can be executed within the same execution cycle as the unit depth.</p>
-<p>If we could enter some placeholders and check how the circuit behaves for a different set of parameters we could maybe find a better solution than the canonical set of equally spaced steps.</p>
+<p>The initial and final Hamiltonian blocks (<span class="math inline">\(H_i\)</span> and <span class="math inline">\(H_f\)</span>) are the ones that get propagated according to the trotterization, the digitization of the mixing cycle. The challenge was defining the best possible scheduling function so that the evolution is absent of any transition of the ground state.</p>
+<p>Considering some of the previous concepts, we could free-up the scheduling function and come up with a better selection of parameters that minimizes the length of this evolution. If we take a large <span class="math inline">\(n\)</span> in our Suzuki-Trotter approximation we could move beyond the coherent threshold of a machine and setting static time-lapses for the whole evolution might not be the best approach to approximate the target evolution (which we do not fully know). One crucial point researchers focus on is generating the shallowest version of this evolution as the shorter it gets less error gets accumulated (see <a href="../../parts/computers/challenges.html#noise-and-errors">Noise and errors</a>). We refer as the <strong>depth</strong> of the circuit to the maximal length it reaches considering every set of gates that can be executed within the same execution cycle as the unit depth.</p>
+<p>If we could enter some placeholders and check how the circuit behaves for a different set of parameters we could maybe find a better solution than the canonical set of equally spaced steps that places the evolution at critical points of our scheduling curve.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../assets/schedulingfunc.gif" class="img-fluid figure-img"></p>
+<figcaption>Scheduling curve</figcaption>
+</figure>
+</div>
+<p>So, by putting some parameters to the mixing blocks we get</p>
 <p><span class="math display">\[
 |\gamma, \beta\rangle = U(H_B,\beta_p)U(H_C, \gamma_p) \dots U(H_B,\beta_1)U(H_C, \gamma_1)|s\rangle
 \]</span></p>
@@ -477,14 +533,19 @@ window.Quarto = {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/qaoa.png" class="img-fluid figure-img"></p>
-<figcaption>QAOA</figcaption>
+<figcaption>One layer of Quantum Approximate Optimization Algorithm (QAOA)</figcaption>
 </figure>
 </div>
 </figure>
-<p>So we only require to select the number of steps (also called layers when talking about QAOA) in order to produce our template circuit. Then it comes the time to select the values that should replace placeholder parameters <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\beta\)</span>.</p>
-<p>The existence of both Hamiltonians is crucial to the well functioning of the problem as if we did not have a initial Hamiltonian, our selection of parameters could make as fall into a higher energy level eigenstate (<span class="math inline">\(|\lambda_1\rangle\)</span>) and by continuously applying our unitary associated to the target Hamiltonian we would get the same result being stuck in the same quantum state forever (<span class="math inline">\(H|\psi_{\lambda_1}\rangle = E_{\lambda_1}|\psi_{\lambda_1}\rangle\)</span>). That is how our initial hamiltonian throughout the whole evolution allows us to scape those local minima looking for the actual ground truth.</p>
+<p>This is the basis of the Quantum Approximate Optimization Algorithm (QAOA). We only require to select the number of steps (also called layers when) in order to produce our template circuit. Then it comes the time to select the values that should replace placeholder parameters <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<p>The selection of both Hamiltonians, as if we did not have a <em>good</em> initial Hamiltonian, our selection of parameters could make as fall into a higher energy level eigenstate (<span class="math inline">\(|\lambda_1\rangle\)</span>) and by continuously applying our unitary associated to the target Hamiltonian we would get stuck in the same quantum state forever (<span class="math inline">\(U|\psi_{\lambda_1}\rangle = E_{\lambda_1}|\psi_{\lambda_1}\rangle\)</span>). That is how our initial Hamiltonian throughout the whole evolution allows us to scape those local minima looking for the actual ground truth.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-farhi2014quantum" class="csl-entry" role="listitem">
+Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. 2014. <span>“A Quantum Approximate Optimization Algorithm.”</span> <em>arXiv Preprint arXiv:1411.4028</em>.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -893,8 +954,8 @@ window.Quarto = {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/algorithms/qaoaexample.html" class="pagination-link" aria-label="QAOA in partice">
+        <span class="nav-page-text">QAOA in partice</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

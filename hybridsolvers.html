@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -70,6 +90,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -308,6 +357,35 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Quantum Approximate Optimization Algorithm</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QAOA in partice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final remarks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./parts/qml/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data embedding</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -318,13 +396,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./libraries.html" class="sidebar-item-text sidebar-link">
@@ -349,7 +427,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hybrid-annealers" id="toc-hybrid-annealers" class="nav-link active" data-scroll-target="#hybrid-annealers"><span class="header-section-number">B.1</span> Hybrid Annealers</a></li>
+  <li><a href="#hybrid-annealers" id="toc-hybrid-annealers" class="nav-link active" data-scroll-target="#hybrid-annealers">Hybrid Annealers</a>
+  <ul class="collapse">
+  <li><a href="#d-waves-hybrid-solvers" id="toc-d-waves-hybrid-solvers" class="nav-link" data-scroll-target="#d-waves-hybrid-solvers">D-Wave’s Hybrid solvers</a></li>
+  <li><a href="#quantagonia" id="toc-quantagonia" class="nav-link" data-scroll-target="#quantagonia">Quantagonia</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -378,15 +460,31 @@ ul.task-list li input[type="checkbox"] {
 <p>Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve.</p>
 <p>Think about Shor’s algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that tep there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.</p>
 <p>A more detailed explanation can be found in <a href="https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring">IBM’s documentation</a> but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.</p>
-<section id="hybrid-annealers" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="hybrid-annealers"><span class="header-section-number">B.1</span> Hybrid Annealers</h2>
-<p>This is the idea behind some of the services we found available today. On one side, we have the pioneers of the Quantum Computing cloud services, D-Wave and their <a href="https://docs.dwavequantum.com/en/latest/industrial_optimization/leap_hybrid.html">LeapHybrid Solvers</a>.</p>
-<p>Their hybrid approach also allows to tackle beyond QUBO problems, like:</p>
+<section id="hybrid-annealers" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="hybrid-annealers">Hybrid Annealers</h2>
+<p>Our approach to optimization is already limited to the QUBO formulation but this is an imposed restrictions given our hardware. We may want to find solutions to problems whose variables can be integers, for example. This type of problems are classically solved by using <em>branch and bound</em> strategies. Taken a problem of the shape</p>
+<p><span class="math display">\[
+\max_{x\in\mathbb{R}^n} f(x) \\
+\quad  \text{s.t.  } c(c) \le 0 \\
+    \quad \quad x_i \in \mathbb{Z}, i \in I
+\]</span></p>
+<p>where <span class="math inline">\(f\)</span> and <span class="math inline">\(c\)</span> are nonlinear and non-convex functions. This makes our target problem a non-convex mixed-integer nonlinear problem (MINLP). Having guarantee that we not only reach a solution but <strong>the</strong> solution is indeed a demanding task.</p>
+<p>Good news is that non-convex QUBOs can be made convex as follows</p>
+<p><span class="math display">\[
+\max_{x\in\{0,1\}^n} x^T (Q + diag(s))x + s^Tx
+\]</span></p>
+<p>where <span class="math inline">\(S\)</span> refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving and auxiliary Semidefinite Optimization Problem (SDP) that returns larges eigenvalue of <span class="math inline">\(Q\)</span> <span class="citation" data-cites="billionnet2007using">(<a href="references.html#ref-billionnet2007using" role="doc-biblioref">Billionnet and Elloumi 2007</a>)</span>. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways <span class="citation" data-cites="montanaro2020quantum augustino2025solvingsemidefiniterelaxationqubos">(<a href="references.html#ref-montanaro2020quantum" role="doc-biblioref">Montanaro 2020</a>; <a href="references.html#ref-augustino2025solvingsemidefiniterelaxationqubos" role="doc-biblioref">Augustino et al. 2025</a>)</span>. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.</p>
+<section id="d-waves-hybrid-solvers" class="level3">
+<h3 class="anchored" data-anchor-id="d-waves-hybrid-solvers">D-Wave’s Hybrid solvers</h3>
+<p>D-Wave was one of the first to leverage this complex workflows involving classical and quantum resources and came with a practical solution anybody used to their service can use. They released a set of <a href="https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html">hybrid solvers</a>. These solvers are particularly convenient when instead of Binary Quadratic Models we would like to formulate our problem as:</p>
 <ul>
-<li>Non-linear problems</li>
-<li>Constrained Quadratic problems</li>
-<li>Discrete Quadratic problems</li>
+<li><a href="https://docs.ocean.dwavesys.com/en/stable/concepts/cqm.html#cqm-sdk">Constrained Quadratic Models</a>: problems that might include real, integer and/or binary variables and one or more constraints.</li>
+<li><a href="https://docs.ocean.dwavesys.com/en/stable/concepts/dqm.html#dqm-sdk">Discrete Quadratic Models</a>: problems containing discrete variables in their core variable formulation.</li>
 </ul>
+<p>As you can see, there is no silver bullet, but being aware of all the posibilites technology brings may make a difference when facing our business use cases for that extra percentage that makes us competitive.</p>
+</section>
+<section id="quantagonia" class="level3">
+<h3 class="anchored" data-anchor-id="quantagonia">Quantagonia</h3>
 <p>Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by <a href="https://www.quantagonia.com/">Quantagonia</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -396,6 +494,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-augustino2025solvingsemidefiniterelaxationqubos" class="csl-entry" role="listitem">
+Augustino, Brandon, Giacomo Nannicini, Tamás Terlaky, and Luis Zuluaga. 2025. <span>“Solving the Semidefinite Relaxation of QUBOs in Matrix Multiplication Time, and Faster with a Quantum Computer.”</span> <a href="https://arxiv.org/abs/2301.04237">https://arxiv.org/abs/2301.04237</a>.
+</div>
+<div id="ref-billionnet2007using" class="csl-entry" role="listitem">
+Billionnet, Alain, and Sourour Elloumi. 2007. <span>“Using a Mixed Integer Quadratic Programming Solver for the Unconstrained Quadratic 0-1 Problem.”</span> <em>Mathematical Programming</em> 109: 55–68.
+</div>
+<div id="ref-montanaro2020quantum" class="csl-entry" role="listitem">
+Montanaro, Ashley. 2020. <span>“Quantum Speedup of Branch-and-Bound Algorithms.”</span> <em>Physical Review Research</em> 2 (1): 013056.
+</div>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->

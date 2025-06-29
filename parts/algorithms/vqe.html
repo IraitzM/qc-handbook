@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -338,6 +358,35 @@ window.Quarto = {
  <span class="menu-text">Quantum Approximate Optimization Algorithm</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QAOA in partice</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final remarks</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/qml/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data embedding</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -348,13 +397,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
@@ -399,7 +448,7 @@ window.Quarto = {
 </header>
 
 
-<p>VQE does a upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minium energy level (let’s call it <span class="math inline">\(E_0\)</span>). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which is actually the quantum state associate to the minimum energy value.</p>
+<p>Variational Quantum Eigensolver (VQE) proposed some years back <span class="citation" data-cites="peruzzo2014variational">(<a href="../../references.html#ref-peruzzo2014variational" role="doc-biblioref">Peruzzo et al. 2014</a>)</span> does a upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minium energy level (let’s call it <span class="math inline">\(E_0\)</span>). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which is actually the quantum state associate to the minimum energy value.</p>
 <p><span class="math display">\[
 H|\psi_{\lambda}\rangle = E_{\lambda}|\psi_{\lambda}\rangle
 \]</span></p>
@@ -499,9 +548,14 @@ R_y(-\pi/2)|0\rangle =
 </figure>
 </div>
 </figure>
-<p>A key benefit for VQE is that it does not require any specific shape for our ansatz so if a flexible enough option is selected we could benefit those who could better fit into our hardware connectivity topology to obtain the results.</p>
+<p>A key benefit for VQE is that it does not require any specific shape for our ansatz, so if a flexible enough option is selected we could benefit those who could better fit into our hardware connectivity topology to obtain the results.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-peruzzo2014variational" class="csl-entry" role="listitem">
+Peruzzo, Alberto, Jarrod McClean, Peter Shadbolt, Man-Hong Yung, Xiao-Qi Zhou, Peter J Love, Alán Aspuru-Guzik, and Jeremy L O’brien. 2014. <span>“A Variational Eigenvalue Solver on a Photonic Quantum Processor.”</span> <em>Nature Communications</em> 5 (1): 4213.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
