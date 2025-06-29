@@ -58,7 +58,7 @@ Qiskit is not the only SDK we will be using so it is good to know this very same
 * `default.mixed` for dealing with mixed states
 * `default.tensor` for MPS type of simulation using [QUIMB](https://quimb.readthedocs.io/en/latest/index.html) under the hood
 
-And many more. They also include nice simulators for GPU based simulation, based on [NVIDIA cuQuantum SDK](https://developer.nvidia.com/cuquantum-sdk) via [Lightning](https://www.xanadu.ai/products/lightning/) which will be really helpful when we start talking about [training circuits](../algorithms/optimizingcircuits.ipynb).
+And many more. They also include nice simulators for GPU based simulation, based on [NVIDIA cuQuantum SDK](https://developer.nvidia.com/cuquantum-sdk) via [Lightning](https://www.xanadu.ai/products/lightning/) which will be really helpful when we start talking about [training circuits](../algorithms/optimizingcircuits.qmd).
 
 If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like [TensorNetwork.org](https://tensornetwork.org/) to look into useful resources and some nice references to get deeper into the field [@biamonte2017tensornetworksnutshell].
 
