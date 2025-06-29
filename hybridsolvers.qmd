@@ -6,15 +6,36 @@ Think about Shor's algorithm. It revolutionized the field and worried a couple o
 
 A more detailed explanation can be found in [IBM's documentation](https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring) but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.
 
-## Hybrid Annealers
+## Hybrid Annealers {.unnumbered}
 
-This is the idea behind some of the services we found available today. On one side, we have the pioneers of the Quantum Computing cloud services, D-Wave and their [LeapHybrid Solvers](https://docs.dwavequantum.com/en/latest/industrial_optimization/leap_hybrid.html).
+Our approach to optimization is already limited to the QUBO formulation but this is an imposed restrictions given our hardware. We may want to find solutions to problems whose variables can be integers, for example. This type of problems are classically solved by using _branch and bound_ strategies.  Taken a problem of the shape
 
-Their hybrid approach also allows to tackle beyond QUBO problems, like:
+$$
+\max_{x\in\mathbb{R}^n} f(x) \\
+\quad  \text{s.t.  } c(c) \le 0 \\
+    \quad \quad x_i \in \mathbb{Z}, i \in I
+$$
 
-* Non-linear problems
-* Constrained Quadratic problems
-* Discrete Quadratic problems
+where $f$ and $c$ are nonlinear and non-convex functions. This makes our target problem a non-convex mixed-integer nonlinear problem (MINLP). Having guarantee that we not only reach a solution but **the** solution is indeed a demanding task.
+
+Good news is that non-convex QUBOs can be made convex as follows
+
+$$
+\max_{x\in\{0,1\}^n} x^T (Q + diag(s))x + s^Tx
+$$
+
+where $S$ refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving and auxiliary Semidefinite Optimization Problem (SDP) that returns larges eigenvalue of $Q$ [@billionnet2007using]. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways [@montanaro2020quantum; @augustino2025solvingsemidefiniterelaxationqubos]. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.
+
+### D-Wave's Hybrid solvers
+
+D-Wave was one of the first to leverage this complex workflows involving classical and quantum resources and came with a practical solution anybody used to their service can use. They released a set of [hybrid solvers](https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html). These solvers are particularly convenient when instead of Binary Quadratic Models we would like to formulate our problem as:
+
+* [Constrained Quadratic Models](https://docs.ocean.dwavesys.com/en/stable/concepts/cqm.html#cqm-sdk): problems that might include real, integer and/or binary variables and one or more constraints.
+* [Discrete Quadratic Models](https://docs.ocean.dwavesys.com/en/stable/concepts/dqm.html#dqm-sdk): problems containing discrete variables in their core variable formulation.
+
+As you can see, there is no silver bullet, but being aware of all the posibilites technology brings may make a difference when facing our business use cases for that extra percentage that makes us competitive.
+
+### Quantagonia
 
 Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by [Quantagonia](https://www.quantagonia.com/).
 

@@ -1,0 +1,290 @@
+#  QAOA in partice {.unnumbered}
+
+
+As we have seen before, QAOA take the best of both worlds (ideally) considering the ansatz out of the AQC but variationaly training it to obtain the best scheduling function out of the free parameters.
+
+Continuing with previous example....
+
+
+```{python}
+import networkx as nx
+
+# Create empty graph
+G = nx.Graph()
+
+# Add edges to the graph (also adds nodes)
+G.add_edges_from([(1,2),(1,3),(2,4),(3,4),(3,5),(4,5)])
+
+nx.draw(G)
+```
+
+```{python}
+import numpy as np
+from collections import defaultdict
+
+# Initialize our Q matrix
+Q = defaultdict(int)
+
+# Update Q matrix for every edge in the graph
+for i, j in G.edges:
+    Q[(i,i)]+= -1
+    Q[(j,j)]+= -1
+    Q[(i,j)]+= 2
+
+# Give it also a matrix shape to ease readability
+size = G.number_of_nodes()
+H_problem = np.zeros((size, size))
+
+for k, v in Q.items():
+    if not isinstance(k, int):
+        H_problem[k[0]-1][k[1]-1] = v
+
+H_problem
+```
+
+For this simple example, brute-forcing the solution can be done to have a reference for it.
+
+```{python}
+import numpy as np
+
+def objective_value(x: np.ndarray, w: np.ndarray) -> float:
+    """Compute the value of a cut.
+    Args:
+        x: Binary string as numpy array.
+        w: Adjacency matrix.
+    Returns:
+        Value of the cut.
+    """
+    return np.dot(np.dot(x.T, w), x)
+
+def bitfield(n: int, L: int) -> list[int]:
+    """ Get the binary representation"""
+    result = np.binary_repr(n, L)
+    return [int(digit) for digit in result]  # [2:] to chop off the "0b" part
+
+# use the brute-force way to generate the oracle
+L = G.number_of_nodes()
+max = 2**L
+sol = np.inf
+for i in range(max):
+    cur = bitfield(i, L)
+
+    cur_v = objective_value(np.array(cur), H_problem)
+    if cur_v < sol:
+        sol = cur_v
+
+print(f'Objective value computed by the brute-force method is {sol}')
+```
+
+The main challenge would be understanding if this one is the only solution in our example
+
+```{python}
+x = [0, 1, 1, 0, 0]
+print(np.dot(np.dot(np.transpose(x), H_problem), x))
+```
+
+```{python}
+x = [0, 1, 1, 0, 1]
+print(np.dot(np.dot(np.transpose(x), H_problem), x))
+```
+
+In fact, for this example we know there are more than one optimal solutions...
+
+```{python}
+from qiskit.visualization import plot_histogram
+
+solution = {
+    '01101': 0.25,
+    '10010': 0.25,
+    '10011': 0.25,
+    '01100': 0.25,
+}
+
+plot_histogram(solution)
+```
+
+We would like to fully understand our solution landscape. Quantum Computing may help us by mapping the solution to a more complex superposed state that reveals all potential solutions to our problem.
+
+We will need to build a Hamiltonian that maps our problem.
+
+```{python}
+from qiskit.quantum_info import SparsePauliOp
+
+H_op = SparsePauliOp.from_list(
+    [
+        # h
+        ("ZIIII", -2),
+        ("IZIII", -2),
+        ("IIZII", -3),
+        ("IIIZI", -3),
+        ("IIIIZ", -2),
+        # j
+        ("ZZIII", 2),
+        ("ZIZII", 2),
+        ("IZIZI", 2),
+        ("IIZIZ", 2),
+        ("IIIZZ", 2),
+    ]
+)
+
+print(f"Number of qubits: {H_op.num_qubits}")
+```
+
+In this case, we will start with the existing Qiskit functionality and do a drill-down to highlight what is done behind the scenes. Qiskit provides a ready to be used QAOA implementation that will only require the and optimizer and a way to extract information out of our quantum device (either Estimator or Sampler primitive).
+
+```{python}
+from qiskit_algorithms.minimum_eigensolvers import QAOA
+from qiskit_algorithms.optimizers import COBYLA
+from qiskit.primitives import Sampler
+
+optimizer = COBYLA()
+sampler = Sampler()
+
+qaoa = QAOA(sampler, optimizer, reps=2)
+result = qaoa.compute_minimum_eigenvalue(H_op)
+```
+
+```{python}
+print(result)
+```
+
+```{python}
+from qiskit.visualization import plot_histogram
+
+counts = {}
+for key in result.eigenstate:
+    key_str = format(key, 'b').zfill(5)
+    counts[key_str] = result.eigenstate[key]
+
+plot_histogram(counts)
+```
+
+```{python}
+from qiskit.quantum_info import Statevector
+from qiskit.result import QuasiDistribution
+
+def sample_most_likely(state_vector: QuasiDistribution | Statevector) -> np.ndarray:
+    """Compute the most likely binary string from state vector.
+    Args:
+        state_vector: State vector or quasi-distribution.
+
+    Returns:
+        Binary string as an array of ints.
+    """
+    if isinstance(state_vector, QuasiDistribution):
+        values = list(state_vector.values())
+    else:
+        values = state_vector
+    n = int(np.log2(len(values)))
+    k = np.argmax(np.abs(values))
+    x = bitfield(k, n)
+    x.reverse()
+    return np.asarray(x)
+
+x = sample_most_likely(result.eigenstate)
+
+print(x)
+print(f'Objective value computed by QAOA is {objective_value(x, H_problem)}')
+```
+
+```{python}
+from qiskit_algorithms.optimizers import SLSQP
+
+optimizer = SLSQP()
+
+qaoa = QAOA(sampler, optimizer, reps=4)
+result = qaoa.compute_minimum_eigenvalue(H_op)
+print(result)
+```
+
+```{python}
+counts = {}
+for key in result.eigenstate:
+    key_str = format(key, 'b').zfill(5)
+    counts[key_str] = result.eigenstate[key]
+
+plot_histogram(counts)
+```
+
+```{python}
+x = sample_most_likely(result.eigenstate)
+
+print(x)
+print(f'Objective value computed by QAOA is {objective_value(x, H_problem)}')
+```
+
+```{python}
+optimizer = SLSQP(
+    maxiter=100000
+)
+
+qaoa = QAOA(sampler, optimizer, reps=1)
+result = qaoa.compute_minimum_eigenvalue(H_op)
+print(result)
+```
+
+```{python}
+counts = {}
+for key in result.eigenstate:
+    key_str = format(key, 'b').zfill(5)
+    counts[key_str] = result.eigenstate[key]
+
+plot_histogram(counts)
+```
+
+```{python}
+x = sample_most_likely(result.eigenstate)
+
+print(x)
+print(f'Objective value computed by QAOA is {objective_value(x, H_problem)}')
+```
+
+Let's check what is going on behind it. We can check the ansatz that QAOA creates.
+
+```{python}
+qaoa.ansatz.draw('mpl', fold=150)
+```
+
+```{python}
+qaoa.ansatz.decompose().draw('mpl', fold=150)
+```
+
+```{python}
+qaoa.ansatz.decompose(reps=2).draw('mpl', fold=150)
+```
+
+As we can see the ansatz is build following the Adiabatic Quantum Computing scheme where a block of $X$ rotations is applied, and alternated with the problem hamiltonian ($Z + ZZ$ interactions) as many times as repetitions are performed.
+
+```{python}
+qaoa = QAOA(sampler, optimizer, reps=4)
+result = qaoa.compute_minimum_eigenvalue(H_op)
+print(result)
+```
+
+```{python}
+qaoa.ansatz.draw('mpl', fold=150)
+```
+
+```{python}
+qaoa.ansatz.decompose().decompose().draw('mpl', fold=150)
+```
+
+Obtained solution distribution really points out to the solutions that provide solutions to our problem, superposed in a state that is the one minimizing the outcome of the circuit with respect to the expectation value of the hamitlonian.
+
+```{python}
+counts = {}
+for key in result.eigenstate:
+    key_str = format(key, 'b').zfill(5)
+    counts[key_str] = result.eigenstate[key]
+
+plot_histogram(counts)
+```
+
+Therefore, is we are able to encode our problem into an Ising Hamiltonian it looks like we could easily design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationaly trained scheduling function.
+
+```{python}
+qaoa.ansatz.depth()
+```
+
+Small problems will render shallow circuits, but we need to be aware that introducing many repetitions of those blocks or _layers_, it will require more operations to be squeezed in, the lifespan of the cubits will need to be longer and the more operations we add, more noise it will enter into our final state.
+

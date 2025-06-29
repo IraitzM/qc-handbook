@@ -66,6 +66,12 @@ book:
       - parts/algorithms/vqe.md
       - parts/algorithms/optimizingcircuits.qmd
       - parts/algorithms/qaoa.md
+      - parts/algorithms/qaoaexample.qmd
+      - parts/algorithms/extras.md
+
+    - part: parts/qml/index.md
+      chapters:
+      - parts/qml/embedding.md
 
     - references.qmd
   appendices:

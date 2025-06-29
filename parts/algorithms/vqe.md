@@ -1,6 +1,6 @@
 # Variational Quantum Eigensolver {.unnumbered}
 
-VQE does a upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minium energy level (let's call it $E_0$). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which is actually the quantum state associate to the minimum energy value.
+Variational Quantum Eigensolver (VQE) proposed some years back [@peruzzo2014variational] does a upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minium energy level (let's call it $E_0$). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which is actually the quantum state associate to the minimum energy value.
 
 $$
 H|\psi_{\lambda}\rangle = E_{\lambda}|\psi_{\lambda}\rangle
@@ -120,4 +120,4 @@ Also, given previous decomposition we could easily see how this calculations cou
 ![VQE algorithm](../../assets/vqe-algo.jpg)
 </figure>
 
-A key benefit for VQE is that it does not require any specific shape for our ansatz so if a flexible enough option is selected we could benefit those who could better fit into our hardware connectivity topology to obtain the results.
+A key benefit for VQE is that it does not require any specific shape for our ansatz, so if a flexible enough option is selected we could benefit those who could better fit into our hardware connectivity topology to obtain the results.
