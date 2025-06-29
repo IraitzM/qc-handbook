@@ -13,7 +13,7 @@ Variational Algorithm make use of these three basic principles:
 * A hybrid (quantum-classical) strategy to compute and vary the parameters
 
 <figure markdown>
-![Variational algorithm procedure](../../assets/variational-algorithm.png){width=55%}
+![Variational algorithm procedure](../../assets/variational-algorithm.png){width=65%}
 </figure>
 
 These procedures therefore require the circuit to be evaluated (measured in some manner) and parameters changed ideally approximating a target value. This process is quite known for those coming from classical machine learning and therefore you can benefit from that ecosystem. Specifically, optimization techniques.
@@ -22,7 +22,8 @@ The easiest ones are gradient-free optimization techniques. Those explore the so
 
 A different approach is to extend those gradient based optimizers given that quantum circuits do provide a way in which their derivative can be approximated.
 
-**Parameter shift rule**
+## Computing gradients
+
 In order to fit the ideal set of parameters minimizing a cost function, gradient based approaches are quite popular as being aware of the direction in which this cost function is minimized it may shorten the time required for the method to find it target Quantum circuits have a similar capacity, we can free up the parameters of a given circuit and optimize based on a cost function which in most cases can be represented by the expectation value over some observable. For this, we would need to understand how these derivatives can be computed... at scale.
 
 ```{python}
@@ -137,8 +138,9 @@ One of the problems with calculating gradients this way is that now we have to e
 
 In many cases we will see how non-gradient based methods are made available to avoid the extensive usage of quantum hardware.
 
-**Expectation value**
-The guiding light when training circuit using the variational principle is to accurately define the objective and cost function. What are we looking for? How can we measure the progress? In general, it is understood that the minimization of energy, looking for the quantum state that renders a minimal expectation value, can be tractable and a good measure of improvement. this, the **expectation value** described as
+## Expectation value
+
+The guiding light when training circuit using the variational principle is to accurately define the **objective** and **cost functions**. What are we looking for? How can we measure the progress? In general, it is understood that the minimization of energy, looking for the quantum state that renders a minimal expectation value, can be tractable and a good measure of improvement. this, the **expectation value** described as
 
 $$
 \langle \psi |H|\psi\rangle

@@ -37,13 +37,13 @@ book:
       - parts/gettingstarted/simulations.qmd
       - parts/gettingstarted/classicalqc.qmd
 
-    - part: "Building a quantum computer"
+    - part: "Quantum Computers"
       chapters:
       - parts/computers/firstrealizations.md
       - parts/computers/technology.md
       - parts/computers/machinetypes.md
       - parts/computers/serviceproviders.md
-      - parts/computers/currentoffering.md
+      - parts/computers/challenges.md
 
     - part: "Algorithms"
       chapters:
@@ -64,6 +64,8 @@ book:
       - parts/algorithms/examplesfordaqc.qmd
       - parts/algorithms/variational.qmd
       - parts/algorithms/vqe.md
+      - parts/algorithms/optimizingcircuits.qmd
+      - parts/algorithms/qaoa.md
 
     - references.qmd
   appendices:

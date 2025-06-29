@@ -1,6 +1,8 @@
 # Adiabatic Theorem {.unnumbered}
 
-Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. This model employs continuous-time evolution of a quantum state $|\psi(t)\rangle$ from a well-defined initial value to compute a final observed value. The evolution is modeled by the Schrödinger equation
+Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is the main mechanism quantum computers use to obtain the minimum energy or ground state for a given problem, and it is the main approach we use to solve hard combinatorial optimization problems [@Albash_2018].
+
+This type of quantum computing is based on continuous-time evolution of a quantum state $|\psi(t)\rangle$ from a well-defined initial value to compute a final observed value. The evolution is modeled by the time-dependent [Schrödinger equation](https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation)
 
 $$
 i\hbar \frac{\partial|\psi(t)\rangle}{\partial t}= H(t)|\psi(t)\rangle
@@ -33,7 +35,7 @@ $$
 
 Visually, you can see the issues.
 <figure markdown>
-![Energy gap](../../assets/energygap.png)
+![Energy gap (https://arxiv.org/pdf/1611.04471)](../../assets/energygap.png)
 </figure>
 
 It might be risky if at those points the evolution moves _too fast_. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of maintaining in the global minima.

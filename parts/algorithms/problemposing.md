@@ -122,7 +122,7 @@ But more importantly, as those may represent any $i$ $j$ indexes to be connected
 Looking at the connectivity of the chip, if an index represents a red ball and each line gets tuned by the values in our problem $q_{ij}$, how can we tune those that have no red line between them?
 
 <figure markdown>
-![DWave chip architecture](../../assets/dwave-chip.png)
+![DWave chip architecture](../../assets/dwave-chip.png){width=60%}
 </figure>
 
 [QPU Architecture](https://docs.dwavesys.com/docs/latest/c_gs_4.html#getting-started-topologies)
@@ -130,7 +130,7 @@ Looking at the connectivity of the chip, if an index represents a red ball and e
 We might need to find ways to connect qubits that are not directly connected and in D-Wave services we can chain connected qubits so that we could place the potential value of a distant qubit in linked different locations of a chip. This is done by artificially introducing additional variables that are mapped to qubits whose value should align to the qubit they are chained to. A visual representation of this would look like
 
 <figure markdown>
-![DWave chain](../../assets/dwave-chain.png)
+![DWave chain](../../assets/dwave-chain.png){width=80%}
 </figure>
 
 That way if we look to solve our three variable problem into a 4 qubit chip, we might see more than three qubit related readout being reported.

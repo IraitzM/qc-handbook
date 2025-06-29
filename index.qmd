@@ -15,4 +15,4 @@ Also, it costs nothing so, no harm done. Code snippets are easier to maintain so
 
 Mi name is Iraitz Montalbán, Computer Scientist by background, I started in the field of Quantum Computing by chance, while doing an internship in 2010 there were some guys doing something called _quantum computing_, which was a mathematical framework back then. I kept my interest in the field and ended up doing a masters on Quantum Computing Technologies at UPM and working with some startups in the field.
 
-Fill free to [keep in touch](https://www.linkedin.com/in/iraitzmontalban/).
+Feel free to keep in touch at [iraitz.info](https://iraitz.info/).

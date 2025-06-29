@@ -1,4 +1,4 @@
-# Current offering {.unnumbered}
+# Challenges {.unnumbered}
 
 This is a tricky one, even though we love working with quantum computers, the key aspect is being able to solve _efficiently_ a given problem. And, at this stage, there are many competitors doing a great job at solving problems without the need for quantum computers, and it is important that while this field evolves we make the most out of their colleagues. All those, _quantum-inspired_ and _quantum-adjacent_ technologies.
 
@@ -12,7 +12,7 @@ We highly recommend looking into **classical** and **quantum-inspired** solution
 
 You have been warned!
 
-## Hardware based implementations
+## Considerations
 
 Before we enter into more cumbersome and obscure techniques, lets understand the context in which we are trying to use Quantum Computing to outperform classical means. It is not a fair comparison as we count with almost 70 years of development in the classical regime while quantum computers even though have been used for almost 25 years since the first realization of the qubit, might require some extra work until a similar status of maturity and confidence is reached.
 
@@ -28,11 +28,11 @@ Coupling map refers to the connectivity between qubits. Most of our problems wil
 
 As an example, this is the coupling map of Rigetti:
 
-![Rigetti Aspen topology](../../assets/rigetti.png)
+![Rigetti Aspen topology](../../assets/rigetti.png){width=70%}
 
 And this one belongs to IonQ's Aria:
 
-![IonQ Aria topology](../../assets/ionq-aria.png)
+![IonQ Aria topology](../../assets/ionq-aria.png){width=50%}
 
 Seems like ino-traps may be a better fit to combinatorial optimization problems as they already count with all-to-all connectivity, but they lack the scale of superconducting devices. So, can we make anything to virtually connect those qubits on Rigetti's device all-to-all?
 
@@ -106,24 +106,24 @@ At the end you will see the representation fo the pulsed schedule that is finall
 
 More on this can be found on [IBM's documentation](https://qiskit.org/documentation/tutorials/circuits_advanced/04_transpiler_passes_and_passmanager.html)
 
-### Noise
+### Noise and errors
 
-And if that wasn't enough, we saw on previous exercise our quantum devices are far from perfect. Operations not always turn out as expected:
+And if that wasn't enough, quantum devices are far from perfect when performing operations. Operations not always turn out as expected due to:
 
 * Measurement or Readout error
 * Operation error rates
 
-And given the limited coupling ability and native gate translation, more operations than initially required need to be added to the final circuit. 
+And given the limited coupling ability and native gate translation, more operations than initially expected ones need to be added to the final circuit. The more operations we have, the more error we will add at the end state.
 
 ![IBM Jakarta](../../assets/ibm-jakarta.png){width=60%}
 
-All this goes against the effort we have put when trying to solve our problem accurately using quantum computers. But, there is people researching on how this effect can be minimized or suppressed, so let's see a couple of examples. It is also relevant to clarify the lingo as it might get messy.
+All this goes against the effort we have put when trying to solve our problem accurately using quantum computers. Lucky for us, there is people researching on how these effects can be minimized or suppressed, so let's see a couple of examples. It is also relevant to clarify the lingo as it might get messy. They are trying to take us to the **Fault-Tolerant Quantum Computing** era. Some of the areas people are working on will be highlighted below.
 
 **Error suppression**
 
 Error suppression aims to leverage knowledge about the system and its fundamental errors to suppress their effect when someone runs a given circuit on those devices. It is often found at a fundamental level, really close o the hardware itself and should be easy to abstract the final user from these actions as they mostly require little knowledge about the executing circuit.
 
-A clear example of this techniques is _Dynamical Decoupling_. A techniques that introduces operations when qubits are idling so that they do not get affected by the surrounding qubtis and operations taking place.
+A clear example of these techniques is _Dynamical Decoupling_. A techniques that introduces operations when qubits are idling so that they do not get affected by the surrounding qubtis and operations taking place.
 
 ![Pulse scheme for dynamical decoupling](../../assets/ddqiskit.png)
 
@@ -135,7 +135,7 @@ These techniques try to diminish the effect of noise during the execution by com
 
 ![Redout error](../../assets/readoutmitigation.png)
 
-Or when expectation value is obtained, characterize the noise level and extrapolate the value we would have obtained in absence of noise for a given device.
+Or when expectation value is the obtained value, characterize the noise level and extrapolate the value we would have obtained in absence of noise for a given device.
 
 ![Zero noise extrapolation (ZNE)](../../assets/zne.png){width=60%}
 
