@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to digitization – Quantum Computing Handbook</title>
+<title>Feature maps – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,8 +85,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../parts/algorithms/examplesfordaqc.html" rel="next">
-<link href="../../parts/algorithms/trainingcircuits.html" rel="prev">
+<link href="../../parts/qml/kernels.html" rel="next">
+<link href="../../parts/qml/embedding.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -147,7 +167,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Tuning circuits</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/digitizedaqc.html">Introduction to digitization</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Quantum Machine Learning</a></li><li class="breadcrumb-item"><a href="../../parts/qml/featuremaps.html">Feature maps</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -332,14 +352,14 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tuning circuits</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to digitization</span></a>
   </div>
 </li>
@@ -391,11 +411,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../parts/qml/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
@@ -404,7 +424,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Feature maps</span></a>
   </div>
 </li>
@@ -461,17 +481,22 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#trotter-suzuki-decomposition" id="toc-trotter-suzuki-decomposition" class="nav-link active" data-scroll-target="#trotter-suzuki-decomposition">Trotter-Suzuki decomposition</a></li>
-  <li><a href="#a-practical-example" id="toc-a-practical-example" class="nav-link" data-scroll-target="#a-practical-example">A practical example</a></li>
+  <li><a href="#basis-encoding" id="toc-basis-encoding" class="nav-link active" data-scroll-target="#basis-encoding">Basis encoding</a></li>
+  <li><a href="#angle-encoding" id="toc-angle-encoding" class="nav-link" data-scroll-target="#angle-encoding">Angle encoding</a></li>
+  <li><a href="#amplitude-encoding" id="toc-amplitude-encoding" class="nav-link" data-scroll-target="#amplitude-encoding">Amplitude encoding</a></li>
+  <li><a href="#iqp-circuits" id="toc-iqp-circuits" class="nav-link" data-scroll-target="#iqp-circuits">IQP circuits</a>
+  <ul class="collapse">
+  <li><a href="#zz-feature-map" id="toc-zz-feature-map" class="nav-link" data-scroll-target="#zz-feature-map">ZZ feature map</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Tuning circuits</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/digitizedaqc.html">Introduction to digitization</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Quantum Machine Learning</a></li><li class="breadcrumb-item"><a href="../../parts/qml/featuremaps.html">Feature maps</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction to digitization</h1>
+<h1 class="title">Feature maps</h1>
 </div>
 
 
@@ -488,154 +513,144 @@ window.Quarto = {
 </header>
 
 
-<p>Digitized quantum computers work indeed in a different manner. Hamiltonians are <em>less</em> important from a program perspective. All we need is the set of instructions to be provided for them to run. Of course, these instructions cannot come out of the blue, so we still apply previous principles but with the flexibility of being able to tweak how the initial quantum state evolves. We are not limited by a given algorithm or device configuration, as there exist no default setup other than the initial state of the system (<span class="math inline">\(|0\rangle^n\)</span>). It is up to our design how it will work and how much juice we squeeze out of the machine.</p>
-<p>As an example, we can still benefit from the AQC paradigm and implement a time dependent Hamiltonian that solves our problem like before. One critical aspect though is the fact that digitized quantum computers work in cycles and actions will need to be discretized (bounded in time) in order to implement our wanted state evolution. But it gives us more room to change some of the parameters machines like D-Wave’s ones have fixed for us. That way, we may more options to explore.</p>
-<section id="trotter-suzuki-decomposition" class="level2">
-<h2 class="anchored" data-anchor-id="trotter-suzuki-decomposition">Trotter-Suzuki decomposition</h2>
-<p>Approximating a time-dependent Hamiltonian can be challenging as working with continuous values on a cycle driven machine (digital machine) requires us to discretize the time evolution into piecewise linear steps.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/piecewise-linear.png" class="img-fluid figure-img"></p>
-<figcaption>Piecewise linear function</figcaption>
-</figure>
+<p>Feature maps are the way in which classical data gets transformed into quantum states. A good point to start is to use existing templates from libraries like <a href="https://docs.pennylane.ai/en/stable/introduction/templates.html">Pennylane</a>.</p>
+<section id="basis-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="basis-encoding">Basis encoding</h2>
+<p>Basis encoding might be one of the most simplistic ways to map classical data in quantum states. It requires our data to be composed by integers and maps its binary representation to the basis state that maps the same binary string: <span class="math inline">\(n = 4, \quad b_n = 1001, \quad |b_n\rangle = |1001\rangle\)</span>.</p>
+<p><span class="math display">\[
+|X\rangle = \frac{1}{\sqrt{M}}\sum_{m=1}^M |x^m \rangle
+\]</span></p>
+<p>It is not often used as it limits the data that can be embedded and requires quite some resources from the quantum side which are not fully utilized.</p>
+<div id="dd3df36d" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">'default.qubit'</span>, wires<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">@qml.qnode</span>(dev)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> feature_map(feature_vector):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    qml.BasisEmbedding(features<span class="op">=</span>feature_vector, wires<span class="op">=</span><span class="bu">range</span>(<span class="dv">3</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> qml.state()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>feature_map(X).T, prefix<span class="op">=</span><span class="st">'| </span><span class="ch">\\</span><span class="st">psi </span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="1">
+<p><span class="math display">\[
+| \psi \rangle =
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1  \\
+\end{bmatrix}
+\]</span></p>
 </div>
-</figure>
-<p>If we consider out unitary evolution for the Hamiltonian <span class="math inline">\(U(T,t_0)\)</span> we could take same approach and approximate its results by extending its definition to discrete intervals.</p>
-<p><span class="math display">\[
-U(T,t_0) = U(t_n, t_{n-1})U(t_{n-1}, t_{n-2}) \dots U(t_1, t_0)
-\]</span></p>
-<p>The smaller the step the better we will approximate ideal continuous case. Take also into consideration that <span class="math inline">\(\delta t_i = t_{i+1} - t_i\)</span> do not have to be equally spaced for all <span class="math inline">\(i\)</span>s even though it does help for generalization purposes.</p>
-<p>In quantum mechanics there exists a concreta example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape <span class="math inline">\(e^{A+B}\)</span> its limit can be defined</p>
-<p><span class="math display">\[
-e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
-\]</span></p>
-<p>Meaning we can alternate the effect of a decomposed Hamiltonian (<span class="math inline">\(H = H_A + H_B\)</span>) divided by a discrete number of steps so that the smaller the step size the better we will approximate the ideal case of a constant time evolution.</p>
+</div>
 </section>
-<section id="a-practical-example" class="level2">
-<h2 class="anchored" data-anchor-id="a-practical-example">A practical example</h2>
-<p>Let’s go step by step. Our digitized annealing algorithm will be composed by three main blocks as we already explained before.</p>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/digitized-qa.png" class="img-fluid figure-img"></p>
-<figcaption>Digitized Quantum Annealing</figcaption>
-</figure>
-</div>
-</figure>
-<p>The mixing cycle is where the mixture between our initial Hamiltonian and problem Hamiltonian happen according to the scheduling function.</p>
-<p><a href="https://arxiv.org/abs/1906.08948">Some support material</a></p>
-<p>One critical aspect is to be able to initialize the system to the ground state of our initial Hamiltonian (<span class="math inline">\(|+\rangle\)</span> from our previous example). This can be easily achieved by Hadamard operations placed on each qubit.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>init_state <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> qi <span class="kw">in</span> init_state.qubits:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    init_state.h(qi)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>init_state.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/init_state.png" class="img-fluid figure-img"></p>
-<figcaption>Initial state (superposition of all possible basis states)</figcaption>
-</figure>
-</div>
-</figure>
-<p>Then, we need to produce the combination of our two hamiltonians. We will continue with previously seen examples. First the initial hamiltonian:</p>
+<section id="angle-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="angle-encoding">Angle encoding</h2>
+<p>Angle encoding takes benefit from the ability to embed rotation angles into our gates so that we can introduce our numeric data as the rotation angle of a given qubit. Example, <span class="math inline">\(x = [x_1, x_2,...,x_n]\)</span> would be mapped to</p>
 <p><span class="math display">\[
-H_A = -\sum_i^n \sigma_{x_i}
+(R_x(x_1) \otimes R_x(x_2) \otimes \dots \otimes R_x(x_n))|0\rangle^{\otimes n}
 \]</span></p>
-<p>In this case its effect is conditioned by the scheduling function. Let’s rewrite the previous time dependent Hamiltonian such that a single scheduling function defines the mixture.</p>
-<p><span class="math display">\[
-H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
-\]</span></p>
-<p>That way we could introduce a parameterized quantum circuit in which a progressively decaying parameter <span class="math inline">\(\theta\)</span> would match the effect of <span class="math inline">\(1-\lambda (t)\)</span>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
+<p>data must be in the regime where those rotations take effect (<span class="math inline">\([0, 2\pi]\)</span>) and may be more suitable if a cyclic nature is already present. Normalization of data may be relevant preprocessing step in this case.</p>
+<div id="9c3140d6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane.numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lt <span class="op">=</span> Parameter(<span class="st">"$(1-</span><span class="ch">\\</span><span class="st">lambda (t))$"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> Parameter(<span class="st">"dt"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Ha <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> qi <span class="kw">in</span> Ha.qubits:</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Ha.rx(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>lt, qi)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>Ha.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/init-hamiltonian.png" class="img-fluid figure-img"></p>
-<figcaption>Initial Hamiltonian (whose solution is the previous circuit block)</figcaption>
-</figure>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">'default.qubit'</span>, wires<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">@qml.qnode</span>(dev)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> feature_map(feature_vector):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    qml.AngleEmbedding(features<span class="op">=</span>feature_vector, wires<span class="op">=</span><span class="bu">range</span>(<span class="dv">3</span>), rotation<span class="op">=</span><span class="st">'Z'</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> qml.state()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [<span class="dv">2</span><span class="op">*</span>np.pi,<span class="dv">0</span>,np.pi]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(qml.draw(feature_map, level<span class="op">=</span><span class="st">"device"</span>)(X))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0: ──RZ(6.28)─┤ ╭State
+1: ──RZ(0.00)─┤ ├State
+2: ──RZ(3.14)─┤ ╰State</code></pre>
 </div>
-</figure>
-<p>And for our target Hamiltonian, if we select previous Ising type of Hamiltonian, we may only need to introduce the parameters affecting our specific instance of the problem.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>lt <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">lambda (t)$"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> Parameter(<span class="st">"dt"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> []</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    h.append(Parameter(<span class="ss">f"$h_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">$"</span>))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> {}</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="dv">3</span>):</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        J[(i,j)] <span class="op">=</span> Parameter(<span class="ss">f"$J_</span><span class="sc">{</span>j<span class="sc">}</span><span class="ss">^</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">$"</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>Hp <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    Hp.rz(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>lt<span class="op">*</span>h[i], i)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="dv">3</span>):</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        Hp.rzz(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>lt<span class="op">*</span>J[(i, j)], i, j)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>Hp.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/problem_hamiltonian.png" class="img-fluid figure-img"></p>
-<figcaption>Problem Hamiltonian (the one we want to obtain the ground state from)</figcaption>
-</figure>
 </div>
-</figure>
-<p>With these three pieces we can build our digitized version for an adiabatic computation. Just by selecting the resolution of the <span class="math inline">\(\lambda (t)\)</span> function (often called the number of trotter steps) we can build the whole end to end circuit.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+</section>
+<section id="amplitude-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="amplitude-encoding">Amplitude encoding</h2>
+<p>Amplitude encoding takes the probability amplitude of elements on an array and matches those to the position the where placed at. Assuming our data is composed by <span class="math inline">\(n\)</span> values (<span class="math inline">\(X = [x_0, x_1,...,x_n]\)</span> ) its representation would take the shape</p>
+<p><span class="math display">\[
+|\phi\rangle = \frac{1}{\sqrt{\sum_k x_k^2}} \sum_{k=0}^{2 -1} x_k|k\rangle
+\]</span></p>
+<div id="b4d20efc" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">'default.qubit'</span>, wires<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Init state</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> qc.compose(init_state)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Trotter steps</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dtval <span class="kw">in</span> [<span class="fl">0.333</span>, <span class="fl">0.6666</span>, <span class="fl">0.999</span>]:</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    qc <span class="op">=</span> qc.compose(Ha.bind_parameters({dt: <span class="fl">0.333</span>, ltA: (<span class="dv">1</span><span class="op">-</span>dtval)}))</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {dt: <span class="fl">0.333</span>, ltB: dtval}</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        params[h[i]] <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="dv">3</span>):</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            params[J[(i,j)]] <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    qc <span class="op">=</span> qc.compose(Hp.bind_parameters(params))</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>, fold <span class="op">=</span> <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">@qml.qnode</span>(dev)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> feature_map(f):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    qml.AmplitudeEmbedding(features<span class="op">=</span>f, wires<span class="op">=</span><span class="bu">range</span>(<span class="dv">2</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> qml.state()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>feature_map(f<span class="op">=</span>[<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>array([0.5+0.j, 0.5+0.j, 0.5+0.j, 0.5+0.j])</code></pre>
+</div>
+</div>
+</section>
+<section id="iqp-circuits" class="level2">
+<h2 class="anchored" data-anchor-id="iqp-circuits">IQP circuits</h2>
+<p>Based on some works in the field <span class="citation" data-cites="Havl_ek_2019">(<a href="../../references.html#ref-Havl_ek_2019" role="doc-biblioref">Havlíček et al. 2019</a>)</span>, IQP circuit family was proposed as a potential good transformation given its hardness when it comes to classical simulation. If there is something quantum that adds to the mixture, this circuits mush be a good way to have those intrinsically added.</p>
+<section id="zz-feature-map" class="level3">
+<h3 class="anchored" data-anchor-id="zz-feature-map">ZZ feature map</h3>
+<p>This is a particular version of the Pauli feature map that we will be able to find in <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZZFeatureMap">Qiskit</a>. It performs the same rotations we saw in the angle encoding but with an extra <span class="math inline">\(ZZ\)</span> interaction between data points to capture the correlating observations to further boost their representation. We can also perform several repetitions of the mapping providing a more complex iteration.</p>
+<p>Given that it uses <span class="math inline">\(Z\)</span> rotations it is common to see Hadamard gates preceding those rotations so that by moving our <span class="math inline">\(|0\rangle\)</span> states to <span class="math inline">\(|+\rangle\)</span> will make sure those rotations have some meaningful effect.</p>
+<div id="4a114155" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">3</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>feature_map.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
 <figure class="figure">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../assets/digitized-annealing.png" class="img-fluid figure-img"></p>
-<figcaption>Digitized annealing circuit</figcaption>
+<p><img src="featuremaps_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
+</div>
+</div>
+<div id="3c314c7e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>feature_map.decompose().draw(<span class="st">'mpl'</span>, fold<span class="op">=-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<figure class="figure">
+<p><img src="featuremaps_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
 </figure>
-<p>We have built our digitized version of the <em>Adiabatic Quantum Computing</em> paradigm. Now, we can tweak it as we want, looking into optimal parameter sets. Change the scheduling function or any other option so that we can implement it on a gate-based quantum computer to check if this outperforms our colleagues from D-Wave. The goal still remains to obtain the ground-state or minimum energy state for the problem Hamiltonian after the whole protocol is performed.</p>
-<!-- https://arxiv.org/pdf/2109.10145 -->
+</div>
+</div>
+</div>
+<p>The <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap">general case</a> allows to define a complete specification of Pauli rotations and entanglement layout so that one can customize the feature map to its specifications.</p>
+<div id="7988a995" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> PauliFeatureMap</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> PauliFeatureMap(<span class="dv">3</span>, paulis<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"YZ"</span>], entanglement<span class="op">=</span><span class="st">'linear'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>feature_map.decompose().draw(<span class="st">'mpl'</span>, fold<span class="op">=-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<figure class="figure">
+<p><img src="featuremaps_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Why is this mapping good? Or bad? How many repetitions need to be used? Well, indeed, some of the approaches have no particular rational behind and are much more experimental. We can always look into the literature relevant papers exploring the qualities of each feature map trying to find the one that could be beneficial for our project <span class="citation" data-cites="sim2019expressibility">(<a href="../../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim, Johnson, and Aspuru-Guzik 2019</a>)</span>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Havl_ek_2019" class="csl-entry" role="listitem">
+Havlíček, Vojtěch, Antonio D. Córcoles, Kristan Temme, Aram W. Harrow, Abhinav Kandala, Jerry M. Chow, and Jay M. Gambetta. 2019. <span>“Supervised Learning with Quantum-Enhanced Feature Spaces.”</span> <em>Nature</em> 567 (7747): 209–12. <a href="https://doi.org/10.1038/s41586-019-0980-2">https://doi.org/10.1038/s41586-019-0980-2</a>.
+</div>
+<div id="ref-sim2019expressibility" class="csl-entry" role="listitem">
+Sim, Sukin, Peter D Johnson, and Alán Aspuru-Guzik. 2019. <span>“Expressibility and Entangling Capability of Parameterized Quantum Circuits for Hybrid Quantum-Classical Algorithms.”</span> <em>Advanced Quantum Technologies</em> 2 (12): 1900070.
+</div>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1040,13 +1055,13 @@ H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/algorithms/trainingcircuits.html" class="pagination-link" aria-label="Tuning circuits">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tuning circuits</span>
+      <a href="../../parts/qml/embedding.html" class="pagination-link" aria-label="Data embedding">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Data embedding</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/algorithms/examplesfordaqc.html" class="pagination-link" aria-label="Digitized AQC">
-        <span class="nav-page-text">Digitized AQC</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/qml/kernels.html" class="pagination-link" aria-label="Kernels">
+        <span class="nav-page-text">Kernels</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

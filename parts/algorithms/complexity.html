@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -367,6 +387,24 @@ window.Quarto = {
  <span class="menu-text">Data embedding</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Feature maps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/kernels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Summary</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -473,7 +511,7 @@ window.Quarto = {
 <section id="computational-complexity" class="level2">
 <h2 class="anchored" data-anchor-id="computational-complexity">Computational complexity</h2>
 <p>If one looks at the media it looks that <em>ENTER THE NEW TREND HERE</em> will be much better than what whatever we might be using. This is something Quantum Computing has also been affected by. Thus, it is important to frame the potential gain QC may introduce to our processes as depending on the complexity of it could well be there is no justification to adopt a new paradigm given the effort it requires.</p>
-<p>BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space.</p>
+<p>BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space. Several problems fall into this category and are subject to be solved using quantum computing solutions <span class="citation" data-cites="wocjan2006naturalbqpcompleteproblems">(<a href="../../references.html#ref-wocjan2006naturalbqpcompleteproblems" role="doc-biblioref">Wocjan and Zhang 2006</a>)</span>.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -486,6 +524,11 @@ window.Quarto = {
 <p>We will start with a critical process for many companies and part of the key processes when it comes to Machine Learning.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-wocjan2006naturalbqpcompleteproblems" class="csl-entry" role="listitem">
+Wocjan, Pawel, and Shengyu Zhang. 2006. <span>“Several Natural BQP-Complete Problems.”</span> <a href="https://arxiv.org/abs/quant-ph/0606179">https://arxiv.org/abs/quant-ph/0606179</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
