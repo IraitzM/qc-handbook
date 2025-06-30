@@ -45,7 +45,7 @@ Our main focus for this following section will be dedicated to **combinatorial o
 
 If one looks at the media it looks that _ENTER THE NEW TREND HERE_ will be much better than what whatever we might be using. This is something Quantum Computing has also been affected by. Thus, it is important to frame the potential gain QC may introduce to our processes as depending on the complexity of it could well be there is no justification to adopt a new paradigm given the effort it requires.
 
-BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space.
+BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space. Several problems fall into this category and are subject to be solved using quantum computing solutions [@wocjan2006naturalbqpcompleteproblems].
 
 <figure markdown>
 ![Complexity depiction Taken from https://arxiv.org/pdf/1611.04471](../../assets/complexity.png)

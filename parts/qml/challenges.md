@@ -1,0 +1,9 @@
+# Summary {.unnumbered}
+
+Challenges remain from previous exercises. Circuit depth can be significantly increased also with these approaches, although QML allows for free form ansatz creation instead of problem specific ones like [QAOA](../algorithms/qaoa.md). That makes possible to adapt the ansatz so that it better fits specific hardware coupling maps like with [hardware aware VQE](../algorithms/extras.md).
+
+Still, defining the advantage of QML over ML can be difficult. We must consider the complexities of classical to quantum data conversion bottlenecks and maturity of quantum devices as well as the extra payload for over the network training and queuing when using quantum hardware. This is the reason why some vendors like AWS and IBM defined hybrid workloads and session-blocking to ease remote training. Others, like Xanadu and Google, released functional and easy to use efficient local QML focused frameworks (Pennylane and TensorFlow Quantum) but apart from the limitations one may face on going beyond 30 qubits seems like are more for educational purposes than any other thing.
+
+Lastly, some interesting use cases mixing both regimes, quantum and classical have emerged which would reveal the true advantage of QC at this stage. Quantum-aided ML steps have shown interesting results as it is the case of Quantum Feature Selection [@mucke2023feature], which deals with the pre-selection of relevant information from the dataset maximizing information and reducing noise. Quantum-inspired techniques such as Tensor Networks actually provide really impressive results using just classical resources.
+
+We have seen how the evolution from [Adiabatic Quantum Computing](../algorithms/adiabatic.md), though trainable circuits up to Quantum Machine Learning has a rational behind it for overcoming existing limitations at each step. As long as we focus on solving issues, progress is guaranteed and who knows, maybe some day, quantum advantage.

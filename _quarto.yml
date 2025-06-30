@@ -72,6 +72,9 @@ book:
     - part: parts/qml/index.md
       chapters:
       - parts/qml/embedding.md
+      - parts/qml/featuremaps.qmd
+      - parts/qml/kernels.qmd
+      - parts/qml/challenges.md
 
     - references.qmd
   appendices:
