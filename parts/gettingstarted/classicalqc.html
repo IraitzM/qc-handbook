@@ -86,7 +86,7 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../parts/computers/firstrealizations.html" rel="next">
-<link href="../../parts/gettingstarted/simulations.html" rel="prev">
+<link href="../../parts/gettingstarted/phasekickback.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -204,6 +204,12 @@ div.csl-indent {
   <div class="sidebar-item-container"> 
   <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/phasekickback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -407,6 +413,18 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/svm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Support Vector Classifier</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Neural Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -485,7 +503,7 @@ div.csl-indent {
 <p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as State Vector simulator (dah!) and it is common on some of the most used SDKs.</p>
 <p>A less common approach is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it).</p>
 <p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision level. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method.</p>
-<div id="dfa8233f" class="cell" data-execution_count="1">
+<div id="201de7f5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Qiskit</span></span>
@@ -951,8 +969,8 @@ Biamonte, Jacob, and Ville Bergholm. 2017. <span>“Tensor Networks in a Nutshel
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/gettingstarted/simulations.html" class="pagination-link" aria-label="Simulations">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Simulations</span>
+      <a href="../../parts/gettingstarted/phasekickback.html" class="pagination-link" aria-label="Phases">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Phases</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

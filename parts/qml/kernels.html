@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../parts/qml/challenges.html" rel="next">
+<link href="../../parts/qml/svm.html" rel="next">
 <link href="../../parts/qml/featuremaps.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -233,6 +233,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/phasekickback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -436,6 +442,18 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/svm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Support Vector Classifier</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Neural Networks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -549,7 +567,7 @@ k(x_i, x_j) = \langle\psi(x_i)|\psi(x_j)\rangle
 k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 \]</span></p>
 <p>which can be easily performed by flipping the original circuit backwards and adding it to the initial feature map.</p>
-<div id="d780aa17" class="cell" data-execution_count="1">
+<div id="46b3cf20" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">2</span>)</span>
@@ -567,22 +585,6 @@ k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 <p>By computing the number of times we get <span class="math inline">\(|0\rangle^n\)</span> after this execution we can get the closeness of these to feature map prepared states. If orthogonal states are evaluated (ex. <span class="math inline">\(\langle 0 | 1\rangle\)</span>) then we can assume their states to be as distant as possible within the Hilbert space.</p>
 <p>This way we could easily compute the fidelity between states on a higher dimensional feature space by just running this exercise of each sample pair (<span class="math inline">\(O(N^2)\)</span>) in what it is called a Fidelity Kernel <span class="citation" data-cites="Hubregtsen_2022">(<a href="../../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span>.</p>
 <p>Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the <strong>Quantum Support Vector Classifier</strong> <span class="citation" data-cites="Rebentrost_2014">(<a href="../../references.html#ref-Rebentrost_2014" role="doc-biblioref">Rebentrost, Mohseni, and Lloyd 2014</a>)</span>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.kernels <span class="im">import</span> FidelityQuantumKernel</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.algorithms.state_fidelities <span class="im">import</span> ComputeUncompute</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.algorithms <span class="im">import</span> QSVC</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.primitives <span class="im">import</span> Sampler</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># How to compute the fidelity between the states </span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fidelity <span class="op">=</span> ComputeUncompute(sampler<span class="op">=</span>Sampler())</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and quantum Kernel</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">2</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>new_kernel <span class="op">=</span> FidelityQuantumKernel(feature_map<span class="op">=</span>feature_map, fidelity<span class="op">=</span>fidelity)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># QKernel + SVC</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>qsvc <span class="op">=</span> QSVC(quantum_kernel<span class="op">=</span>new_kernel)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>qsvc.fit(features, labels)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>qsvc.score(features, labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1010,8 +1012,8 @@ Rebentrost, Patrick, Masoud Mohseni, and Seth Lloyd. 2014. <span>“Quantum Supp
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/qml/challenges.html" class="pagination-link" aria-label="Summary">
-        <span class="nav-page-text">Summary</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/qml/svm.html" class="pagination-link" aria-label="Quantum Support Vector Classifier">
+        <span class="nav-page-text">Quantum Support Vector Classifier</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
