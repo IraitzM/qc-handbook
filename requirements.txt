@@ -15,6 +15,7 @@ authlib==1.6.0
 autograd==1.8.0
 autoray==0.7.1
 babel==2.17.0
+bayesian-optimization==1.5.1
 beautifulsoup4==4.13.4
 bleach==6.2.0
 blinker==1.9.0
@@ -23,7 +24,7 @@ certifi==2025.6.15
 cffi==1.17.1
 charset-normalizer==3.4.2
 click==8.2.1
-colorama==0.4.6 ; sys_platform == 'win32' or platform_system == 'Windows'
+colorama==0.4.6
 comm==0.2.2
 contourpy==1.3.2
 cryptography==45.0.4
@@ -59,6 +60,8 @@ h11==0.16.0
 homebase==1.0.1
 httpcore==1.0.9
 httpx==0.28.1
+ibm-cloud-sdk-core==3.24.2
+ibm-platform-services==0.66.2
 idna==3.10
 importlib-metadata==8.7.0
 ipykernel==6.29.5
@@ -69,6 +72,7 @@ isoduration==20.11.0
 itsdangerous==2.2.0
 jedi==0.19.2
 jinja2==3.1.6
+joblib==1.5.1
 json5==0.12.0
 jsonpointer==3.0.0
 jsonschema==4.17.3
@@ -85,6 +89,7 @@ jupyterlab-pygments==0.3.0
 jupyterlab-server==2.24.0
 jupyterlab-widgets==3.0.15
 kiwisolver==1.4.8
+mapomatic==0.13.0
 markupsafe==3.0.2
 matplotlib==3.10.3
 matplotlib-inline==0.1.7
@@ -122,11 +127,13 @@ pycparser==2.22
 pydantic==2.11.7
 pydantic-core==2.33.2
 pygments==2.19.2
+pyjwt==2.10.1
 pylatexenc==2.10
 pyparsing==3.2.3
 pyqubo==1.5.0
 pyrsistent==0.20.0
 pysocks==1.7.1
+pyspnego==0.11.2
 python-dateutil==2.9.0.post0
 python-json-logger==3.3.0
 pytz==2025.2
@@ -137,12 +144,16 @@ pyzmq==27.0.0
 qiskit==1.4.3
 qiskit-aer==0.17.1
 qiskit-algorithms==0.3.1
+qiskit-ibm-runtime==0.40.1
+qiskit-machine-learning==0.8.3
 qutip==5.2.0
 qutip-qip==0.4.1
 requests==2.32.4
+requests-ntlm==1.3.0
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rustworkx==0.16.0
+scikit-learn==1.7.0
 scipy==1.16.0
 scipy-openblas32==0.3.30.0.0
 seaborn==0.13.2
@@ -151,15 +162,19 @@ setuptools==80.9.0
 six==1.17.0
 sniffio==1.3.1
 soupsieve==2.7
+squlearn==0.8.3
+sspilib==0.3.1 ; sys_platform == 'win32'
 stack-data==0.6.3
 stevedore==5.4.1
 symengine==0.13.0
 sympy==1.14.0
 termcolor==3.1.0
 terminado==0.18.1
+threadpoolctl==3.6.0
 tinycss2==1.4.0
 tomlkit==0.13.3
 tornado==6.5.1
+tqdm==4.67.1
 traitlets==5.14.3
 types-python-dateutil==2.9.0.20250516
 typing-extensions==4.14.0

@@ -1,0 +1,123 @@
+# Quantum Support Vector Classifier {.unnumbered}
+
+Let's see how we can compose that particular model, step by step. Probably [sQUlearn](https://squlearn.github.io/index.html) is one of the best resources in order to simplify our code. We will start loading the data. The infamous iris datatset (we will only take the first two values).
+
+```{python}
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from sklearn import datasets
+from sklearn.decomposition import PCA
+
+# import some data to play with
+iris = datasets.load_iris()
+X = iris.data[:100, :2]  # we only take the first two features.
+Y = iris.target[:100] # and first 100 samples
+
+plt.figure(2, figsize=(8, 6))
+plt.clf()
+
+# Plot the training points
+plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+```
+
+The task here is to find a good projection of those features so that we can better separate between the three classes (Setosa, Virginica and Versicolor). Some key steps are the splitting so that we have a fear metric to evaluate and the scaling of the variables.
+
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    Y,
+    test_size=0.33,
+    random_state=42,
+)
+
+scaler = MinMaxScaler((-0.9, 0.9))
+
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+```
+
+Now we need to select a good embedding... Well, let try with a simple Z feature map.
+```{python}
+from qiskit.circuit.library import ZFeatureMap
+
+fmap = ZFeatureMap(X_train.shape[1], reps=1)
+fmap.decompose().draw('mpl')
+```
+
+Now we know where we will put our data. We need to compose a kernel with that. The simplest one, 
+
+```{python}
+#| echo: false
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+```
+
+```{python}
+from qiskit_machine_learning.kernels import FidelityQuantumKernel
+from qiskit_algorithms.state_fidelities import ComputeUncompute
+from qiskit.primitives import Sampler
+
+# How to compute the fidelity between the states 
+fidelity = ComputeUncompute(sampler=Sampler())
+
+# Feature map and quantum Kernel
+kernel = FidelityQuantumKernel(feature_map=fmap, fidelity=fidelity)
+kernel.evaluate(X_train[0,:], X_train[0,:])
+```
+
+That makes sense, a complete overlap between the two. What happens if we use different sample points.
+```{python}
+kernel.evaluate(X_train[1,:], X_train[0,:])
+```
+
+How good is our kernel?
+
+## Target Alignment
+
+There is a metric we can use for that, called Target Alignment [@Hubregtsen_2022]
+
+$$
+TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j²}}
+$$
+where $K$ is our kernel. We can test how good our kernel is then.
+
+
+```{python}
+import numpy as np
+
+# Get estimated kernel matrix
+kmatrix = kernel.evaluate(X_train)
+
+# Scale y values to -1 and 1
+nplus = np.count_nonzero(np.array(y_train) == 1)
+nminus = len(y_train) - nplus
+_Y = np.array([y / nplus if y == 1 else y / nminus for y in y_train])
+
+T = np.outer(_Y, _Y)
+inner_product = np.sum(kmatrix * T)
+norm = np.sqrt(np.sum(kmatrix * kmatrix) * np.sum(T * T))
+inner_product / norm
+```
+
+Not bat, we could then get an estimate on the separability of a selected kernel with this. Now that we know our kernel is good enough, lt's check how it works alongside a Support Vector Classifier.
+
+```{python}
+from qiskit_machine_learning.algorithms import QSVC
+
+# QKernel + SVC
+qsvc = QSVC(quantum_kernel=kernel)
+qsvc.fit(X_train, y_train)
+qsvc.score(X_test, y_test)
+```
+
+Perfect score! Well, it was not that hard 😊

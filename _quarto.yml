@@ -35,6 +35,7 @@ book:
       - parts/gettingstarted/basics.qmd
       - parts/gettingstarted/gates.qmd
       - parts/gettingstarted/simulations.qmd
+      - parts/gettingstarted/phasekickback.qmd
       - parts/gettingstarted/classicalqc.qmd
 
     - part: "Quantum Computers"
@@ -74,6 +75,8 @@ book:
       - parts/qml/embedding.md
       - parts/qml/featuremaps.qmd
       - parts/qml/kernels.qmd
+      - parts/qml/svm.qmd
+      - parts/qml/qnns.md
       - parts/qml/challenges.md
 
     - references.qmd

@@ -63,25 +63,6 @@ This way we could easily compute the fidelity between states on a higher dimensi
 
 Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the **Quantum Support Vector Classifier** [@Rebentrost_2014].
 
-```py
-from qiskit_machine_learning.kernels import FidelityQuantumKernel
-from qiskit.algorithms.state_fidelities import ComputeUncompute
-from qiskit_machine_learning.algorithms import QSVC
-from qiskit.primitives import Sampler
-
-# How to compute the fidelity between the states 
-fidelity = ComputeUncompute(sampler=Sampler())
-
-# Feature map and quantum Kernel
-feature_map = ZZFeatureMap(2)
-new_kernel = FidelityQuantumKernel(feature_map=feature_map, fidelity=fidelity)
-
-# QKernel + SVC
-qsvc = QSVC(quantum_kernel=new_kernel)
-qsvc.fit(features, labels)
-qsvc.score(features, labels)
-```
-
 <figure markdown>
 ![Quantum Support Vector Classifier (SQVC)](../../assets/qsvc.svg)
 </figure>

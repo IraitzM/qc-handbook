@@ -421,6 +421,8 @@ $$
 |\Psi^{+}\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle) \quad |\Psi^{-}\rangle = \frac{1}{\sqrt{2}}(|10\rangle - |10\rangle)
 $$
 
+This are not separable, there is no tensorial product describing each part separately. We need to understand the system as a whole. Good thing is that is we measure one of the qubits we can instantly know what the state of the other qubit is even without measuring it.
+
 Entangled states are behind some of the key algorithms in communication protocols such as Quantum Teleportation or Superdense coding or behind the post-quantum cryptography proposals, like the Quantum Key Distribution. But they are also relevant for computations as we will see in the following sections.
 
 I know, too much theory. Let's try to execute some examples to make it more clear.

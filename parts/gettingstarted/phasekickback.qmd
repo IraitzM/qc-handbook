@@ -1,0 +1,121 @@
+# Phases {.unnumbered}
+
+You may wonder, do we use the complex part at all? So far, I haven't seen any usage of it. Well, we do. In fact it is key to many of the algorithms we unlock with quantum computing. Moving around the X-axis of the bloch sphere and acting upon it.
+
+Let's take an example on a superposed state.
+
+```{python}
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(2, 2)
+qc.h(0)
+qc.h(1)
+
+qc.draw('mpl')
+```
+
+```{python}
+from qiskit.quantum_info import Statevector
+from qiskit.visualization import plot_bloch_multivector
+
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+What is that state, we can check its mathematical formulation which end up being
+
+$$
+|\psi\rangle = \frac{1}{2}\left(|00\rangle + |01\rangle + |10\rangle +|11\rangle\right)
+$$
+
+```{python}
+from qiskit.visualization import array_to_latex
+
+array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
+```
+
+Go and extend the circuit... and check what happens.
+```{python}
+import numpy as np
+
+qc.ry(np.pi/2, 1)
+
+qc.draw('mpl')
+```
+
+```{python}
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+```{python}
+from qiskit.visualization import array_to_latex
+
+array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
+```
+
+Ok, so now we have the following shape
+$$
+|\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + |1\rangle\right) = |1+\rangle
+$$
+
+which shows a state where one qubit is in the 1 state (all odds into reading the 1 value int he computational basis), while the other qubit looks still in a superposition (50-50 chances of getting 0 or 1 in the computational basis). As we mentioned before, this is not an [entangled](../gettingstarted/gates.qmd#entanglement) state as it is separable. Hence, the tensor product symbol.
+
+::: {.callout-warning collapse=true}
+# Qubit readout ordering
+You found weird the state was $|1+\rangle$ instead of $|+1\rangle$ ? You are not alone, check [this entry](https://lukaszpalt.com/behind-the-mystery-of-wrong-qubit-ordering-in-qiskit/) by Lukasz Palt for further clarification.
+:::
+
+## Phase kickback
+
+Now, look what happens when we act on the second qubit controlled by the first one.
+
+```{python}
+import numpy as np
+
+qc.crz(np.pi, 0, 1)
+
+qc.draw('mpl')
+```
+
+```{python}
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+The Z-rotation on the target qubit had almost no effect, but what happened to the control one? It moved?
+
+```{python}
+from qiskit.visualization import array_to_latex
+
+array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
+```
+
+Wait, there is a $i$ in there? Yeap. We changed the phase of one of the elements in the control qubit. It is not only in between 0 and 1 poles, but also we added a phase to it that is represented by the sign direction in the complex axis.
+
+$$
+|\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1+\rangle
+$$
+
+```{python}
+np.round(psi.data,2)
+```
+
+That is the effect when the phase $e^{i\pi/2}$ gets applied then.
+
+```{python}
+
+np.round(np.exp(1j*np.pi/2)/np.sqrt(2), 2)
+```
+
+Really interesting. In fact, this is the effect behind many of the theoretical works related to the speedup of solving systems of linear equations, for example [@Harrow_2009].
+
+::: {.callout-tip collapse=true}
+# Phase kickback and more
+
+This is a great resource going deep in some of the algorithms that use this effect
+
+{{< video https://www.youtube.com/watch?v=455pmYaZXKw >}}
+
+And for those that prefer Pennylane or reading about it, [this is a great tutorial](https://pennylane.ai/qml/demos/tutorial_phase_kickback) on the basics on how phase allows as to identify specific states in our search sapce.
+:::
