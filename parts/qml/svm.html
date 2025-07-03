@@ -500,6 +500,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#target-alignment" id="toc-target-alignment" class="nav-link active" data-scroll-target="#target-alignment">Target Alignment</a></li>
+  <li><a href="#role-of-entanglement" id="toc-role-of-entanglement" class="nav-link" data-scroll-target="#role-of-entanglement">Role of entanglement</a></li>
   </ul>
 </nav>
     </div>
@@ -526,7 +527,7 @@ window.Quarto = {
 
 
 <p>Let’s see how we can compose that particular model, step by step. Probably <a href="https://squlearn.github.io/index.html">sQUlearn</a> is one of the best resources in order to simplify our code. We will start loading the data. The infamous iris datatset (we will only take the first two values).</p>
-<div id="1fd91c43" class="cell" data-execution_count="1">
+<div id="15b0813e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
@@ -558,7 +559,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The task here is to find a good projection of those features so that we can better separate between the three classes (Setosa, Virginica and Versicolor). Some key steps are the splitting so that we have a fear metric to evaluate and the scaling of the variables.</p>
-<div id="9d4ba6c8" class="cell" data-execution_count="2">
+<div id="79933aec" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -575,7 +576,7 @@ window.Quarto = {
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we need to select a good embedding… Well, let try with a simple Z feature map.</p>
-<div id="0fa718cf" class="cell" data-execution_count="3">
+<div id="bd3a1b01" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZFeatureMap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fmap <span class="op">=</span> ZFeatureMap(X_train.shape[<span class="dv">1</span>], reps<span class="op">=</span><span class="dv">1</span>)</span>
@@ -589,7 +590,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Now we know where we will put our data. We need to compose a kernel with that. The simplest one,</p>
-<div id="30f39b6c" class="cell" data-execution_count="5">
+<div id="e0d4e683" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.kernels <span class="im">import</span> FidelityQuantumKernel</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_algorithms.state_fidelities <span class="im">import</span> ComputeUncompute</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.primitives <span class="im">import</span> Sampler</span>
@@ -605,7 +606,7 @@ window.Quarto = {
 </div>
 </div>
 <p>That makes sense, a complete overlap between the two. What happens if we use different sample points.</p>
-<div id="d1a3452d" class="cell" data-execution_count="6">
+<div id="195668f7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>kernel.evaluate(X_train[<span class="dv">1</span>,:], X_train[<span class="dv">0</span>,:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>array([[0.33903138]])</code></pre>
@@ -616,40 +617,202 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="target-alignment">Target Alignment</h2>
 <p>There is a metric we can use for that, called Target Alignment <span class="citation" data-cites="Hubregtsen_2022">(<a href="../../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span></p>
 <p><span class="math display">\[
-TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j²}}
+TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j^2}}
 \]</span> where <span class="math inline">\(K\)</span> is our kernel. We can test how good our kernel is then.</p>
-<div id="2155f749" class="cell" data-execution_count="7">
+<div id="830ff28e" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get estimated kernel matrix</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>kmatrix <span class="op">=</span> kernel.evaluate(X_train)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale y values to -1 and 1</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>nplus <span class="op">=</span> np.count_nonzero(np.array(y_train) <span class="op">==</span> <span class="dv">1</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>nminus <span class="op">=</span> <span class="bu">len</span>(y_train) <span class="op">-</span> nplus</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>_Y <span class="op">=</span> np.array([y <span class="op">/</span> nplus <span class="cf">if</span> y <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> y <span class="op">/</span> nminus <span class="cf">for</span> y <span class="kw">in</span> y_train])</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> np.outer(_Y, _Y)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>inner_product <span class="op">=</span> np.<span class="bu">sum</span>(kmatrix <span class="op">*</span> T)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>norm <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>(kmatrix <span class="op">*</span> kmatrix) <span class="op">*</span> np.<span class="bu">sum</span>(T <span class="op">*</span> T))</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>inner_product <span class="op">/</span> norm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> target_alignment(kernel, X, y_labels) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get estimated kernel matrix</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    kmatrix <span class="op">=</span> kernel.evaluate(X)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Scale y values to -1 and 1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    nun_plus <span class="op">=</span> np.count_nonzero(np.array(y_labels) <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    num_minus <span class="op">=</span> <span class="bu">len</span>(y_labels) <span class="op">-</span> nun_plus</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    _Y <span class="op">=</span> np.array([y <span class="op">/</span> nun_plus <span class="cf">if</span> y <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> y <span class="op">/</span> num_minus <span class="cf">for</span> y <span class="kw">in</span> y_labels])</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    T <span class="op">=</span> np.outer(_Y, _Y) <span class="co"># Y outer product</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    numerator <span class="op">=</span> np.<span class="bu">sum</span>(kmatrix <span class="op">*</span> T)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    denominator <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>(kmatrix <span class="op">*</span> kmatrix) <span class="op">*</span> np.<span class="bu">sum</span>(T <span class="op">*</span> T))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> numerator <span class="op">/</span> denominator</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>np.float64(0.6075420371223076)</code></pre>
 </div>
 </div>
-<p>Not bat, we could then get an estimate on the separability of a selected kernel with this. Now that we know our kernel is good enough, lt’s check how it works alongside a Support Vector Classifier.</p>
-<div id="879f1057" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.algorithms <span class="im">import</span> QSVC</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># QKernel + SVC</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>qsvc <span class="op">=</span> QSVC(quantum_kernel<span class="op">=</span>kernel)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>qsvc.fit(X_train, y_train)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>qsvc.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7f426ae6" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>np.float64(0.5026116721148101)</code></pre>
+</div>
+</div>
+<p>Not bat, we could then get an estimate on the separability of a selected kernel with this. Now that we know our kernel is good enough, lt’s check how it works alongside a Support Vector Classifier.</p>
+<div id="d6c0256b" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.algorithms <span class="im">import</span> QSVC</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># QKernel + SVC</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>qsvc <span class="op">=</span> QSVC(quantum_kernel<span class="op">=</span>kernel)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>qsvc.fit(X_train, y_train)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>qsvc.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>1.0</code></pre>
 </div>
 </div>
 <p>Perfect score! Well, it was not that hard 😊</p>
+</section>
+<section id="role-of-entanglement" class="level2">
+<h2 class="anchored" data-anchor-id="role-of-entanglement">Role of entanglement</h2>
+<p>We can try with a little bit more complex feature map. In fact, <span class="math inline">\(Z\)</span>-embedding has no entanglement capacity as it is only composed by independent single qubit rotations. We can add a little bit of entanglement to it and check if that performs better (it has entanglement and that is cool, so it should work better).</p>
+<div id="b7056601" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import some data to play with</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> datasets.load_iris()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> iris.data[<span class="dv">50</span>:<span class="dv">150</span>, :<span class="dv">2</span>]  <span class="co"># we only take the last two features.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> iris.target[<span class="dv">50</span>:] <span class="co"># and first 100 samples</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>plt.figure(<span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plt.clf()</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the training points</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[:, <span class="dv">0</span>], X[:, <span class="dv">1</span>], c<span class="op">=</span>Y, cmap<span class="op">=</span>plt.cm.Paired)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Sepal length'</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Sepal width'</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.xticks(())</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.yticks(())</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="svm_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>That looks more complex. Let’s check our previous feature map.</p>
+<div id="b7da1836" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and test</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    X,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    Y,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.33</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> MinMaxScaler((<span class="op">-</span><span class="fl">0.9</span>, <span class="fl">0.9</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and kernel composition</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>fmap <span class="op">=</span> ZFeatureMap(X_train.shape[<span class="dv">1</span>], reps<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>fidelity <span class="op">=</span> ComputeUncompute(sampler<span class="op">=</span>Sampler())</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and quantum Kernel</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> FidelityQuantumKernel(feature_map<span class="op">=</span>fmap, fidelity<span class="op">=</span>fidelity)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>kernel.evaluate(X_train[<span class="dv">0</span>,:], X_train[<span class="dv">0</span>,:])</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co"># QKernel + SVC</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>qsvc <span class="op">=</span> QSVC(quantum_kernel<span class="op">=</span>kernel)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>qsvc.fit(X_train, y_train)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>qsvc.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>0.6666666666666666</code></pre>
+</div>
+</div>
+<p>Well, it makes sense that this one is harder.</p>
+<div id="87ca68eb" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> qsvc.predict(X_test)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              precision    recall  f1-score   support
+
+           1       0.68      0.79      0.73        19
+           2       0.64      0.50      0.56        14
+
+    accuracy                           0.67        33
+   macro avg       0.66      0.64      0.65        33
+weighted avg       0.66      0.67      0.66        33
+</code></pre>
+</div>
+</div>
+<p>We can see how well the representation in the bloch sphere separates the two groups.</p>
+<div id="02f86b63" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>np.float64(0.843602003610384)</code></pre>
+</div>
+</div>
+<div id="2a3aae01" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>np.float64(0.7336524493034711)</code></pre>
+</div>
+</div>
+<p>Curious enough, the <span class="math inline">\(TA\)</span> is higher in this case, meaning it separates better between the two groups, yet the classificaiton is worst. Let’s check out with some more complex feature map.</p>
+<div id="bf39ea0b" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and kernel composition</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>fmap <span class="op">=</span> ZZFeatureMap(X_train.shape[<span class="dv">1</span>], reps<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>fmap.decompose().draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+<figure class="figure">
+<p><img src="svm_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="d3e5e9eb" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fidelity <span class="op">=</span> ComputeUncompute(sampler<span class="op">=</span>Sampler())</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and quantum Kernel</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> FidelityQuantumKernel(feature_map<span class="op">=</span>fmap, fidelity<span class="op">=</span>fidelity)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>kernel.evaluate(X_train[<span class="dv">0</span>,:], X_train[<span class="dv">0</span>,:])</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># QKernel + SVC</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>qsvc <span class="op">=</span> QSVC(quantum_kernel<span class="op">=</span>kernel)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>qsvc.fit(X_train, y_train)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>qsvc.score(X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>0.48484848484848486</code></pre>
+</div>
+</div>
+<p>Uff! That does not look good.</p>
+<div id="ae58b21c" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> qsvc.predict(X_test)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              precision    recall  f1-score   support
+
+           1       0.58      0.37      0.45        19
+           2       0.43      0.64      0.51        14
+
+    accuracy                           0.48        33
+   macro avg       0.51      0.51      0.48        33
+weighted avg       0.52      0.48      0.48        33
+</code></pre>
+</div>
+</div>
+<div id="6bc773cd" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>np.float64(0.7647315781779153)</code></pre>
+</div>
+</div>
+<div id="4a9c2291" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>np.float64(0.6725460488050752)</code></pre>
+</div>
+</div>
+<p>Well, the <span class="math inline">\(TA\)</span> in this case shows it separates worst in the latent <a href="https://en.wikipedia.org/wiki/Hilbert_space">Hilbert</a> space data is encoded into so it might make sense that this worsens the prediction. But common, we added entanglement, that is the magic sauce for QML. That should do it’s thing right? Well, I guess this is why people has not yet solved why and how QC will boost ML for the general case.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
