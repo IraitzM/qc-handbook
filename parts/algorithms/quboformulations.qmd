@@ -10,16 +10,15 @@ Known penalties
 | Classical Constraint | Equivalent Penalty |
 |----------------------|--------------------| 
 | $x + y \le 1$ | $P(xy)$ |
-| $x + y \ge $ | $P(1− x − y + xy)$ |
+| $x + y \ge 1$ | $P(1− x − y + xy)$ |
 | $x + y = 1$ | $P(1− x − y + 2xy)$ |
 | $x \le y$ | $P(x − xy)$ |
 | $x_1 + x_2 + x_3  \le 1$ | $P(x_1 x_2 + x_1 x_3 + x_2 x_3)$ |
 | $x = y$ | $P(x+y- 2xy)$ |
 
-being $P$ a positive scalar characterizing the effect of the penalty over the cost function.
+being $P$ a positive scalar characterizing the effect of the penalty over the cost function. Is is [a topic on its own](https://docs.dwavequantum.com/en/latest/quantum_research/reformulating.html#constraints-conflict-graph-technique).
 
 We will see how some classical problems can be mapped to their QUBO form so that this problems can be solved by Quantum Algorithms.
-
 
 ## Binary Linear Programming
 

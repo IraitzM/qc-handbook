@@ -87,7 +87,7 @@ How good is our kernel?
 There is a metric we can use for that, called Target Alignment [@Hubregtsen_2022]
 
 $$
-TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j²}}
+TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j^2}}
 $$
 where $K$ is our kernel. We can test how good our kernel is then.
 
@@ -95,18 +95,27 @@ where $K$ is our kernel. We can test how good our kernel is then.
 ```{python}
 import numpy as np
 
-# Get estimated kernel matrix
-kmatrix = kernel.evaluate(X_train)
+def target_alignment(kernel, X, y_labels) -> float:
 
-# Scale y values to -1 and 1
-nplus = np.count_nonzero(np.array(y_train) == 1)
-nminus = len(y_train) - nplus
-_Y = np.array([y / nplus if y == 1 else y / nminus for y in y_train])
+    # Get estimated kernel matrix
+    kmatrix = kernel.evaluate(X)
 
-T = np.outer(_Y, _Y)
-inner_product = np.sum(kmatrix * T)
-norm = np.sqrt(np.sum(kmatrix * kmatrix) * np.sum(T * T))
-inner_product / norm
+    # Scale y values to -1 and 1
+    nun_plus = np.count_nonzero(np.array(y_labels) == 1)
+    num_minus = len(y_labels) - nun_plus
+    _Y = np.array([y / nun_plus if y == 1 else y / num_minus for y in y_labels])
+
+    T = np.outer(_Y, _Y) # Y outer product
+
+    numerator = np.sum(kmatrix * T)
+    denominator = np.sqrt(np.sum(kmatrix * kmatrix) * np.sum(T * T))
+    return numerator / denominator
+
+target_alignment(kernel, X_train, y_train)
+```
+
+```{python}
+target_alignment(kernel, X_test, y_test)
 ```
 
 Not bat, we could then get an estimate on the separability of a selected kernel with this. Now that we know our kernel is good enough, lt's check how it works alongside a Support Vector Classifier.
@@ -121,3 +130,116 @@ qsvc.score(X_test, y_test)
 ```
 
 Perfect score! Well, it was not that hard 😊
+
+## Role of entanglement
+
+We can try with a little bit more complex feature map. In fact, $Z$-embedding has no entanglement capacity as it is only composed by independent single qubit rotations. We can add a little bit of entanglement to it and check if that performs better (it has entanglement and that is cool, so it should work better).
+
+```{python}
+# import some data to play with
+iris = datasets.load_iris()
+X = iris.data[50:150, :2]  # we only take the last two features.
+Y = iris.target[50:] # and first 100 samples
+
+plt.figure(2, figsize=(8, 6))
+plt.clf()
+
+# Plot the training points
+plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+```
+
+That looks more complex. Let's check our previous feature map.
+
+```{python}
+# Train and test
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    Y,
+    test_size=0.33,
+    random_state=42,
+)
+
+# Scale
+scaler = MinMaxScaler((-0.9, 0.9))
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Feature map and kernel composition
+fmap = ZFeatureMap(X_train.shape[1], reps=1)
+fidelity = ComputeUncompute(sampler=Sampler())
+
+# Feature map and quantum Kernel
+kernel = FidelityQuantumKernel(feature_map=fmap, fidelity=fidelity)
+kernel.evaluate(X_train[0,:], X_train[0,:])
+
+# QKernel + SVC
+qsvc = QSVC(quantum_kernel=kernel)
+qsvc.fit(X_train, y_train)
+qsvc.score(X_test, y_test)
+```
+
+Well, it makes sense that this one is harder.
+
+```{python}
+from sklearn.metrics import classification_report
+
+y_pred = qsvc.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+
+We can see how well the representation in the bloch sphere separates the two groups.
+
+```{python}
+target_alignment(kernel, X_train, y_train)
+```
+
+```{python}
+target_alignment(kernel, X_test, y_test)
+```
+
+Curious enough, the $TA$ is higher in this case, meaning it separates better between the two groups, yet the classificaiton is worst. Let's check out with some more complex feature map.
+
+```{python}
+from qiskit.circuit.library import ZZFeatureMap
+
+# Feature map and kernel composition
+fmap = ZZFeatureMap(X_train.shape[1], reps=1)
+fmap.decompose().draw('mpl')
+```
+
+```{python}
+fidelity = ComputeUncompute(sampler=Sampler())
+
+# Feature map and quantum Kernel
+kernel = FidelityQuantumKernel(feature_map=fmap, fidelity=fidelity)
+kernel.evaluate(X_train[0,:], X_train[0,:])
+
+# QKernel + SVC
+qsvc = QSVC(quantum_kernel=kernel)
+qsvc.fit(X_train, y_train)
+qsvc.score(X_test, y_test)
+```
+
+Uff! That does not look good.
+
+```{python}
+y_pred = qsvc.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+
+```{python}
+target_alignment(kernel, X_train, y_train)
+```
+
+```{python}
+target_alignment(kernel, X_test, y_test)
+```
+
+Well, the $TA$ in this case shows it separates worst in the latent [Hilbert](https://en.wikipedia.org/wiki/Hilbert_space) space data is encoded into so it might make sense that this worsens the prediction. But common, we added entanglement, that is the magic sauce for QML. That should do it's thing right? Well, I guess this is why people has not yet solved why and how QC will boost ML for the general case.
