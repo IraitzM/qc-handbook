@@ -19,7 +19,7 @@ $$
 
 being this the minimum representation of a quantum state: a unit norm vector $\in \mathbb{C}^2$ whose physical realization is known as the **qubit**. Qubits do not exists (like bit as a matter of fact), these concepts are pure mathematical constructions that have a specific meaning. In our case, the minimum unit we can manipulate in our quantum computer.
 
-It represents the two extremes the system can be at and their **probability amplitudes**. It means we will observe one or the other if we measure the system and those probabilities must add up to one - $|\alpha|^2+|\beta|^2 = 1$ - given that there is certainty that the system exists in one of those options.
+It represents the two extremes the system can be at and their **probability amplitudes**. It means we will observe one or the other if we measure the system and those probabilities must add up to one. The formula for it is as follows, $|\alpha|^2+|\beta|^2 = 1$ and represents the certainty that the system exists in one of those options.
 
 This state can be decomposed into basic components, the two extreme cases previously mentioned or mathematically speaking, **basis states**. This is relevant as when it comes to quantum computers, our minimal unit will be expressed on its computational basis:
 $$
@@ -98,7 +98,7 @@ $$
 \beta |1\rangle.
 $$
 
-The state is a superposed, meaning is a coin spinning in the air and we do not know which state it will reveal when we stop it to look. Our ability to perceive it is limited by the measurement procedure itself, which also alters the condition of the system (stops the coin from spinning), but it is in a set of probabilities during the spinning that is not entirely tied to one specific option (heads or tails).
+The state is a superposition, meaning it is a coin spinning in the air and we do not know which state it will reveal when we stop it to look. Our ability to perceive it is limited by the measurement procedure itself, which also alters the condition of the system (stops the coin from spinning), but it is in a set of probabilities during the spinning that is not entirely tied to one specific option (heads or tails).
 
 We need to project our quantum state into one of the two potential states we can obtain ($|0\rangle$ or $|1\rangle$). Sadly, when measuring only classical bits can be obtained (0 or 1) into our conventional machines (like the laptop or phone you are using right now), so no probability amplitude, no phase... quantum information gets lost in the measurement process and we end up with classical (boring) information.
 
@@ -130,7 +130,7 @@ Measuring quantum states is a necessary condition to extract information out of 
 
 Ok, so when we observe a quantum state we can only see one of the potential outcomes, the one we observe actualy. And this affects the system, meaning when we look at it it collapses to the state we have observed and no longer exsits as a probability ditribution but as a certainty.
 
-The action we use to observe the quantum state is by means of **Observables** (self-adjoint operators). These are used to project the measurement of a given quantum state to one of its _eigenvalues_. Using the closeness between quantum state and eigenvectors of the observable we can measure what is the overlap between those. The eigenvectors of the observable form an orthonormal basis for the Hilbert space, therefore each measure corresponds to a mapping to the eigenvectors comprising the basis. I know, this is a little bit too technical but just think about the observable as a pair of tinted glasses, if glasses have a green-_ish_ color, everything will look some sort of green: dark green for black or light green for white. It is kind of like that. Kind of.
+The action we use to observe the quantum state is by means of **observables** (self-adjoint operators). These are used to project the measurement of a given quantum state to one of its _eigenvalues_. Using the closeness between quantum state and eigenvectors of the observable we can measure what is the overlap between those. The eigenvectors of the observable form an orthonormal basis for the Hilbert space, therefore each measure corresponds to a mapping to the eigenvectors comprising the basis. I know, this is a little bit too technical but just think about the observable as a pair of tinted glasses, if glasses have a green-_ish_ color, everything will look some sort of green: dark green for black or light green for white. It is kind of like that. Kind of.
 
 We will see that a common observable used is the Pauli $\sigma_z$ matrix
 
@@ -149,7 +149,7 @@ $$
 \sigma_z|0\rangle = 1|0\rangle \rightarrow \sigma_z|1\rangle = -1|1\rangle.
 $$
 
-Therefore, any potential measurement will be mapped to one of those two eigenvectors and its eigenvalue used as the outcome of the measurement. The basis set shown above is often known as the **computational basis** and it will become relevant when we move to actual implementations.
+Therefore, any potential measurement will be mapped to one of those two eigenvectors and its eigenvalue used as the outcome of the measurement. The basis set shown above is often known as the **computational basis** and it will become relevant when we move to actual implementations where this will be fixes by the device itself.
 
 From our previous state $|\phi\rangle = \alpha |0\rangle + \beta |1\rangle$ and perform a measurement over the computational basis ($|0\rangle,|1\rangle$) where evidently the outcome would be $|0\rangle$ with $|\alpha|^2$ probability or $|1\rangle$ with $|\beta|^2$ probability. But more importantly, a single measurement, no matter how complex, entangled or superposed our state might be, will only be able to recover classical bits mapping two previously seen states ($|0\rangle \rightarrow 0$ and $|1\rangle \rightarrow 1$).
 
