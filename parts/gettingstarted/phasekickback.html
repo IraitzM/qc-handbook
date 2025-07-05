@@ -136,6 +136,14 @@ div.csl-indent {
   gtag('config', 'G-MXHDHE1HP5');
 </script>
 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KC499QR2');</script>
+<!-- End Google Tag Manager -->
+
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -523,6 +531,9 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KC499QR2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/gettingstarted/qc-intro.html">Getting started</a></li><li class="breadcrumb-item"><a href="../../parts/gettingstarted/phasekickback.html">Phases</a></li></ol></nav>
 <div class="quarto-title">
@@ -551,7 +562,7 @@ window.Quarto = {
 
 <p>You may wonder, do we use the complex part at all? So far, I haven’t seen any usage of it. Well, we do. In fact it is key to many of the algorithms we unlock with quantum computing. Moving around the X-axis of the bloch sphere and acting upon it.</p>
 <p>Let’s take an example on a superposed state.</p>
-<div id="5d3fc093" class="cell" data-execution_count="1">
+<div id="828a0af4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>, <span class="dv">2</span>)</span>
@@ -567,7 +578,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="43a19491" class="cell" data-execution_count="2">
+<div id="283f5bd7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_bloch_multivector</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -585,7 +596,7 @@ window.Quarto = {
 <p><span class="math display">\[
 |\psi\rangle = \frac{1}{2}\left(|00\rangle + |01\rangle + |10\rangle +|11\rangle\right)
 \]</span></p>
-<div id="41680a69" class="cell" data-execution_count="3">
+<div id="3f3e2be8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -599,7 +610,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Go and extend the circuit… and check what happens.</p>
-<div id="a3fd4df2" class="cell" data-execution_count="4">
+<div id="301ff73e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>qc.ry(np.pi<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span>)</span>
@@ -613,7 +624,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="63cb873a" class="cell" data-execution_count="5">
+<div id="ccabcf49" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -624,7 +635,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="647920bf" class="cell" data-execution_count="6">
+<div id="262aca15" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -660,7 +671,7 @@ Qubit readout ordering
 <section id="phase-kickback" class="level2">
 <h2 class="anchored" data-anchor-id="phase-kickback">Phase kickback</h2>
 <p>Now, look what happens when we act on the second qubit controlled by the first one.</p>
-<div id="d067a910" class="cell" data-execution_count="7">
+<div id="64594a7d" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>qc.crz(np.pi, <span class="dv">0</span>, <span class="dv">1</span>)</span>
@@ -674,7 +685,7 @@ Qubit readout ordering
 </div>
 </div>
 </div>
-<div id="a72563f3" class="cell" data-execution_count="8">
+<div id="805cbba2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -686,7 +697,7 @@ Qubit readout ordering
 </div>
 </div>
 <p>The Z-rotation on the target qubit had almost no effect, but what happened to the control one? It moved?</p>
-<div id="0234e1a9" class="cell" data-execution_count="9">
+<div id="2fcb9050" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -703,14 +714,14 @@ Qubit readout ordering
 <p><span class="math display">\[
 |\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1+\rangle
 \]</span></p>
-<div id="7f7a6c82" class="cell" data-execution_count="10">
+<div id="7ef5a034" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(psi.data,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>array([0.  +0.j  , 0.  -0.j  , 0.71+0.j  , 0.  +0.71j])</code></pre>
 </div>
 </div>
 <p>That is the effect when the phase <span class="math inline">\(e^{i\pi/2}\)</span> gets applied then.</p>
-<div id="2130fb52" class="cell" data-execution_count="11">
+<div id="2f54c1ad" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(np.exp(<span class="ot">1j</span><span class="op">*</span>np.pi<span class="op">/</span><span class="dv">2</span>)<span class="op">/</span>np.sqrt(<span class="dv">2</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>np.complex128(0.71j)</code></pre>

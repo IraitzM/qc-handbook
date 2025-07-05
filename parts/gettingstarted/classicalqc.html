@@ -136,6 +136,14 @@ div.csl-indent {
   gtag('config', 'G-MXHDHE1HP5');
 </script>
 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KC499QR2');</script>
+<!-- End Google Tag Manager -->
+
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
 
@@ -494,6 +502,9 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KC499QR2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/gettingstarted/qc-intro.html">Getting started</a></li><li class="breadcrumb-item"><a href="../../parts/gettingstarted/classicalqc.html">Classical resources</a></li></ol></nav>
 <div class="quarto-title">
@@ -527,7 +538,7 @@ div.csl-indent {
 <p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as State Vector simulator (dah!) and it is common on some of the most used SDKs.</p>
 <p>A less common approach is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it).</p>
 <p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision level. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method.</p>
-<div id="fcfdce8c" class="cell" data-execution_count="1">
+<div id="fc554139" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Qiskit</span></span>

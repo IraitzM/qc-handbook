@@ -136,6 +136,14 @@ div.csl-indent {
   gtag('config', 'G-MXHDHE1HP5');
 </script>
 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KC499QR2');</script>
+<!-- End Google Tag Manager -->
+
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
@@ -523,6 +531,9 @@ window.Quarto = {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KC499QR2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Quantum Machine Learning</a></li><li class="breadcrumb-item"><a href="../../parts/qml/kernels.html">Kernels</a></li></ol></nav>
 <div class="quarto-title">
@@ -591,7 +602,7 @@ k(x_i, x_j) = \langle\psi(x_i)|\psi(x_j)\rangle
 k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 \]</span></p>
 <p>which can be easily performed by flipping the original circuit backwards and adding it to the initial feature map.</p>
-<div id="56696a44" class="cell" data-execution_count="1">
+<div id="7718e404" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">2</span>)</span>
