@@ -88,11 +88,23 @@ bibliography: references.bib
 
 format:
   html:
+    include-in-header: static/code_head.html
     number-depth: 2
     theme: 
      - cosmo
      - style.scss
     code-link: true
+
+# Some SEO
+metadata:
+  lang: en
+  author: "Iraitz Montalbán"
+  twitter-card: false
+  open-graph: true
+  image: cover.png
+
+resources:
+  - robots.txt
 
 
 
