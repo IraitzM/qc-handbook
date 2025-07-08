@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Iraitz Montalbán">
 
 <title>Classical resources – Quantum Computing Handbook</title>
 <style>
@@ -146,6 +145,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Classical resources – Quantum Computing Handbook">
 <meta property="og:description" content="">
@@ -484,6 +512,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -515,12 +549,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Iraitz Montalbán </p>
-          </div>
-  </div>
     
   
     
@@ -532,13 +560,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <p>So, now you know how a simulator works. Essentially performs the mathematical operations we expect a quantum computer will do. but there are quite some nuances on the way in which we do this. For example, it is not the same to use a <em>simulator</em> or an <em>emulator</em>.</p>
-<p>A <em>simulator</em> performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it was what the ideal machine should do. An <em>emulator</em> on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show how the same actions performed by a phisical machine would look like.</p>
+<p>A <em>simulator</em> performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it was what the ideal machine should do. An <em>emulator</em> on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show how the same actions performed by a physical machine would look like.</p>
+<p>The of course, you have sending the job to a real device through a service like the ones offered by the <a href="https://quantum.cloud.ibm.com/">IBM Quantum Platform</a>. You will need to create an account but after that, you can submit all the circuits you want to real hardware. checkout <a href="../../submit_circuit.html">this example</a>.</p>
 <section id="simulators" class="level2">
 <h2 class="anchored" data-anchor-id="simulators">Simulators</h2>
-<p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as State Vector simulator (dah!) and it is common on some of the most used SDKs.</p>
-<p>A less common approach is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it).</p>
-<p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision level. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method.</p>
-<div id="d0363740" class="cell" data-execution_count="1">
+<p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as <strong>State Vector</strong> simulator (dah!) and it is common on some of the most used SDKs. The ability to simulate a given circuit is proportional to the resources needed to manipulate that state vector.</p>
+<p><strong>GHZ-state case</strong></p>
+<p>Let’s take a GHZ state as an example, a 5 qubit GHZ state.</p>
+<p><span class="math display">\[
+|\psi\rangle = \frac{1}{\sqrt{2}}(|00000\rangle + |11111\rangle)
+\]</span></p>
+<p>A 5-qubit system requires a state vector in a Hilbert space of dimension <span class="math inline">\(2^5 = 32\)</span>. Each amplitude is a complex number, typically represented with double precision. So, making a back of the envelope calculation: <span class="math inline">\(32\)</span> amplitudes <span class="math inline">\(\times\)</span> <span class="math inline">\(16\)</span> bytes (8 bytes real part + 8 bytes imaginary part) <span class="math inline">\(= 512\)</span> bytes.</p>
+<p>Beyond the state vector, a quantum simulator needs:</p>
+<ul>
+<li>Quantum gates (<span class="math inline">\(H\)</span> and <span class="math inline">\(CX\)</span> in this case). For 5 qubits, single-qubit gates are 2×2 matrices and two-qubit gates are 4×4: ~1-2 KB per gate.</li>
+<li>Temporary buffer for intermediate calculations of similar size.</li>
+<li>Simulator overhead for managing the circuit, data structures and conversions: ~10-50 KB</li>
+</ul>
+<p>Minimum theoretical memory: ~512 bytes + overhead ≈ 50-100 KB. Most of this goes into the simulator itself more than the simulation but as we scale those numbers up, a 10 qubit simulator manages ~16KB state vectors, 20-qubit one ~16MB and 30 qubit system uses only ~16GB just for the state vector representation. You might struggle beyond 22-25 qubits depending on how powerful your machine is.</p>
+<p>A less common approach, given the numbers we saw before, is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it). This not only manages a state vector but a matrix evolution on each step.</p>
+<p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method although in some cases, unless you are using some bleeding-edge simulators, they do not offer the option of noise simulation.</p>
+<div id="11a05ec7" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Qiskit</span></span>
@@ -592,12 +634,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>And many more. They also include nice simulators for GPU based simulation, based on <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum SDK</a> via <a href="https://www.xanadu.ai/products/lightning/">Lightning</a> which will be really helpful when we start talking about <a href="../../parts/algorithms/optimizingcircuits.html">training circuits</a>.</p>
 <p>If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like <a href="https://tensornetwork.org/">TensorNetwork.org</a> to look into useful resources and some nice references to get deeper into the field <span class="citation" data-cites="biamonte2017tensornetworksnutshell">(<a href="../../references.html#ref-biamonte2017tensornetworksnutshell" role="doc-biblioref">Biamonte and Bergholm 2017</a>)</span>.</p>
-<p>Let’s keep it simple for now and deal with algorithm implementations.</p>
+<p>In any case, this is not a trivial task. In fact, some have already claimed to be a Herculean task <span class="citation" data-cites="xu2023herculeantaskclassicalsimulation">(<a href="../../references.html#ref-xu2023herculeantaskclassicalsimulation" role="doc-biblioref">Xu et al. 2023</a>)</span>. Let’s keep it simple for now and deal with algorithm implementations.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-biamonte2017tensornetworksnutshell" class="csl-entry" role="listitem">
 Biamonte, Jacob, and Ville Bergholm. 2017. <span>“Tensor Networks in a Nutshell.”</span> <a href="https://arxiv.org/abs/1708.00006">https://arxiv.org/abs/1708.00006</a>.
+</div>
+<div id="ref-xu2023herculeantaskclassicalsimulation" class="csl-entry" role="listitem">
+Xu, Xiaosi, Simon Benjamin, Jinzhao Sun, Xiao Yuan, and Pan Zhang. 2023. <span>“A Herculean Task: Classical Simulation of Quantum Computers.”</span> <a href="https://arxiv.org/abs/2302.08880">https://arxiv.org/abs/2302.08880</a>.
 </div>
 </div>
 </section>
