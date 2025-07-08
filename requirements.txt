@@ -135,6 +135,7 @@ pyrsistent==0.20.0
 pysocks==1.7.1
 pyspnego==0.11.2
 python-dateutil==2.9.0.post0
+python-dotenv==1.1.1
 python-json-logger==3.3.0
 pytz==2025.2
 pywin32==310 ; platform_python_implementation != 'PyPy' and sys_platform == 'win32'

@@ -4,3 +4,6 @@
 # Quarto
 /.quarto/
 /_book/
+
+# Env. variables
+.env

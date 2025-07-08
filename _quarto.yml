@@ -83,6 +83,7 @@ book:
   appendices:
     - libraries.md
     - hybridsolvers.qmd
+    - submit_circuit.ipynb
 
 bibliography: references.bib
 
@@ -99,7 +100,6 @@ format:
 # Some SEO
 metadata:
   lang: en
-  author: "Iraitz Montalbán"
   twitter-card: false
   open-graph: true
   image: cover.png
