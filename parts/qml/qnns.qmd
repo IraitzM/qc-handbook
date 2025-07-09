@@ -1,0 +1,368 @@
+# Quantum Neural Networks {.unnumbered}
+
+There has been some criticism about this adaptation of the classical bio-inspired model.
+
+* Neural Networks = non-linear
+* Quantum Computing = linear (up until measurement)
+* Quantum Neural Networks = ?
+
+but in fact the literature keeps growing about the potential of these techniques to provide similar results to those obtained within the state of the art but with much fewer resources [@Pe_a_Tapia_2023].
+
+We already know classical data can be converted into quantum states. What if we take the chance to extend the existing quantum circuit so that it also performs the whole action until a class is selected as part of the measurement process?
+
+The generic name of this type of circuit is the **Variational Quantum Classifier** and shows following structure.
+
+<figure markdown>
+![Variational Quantum Classifier (VQC)](../../assets/vqc.svg)
+</figure>
+
+It is all based in the same concept of trainable parameterized quantum circuits and we already have the means to adapt the parameters according to a target function. We might need to device if expectation value or a given sample is the ideal measure we would like to obtain from the circuit. This is often decided depending on which type of model we would like to obtain, a classification or a regression model.
+
+Which ansatz should we select for the trainable part of the QNN? Well, this is an open question with no direct answer. As it happens in classical NN the amount of circuits we could select for our QNN is infinite. Classical NN architectures by means of experimentation and better understanding the inner workings of our brain, have come to an agreement of what seem to be clever guesses according to specific tasks:
+
+* For artificial vision: Convolutional Neural Networks
+* For forecasting in general: Recurrent Neural Networks
+* For text and context aware tasks: Transformers
+* For self-driving cars: Liquid Neural Networks
+
+So we will need to point to the literature to better understand which ansatz compositions will render best performance in our particular case. Many frameworks do provide already a set of ansatz actually implemented that reflect those existing in the literature (often also published by the same teams working at IBM or Xanadu) but they do provide interesting benchmarks that may help in our decision making process.
+
+In essence we need to create two block, one encoding our data into quantum states (feature map) and a Parameterized Quantum Circuit (also ansatz) so that the circuit can be trained/tuned towards a specific purpose.
+
+<figure markdown>
+![QNN basic structure](../../assets/qnn_base.png)
+</figure>
+
+```py
+from qiskit import QuantumCircuit
+from qiskit.circuit.library import ZZFeatureMap, RealAmplitudes
+
+num_inputs = 2
+feature_map = ZZFeatureMap(num_inputs)
+ansatz = RealAmplitudes(num_inputs, reps=1)
+
+# construct QNN
+qc = QuantumCircuit(num_inputs)
+qc.compose(feature_map, inplace=True)
+qc.compose(ansatz, inplace=True)
+qc.draw(output="mpl")
+```
+
+Real amplitudes is just an ansatz available to us following this shape below. It is versatile enough so it will help us reach the outcome we would like to obtain. But, your choice if you would like any other design for your ansatz.
+
+<figure markdown>
+![Real amplitudes](../../assets/realamplitudes.png)
+</figure>
+
+We can then connect each piece of the puzzle forming our QNN.
+
+<figure markdown>
+![QNN basic architecture](../../assets/qnn.jpeg)
+</figure>
+
+```py
+from qiskit.algorithms.optimizers import COBYLA
+from qiskit_machine_learning.algorithms.classifiers import NeuralNetworkClassifier
+from qiskit_machine_learning.neural_networks import EstimatorQNN
+
+# We append the estructure to the Estimator primitive
+estimator_qnn = EstimatorQNN(
+    circuit=qc, input_params=feature_map.parameters, weight_params=ansatz.parameters
+)
+
+# construct neural network classifier
+estimator_classifier = NeuralNetworkClassifier(
+    estimator_qnn, optimizer=COBYLA(maxiter=60), callback=callback_graph
+)
+```
+
+And compose a training procedure as it is often done, by calling _.fit_ function and evaluating the prediction.
+
+```py
+estimator_classifier.fit(features, labels)
+estimator_classifier.score(features, labels)
+```
+
+Multi-label classification can also be covered but in many cases a stacked set of QNNs (one-vs-all) is preferred so that we get a set of $N$ specialized networks to balance the vote for $N$ potential classes. Instead of manually creating all those circuits and datasets we can simply invoke prepared classes in frameworks such as Qiskit that will be able to deal with those internal complexities. One should pay attention though that training various models will increase the number of iterations/executions of the circuit needed for parameter fitting (as many times as classes are).
+
+Regression tasks can also be performed if we consider the expectation value the one mapping our target value. In that case a simple change of evaluation function would do the trick. We will see that actually it is easy as well to invoke but as we already know, getting the expectation value over simple circuit sampling may require several evaluations of the circuit in order to get all basis changes for a proper expectation value evaluation.
+
+## Expressivity
+
+Expressivity is a key aspect with any function approximator, like with neural networks which are known to be universal approximators [@kidger2020universal]. We expect Quantum Neural Networks to provide similar capacity as they have already being evaluated in similar terms [@Pe_a_Tapia_2023] but this will be limited by the ansatz selection. The ansatz is essentially where a given Quantum Neural Network will produce states for a particular Hilbert space and expressivity, in those terms, refers to the capacity of covering said Hilbert space.
+
+A $4$ qubit system represents a $2^4 = 16$ dimension Hilbert space ($\mathcal{H}$). How can we measure how expressive our ansatz is? Evaluating analytically the coverage of the Hilbert space might not be practical, but we could simply sample from the circuit a set of times and compare the states we get in terms of distance for said space. **Fidelity** can be used to measure the _distance_ between two states as we saw [before](kernels.qmd), so we get and compare it with what would be the ideal scenario, a uniform distribution of the entire fidelity space for maximal expressivity [@sim2019expressibility]. If the states generated by our circuit can render all distances, from same sate (fidelity of one) to the orthogonal case (fidelity of zero) then our circuit can cover the whole spectrum to our Hilbert space. 
+
+One simple approach is to compare the distribution of fidelities obtainer from sampling $n$ number of times with randomly selected parameters given a target PQC to be evaluated in comparison with the uniform distribution of fidelities for the same domain, like the ensemble of Haar random states.
+
+Thus,
+$$
+\text{Expr} = D_{KL}\left( \hat{P}_{PQC}(F; \theta) \| P_{Haar}(F)\right) = \sum_{j} \hat{P}_{PQC}(F_j; \theta)\log\left(\frac{\hat{P}_{PQC}(F_j; \theta)}{P_{\text{Haar}(F_j)}}\right)
+$$
+
+where $\hat{P}_{PQC}(F; \theta)$ is the estimated probability distribution of fidelities resulting while sampling states from a
+PQC with parameters $\theta$. $F_j$ represents the fidelity at $j$th bin.
+
+Thus, we need to generate a _histogram_ of the elements of $F$. The output of this histogram is a set of bins $B = \{(l_1, u_1), (l_2, u_2), \cdots \}$ where $l_{j}$ ($u_j$) denotes the lower (upper) limit of bin $j$. It also produces an empirical probability distribution function $\mathrm{P}_{\text{PQC}}(j)$, which is simply the probability that a given value of $F$ falls in a bin $j$.
+
+Let's take the ansatz defined by an idle circuit as an example.
+
+```{python}
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(1, 1)
+
+qc.draw('mpl')
+```
+
+```{python}
+from qiskit.quantum_info import Statevector
+from qiskit.visualization import plot_bloch_multivector
+
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+No matter what we do, the ansatz won't change, therefore its expressivity should be equal to none.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from qiskit_aer import AerSimulator
+
+# Size of our histogram
+dims = 100
+num_qubits = 1
+
+# Possible Bin
+bins_list = []
+for i in range(dims):
+    bins_list.append((i) / (dims - 1))
+
+# Harr histogram
+p_haar_hist = []
+for i in range(dims - 1):
+    p_haar_hist.append(
+        (1 - bins_list[i]) ** (2**num_qubits - 1) - (1 - bins_list[i + 1]) ** (2**num_qubits - 1)
+    )
+
+# Select the AerSimulator from the Aer provider
+simulator = AerSimulator(method='matrix_product_state')
+
+# Sample from circuit
+nshot=1_024
+nsamples=1_000
+fidelities=[]    
+for _ in range(nsamples):
+    qc = QuantumCircuit(1, 1)
+    qc.measure(0,0)
+
+    job = simulator.run([qc], shots = nshot)
+    result = job.result()
+    count = result.get_counts()
+
+    # Fidelity
+    if '0' in count:
+        ratio=count['0']/nshot
+    else:
+        ratio=0
+    fidelities.append(ratio)
+
+weights = np.ones_like(fidelities) / float(len(fidelities))
+
+# Plot
+bins_x = []
+for i in range(dims - 1):
+    bins_x.append(bins_list[1] + bins_list[i])
+
+plt.hist(
+    fidelities,
+    bins=bins_list,
+    weights=weights,
+    label="Circuit",
+    range=[0, 1],
+)
+plt.plot(bins_x, p_haar_hist, label="Haar")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+### Zero means maximal expressivity
+
+We can see how all fidelities are probability of zero except for fidelity 1, which means there is only one state we can render with this circuit. The expressivity works backwards, meaning a distance of zero represents the fidelity probability landscape equal to the uniform distribution. Therefore, all states (pure) in the Hilbert space can be produced with the right set of parameters ($\theta$). Thus the expressivity will take the maximum value as the $log(N)$ where $N$ is the number of bins selected for the histogram.
+
+```{python}
+from scipy.special import rel_entr # For entropy calculation
+
+pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
+```
+
+This will numerically approximate the value of
+
+```{python}
+np.log(dims)
+```
+hence, 0 is the maximum expressivity we can get.
+
+We can see what would be the effect if we introduce a parameterized gate instead, something more complex with a free parameter such as:
+
+```{python}
+from qiskit import QuantumCircuit
+from qiskit.circuit import Parameter
+
+a = Parameter('a')
+
+qc = QuantumCircuit(1, 1)
+qc.h(0)
+qc.rz(a, 0)
+
+qc.draw('mpl')
+```
+
+```{python}
+from random import random
+
+# Possible Bin
+bins_list = []
+for i in range(dims):
+    bins_list.append((i) / (dims - 1))
+
+# Haar histogram
+p_haar_hist = []
+for i in range(dims - 1):
+    p_haar_hist.append(
+        (1 - bins_list[i]) ** (2**num_qubits - 1) - (1 - bins_list[i + 1]) ** (2**num_qubits - 1)
+    )
+
+# Select the AerSimulator from the Aer provider
+simulator = AerSimulator(method='matrix_product_state')
+
+# Sample from circuit
+fidelities=[]    
+for _ in range(nsamples):
+    qc = QuantumCircuit(1, 1)
+    qc.h(0)
+    qc.rz(2 * np.pi * random(), 0)
+    # Inverse of the circuit
+    qc.rz(2 * np.pi * random(), 0)
+    qc.h(0)
+    qc.measure(0,0)
+
+    job = simulator.run([qc], shots = nshot)
+    result = job.result()
+    count = result.get_counts()
+
+    # Fidelity
+    if '0' in count:
+        ratio=count['0']/nshot
+    else:
+        ratio=0
+    fidelities.append(ratio)
+
+weights = np.ones_like(fidelities) / float(len(fidelities))
+
+# Plot
+bins_x = []
+for i in range(dims - 1):
+    bins_x.append(bins_list[1] + bins_list[i])
+
+plt.hist(
+    fidelities,
+    bins=bins_list,
+    weights=weights,
+    label="Circuit",
+    range=[0, 1],
+)
+plt.plot(bins_x, p_haar_hist, label="Haar")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+```{python}
+pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
+```
+
+We can extend this acting on more than one axis, which should end up with the maximum coverage over the bloch sphere for this one single qubit case.
+
+```{python}
+from qiskit import QuantumCircuit
+from qiskit.circuit import Parameter
+
+a = Parameter('a')
+b = Parameter('b')
+
+qc = QuantumCircuit(1, 1)
+qc.h(0)
+qc.rz(a, 0)
+qc.rx(b, 0)
+
+qc.draw('mpl')
+```
+
+```{python}
+# Possible Bin
+bins_list = []
+for i in range(dims):
+    bins_list.append((i) / (dims - 1))
+
+# Haar histogram
+p_haar_hist = []
+for i in range(dims - 1):
+    p_haar_hist.append(
+        (1 - bins_list[i]) ** (2**num_qubits - 1) - (1 - bins_list[i + 1]) ** (2**num_qubits - 1)
+    )
+
+# Select the AerSimulator from the Aer provider
+simulator = AerSimulator(method='matrix_product_state')
+
+# Sample from circuit
+fidelities=[]    
+for _ in range(nsamples):
+    qc = QuantumCircuit(1, 1)
+    qc.h(0)
+    qc.rz(2 * np.pi * random(), 0)
+    qc.rx(2 * np.pi * random(), 0)
+    # Inverse of the circuit
+    qc.rx(2 * np.pi * random(), 0)
+    qc.rz(2 * np.pi * random(), 0)
+    qc.h(0)
+    qc.measure(0,0)
+
+    job = simulator.run([qc], shots = nshot)
+    result = job.result()
+    count = result.get_counts()
+
+    # Fidelity
+    if '0' in count:
+        ratio=count['0']/nshot
+    else:
+        ratio=0
+    fidelities.append(ratio)
+
+weights = np.ones_like(fidelities) / float(len(fidelities))
+
+# Plot
+bins_x = []
+for i in range(dims - 1):
+    bins_x.append(bins_list[1] + bins_list[i])
+
+plt.hist(
+    fidelities,
+    bins=bins_list,
+    weights=weights,
+    label="Circuit",
+    range=[0, 1],
+)
+plt.plot(bins_x, p_haar_hist, label="Haar")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+```{python}
+pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
+```
+
+These plots should resemble those at the original work [@sim2019expressibility].

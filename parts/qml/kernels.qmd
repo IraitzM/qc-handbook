@@ -59,7 +59,18 @@ kernel.decompose().draw('mpl', fold = 150)
 
 By computing the number of times we get $|0\rangle^n$ after this execution we can get the closeness of these to feature map prepared states. If orthogonal states are evaluated (ex. $\langle 0 | 1\rangle$) then we can assume their states to be as distant as possible within the Hilbert space.
 
-This way we could easily compute the fidelity between states on a higher dimensional feature space by just running this exercise of each sample pair ($O(N^2)$) in what it is called a Fidelity Kernel [@Hubregtsen_2022].
+This way we could easily compute the **fidelity** between states on a higher dimensional feature space by just running this exercise of each sample pair ($O(N^2)$) in what it is called a **Fidelity Kernel** [@Hubregtsen_2022].
+
+:::{.callout-important collapse="true"}
+# Fidelity
+
+Fidelity comes from the formula
+$$
+F(\rho, \sigma) = \|\langle\psi_{\rho}|\psi_{\sigma}\rangle\|^2
+$$
+where both states are considered to be pure. for the mixed state case, fidelity [differs](https://en.wikipedia.org/wiki/Fidelity_of_quantum_states).
+
+:::
 
 Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the **Quantum Support Vector Classifier** [@Rebentrost_2014].
 

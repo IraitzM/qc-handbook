@@ -76,7 +76,7 @@ book:
       - parts/qml/featuremaps.qmd
       - parts/qml/kernels.qmd
       - parts/qml/svm.qmd
-      - parts/qml/qnns.md
+      - parts/qml/qnns.qmd
       - parts/qml/challenges.md
 
     - references.qmd
