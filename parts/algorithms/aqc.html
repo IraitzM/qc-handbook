@@ -555,10 +555,10 @@ window.Quarto = {
 <p><span class="math display">\[
 H_{init} = - \sum_i^N \sigma_i^x
 \]</span></p>
-<div id="a4680b1a" class="cell" data-execution_count="1">
+<div id="1e593c4f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">3</span> <span class="co"># 4 qubit system</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fb26f0a8" class="cell" data-execution_count="2">
+<div id="96705da6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sigma_x <span class="op">=</span> np.matrix([[<span class="dv">0</span>, <span class="dv">1</span>],</span>
@@ -581,7 +581,7 @@ H_{init} = - \sum_i^N \sigma_i^x
 </div>
 </div>
 <p>Now we will use a couple of functions to compute the Eigenspectra (set of eigenvalues for a given Hamiltonian) and the ground-state (minimum energy state).</p>
-<div id="1a3e89e7" class="cell" data-execution_count="3">
+<div id="1adf7d43" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> eig</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -613,7 +613,7 @@ H_{init} = - \sum_i^N \sigma_i^x
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot((<span class="dv">1</span><span class="op">/</span>sqrt(num)), stat_gs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>So, by computing the ground state of our initial Hamiltonian we can check that it is the superposition of all possible states with equal probability.</p>
-<div id="5f528513" class="cell" data-execution_count="4">
+<div id="cce73296" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>get_gs(H_init)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>matrix([[-0.35355339],
@@ -630,7 +630,7 @@ H_{init} = - \sum_i^N \sigma_i^x
 <p><span class="math display">\[
 H_{problem} = \sum_j^N J_{j,j+1}\sigma_j^z\sigma_{j+1}^z
 \]</span></p>
-<div id="74892d42" class="cell" data-execution_count="5">
+<div id="9a08c7bc" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sigma_z <span class="op">=</span> np.matrix([[<span class="dv">1</span>, <span class="dv">0</span>],</span>
@@ -652,7 +652,7 @@ H_{problem} = \sum_j^N J_{j,j+1}\sigma_j^z\sigma_{j+1}^z
         [ 0.,  0.,  0.,  0.,  0.,  0.,  0., -1.]])</code></pre>
 </div>
 </div>
-<div id="545ff92c" class="cell" data-execution_count="6">
+<div id="f15216ac" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>get_gs(H_problem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>matrix([[0.5],
@@ -673,7 +673,7 @@ H_{problem} = \sum_j^N J_{j,j+1}\sigma_j^z\sigma_{j+1}^z
 <p><span class="math display">\[
 H(t) = (1-\lambda(t))H_{init} + \lambda(t)H_{problem}
 \]</span></p>
-<div id="82c7801f" class="cell" data-execution_count="7">
+<div id="64aeef0c" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>e0 <span class="op">=</span> []</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>e1 <span class="op">=</span> []</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>time_range <span class="op">=</span> np.arange(<span class="fl">0.0</span>, <span class="fl">1.0</span>, <span class="fl">0.1</span>)</span>
@@ -686,7 +686,7 @@ H(t) = (1-\lambda(t))H_{init} + \lambda(t)H_{problem}
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    e0.append(vals[<span class="dv">0</span>])</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    e1.append(vals[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="541401ea" class="cell" data-execution_count="8">
+<div id="ca973406" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.plot(time_range, e0, time_range, e1)</span>
@@ -699,7 +699,7 @@ H(t) = (1-\lambda(t))H_{init} + \lambda(t)H_{problem}
 </div>
 </div>
 </div>
-<div id="4c5efa62" class="cell" data-execution_count="9">
+<div id="c19b2046" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.plot(np.subtract(e1,e0))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -710,7 +710,7 @@ H(t) = (1-\lambda(t))H_{init} + \lambda(t)H_{problem}
 </div>
 </div>
 </div>
-<div id="064be240" class="cell" data-execution_count="10">
+<div id="82e68fb0" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>stats[:, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>matrix([[0.49701447],
