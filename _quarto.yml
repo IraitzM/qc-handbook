@@ -88,6 +88,8 @@ book:
     - parts/appendix/quantumfeatures.qmd
 
 bibliography: parts/references.bib
+bibliographystyle: american-physics-society
+# More on: https://typst.app/docs/reference/model/bibliography/#parameters-style
 
 format:
   html:
