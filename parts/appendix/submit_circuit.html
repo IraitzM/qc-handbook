@@ -632,7 +632,7 @@ window.Quarto = {
 <p>And one can store the account information for future usages.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_ibm_runtime <span class="im">import</span> QiskitRuntimeService</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>service <span class="op">=</span> QiskitRuntimeService.save_account(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>QiskitRuntimeService.save_account(</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    token<span class="op">=</span>qiskit_api_key, <span class="co"># Your token is confidential.</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    set_as_default<span class="op">=</span><span class="va">True</span>, <span class="co"># Optionally set these as your default credentials.</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
