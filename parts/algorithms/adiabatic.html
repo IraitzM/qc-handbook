@@ -194,7 +194,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -444,6 +444,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -452,7 +458,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -467,20 +473,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -518,12 +530,12 @@ window.Quarto = {
 </header>
 
 
-<p>Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is the main mechanism quantum computers use to obtain the minimum energy or ground state for a given problem, and it is the main approach we use to solve hard combinatorial optimization problems <span class="citation" data-cites="Albash_2018">(<a href="../../references.html#ref-Albash_2018" role="doc-biblioref">Albash and Lidar 2018</a>)</span>.</p>
+<p>Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is the main mechanism quantum computers use to obtain the minimum energy or ground state for a given problem, and it is the main approach we use to solve hard combinatorial optimization problems <span class="citation" data-cites="Albash_2018">(<a href="../references.html#ref-Albash_2018" role="doc-biblioref">Albash and Lidar 2018</a>)</span>.</p>
 <p>This type of quantum computing is based on continuous-time evolution of a quantum state <span class="math inline">\(|\psi(t)\rangle\)</span> from a well-defined initial value to compute a final observed value. The evolution is modeled by the time-dependent <a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Schrödinger equation</a></p>
 <p><span class="math display">\[
 i\hbar \frac{\partial|\psi(t)\rangle}{\partial t}= H(t)|\psi(t)\rangle
 \]</span></p>
-<p>operating in the presence of adiabatic changes to the governing Hamiltonian <span class="math inline">\(H(t)\)</span> over the range <span class="math inline">\(t\in\left[0,T\right]\)</span>, where <span class="math inline">\(\hbar\)</span> is Planck’s constant. Adiabatic computing is computationally equivalent to all other quantum computing models, including the circuit and topological models, and it can efficiently solve any problem in BQP <span class="citation" data-cites="aharonov2008adiabatic">(<a href="../../references.html#ref-aharonov2008adiabatic" role="doc-biblioref">Aharonov et al. 2008</a>)</span>. However, it was originally proposed as a method for solving satisfiability problems <span class="citation" data-cites="farhi2000numerical">(<a href="../../references.html#ref-farhi2000numerical" role="doc-biblioref">Farhi, Goldstone, and Gutmann 2000</a>)</span> and it has received attention for the simplicity by which combinatorial optimization problems can be cast in Hamiltonian forms <span class="citation" data-cites="lucas2014ising">(<a href="../../references.html#ref-lucas2014ising" role="doc-biblioref">Lucas 2014</a>)</span>.</p>
+<p>operating in the presence of adiabatic changes to the governing Hamiltonian <span class="math inline">\(H(t)\)</span> over the range <span class="math inline">\(t\in\left[0,T\right]\)</span>, where <span class="math inline">\(\hbar\)</span> is Planck’s constant. Adiabatic computing is computationally equivalent to all other quantum computing models, including the circuit and topological models, and it can efficiently solve any problem in BQP <span class="citation" data-cites="aharonov2008adiabatic">(<a href="../references.html#ref-aharonov2008adiabatic" role="doc-biblioref">Aharonov et al. 2008</a>)</span>. However, it was originally proposed as a method for solving satisfiability problems <span class="citation" data-cites="farhi2000numerical">(<a href="../references.html#ref-farhi2000numerical" role="doc-biblioref">Farhi, Goldstone, and Gutmann 2000</a>)</span> and it has received attention for the simplicity by which combinatorial optimization problems can be cast in Hamiltonian forms <span class="citation" data-cites="lucas2014ising">(<a href="../references.html#ref-lucas2014ising" role="doc-biblioref">Lucas 2014</a>)</span>.</p>
 <p>The time dependent Hamiltonian for this type of computation is given by the following formula</p>
 <p><span class="math display">\[
 H(t) = A(t)H_{A} + B(t)H_B

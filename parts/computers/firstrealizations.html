@@ -194,7 +194,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -444,6 +444,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -452,7 +458,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -467,20 +473,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -524,10 +536,10 @@ window.Quarto = {
 </header>
 
 
-<p>Motivated by Shor’s algorithm <span class="citation" data-cites="shor1994algorithms">(<a href="../../references.html#ref-shor1994algorithms" role="doc-biblioref">Shor 1994</a>)</span>, during late 90s there was quite some motivation to provide a physical realization of what up to that moment was mostly theoretical work.</p>
+<p>Motivated by Shor’s algorithm <span class="citation" data-cites="shor1994algorithms">(<a href="../references.html#ref-shor1994algorithms" role="doc-biblioref">Shor 1994</a>)</span>, during late 90s there was quite some motivation to provide a physical realization of what up to that moment was mostly theoretical work.</p>
 <p>Any two-level physical system could be a good candidate for a qubit but we need to a find a physical realization that allows for operation and performing the set of tasks we could consider an algorithm.</p>
-<p>In 1998, using nuclear magnetic resonance (NMR) both Oxford University and Stanford achieved the first implementations of two qubit algorithms <span class="citation" data-cites="chuang1998experimental">(<a href="../../references.html#ref-chuang1998experimental" role="doc-biblioref">Chuang, Gershenfeld, and Kubinec 1998</a>)</span>. More or less in the same period, Yasunobu Nakamura and Jaw-Shen Tsai demonstrated how a superconducting chip can be used as a qubit by controlling the current through it <span class="citation" data-cites="nakamura2001rabi">(<a href="../../references.html#ref-nakamura2001rabi" role="doc-biblioref">Nakamura, Pashkin, and Tsai 2001</a>)</span>.</p>
-<p>2007 is known to be a key date as the first <strong>transmon</strong> was born. It is the equivalent of the transistor in the quantum regime <span class="citation" data-cites="koch2007charge">(<a href="../../references.html#ref-koch2007charge" role="doc-biblioref">Koch et al. 2007</a>)</span>. So first qubits exist since early 2000 which is not much but from manufacturing a qubit to building a whole computer… that is a long road.</p>
+<p>In 1998, using nuclear magnetic resonance (NMR) both Oxford University and Stanford achieved the first implementations of two qubit algorithms <span class="citation" data-cites="chuang1998experimental">(<a href="../references.html#ref-chuang1998experimental" role="doc-biblioref">Chuang, Gershenfeld, and Kubinec 1998</a>)</span>. More or less in the same period, Yasunobu Nakamura and Jaw-Shen Tsai demonstrated how a superconducting chip can be used as a qubit by controlling the current through it <span class="citation" data-cites="nakamura2001rabi">(<a href="../references.html#ref-nakamura2001rabi" role="doc-biblioref">Nakamura, Pashkin, and Tsai 2001</a>)</span>.</p>
+<p>2007 is known to be a key date as the first <strong>transmon</strong> was born. It is the equivalent of the transistor in the quantum regime <span class="citation" data-cites="koch2007charge">(<a href="../references.html#ref-koch2007charge" role="doc-biblioref">Koch et al. 2007</a>)</span>. So first qubits exist since early 2000 which is not much but from manufacturing a qubit to building a whole computer… that is a long road.</p>
 <p>Many metrics will be used to compare different devices and realizations in following sections so better get them clear now.</p>
 <p><strong>T1 time</strong></p>
 <p>Also known as the <strong>relaxation time</strong>, identifies how much time it would take a qubit to transition from an excited state (<span class="math inline">\(|1\rangle\)</span>) to its ground state (<span class="math inline">\(|0\rangle\)</span>). T1 time is not an actual time from state to state but rather identifies the time in which a state might transition and flips states once exited (<span class="math inline">\(P(|1\rangle) = e^{-\frac{t}{T1}}\)</span>).</p>
@@ -557,7 +569,7 @@ NOTE
 <section id="building-the-thing" class="level2">
 <h2 class="anchored" data-anchor-id="building-the-thing">Building the thing</h2>
 <p>There is more than one type of quantum computer. Actually we yet don’t know the one that will win the podium, but the race is interesting at this point. The physical realization conditions many aspects of the whole machine so it is relevant to understand a bit of their inner workings so that we can select the most appropriate option.</p>
-<p>There is one general definition of how a quantum computer may look like and it is given by the <strong>DiVincenzo criteria</strong> <span class="citation" data-cites="divincenzo1997topics">(<a href="../../references.html#ref-divincenzo1997topics" role="doc-biblioref">DiVincenzo 1997</a>)</span>.</p>
+<p>There is one general definition of how a quantum computer may look like and it is given by the <strong>DiVincenzo criteria</strong> <span class="citation" data-cites="divincenzo1997topics">(<a href="../references.html#ref-divincenzo1997topics" role="doc-biblioref">DiVincenzo 1997</a>)</span>.</p>
 <ul>
 <li>Must be scalable and well characterized qubits.</li>
 <li>System may be able to be initialized (<span class="math inline">\(|00...\rangle\)</span> state is the common choice)</li>

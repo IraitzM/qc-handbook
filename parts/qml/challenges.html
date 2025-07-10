@@ -50,8 +50,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../references.html" rel="next">
-<link href="../../parts/qml/qnns.html" rel="prev">
+<link href="../../parts/references.html" rel="next">
+<link href="../../parts/qml/qnnexample.html" rel="prev">
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -165,7 +165,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -415,6 +415,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -423,7 +429,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -438,20 +444,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -491,7 +503,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>Challenges remain from previous exercises. Circuit depth can be significantly increased also with these approaches, although QML allows for free form ansatz creation instead of problem specific ones like <a href="../../parts/algorithms/qaoa.html">QAOA</a>. That makes possible to adapt the ansatz so that it better fits specific hardware coupling maps like with <a href="../../parts/algorithms/extras.html">hardware aware VQE</a>.</p>
 <p>Still, defining the advantage of QML over ML can be difficult. We must consider the complexities of classical to quantum data conversion bottlenecks and maturity of quantum devices as well as the extra payload for over the network training and queuing when using quantum hardware. This is the reason why some vendors like AWS and IBM defined hybrid workloads and session-blocking to ease remote training. Others, like Xanadu and Google, released functional and easy to use efficient local QML focused frameworks (Pennylane and TensorFlow Quantum) but apart from the limitations one may face on going beyond 30 qubits seems like are more for educational purposes than any other thing.</p>
-<p>Lastly, some interesting use cases mixing both regimes, quantum and classical have emerged which would reveal the true advantage of QC at this stage. Quantum-aided ML steps have shown interesting results as it is the case of Quantum Feature Selection <span class="citation" data-cites="mucke2023feature">(<a href="../../references.html#ref-mucke2023feature" role="doc-biblioref">Mücke et al. 2023</a>)</span>, which deals with the pre-selection of relevant information from the dataset maximizing information and reducing noise. Quantum-inspired techniques such as Tensor Networks actually provide really impressive results using just classical resources.</p>
+<p>Lastly, some interesting use cases mixing both regimes, quantum and classical have emerged which would reveal the true advantage of QC at this stage. Quantum-aided ML steps have shown interesting results as it is the case of Quantum Feature Selection <span class="citation" data-cites="mucke2023feature">(<a href="../references.html#ref-mucke2023feature" role="doc-biblioref">Mücke et al. 2023</a>)</span>, which deals with the pre-selection of relevant information from the dataset maximizing information and reducing noise. Quantum-inspired techniques such as Tensor Networks actually provide really impressive results using just classical resources.</p>
 <p>We have seen how the evolution from <a href="../../parts/algorithms/adiabatic.html">Adiabatic Quantum Computing</a>, though trainable circuits up to Quantum Machine Learning has a rational behind it for overcoming existing limitations at each step. As long as we focus on solving issues, progress is guaranteed and who knows, maybe some day, quantum advantage.</p>
 
 
@@ -903,12 +915,12 @@ Mücke, Sascha, Raoul Heese, Sabine Müller, Moritz Wolter, and Nico Piatkowski.
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../parts/qml/qnns.html" class="pagination-link" aria-label="Quantum Neural Networks">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quantum Neural Networks</span>
+      <a href="../../parts/qml/qnnexample.html" class="pagination-link" aria-label="Quantum Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../references.html" class="pagination-link" aria-label="References">
+      <a href="../../parts/references.html" class="pagination-link" aria-label="References">
         <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

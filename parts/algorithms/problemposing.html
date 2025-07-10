@@ -229,7 +229,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -479,6 +479,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -487,7 +493,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -502,20 +508,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -632,7 +644,7 @@ s.t. \quad \sum_i b_i x_i = c
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>({<span class="st">'x1'</span>: <span class="fl">1.0</span>, <span class="st">'x2'</span>: <span class="fl">2.0</span>, <span class="st">'x3'</span>: <span class="fl">0.0</span>}, {(<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="fl">5.0</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="fl">7.0</span>}, <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><a href="https://docs.ocean.dwavesys.com/en/stable/docs_dimod/">dimod documentation</a></p>
-<p>Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in <a href="../../hybridsolvers.html">B Hybrid Solvers</a></p>
+<p>Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in <a href="../../hybridsolvers.qmd">B Hybrid Solvers</a></p>
 </section>
 <section id="mapping-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-the-problem">Mapping the problem</h2>
@@ -677,7 +689,7 @@ We will need to get a little bit used to the transformation between different fo
 </div>
 </figure>
 <p>In above example, 0 and 5 qubits are linked to the same problem variable so they should report same bit readout but qubit <em>chains</em> can break and therefore we will need to play with the chain strength to avoid any invalid solution.</p>
-<p>Sadly for us, the embedding of densely connected problems comes with the overhead of chaining a lot of physical qubits so we can make all those all-to-all connections that are not native to the device. In fact, we can check that the encoding they have made (by they we mean the people from D-Wave) we can see the maximum number of qubits of the problems encoded in hardware is in the order of 60 to 100. But is this using thousands of qubits? Yes, this is how bad the overhead can get <span class="citation" data-cites="cai2014practicalheuristicfindinggraph">(<a href="../../references.html#ref-cai2014practicalheuristicfindinggraph" role="doc-biblioref">Cai, Macready, and Roy 2014</a>)</span>.</p>
+<p>Sadly for us, the embedding of densely connected problems comes with the overhead of chaining a lot of physical qubits so we can make all those all-to-all connections that are not native to the device. In fact, we can check that the encoding they have made (by they we mean the people from D-Wave) we can see the maximum number of qubits of the problems encoded in hardware is in the order of 60 to 100. But is this using thousands of qubits? Yes, this is how bad the overhead can get <span class="citation" data-cites="cai2014practicalheuristicfindinggraph">(<a href="../references.html#ref-cai2014practicalheuristicfindinggraph" role="doc-biblioref">Cai, Macready, and Roy 2014</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

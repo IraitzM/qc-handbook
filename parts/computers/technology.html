@@ -194,7 +194,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -444,6 +444,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -452,7 +458,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -467,20 +473,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -574,7 +586,7 @@ window.Quarto = {
 </section>
 <section id="trapped-ions" class="level2">
 <h2 class="anchored" data-anchor-id="trapped-ions">Trapped ions</h2>
-<p>Initially proposed by Cirac and Zoller <span class="citation" data-cites="cirac1995quantum">(<a href="../../references.html#ref-cirac1995quantum" role="doc-biblioref">Cirac and Zoller 1995</a>)</span>, ions are confined into traps making up the quantum computer composed of those.</p>
+<p>Initially proposed by Cirac and Zoller <span class="citation" data-cites="cirac1995quantum">(<a href="../references.html#ref-cirac1995quantum" role="doc-biblioref">Cirac and Zoller 1995</a>)</span>, ions are confined into traps making up the quantum computer composed of those.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -585,7 +597,7 @@ window.Quarto = {
 </figure>
 <p>Pairs of internal electronic states of ions are implemented as the base qubit states <span class="math inline">\(|0\rangle\)</span> and <span class="math inline">\(|1\rangle\)</span>. They can be any combination of long-lived levels, differentiated by the separation of their energy levels. The 2 most predominant ones are hyperfine levels, separated by gigahertz frequencies; and optical levels, separated by frequencies of hundreds of terahertz.</p>
 <p>After the ions are loaded into their traps, the qubits are optically pumped into the fiducial state of <span class="math inline">\(|1\rangle\)</span>. The methodology of gate operation via state transition is dependent on the type of trapped-ion qubit. For optical qubits, a laser with a resonant frequency equal to the state transition is used whereas gate operations on hyperfine qubits can be performed either with lasers using stimulated Raman Coupling or with microwaves directly addressing the giga-hertz energy level splitting.</p>
-<p>The state-dependent readout is carried out by lasers as well. Using contemporary methods, readout fidelities of over 99.9% have been achieved within microseconds <span class="citation" data-cites="myerson2008high crain2019high">(<a href="../../references.html#ref-myerson2008high" role="doc-biblioref">Myerson et al. 2008</a>; <a href="../../references.html#ref-crain2019high" role="doc-biblioref">Crain et al. 2019</a>)</span>.</p>
+<p>The state-dependent readout is carried out by lasers as well. Using contemporary methods, readout fidelities of over 99.9% have been achieved within microseconds <span class="citation" data-cites="myerson2008high crain2019high">(<a href="../references.html#ref-myerson2008high" role="doc-biblioref">Myerson et al. 2008</a>; <a href="../references.html#ref-crain2019high" role="doc-biblioref">Crain et al. 2019</a>)</span>.</p>
 <p>Ion-traps count with a virtual all-to-all connectivity that allows for any qubit to qubit interaction. Shortcomings can be attributed to the decrease of the speed and fidelity of 2 qubit gates as the number of ions in the chain increases though. As the size of the ion chain increases, its mass increases as does the average distance between ions. This in turn leads to a decrease in the coupling strength between arbitrary ions, causing a decrease in speed of 2 qubit gates. Fidelity decreases due to the increased susceptibility among the normal modes used to mediate the 2-qubit interaction to unwanted spectral crosstalk interaction, as well as to noise-induced heating in the system if the gates take longer.</p>
 <p>A way to circumvent this problem is to break up the long linear chain into smaller modules, and it is still the barrier many device manufacturers in this regime need to work on.</p>
 <center>
@@ -627,7 +639,7 @@ window.Quarto = {
 </div>
 </figure>
 <p>Single-qubit gate operations are achieved by driving atomic transitions using laser beams tightly focused on a single atom, or by microwaves, for which the targeted atom’s resonance needs to be shifted using magnetic fields or laser beams. Two-qubit gates would seem to be a hindrance for neutral atom qubits due to their weak interactions with each other; however, this problem is solved by exciting atoms to Rydberg states. A Rydberg atom exhibits a strong dipolar interaction and produces a phenomenon known as the Rydberg blockade, which prohibits more than one atom in a small volume from being simultaneously excited to a Rydberg state. This can be used to produce entanglement between two atoms using a three pulse sequence. The readout of the neutral atom array is typically done by taking a fluorescence image at the end of the computational process. It is performed such that each atom in the state <span class="math inline">\(|0\rangle\)</span> will appear bright, whereas atoms in the state <span class="math inline">\(|1\rangle\)</span> remain dark.</p>
-<p>The arrangement of atoms in any type of 2D or even 3D structures makes problem mapping and qubit coupling flexible enough so that potentially any problem may fit into those devices. The main problem comes on the realization of two-qubit gates with high enough fidelity. Single-qubit operations reach 99.9% fidelity while two-qubit gates have been extensively studied boosting the initial 80% achieved in early 2016 to the reported 96.5% in 2019 <span class="citation" data-cites="levine2019parallel">(<a href="../../references.html#ref-levine2019parallel" role="doc-biblioref">Levine et al. 2019</a>)</span>. This is still an ongoing effort that limits the operability and universality of coding as most of the platforms require some kind of analog encoding as opposed to the logical abstraction others can provide.</p>
+<p>The arrangement of atoms in any type of 2D or even 3D structures makes problem mapping and qubit coupling flexible enough so that potentially any problem may fit into those devices. The main problem comes on the realization of two-qubit gates with high enough fidelity. Single-qubit operations reach 99.9% fidelity while two-qubit gates have been extensively studied boosting the initial 80% achieved in early 2016 to the reported 96.5% in 2019 <span class="citation" data-cites="levine2019parallel">(<a href="../references.html#ref-levine2019parallel" role="doc-biblioref">Levine et al. 2019</a>)</span>. This is still an ongoing effort that limits the operability and universality of coding as most of the platforms require some kind of analog encoding as opposed to the logical abstraction others can provide.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

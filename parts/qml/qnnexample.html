@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Appendix B — Hybrid solvers – Quantum Computing Handbook</title>
+<title>2&nbsp; Quantum Neural Networks – Quantum Computing Handbook</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -43,26 +78,26 @@ div.csl-indent {
 }</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./submit_circuit.html" rel="next">
-<link href="./libraries.html" rel="prev">
-<link href="./cover.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/qml/challenges.html" rel="next">
+<link href="../../parts/qml/qnns.html" rel="prev">
+<link href="../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f6da153c9fec27077684e6ae5d39a8f7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -140,7 +175,7 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Appendix B — Hybrid solvers – Quantum Computing Handbook">
+<meta property="og:title" content="2&nbsp; Quantum Neural Networks – Quantum Computing Handbook">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://iraitzm.github.io/qc-handbook/cover.png">
 <meta property="og:site_name" content="Quantum Computing Handbook">
@@ -157,7 +192,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./libraries.html">Appendices</a></li><li class="breadcrumb-item"><a href="./hybridsolvers.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Quantum Machine Learning</a></li><li class="breadcrumb-item"><a href="../../parts/qml/qnnexample.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,7 +207,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Quantum Computing Handbook</a> 
+      <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/IraitzM/qc-handbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
@@ -188,19 +223,19 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -209,31 +244,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum gates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Simulations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/phasekickback.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/phasekickback.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Phases</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/gettingstarted/classicalqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/gettingstarted/classicalqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Classical resources</span></a>
   </div>
 </li>
@@ -250,31 +285,31 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">First realizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technology</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Service providers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/computers/challenges.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/computers/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenges</span></a>
   </div>
 </li>
@@ -291,7 +326,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/complexity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/complexity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Types of algorithms</span></a>
   </div>
 </li>
@@ -299,7 +334,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/algorithms/optimization.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/algorithms/optimization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimization</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -308,37 +343,37 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Adiabatic Theorem</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/aqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/aqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">AQC in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Problem posing</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/quboformulations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/quboformulations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QUBO formulation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/usingexistingframeworks.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/usingexistingframeworks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">D-Wave and its ecosystem</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/otherconsiderations.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/otherconsiderations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Other considerations</span></a>
   </div>
 </li>
@@ -346,7 +381,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tuning circuits</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -355,49 +390,49 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to digitization</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Digitized AQC</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/variational.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/variational.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">The variational approach</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/vqe.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/vqe.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variational Quantum Eigensolver</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/optimizingcircuits.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/optimizingcircuits.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Optimizing circuits</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum Approximate Optimization Algorithm</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QAOA in partice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Final remarks</span></a>
   </div>
 </li>
@@ -405,46 +440,52 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./parts/qml/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../parts/qml/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum Machine Learning</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data embedding</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Feature maps</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/qml/kernels.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/kernels.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Kernels</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/qml/svm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/svm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum Support Vector Classifier</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/qml/qnns.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/qnns.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantum Neural Networks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
 </li>
@@ -452,35 +493,41 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -490,18 +537,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#hybrid-annealers" id="toc-hybrid-annealers" class="nav-link active" data-scroll-target="#hybrid-annealers">Hybrid Annealers</a>
-  <ul class="collapse">
-  <li><a href="#d-waves-hybrid-solvers" id="toc-d-waves-hybrid-solvers" class="nav-link" data-scroll-target="#d-waves-hybrid-solvers">D-Wave’s Hybrid solvers</a></li>
-  <li><a href="#quantagonia" id="toc-quantagonia" class="nav-link" data-scroll-target="#quantagonia">Quantagonia</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -509,9 +546,9 @@ window.Quarto = {
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLKHBRCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./libraries.html">Appendices</a></li><li class="breadcrumb-item"><a href="./hybridsolvers.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Quantum Machine Learning</a></li><li class="breadcrumb-item"><a href="../../parts/qml/qnnexample.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix B — Hybrid solvers</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></h1>
 </div>
 
 
@@ -528,56 +565,164 @@ window.Quarto = {
 </header>
 
 
-<p>Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve.</p>
-<p>Think about Shor’s algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that tep there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.</p>
-<p>A more detailed explanation can be found in <a href="https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring">IBM’s documentation</a> but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.</p>
-<section id="hybrid-annealers" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="hybrid-annealers">Hybrid Annealers</h2>
-<p>Our approach to optimization is already limited to the QUBO formulation but this is an imposed restrictions given our hardware. We may want to find solutions to problems whose variables can be integers, for example. This type of problems are classically solved by using <em>branch and bound</em> strategies. Taken a problem of the shape</p>
-<p><span class="math display">\[
-\max_{x\in\mathbb{R}^n} f(x) \\
-\quad  \text{s.t.  } c(c) \le 0 \\
-    \quad \quad x_i \in \mathbb{Z}, i \in I
-\]</span></p>
-<p>where <span class="math inline">\(f\)</span> and <span class="math inline">\(c\)</span> are nonlinear and non-convex functions. This makes our target problem a non-convex mixed-integer nonlinear problem (MINLP). Having guarantee that we not only reach a solution but <strong>the</strong> solution is indeed a demanding task.</p>
-<p>Good news is that non-convex QUBOs can be made convex as follows</p>
-<p><span class="math display">\[
-\max_{x\in\{0,1\}^n} x^T (Q + diag(s))x + s^Tx
-\]</span></p>
-<p>where <span class="math inline">\(S\)</span> refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving and auxiliary Semidefinite Optimization Problem (SDP) that returns larges eigenvalue of <span class="math inline">\(Q\)</span> <span class="citation" data-cites="billionnet2007using">(<a href="references.html#ref-billionnet2007using" role="doc-biblioref">Billionnet and Elloumi 2007</a>)</span>. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways <span class="citation" data-cites="montanaro2020quantum augustino2025solvingsemidefiniterelaxationqubos">(<a href="references.html#ref-montanaro2020quantum" role="doc-biblioref">Montanaro 2020</a>; <a href="references.html#ref-augustino2025solvingsemidefiniterelaxationqubos" role="doc-biblioref">Augustino et al. 2025</a>)</span>. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.</p>
-<section id="d-waves-hybrid-solvers" class="level3">
-<h3 class="anchored" data-anchor-id="d-waves-hybrid-solvers">D-Wave’s Hybrid solvers</h3>
-<p>D-Wave was one of the first to leverage this complex workflows involving classical and quantum resources and came with a practical solution anybody used to their service can use. They released a set of <a href="https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html">hybrid solvers</a>. These solvers are particularly convenient when instead of Binary Quadratic Models we would like to formulate our problem as:</p>
-<ul>
-<li><a href="https://docs.ocean.dwavesys.com/en/stable/concepts/cqm.html#cqm-sdk">Constrained Quadratic Models</a>: problems that might include real, integer and/or binary variables and one or more constraints.</li>
-<li><a href="https://docs.ocean.dwavesys.com/en/stable/concepts/dqm.html#dqm-sdk">Discrete Quadratic Models</a>: problems containing discrete variables in their core variable formulation.</li>
-</ul>
-<p>As you can see, there is no silver bullet, but being aware of all the posibilites technology brings may make a difference when facing our business use cases for that extra percentage that makes us competitive.</p>
-</section>
-<section id="quantagonia" class="level3">
-<h3 class="anchored" data-anchor-id="quantagonia">Quantagonia</h3>
-<p>Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by <a href="https://www.quantagonia.com/">Quantagonia</a>.</p>
-<div class="quarto-figure quarto-figure-center">
+<p>We already know that there could be blocks encoding our data (feature maps), blocks containing free parameters (ansatz) and how those parameters can be trained. Let’s see if we can work out a full example.</p>
+<div id="cell-1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> load_iris()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>X_idx <span class="op">=</span> np.where(iris.target <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> iris.data[X_idx]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> iris.target[X_idx]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-2" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> MinMaxScaler()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> X_scaled.shape[<span class="dv">1</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X_scaled, Y, test_size<span class="op">=</span><span class="fl">0.33</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Done! Now we can start creating out QNN structure. First we need something to embed the data into a quantum state.</p>
+<div id="cell-5" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> YZ_CX_EncodingCircuit</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> YZ_CX_EncodingCircuit(num_qubits <span class="op">=</span> features, num_features <span class="op">=</span> features, num_layers <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>feature_map.draw(<span class="st">"mpl"</span>, style<span class="op">=</span><span class="st">"clifford"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
 <figure class="figure">
-<p><img src="assets/quantagonia.png" class="img-fluid figure-img"></p>
-<figcaption>Quantagonia Dashboard</figcaption>
+<p><img src="qnnexample_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
 </figure>
+</div>
+</div>
+</div>
+<p>Now we will select a fully parameterized circuit (no data embedded).</p>
+<div id="cell-7" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> LayeredEncodingCircuit</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit.layered_encoding_circuit <span class="im">import</span> Layer</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Template</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ansatz <span class="op">=</span> LayeredEncodingCircuit(num_qubits<span class="op">=</span>features, num_features<span class="op">=</span>features)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the layer</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> Layer(ansatz)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>layer.Ry(<span class="st">"p"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>layer.cx_entangling(<span class="st">"NN"</span>) <span class="co"># Entangling block</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>ansatz.add_layer(layer,num_layers<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ansatz.draw(<span class="st">"mpl"</span>, style<span class="op">=</span><span class="st">"clifford"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+<figure class="figure">
+<p><img src="qnnexample_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we have composed the <span class="math inline">\(U_{\theta_1}(x)\)</span> feature map and <span class="math inline">\(V(\theta_2)\)</span> parameterized circuit that produce the state <span class="math inline">\(|\Psi(x, \theta)\rangle\)</span>. By measuring the observable <span class="math inline">\(O\)</span> we can then evaluate the put of the QNN structure as</p>
+<p>$$</p>
+<p>f(x,) = (x, ) | O |(x, )</p>
+<p>$$</p>
+<div id="cell-9" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>qnn_structure <span class="op">=</span> feature_map <span class="op">+</span> ansatz</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>qnn_structure.draw(<span class="st">'mpl'</span>, style<span class="op">=</span><span class="st">"clifford"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<figure class="figure">
+<p><img src="qnnexample_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A single <span class="math inline">\(Z\)</span> observable over a specific qubit may do the trick. At the end, we know it will return either 1 or -1 so we are fine for binary classiciation tasks.</p>
+<div id="cell-11" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.observables <span class="im">import</span> CustomObservable</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>observable <span class="op">=</span> CustomObservable(num_qubits<span class="op">=</span>features, operator_string<span class="op">=</span><span class="st">"IIIZ"</span>,parameterized<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(observable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SparsePauliOp(['IIIZ'],
+              coeffs=[ParameterExpression(1.0*p[0])])</code></pre>
+</div>
+</div>
+<p>And with that we just neet to select our simulation mechanism and optimization routine to start training our model.</p>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.qnn <span class="im">import</span> QNNClassifier, SquaredLoss</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.optimizers <span class="im">import</span> Adam</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn <span class="im">import</span> Executor</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>qnn <span class="op">=</span> QNNClassifier(qnn_structure, observable, Executor(<span class="st">"statevector_simulator"</span>), SquaredLoss(), Adam())</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>qnn.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fit:  71%|███████   | 71/100 [12:24&lt;05:16, 10.92s/it]</code></pre>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> qnn.predict(X_test)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              precision    recall  f1-score   support
+
+           1       0.82      0.74      0.78        19
+           2       0.69      0.79      0.73        14
+
+    accuracy                           0.76        33
+   macro avg       0.76      0.76      0.76        33
+weighted avg       0.77      0.76      0.76        33
+</code></pre>
+</div>
+</div>
+<p>Cool! You can check other compositions, like the Data Re-Uploading one or othes used in different benchmarks in the literature <span class="citation" data-cites="P_rez_Salinas_2020 bowles2024betterclassicalsubtleart">(<a href="../references.html#ref-P_rez_Salinas_2020" role="doc-biblioref">Pérez-Salinas et al. 2020</a>; <a href="../references.html#ref-bowles2024betterclassicalsubtleart" role="doc-biblioref">Bowles, Ahmed, and Schuld 2024</a>)</span>.</p>
+<div id="cell-16" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>full_pqc <span class="op">=</span> HubregtsenEncodingCircuit(num_qubits <span class="op">=</span> features, num_features <span class="op">=</span> features, num_layers <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>full_pqc.draw(<span class="st">"mpl"</span>, style<span class="op">=</span><span class="st">"clifford"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+<figure class="figure">
+<p><img src="qnnexample_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-17" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>qnn <span class="op">=</span> QNNClassifier(full_pqc, observable, Executor(<span class="st">"statevector_simulator"</span>), SquaredLoss(), Adam())</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>qnn.fit(X_train, y_train)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> qnn.predict(X_test)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>fit: 100%|██████████| 100/100 [04:37&lt;00:00,  2.77s/it]
+              precision    recall  f1-score   support
+
+           1       0.94      0.84      0.89        19
+           2       0.81      0.93      0.87        14
+
+    accuracy                           0.88        33
+   macro avg       0.88      0.89      0.88        33
+weighted avg       0.89      0.88      0.88        33
+</code></pre>
+</div>
 </div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-augustino2025solvingsemidefiniterelaxationqubos" class="csl-entry" role="listitem">
-Augustino, Brandon, Giacomo Nannicini, Tamás Terlaky, and Luis Zuluaga. 2025. <span>“Solving the Semidefinite Relaxation of QUBOs in Matrix Multiplication Time, and Faster with a Quantum Computer.”</span> <a href="https://arxiv.org/abs/2301.04237">https://arxiv.org/abs/2301.04237</a>.
+<div id="ref-bowles2024betterclassicalsubtleart" class="csl-entry" role="listitem">
+Bowles, Joseph, Shahnawaz Ahmed, and Maria Schuld. 2024. <span>“Better Than Classical? The Subtle Art of Benchmarking Quantum Machine Learning Models.”</span> <a href="https://arxiv.org/abs/2403.07059">https://arxiv.org/abs/2403.07059</a>.
 </div>
-<div id="ref-billionnet2007using" class="csl-entry" role="listitem">
-Billionnet, Alain, and Sourour Elloumi. 2007. <span>“Using a Mixed Integer Quadratic Programming Solver for the Unconstrained Quadratic 0-1 Problem.”</span> <em>Mathematical Programming</em> 109: 55–68.
-</div>
-<div id="ref-montanaro2020quantum" class="csl-entry" role="listitem">
-Montanaro, Ashley. 2020. <span>“Quantum Speedup of Branch-and-Bound Algorithms.”</span> <em>Physical Review Research</em> 2 (1): 013056.
+<div id="ref-P_rez_Salinas_2020" class="csl-entry" role="listitem">
+Pérez-Salinas, Adrián, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. 2020. <span>“Data Re-Uploading for a Universal Quantum Classifier.”</span> <em>Quantum</em> 4 (February): 226. <a href="https://doi.org/10.22331/q-2020-02-06-226">https://doi.org/10.22331/q-2020-02-06-226</a>.
 </div>
 </div>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -981,13 +1126,13 @@ Montanaro, Ashley. 2020. <span>“Quantum Speedup of Branch-and-Bound Algorithms
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./libraries.html" class="pagination-link" aria-label="Software packages">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span>
+      <a href="../../parts/qml/qnns.html" class="pagination-link" aria-label="Quantum Neural Networks">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quantum Neural Networks</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./submit_circuit.html" class="pagination-link" aria-label="Circuit submission">
-        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/qml/challenges.html" class="pagination-link" aria-label="Summary">
+        <span class="nav-page-text">Summary</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

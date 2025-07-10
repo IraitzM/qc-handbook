@@ -52,7 +52,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./parts/intro.html" rel="next">
 <link href="./cover.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -166,7 +166,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -416,6 +416,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -424,7 +430,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -439,20 +445,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="./parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -519,7 +531,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="https://docs.quantum.ibm.com/guides/hello-world">Qiskit documentation</a></li>
 <li>DWave’s documentation around <a href="https://docs.dwavequantum.com/en/latest/index.html">optimization</a></li>
 <li>Pennylane for <a href="https://pennylane.ai/qml">QML and simulation</a> and <a href="https://pennylane.ai/codebook/learning-paths">codebooks</a></li>
-<li>Even some relevant works that go in detail on this, books and stuff <span class="citation" data-cites="dewolf2023quantumcomputinglecturenotes nielsen2010quantum yanofsky2008quantum">(<a href="references.html#ref-dewolf2023quantumcomputinglecturenotes" role="doc-biblioref">Wolf 2023</a>; <a href="references.html#ref-nielsen2010quantum" role="doc-biblioref">Nielsen and Chuang 2010</a>; <a href="references.html#ref-yanofsky2008quantum" role="doc-biblioref">Yanofsky and Mannucci 2008</a>)</span></li>
+<li>Even some relevant works that go in detail on this, books and stuff <span class="citation" data-cites="dewolf2023quantumcomputinglecturenotes nielsen2010quantum yanofsky2008quantum">(<a href="parts/references.html#ref-dewolf2023quantumcomputinglecturenotes" role="doc-biblioref">Wolf 2023</a>; <a href="parts/references.html#ref-nielsen2010quantum" role="doc-biblioref">Nielsen and Chuang 2010</a>; <a href="parts/references.html#ref-yanofsky2008quantum" role="doc-biblioref">Yanofsky and Mannucci 2008</a>)</span></li>
 </ul>
 <p>Well, by telling it from a different perspective it may help people coming from different fields (meaning, non-physicists) grasp the idea behind quantum computing. This is also a work for myself, as it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field you are trying to master.</p>
 <p>Also, it costs nothing so, no harm done. Code snippets are easier to maintain so hopefully, everything will work with the latest versions. I hope you enjoy reading it as much as I have learned creating it.</p>
@@ -947,7 +959,7 @@ Yanofsky, Noson S, and Mirco A Mannucci. 2008. <em>Quantum Computing for Compute
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="Introduction">
+      <a href="./parts/intro.html" class="pagination-link" aria-label="Introduction">
         <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

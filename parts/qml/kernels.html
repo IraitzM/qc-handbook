@@ -229,7 +229,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -479,6 +479,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -487,7 +493,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -502,20 +508,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -601,7 +613,7 @@ k(x_i, x_j) = \langle\psi(x_i)|\psi(x_j)\rangle
 k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 \]</span></p>
 <p>which can be easily performed by flipping the original circuit backwards and adding it to the initial feature map.</p>
-<div id="15c1659b" class="cell" data-execution_count="1">
+<div id="8ce0f348" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">2</span>)</span>
@@ -617,7 +629,7 @@ k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 </div>
 </div>
 <p>By computing the number of times we get <span class="math inline">\(|0\rangle^n\)</span> after this execution we can get the closeness of these to feature map prepared states. If orthogonal states are evaluated (ex. <span class="math inline">\(\langle 0 | 1\rangle\)</span>) then we can assume their states to be as distant as possible within the Hilbert space.</p>
-<p>This way we could easily compute the <strong>fidelity</strong> between states on a higher dimensional feature space by just running this exercise of each sample pair (<span class="math inline">\(O(N^2)\)</span>) in what it is called a <strong>Fidelity Kernel</strong> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span>.</p>
+<p>This way we could easily compute the <strong>fidelity</strong> between states on a higher dimensional feature space by just running this exercise of each sample pair (<span class="math inline">\(O(N^2)\)</span>) in what it is called a <strong>Fidelity Kernel</strong> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -636,7 +648,7 @@ F(\rho, \sigma) = \|\langle\psi_{\rho}|\psi_{\sigma}\rangle\|^2
 </div>
 </div>
 </div>
-<p>Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the <strong>Quantum Support Vector Classifier</strong> <span class="citation" data-cites="Rebentrost_2014">(<a href="../../references.html#ref-Rebentrost_2014" role="doc-biblioref">Rebentrost, Mohseni, and Lloyd 2014</a>)</span>.</p>
+<p>Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the <strong>Quantum Support Vector Classifier</strong> <span class="citation" data-cites="Rebentrost_2014">(<a href="../references.html#ref-Rebentrost_2014" role="doc-biblioref">Rebentrost, Mohseni, and Lloyd 2014</a>)</span>.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

@@ -165,7 +165,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -415,6 +415,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -423,7 +429,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -438,20 +444,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -498,7 +510,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <p>Even though both techniques(<a href="../../parts/algorithms/vqe.html">VQE</a> and <a href="../../parts/algorithms/qaoa.html">QAOA</a>) are quite recent, most of the community adopted them due to the limitations existing hardware had. These techniques, thanks to the variational approach, allowed for shallower circuits to be implemented and improve upon full length algorithms at the cost of running several iterations until the optimization routine finishes.</p>
-<p>The adoption of these techniques lead to new problems as well. Similar to Neural Networks, challenges when scaling the training of those techniques at larger sizes came in the shape of <em>barren-plateus</em> <span class="citation" data-cites="mcclean2018barren">(<a href="../../references.html#ref-mcclean2018barren" role="doc-biblioref">McClean et al. 2018</a>)</span>, regions in the solution space where gradient based approaches cannot be provided with a direction in which the problem could be optimized. This also renders on a high-locality in certain instances that may make our variational training fall into local minima without the ability to get out of those.</p>
+<p>The adoption of these techniques lead to new problems as well. Similar to Neural Networks, challenges when scaling the training of those techniques at larger sizes came in the shape of <em>barren-plateus</em> <span class="citation" data-cites="mcclean2018barren">(<a href="../references.html#ref-mcclean2018barren" role="doc-biblioref">McClean et al. 2018</a>)</span>, regions in the solution space where gradient based approaches cannot be provided with a direction in which the problem could be optimized. This also renders on a high-locality in certain instances that may make our variational training fall into local minima without the ability to get out of those.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -510,8 +522,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>That is why, if possible, global optimization techniques are recommended to be used so that certain global exploratory activity is also present while local optimization is done over the solution surface.</p>
 <section id="vqe-alternatives" class="level2">
 <h2 class="anchored" data-anchor-id="vqe-alternatives">VQE alternatives</h2>
-<p>Hardware efficient ansatz is one of those device-aware techniques that tries to minimize the overhead when going from the theoretical representation to the practical implementation <span class="citation" data-cites="leone2024practical">(<a href="../../references.html#ref-leone2024practical" role="doc-biblioref">Leone et al. 2024</a>)</span>. By already considering the device topology, one can design an ansatz that is suited to the device more than the problem itself.</p>
-<p>Adapt-VQE <span class="citation" data-cites="grimsley2019adaptive">(<a href="../../references.html#ref-grimsley2019adaptive" role="doc-biblioref">Grimsley et al. 2019</a>)</span> is modification of the VQE algorithm making use of a pool of operators. It evaluates their contribution on finding the lowest energy state (<em>ground state</em>) by measuring the gradients (or contribution). The trick here is that the ansatz keeps changing from iteration to iteration looking for a specific set of operators that benefits the convergence towards the ground state. A simple example on how to use it in Qiskit can be found <a href="https://qiskit.org/ecosystem/nature/howtos/adapt_vqe.html">https://qiskit.org/ecosystem/nature/howtos/adapt_vqe.html</a></p>
+<p>Hardware efficient ansatz is one of those device-aware techniques that tries to minimize the overhead when going from the theoretical representation to the practical implementation <span class="citation" data-cites="leone2024practical">(<a href="../references.html#ref-leone2024practical" role="doc-biblioref">Leone et al. 2024</a>)</span>. By already considering the device topology, one can design an ansatz that is suited to the device more than the problem itself.</p>
+<p>Adapt-VQE <span class="citation" data-cites="grimsley2019adaptive">(<a href="../references.html#ref-grimsley2019adaptive" role="doc-biblioref">Grimsley et al. 2019</a>)</span> is modification of the VQE algorithm making use of a pool of operators. It evaluates their contribution on finding the lowest energy state (<em>ground state</em>) by measuring the gradients (or contribution). The trick here is that the ansatz keeps changing from iteration to iteration looking for a specific set of operators that benefits the convergence towards the ground state. A simple example on how to use it in Qiskit can be found <a href="https://qiskit.org/ecosystem/nature/howtos/adapt_vqe.html">https://qiskit.org/ecosystem/nature/howtos/adapt_vqe.html</a></p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -520,13 +532,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </figure>
 </div>
 </figure>
-<p>Tetris-VQE <span class="citation" data-cites="anastasiou2024tetris">(<a href="../../references.html#ref-anastasiou2024tetris" role="doc-biblioref">Anastasiou et al. 2024</a>)</span> defines an even more complex setup built on top of previous method. By growing the ansatz evaluating the gradient but also accounting for the free space available in the remaining qubits, Tetris-VQE generated ansatz tend to be much more compact than Adapt-VQE ones.</p>
+<p>Tetris-VQE <span class="citation" data-cites="anastasiou2024tetris">(<a href="../references.html#ref-anastasiou2024tetris" role="doc-biblioref">Anastasiou et al. 2024</a>)</span> defines an even more complex setup built on top of previous method. By growing the ansatz evaluating the gradient but also accounting for the free space available in the remaining qubits, Tetris-VQE generated ansatz tend to be much more compact than Adapt-VQE ones.</p>
 </section>
 <section id="qaoa" class="level2">
 <h2 class="anchored" data-anchor-id="qaoa">QAOA</h2>
 <p>Like VQE, QAOA has been put to a test and several <em>improvements</em> have been propose to tackle detected inefficiencies or simply try to boost its performance.</p>
-<p><strong>W</strong>arm-<strong>S</strong>tarted QAOA <span class="citation" data-cites="egger2021warm">(<a href="../../references.html#ref-egger2021warm" role="doc-biblioref">Egger, Mareček, and Woerner 2021</a>)</span> proposes classically solving the relaxed version fo the problem so that it is used to warm-start the problem (replacing our initial state towards the one of the relaxed solution). An interesting guide can be found here <a href="https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html">https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html</a>.</p>
-<p>By following a Reinforcement learning approach one can try to find the optimal policy by which ideal parameters can be proposed <em>a priori</em> avoiding any gradient based approach that may lead to localized solutions <span class="citation" data-cites="wauters2020reinforcement">(<a href="../../references.html#ref-wauters2020reinforcement" role="doc-biblioref">Wauters et al. 2020</a>)</span>. On the bad side of this approach, reinforcement learning requires quite some computing time to <em>try-fail-learn</em> the ideal parameters to be used.</p>
+<p><strong>W</strong>arm-<strong>S</strong>tarted QAOA <span class="citation" data-cites="egger2021warm">(<a href="../references.html#ref-egger2021warm" role="doc-biblioref">Egger, Mareček, and Woerner 2021</a>)</span> proposes classically solving the relaxed version fo the problem so that it is used to warm-start the problem (replacing our initial state towards the one of the relaxed solution). An interesting guide can be found here <a href="https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html">https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html</a>.</p>
+<p>By following a Reinforcement learning approach one can try to find the optimal policy by which ideal parameters can be proposed <em>a priori</em> avoiding any gradient based approach that may lead to localized solutions <span class="citation" data-cites="wauters2020reinforcement">(<a href="../references.html#ref-wauters2020reinforcement" role="doc-biblioref">Wauters et al. 2020</a>)</span>. On the bad side of this approach, reinforcement learning requires quite some computing time to <em>try-fail-learn</em> the ideal parameters to be used.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -540,7 +552,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2 class="anchored" data-anchor-id="tackling-large-problems">Tackling large problems</h2>
 <p>So far, we were able to tackle small-<em>ish</em> problems, we could tackle larger problems of course but there is certain limitations due to the number of qubits available in the devices (in the range of 127-156 for IBM, for example).</p>
 <p>The main challenge will come from the hardware implementation and availability of devices capable of mapping the problem to their actual chip architecture. In most cases we have talked about interacting terms between all qubits in our system but in fact, depending on the device we use to solve our problem, we might find not all qubits are connected between them. This is the common case for most of the superconducting chips. That forces us to find ways around those limitations when pairing our problem to specific hardware.</p>
-<p>But we could also find ways to decompose the problem, make it smaller in some sense and enable the usage of smaller devices to tackle large problems. then, could those problems also be solved by classical solvers? Given the size is smaller they could also benefit from that. Some interesting results have already shown the competence of these algorithms in comparison with <em>state-of-the-art</em> classical solvers <span class="citation" data-cites="ponce2025graph">(<a href="../../references.html#ref-ponce2025graph" role="doc-biblioref">Ponce et al. 2025</a>)</span>.</p>
+<p>But we could also find ways to decompose the problem, make it smaller in some sense and enable the usage of smaller devices to tackle large problems. then, could those problems also be solved by classical solvers? Given the size is smaller they could also benefit from that. Some interesting results have already shown the competence of these algorithms in comparison with <em>state-of-the-art</em> classical solvers <span class="citation" data-cites="ponce2025graph">(<a href="../references.html#ref-ponce2025graph" role="doc-biblioref">Ponce et al. 2025</a>)</span>.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

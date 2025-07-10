@@ -229,7 +229,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -479,6 +479,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Quantum Neural Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Summary</span></a>
   </div>
@@ -487,7 +493,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../references.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -502,20 +508,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../libraries.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software packages</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../hybridsolvers.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Hybrid solvers</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../submit_circuit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Circuit submission</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Interesting characteristics</span></span></a>
   </div>
 </li>
       </ul>
@@ -561,7 +573,7 @@ window.Quarto = {
 
 <p>So, now you know how a simulator works. Essentially performs the mathematical operations we expect a quantum computer will do. but there are quite some nuances on the way in which we do this. For example, it is not the same to use a <em>simulator</em> or an <em>emulator</em>.</p>
 <p>A <em>simulator</em> performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it was what the ideal machine should do. An <em>emulator</em> on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show how the same actions performed by a physical machine would look like.</p>
-<p>The of course, you have sending the job to a real device through a service like the ones offered by the <a href="https://quantum.cloud.ibm.com/">IBM Quantum Platform</a>. You will need to create an account but after that, you can submit all the circuits you want to real hardware. checkout <a href="../../submit_circuit.html">this example</a>.</p>
+<p>The of course, you have sending the job to a real device through a service like the ones offered by the <a href="https://quantum.cloud.ibm.com/">IBM Quantum Platform</a>. You will need to create an account but after that, you can submit all the circuits you want to real hardware. checkout <a href="../../submit_circuit.ipynb">this example</a>.</p>
 <section id="simulators" class="level2">
 <h2 class="anchored" data-anchor-id="simulators">Simulators</h2>
 <p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as <strong>State Vector</strong> simulator (dah!) and it is common on some of the most used SDKs. The ability to simulate a given circuit is proportional to the resources needed to manipulate that state vector.</p>
@@ -580,7 +592,7 @@ window.Quarto = {
 <p>Minimum theoretical memory: ~512 bytes + overhead ≈ 50-100 KB. Most of this goes into the simulator itself more than the simulation but as we scale those numbers up, a 10 qubit simulator manages ~16KB state vectors, 20-qubit one ~16MB and 30 qubit system uses only ~16GB just for the state vector representation. You might struggle beyond 22-25 qubits depending on how powerful your machine is.</p>
 <p>A less common approach, given the numbers we saw before, is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it). This not only manages a state vector but a matrix evolution on each step.</p>
 <p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method although in some cases, unless you are using some bleeding-edge simulators, they do not offer the option of noise simulation.</p>
-<div id="5f78cfff" class="cell" data-execution_count="1">
+<div id="42342ba8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Qiskit</span></span>
@@ -633,8 +645,8 @@ window.Quarto = {
 <li><code>default.tensor</code> for MPS type of simulation using <a href="https://quimb.readthedocs.io/en/latest/index.html">QUIMB</a> under the hood</li>
 </ul>
 <p>And many more. They also include nice simulators for GPU based simulation, based on <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum SDK</a> via <a href="https://www.xanadu.ai/products/lightning/">Lightning</a> which will be really helpful when we start talking about <a href="../../parts/algorithms/optimizingcircuits.html">training circuits</a>.</p>
-<p>If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like <a href="https://tensornetwork.org/">TensorNetwork.org</a> to look into useful resources and some nice references to get deeper into the field <span class="citation" data-cites="biamonte2017tensornetworksnutshell">(<a href="../../references.html#ref-biamonte2017tensornetworksnutshell" role="doc-biblioref">Biamonte and Bergholm 2017</a>)</span>.</p>
-<p>In any case, this is not a trivial task. In fact, some have already claimed to be a Herculean task <span class="citation" data-cites="xu2023herculeantaskclassicalsimulation">(<a href="../../references.html#ref-xu2023herculeantaskclassicalsimulation" role="doc-biblioref">Xu et al. 2023</a>)</span>. Let’s keep it simple for now and deal with algorithm implementations.</p>
+<p>If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like <a href="https://tensornetwork.org/">TensorNetwork.org</a> to look into useful resources and some nice references to get deeper into the field <span class="citation" data-cites="biamonte2017tensornetworksnutshell">(<a href="../references.html#ref-biamonte2017tensornetworksnutshell" role="doc-biblioref">Biamonte and Bergholm 2017</a>)</span>.</p>
+<p>In any case, this is not a trivial task. In fact, some have already claimed to be a Herculean task <span class="citation" data-cites="xu2023herculeantaskclassicalsimulation">(<a href="../references.html#ref-xu2023herculeantaskclassicalsimulation" role="doc-biblioref">Xu et al. 2023</a>)</span>. Let’s keep it simple for now and deal with algorithm implementations.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
