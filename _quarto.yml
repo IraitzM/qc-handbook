@@ -29,7 +29,7 @@ book:
     background: light
   chapters:
     - index.qmd
-    - intro.qmd
+    - parts/intro.qmd
     - part: parts/gettingstarted/qc-intro.md
       chapters:
       - parts/gettingstarted/basics.qmd
@@ -77,15 +77,17 @@ book:
       - parts/qml/kernels.qmd
       - parts/qml/svm.qmd
       - parts/qml/qnns.qmd
+      - parts/qml/qnnexample.ipynb
       - parts/qml/challenges.md
 
-    - references.qmd
+    - parts/references.qmd
   appendices:
-    - libraries.md
-    - hybridsolvers.qmd
-    - submit_circuit.ipynb
+    - parts/appendix/libraries.md
+    - parts/appendix/hybridsolvers.qmd
+    - parts/appendix/submit_circuit.ipynb
+    - parts/appendix/quantumfeatures.qmd
 
-bibliography: references.bib
+bibliography: parts/references.bib
 
 format:
   html:
