@@ -280,7 +280,7 @@ for key in result.eigenstate:
 plot_histogram(counts)
 ```
 
-Therefore, is we are able to encode our problem into an Ising Hamiltonian it looks like we could easily design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationaly trained scheduling function.
+Therefore, we are able to encode our problem into an Ising Hamiltonian, so that we can _easily_ design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationaly trained scheduling function.
 
 ```{python}
 qaoa.ansatz.depth()

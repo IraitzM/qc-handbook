@@ -33,10 +33,10 @@ D-Wave was one of the first to leverage this complex workflows involving classic
 * [Constrained Quadratic Models](https://docs.ocean.dwavesys.com/en/stable/concepts/cqm.html#cqm-sdk): problems that might include real, integer and/or binary variables and one or more constraints.
 * [Discrete Quadratic Models](https://docs.ocean.dwavesys.com/en/stable/concepts/dqm.html#dqm-sdk): problems containing discrete variables in their core variable formulation.
 
-As you can see, there is no silver bullet, but being aware of all the posibilites technology brings may make a difference when facing our business use cases for that extra percentage that makes us competitive.
+As you can see, there is no silver bullet, but being aware of all the posibilites technology brings can make a difference when facing our business use cases for that extra percentage that makes us competitive.
 
 ### Quantagonia
 
 Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by [Quantagonia](https://www.quantagonia.com/).
 
-![Quantagonia Dashboard](assets/quantagonia.png)
+![Quantagonia Dashboard](../../assets/quantagonia.png)
