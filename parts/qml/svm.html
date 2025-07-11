@@ -573,7 +573,7 @@ window.Quarto = {
 
 
 <p>Let’s see how we can compose that particular model, step by step. Probably <a href="https://squlearn.github.io/index.html">sQUlearn</a> is one of the best resources in order to simplify our code. We will start loading the data. The infamous iris datatset (we will only take the first two values).</p>
-<div id="16f6de59" class="cell" data-execution_count="1">
+<div id="896ca8c1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
@@ -605,7 +605,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The task here is to find a good projection of those features so that we can better separate between the three classes (Setosa, Virginica and Versicolor). Some key steps are the splitting so that we have a fear metric to evaluate and the scaling of the variables.</p>
-<div id="15d047a8" class="cell" data-execution_count="2">
+<div id="9e03f710" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -622,7 +622,7 @@ window.Quarto = {
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we need to select a good embedding… Well, let try with a simple Z feature map.</p>
-<div id="f2a2a1c5" class="cell" data-execution_count="3">
+<div id="ae912710" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZFeatureMap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fmap <span class="op">=</span> ZFeatureMap(X_train.shape[<span class="dv">1</span>], reps<span class="op">=</span><span class="dv">1</span>)</span>
@@ -636,7 +636,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Now we know where we will put our data. We need to compose a kernel with that. The simplest one,</p>
-<div id="fc440f33" class="cell" data-execution_count="5">
+<div id="4564022a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.kernels <span class="im">import</span> FidelityQuantumKernel</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_algorithms.state_fidelities <span class="im">import</span> ComputeUncompute</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.primitives <span class="im">import</span> Sampler</span>
@@ -652,7 +652,7 @@ window.Quarto = {
 </div>
 </div>
 <p>That makes sense, a complete overlap between the two. What happens if we use different sample points.</p>
-<div id="156cba8a" class="cell" data-execution_count="6">
+<div id="b9c39222" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>kernel.evaluate(X_train[<span class="dv">1</span>,:], X_train[<span class="dv">0</span>,:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>array([[0.33903138]])</code></pre>
@@ -665,7 +665,7 @@ window.Quarto = {
 <p><span class="math display">\[
 TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j^2}}
 \]</span> where <span class="math inline">\(K\)</span> is our kernel. We can test how good our kernel is then.</p>
-<div id="56435f4a" class="cell" data-execution_count="7">
+<div id="d08fe47b" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> target_alignment(kernel, X, y_labels) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
@@ -689,14 +689,14 @@ TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i
 <pre><code>np.float64(0.6075420371223076)</code></pre>
 </div>
 </div>
-<div id="ed332400" class="cell" data-execution_count="8">
+<div id="32afb5ec" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>np.float64(0.5026116721148101)</code></pre>
 </div>
 </div>
 <p>Not bat, we could then get an estimate on the separability of a selected kernel with this. Now that we know our kernel is good enough, lt’s check how it works alongside a Support Vector Classifier.</p>
-<div id="74f6c56f" class="cell" data-execution_count="9">
+<div id="79caa659" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.algorithms <span class="im">import</span> QSVC</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># QKernel + SVC</span></span>
@@ -712,7 +712,7 @@ TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i
 <section id="role-of-entanglement" class="level2">
 <h2 class="anchored" data-anchor-id="role-of-entanglement">Role of entanglement</h2>
 <p>We can try with a little bit more complex feature map. In fact, <span class="math inline">\(Z\)</span>-embedding has no entanglement capacity as it is only composed by independent single qubit rotations. We can add a little bit of entanglement to it and check if that performs better (it has entanglement and that is cool, so it should work better).</p>
-<div id="47bf68d1" class="cell" data-execution_count="10">
+<div id="fcfa542f" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import some data to play with</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> datasets.load_iris()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> iris.data[<span class="dv">50</span>:<span class="dv">150</span>, :<span class="dv">2</span>]  <span class="co"># we only take the last two features.</span></span>
@@ -739,7 +739,7 @@ TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i
 </div>
 </div>
 <p>That looks more complex. Let’s check our previous feature map.</p>
-<div id="5c8c9ff2" class="cell" data-execution_count="11">
+<div id="3268b9e7" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train and test</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    X,</span>
@@ -770,7 +770,7 @@ TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i
 </div>
 </div>
 <p>Well, it makes sense that this one is harder.</p>
-<div id="408c374c" class="cell" data-execution_count="12">
+<div id="97841d65" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> qsvc.predict(X_test)</span>
@@ -788,20 +788,20 @@ weighted avg       0.66      0.67      0.66        33
 </div>
 </div>
 <p>We can see how well the representation in the bloch sphere separates the two groups.</p>
-<div id="93b2c835" class="cell" data-execution_count="13">
+<div id="96147e42" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>np.float64(0.843602003610384)</code></pre>
 </div>
 </div>
-<div id="380fa1a4" class="cell" data-execution_count="14">
+<div id="988206ab" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>np.float64(0.7336524493034711)</code></pre>
 </div>
 </div>
 <p>Curious enough, the <span class="math inline">\(TA\)</span> is higher in this case, meaning it separates better between the two groups, yet the classificaiton is worst. Let’s check out with some more complex feature map.</p>
-<div id="794cd73e" class="cell" data-execution_count="15">
+<div id="edbe6b96" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and kernel composition</span></span>
@@ -815,7 +815,7 @@ weighted avg       0.66      0.67      0.66        33
 </div>
 </div>
 </div>
-<div id="4a3616bc" class="cell" data-execution_count="16">
+<div id="f5f42b0c" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fidelity <span class="op">=</span> ComputeUncompute(sampler<span class="op">=</span>Sampler())</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature map and quantum Kernel</span></span>
@@ -831,7 +831,7 @@ weighted avg       0.66      0.67      0.66        33
 </div>
 </div>
 <p>Uff! That does not look good.</p>
-<div id="7a7020ef" class="cell" data-execution_count="17">
+<div id="5865f317" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> qsvc.predict(X_test)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -846,13 +846,13 @@ weighted avg       0.52      0.48      0.48        33
 </code></pre>
 </div>
 </div>
-<div id="23ee6d64" class="cell" data-execution_count="18">
+<div id="efd5ae47" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>np.float64(0.7647315781779153)</code></pre>
 </div>
 </div>
-<div id="2dd5d8a5" class="cell" data-execution_count="19">
+<div id="43c06bf9" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>target_alignment(kernel, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>np.float64(0.6725460488050752)</code></pre>

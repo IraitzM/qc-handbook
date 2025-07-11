@@ -547,7 +547,7 @@ window.Quarto = {
 
 <p>As we have seen before, QAOA take the best of both worlds (ideally) considering the ansatz out of the AQC but variationaly training it to obtain the best scheduling function out of the free parameters.</p>
 <p>Continuing with previous example….</p>
-<div id="e6f556d3" class="cell" data-execution_count="1">
+<div id="5ff8916c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty graph</span></span>
@@ -565,7 +565,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="b81d058f" class="cell" data-execution_count="2">
+<div id="b16773fb" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -596,7 +596,7 @@ window.Quarto = {
 </div>
 </div>
 <p>For this simple example, brute-forcing the solution can be done to have a reference for it.</p>
-<div id="5a533c50" class="cell" data-execution_count="3">
+<div id="ed208fed" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective_value(x: np.ndarray, w: np.ndarray) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
@@ -631,14 +631,14 @@ window.Quarto = {
 </div>
 </div>
 <p>The main challenge would be understanding if this one is the only solution in our example</p>
-<div id="883c6e61" class="cell" data-execution_count="4">
+<div id="1442e807" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(np.dot(np.transpose(x), H_problem), x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>-5.0</code></pre>
 </div>
 </div>
-<div id="a4224edf" class="cell" data-execution_count="5">
+<div id="1aa88f8c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.dot(np.dot(np.transpose(x), H_problem), x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -646,7 +646,7 @@ window.Quarto = {
 </div>
 </div>
 <p>In fact, for this example we know there are more than one optimal solutions…</p>
-<div id="3f35d4d3" class="cell" data-execution_count="6">
+<div id="5e078d98" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> {</span>
@@ -667,7 +667,7 @@ window.Quarto = {
 </div>
 <p>We would like to fully understand our solution landscape. Quantum Computing may help us by mapping the solution to a more complex superposed state that reveals all potential solutions to our problem.</p>
 <p>We will need to build a Hamiltonian that maps our problem.</p>
-<div id="b78dad08" class="cell" data-execution_count="7">
+<div id="cc16d379" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> SparsePauliOp</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>H_op <span class="op">=</span> SparsePauliOp.from_list(</span>
@@ -693,7 +693,7 @@ window.Quarto = {
 </div>
 </div>
 <p>In this case, we will start with the existing Qiskit functionality and do a drill-down to highlight what is done behind the scenes. Qiskit provides a ready to be used QAOA implementation that will only require the and optimizer and a way to extract information out of our quantum device (either Estimator or Sampler primitive).</p>
-<div id="51a1d052" class="cell" data-execution_count="8">
+<div id="194a34a2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_algorithms.minimum_eigensolvers <span class="im">import</span> QAOA</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_algorithms.optimizers <span class="im">import</span> COBYLA</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.primitives <span class="im">import</span> Sampler</span>
@@ -704,34 +704,34 @@ window.Quarto = {
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>qaoa <span class="op">=</span> QAOA(sampler, optimizer, reps<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> qaoa.compute_minimum_eigenvalue(H_op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_2865/2458342227.py:6: DeprecationWarning: The class ``qiskit.primitives.sampler.Sampler`` is deprecated as of qiskit 1.2. It will be removed no earlier than 3 months after the release date. All implementations of the `BaseSamplerV1` interface have been deprecated in favor of their V2 counterparts. The V2 alternative for the `Sampler` class is `StatevectorSampler`.
+<pre><code>/tmp/ipykernel_2881/2458342227.py:6: DeprecationWarning: The class ``qiskit.primitives.sampler.Sampler`` is deprecated as of qiskit 1.2. It will be removed no earlier than 3 months after the release date. All implementations of the `BaseSamplerV1` interface have been deprecated in favor of their V2 counterparts. The V2 alternative for the `Sampler` class is `StatevectorSampler`.
   sampler = Sampler()</code></pre>
 </div>
 </div>
-<div id="e6cdee0b" class="cell" data-execution_count="9">
+<div id="289a1ab1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{   'aux_operators_evaluated': None,
     'best_measurement': {   'bitstring': '01001',
-                            'probability': np.float64(0.3159111156848488),
+                            'probability': np.float64(0.253289696080741),
                             'state': 9,
                             'value': np.complex128(-10+0j)},
-    'cost_function_evals': np.int64(144),
-    'eigenstate': {0: np.float64(0.002132506415028), 1: np.float64(0.012949366718065), 2: np.float64(0.00403655335846), 3: np.float64(0.0023201989023), 4: np.float64(0.00403655335846), 5: np.float64(0.0023201989023), 6: np.float64(0.001759494053532), 7: np.float64(0.000107283360105), 8: np.float64(0.063716019457061), 9: np.float64(0.315871318869948), 10: np.float64(0.008784581081282), 11: np.float64(0.008089377556849), 12: np.float64(0.018924332852678), 13: np.float64(0.024086174258575), 14: np.float64(0.001533554133171), 15: np.float64(0.00074025543276), 16: np.float64(0.063716019457061), 17: np.float64(0.315871318869948), 18: np.float64(0.018924332852678), 19: np.float64(0.024086174258575), 20: np.float64(0.008784581081282), 21: np.float64(0.008089377556849), 22: np.float64(0.001533554133171), 23: np.float64(0.00074025543276), 24: np.float64(0.011185565652186), 25: np.float64(0.064663388115046), 26: np.float64(0.004445445911212), 27: np.float64(0.000335652560824), 28: np.float64(0.004445445911212), 29: np.float64(0.000335652560824), 30: np.float64(0.001338140510295), 31: np.float64(9.7326425506e-05)},
-    'eigenvalue': np.float64(-7.982173187452194),
-    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7fb8ad4e21e0&gt;,
-    'optimal_parameters': {   ParameterVectorElement(β[0]): np.float64(-5.5383430461276895),
-                              ParameterVectorElement(β[1]): np.float64(-1.3208360792021998),
-                              ParameterVectorElement(γ[0]): np.float64(2.39616100726079),
-                              ParameterVectorElement(γ[1]): np.float64(4.310250468734299)},
-    'optimal_point': array([-5.53834305, -1.32083608,  2.39616101,  4.31025047]),
-    'optimal_value': np.float64(-7.982173187452194),
+    'cost_function_evals': np.int64(332),
+    'eigenstate': {0: np.float64(0.026541031120022), 1: np.float64(0.062438086725392), 2: np.float64(0.002873730060397), 3: np.float64(0.000355130068076), 4: np.float64(0.002873730060397), 5: np.float64(0.000355130068076), 6: np.float64(0.000905730376016), 7: np.float64(3.4084690401e-05), 8: np.float64(0.082653664520457), 9: np.float64(0.252865121906094), 10: np.float64(0.000392877941343), 11: np.float64(0.003443523933768), 12: np.float64(0.014209487781656), 13: np.float64(0.000211483565908), 14: np.float64(5.0971773907e-05), 15: np.float64(6.0988114758e-05), 16: np.float64(0.082653664520457), 17: np.float64(0.252865121906094), 18: np.float64(0.014209487781656), 19: np.float64(0.000211483565908), 20: np.float64(0.000392877941343), 21: np.float64(0.003443523933768), 22: np.float64(5.0971773907e-05), 23: np.float64(6.0988114758e-05), 24: np.float64(0.035565908810402), 25: np.float64(0.15192638031451), 26: np.float64(0.000703520381016), 27: np.float64(0.00334261767755), 28: np.float64(0.000703520381016), 29: np.float64(0.00334261767755), 30: np.float64(0.00015255550421), 31: np.float64(0.000109987009186)},
+    'eigenvalue': np.float64(-7.6251911002954325),
+    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7f8ebcfda270&gt;,
+    'optimal_parameters': {   ParameterVectorElement(β[0]): np.float64(-2.2821825550974792),
+                              ParameterVectorElement(β[1]): np.float64(2.8836946137076542),
+                              ParameterVectorElement(γ[0]): np.float64(-5.563509216875175),
+                              ParameterVectorElement(γ[1]): np.float64(-0.1962734717342046)},
+    'optimal_point': array([-2.28218256,  2.88369461, -5.56350922, -0.19627347]),
+    'optimal_value': np.float64(-7.6251911002954325),
     'optimizer_evals': None,
-    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7fb8aebea8d0&gt;,
-    'optimizer_time': 0.9205121994018555}</code></pre>
+    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7f8ebc2740e0&gt;,
+    'optimizer_time': 2.1038830280303955}</code></pre>
 </div>
 </div>
-<div id="40c5e5d2" class="cell" data-execution_count="10">
+<div id="cdbf3f12" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {}</span>
@@ -748,7 +748,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="68b23d54" class="cell" data-execution_count="11">
+<div id="09cb907f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.result <span class="im">import</span> QuasiDistribution</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -779,7 +779,7 @@ window.Quarto = {
 Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
-<div id="cfe530e8" class="cell" data-execution_count="12">
+<div id="2cbbde26" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_algorithms.optimizers <span class="im">import</span> SLSQP</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> SLSQP()</span>
@@ -790,30 +790,30 @@ Objective value computed by QAOA is -5.0</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>{   'aux_operators_evaluated': None,
     'best_measurement': {   'bitstring': '01001',
-                            'probability': np.float64(0.2500399035268308),
+                            'probability': np.float64(0.2825528887629467),
                             'state': 9,
                             'value': np.complex128(-10+0j)},
-    'cost_function_evals': 298,
-    'eigenstate': {0: np.float64(0.005030813577023), 1: np.float64(0.020479960105291), 2: np.float64(0.011108064539704), 3: np.float64(0.001819418647748), 4: np.float64(0.011108064539704), 5: np.float64(0.001819418647748), 6: np.float64(0.022684518457953), 7: np.float64(0.002742096186972), 8: np.float64(0.044073966271599), 9: np.float64(0.250023143810251), 10: np.float64(0.007941044106756), 11: np.float64(0.001577540995869), 12: np.float64(0.074211057226841), 13: np.float64(0.00083469429871), 14: np.float64(0.004473637273236), 15: np.float64(0.001796072825058), 16: np.float64(0.044073966271599), 17: np.float64(0.250023143810251), 18: np.float64(0.074211057226841), 19: np.float64(0.00083469429871), 20: np.float64(0.007941044106756), 21: np.float64(0.001577540995869), 22: np.float64(0.004473637273236), 23: np.float64(0.001796072825058), 24: np.float64(0.000488475311353), 25: np.float64(0.145280528455046), 26: np.float64(0.003044298325749), 27: np.float64(0.000294902116542), 28: np.float64(0.003044298325749), 29: np.float64(0.000294902116542), 30: np.float64(0.000631969260703), 31: np.float64(0.00026595776953)},
-    'eigenvalue': np.float64(-7.865634681183111),
-    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7fb8a4dc42c0&gt;,
-    'optimal_parameters': {   ParameterVectorElement(γ[3]): np.float64(-3.466737435524177),
-                              ParameterVectorElement(γ[2]): np.float64(-5.669986737134773),
-                              ParameterVectorElement(γ[1]): np.float64(-0.45709858779712886),
-                              ParameterVectorElement(γ[0]): np.float64(-4.631192462127066),
-                              ParameterVectorElement(β[3]): np.float64(5.972933432745307),
-                              ParameterVectorElement(β[2]): np.float64(0.26976508840403),
-                              ParameterVectorElement(β[1]): np.float64(4.735992867104506),
-                              ParameterVectorElement(β[0]): np.float64(2.4405450684473937)},
-    'optimal_point': array([ 2.44054507,  4.73599287,  0.26976509,  5.97293343, -4.63119246,
-       -0.45709859, -5.66998674, -3.46673744]),
-    'optimal_value': np.float64(-7.865634681183111),
+    'cost_function_evals': 358,
+    'eigenstate': {0: np.float64(0.001725844461959), 1: np.float64(0.03035298541947), 2: np.float64(0.003842137369558), 3: np.float64(1.2326940898e-05), 4: np.float64(0.003842137369558), 5: np.float64(1.2326940898e-05), 6: np.float64(0.054145777639196), 7: np.float64(0.007604687625266), 8: np.float64(0.017215480154915), 9: np.float64(0.274931859026226), 10: np.float64(0.000244730547631), 11: np.float64(0.012512315622773), 12: np.float64(0.066035164891387), 13: np.float64(0.004292555951521), 14: np.float64(0.005494915811986), 15: np.float64(0.002917208099106), 16: np.float64(0.017215480154915), 17: np.float64(0.274931859026227), 18: np.float64(0.066035164891387), 19: np.float64(0.004292555951521), 20: np.float64(0.000244730547631), 21: np.float64(0.012512315622773), 22: np.float64(0.005494915811986), 23: np.float64(0.002917208099106), 24: np.float64(0.009438021402573), 25: np.float64(0.06343067295774), 26: np.float64(0.00796269665807), 27: np.float64(0.013235320975568), 28: np.float64(0.00796269665807), 29: np.float64(0.013235320975568), 30: np.float64(0.009508594387734), 31: np.float64(0.006399992006783)},
+    'eigenvalue': np.float64(-7.043323848673669),
+    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7f8eb9d6bbf0&gt;,
+    'optimal_parameters': {   ParameterVectorElement(γ[3]): np.float64(-1.7899343347492227),
+                              ParameterVectorElement(γ[2]): np.float64(-4.515209003432865),
+                              ParameterVectorElement(γ[1]): np.float64(-0.4775818281435454),
+                              ParameterVectorElement(γ[0]): np.float64(4.579694418777448),
+                              ParameterVectorElement(β[3]): np.float64(1.90538888244581),
+                              ParameterVectorElement(β[2]): np.float64(-0.20520449757388948),
+                              ParameterVectorElement(β[1]): np.float64(-0.7153725622421035),
+                              ParameterVectorElement(β[0]): np.float64(-5.373018503565668)},
+    'optimal_point': array([-5.3730185 , -0.71537256, -0.2052045 ,  1.90538888,  4.57969442,
+       -0.47758183, -4.515209  , -1.78993433]),
+    'optimal_value': np.float64(-7.043323848673669),
     'optimizer_evals': None,
-    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7fb8be1dd1f0&gt;,
-    'optimizer_time': 2.298952341079712}</code></pre>
+    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7f8ed3fba1e0&gt;,
+    'optimizer_time': 2.857835531234741}</code></pre>
 </div>
 </div>
-<div id="3b307d01" class="cell" data-execution_count="13">
+<div id="d6ec9351" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {}</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> result.eigenstate:</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    key_str <span class="op">=</span> <span class="bu">format</span>(key, <span class="st">'b'</span>).zfill(<span class="dv">5</span>)</span>
@@ -828,7 +828,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 </div>
-<div id="dda701df" class="cell" data-execution_count="14">
+<div id="34db662c" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sample_most_likely(result.eigenstate)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
@@ -838,7 +838,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 Objective value computed by QAOA is -4.0</code></pre>
 </div>
 </div>
-<div id="a4c31b5e" class="cell" data-execution_count="15">
+<div id="9c5f1b33" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> SLSQP(</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    maxiter<span class="op">=</span><span class="dv">100000</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -849,23 +849,23 @@ Objective value computed by QAOA is -4.0</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>{   'aux_operators_evaluated': None,
     'best_measurement': {   'bitstring': '01001',
-                            'probability': np.float64(0.1151880360704012),
+                            'probability': np.float64(0.1078384920967407),
                             'state': 9,
                             'value': np.complex128(-10+0j)},
-    'cost_function_evals': 30,
-    'eigenstate': {0: np.float64(0.045594624847427), 1: np.float64(0.062026753130757), 2: np.float64(0.060059215602259), 3: np.float64(0.01197035707134), 4: np.float64(0.060059215602259), 5: np.float64(0.01197035707134), 6: np.float64(0.074497820858475), 7: np.float64(0.0002251121226), 8: np.float64(0.072867284133915), 9: np.float64(0.107411318390128), 10: np.float64(0.014584462341144), 11: np.float64(0.000739335612336), 12: np.float64(0.093254508514952), 13: np.float64(0.013431720791372), 14: np.float64(0.011297339577744), 15: np.float64(0.001938164250148), 16: np.float64(0.072867284133915), 17: np.float64(0.107411318390128), 18: np.float64(0.093254508514952), 19: np.float64(0.013431720791372), 20: np.float64(0.014584462341144), 21: np.float64(0.000739335612336), 22: np.float64(0.011297339577744), 23: np.float64(0.001938164250148), 24: np.float64(0.015973513838796), 25: np.float64(0.020999590701957), 26: np.float64(5.2457716899e-05), 27: np.float64(0.001844316417041), 28: np.float64(5.2457716899e-05), 29: np.float64(0.001844316417041), 30: np.float64(0.001631094599674), 31: np.float64(0.000150529061754)},
-    'eigenvalue': np.float64(-6.120524076227936),
-    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7fb8ad64e2a0&gt;,
-    'optimal_parameters': {   ParameterVectorElement(β[0]): np.float64(-3.5737414333218163),
-                              ParameterVectorElement(γ[0]): np.float64(3.2704792962188804)},
-    'optimal_point': array([-3.57374143,  3.2704793 ]),
-    'optimal_value': np.float64(-6.120524076227936),
+    'cost_function_evals': 35,
+    'eigenstate': {0: np.float64(0.045605629346048), 1: np.float64(0.062031982653249), 2: np.float64(0.060061183084126), 3: np.float64(0.01196924568355), 4: np.float64(0.060061183084126), 5: np.float64(0.01196924568355), 6: np.float64(0.074492257261162), 7: np.float64(0.000224162888725), 8: np.float64(0.072870603111921), 9: np.float64(0.10740605828667), 10: np.float64(0.014582963764333), 11: np.float64(0.000737268665493), 12: np.float64(0.093248228496517), 13: np.float64(0.013435024110767), 14: np.float64(0.011300149267087), 15: np.float64(0.001937332666053), 16: np.float64(0.072870603111921), 17: np.float64(0.10740605828667), 18: np.float64(0.093248228496517), 19: np.float64(0.013435024110767), 20: np.float64(0.014582963764333), 21: np.float64(0.000737268665493), 22: np.float64(0.011300149267087), 23: np.float64(0.001937332666053), 24: np.float64(0.015973685515252), 25: np.float64(0.021003983320422), 26: np.float64(5.2038165272e-05), 27: np.float64(0.001843680641147), 28: np.float64(5.2038165272e-05), 29: np.float64(0.001843680641147), 30: np.float64(0.001630614152402), 31: np.float64(0.000150132976869)},
+    'eigenvalue': np.float64(-6.1205242402067555),
+    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7f8ebbee38c0&gt;,
+    'optimal_parameters': {   ParameterVectorElement(β[0]): np.float64(3.573787541008943),
+                              ParameterVectorElement(γ[0]): np.float64(-0.1288692381299657)},
+    'optimal_point': array([ 3.57378754, -0.12886924]),
+    'optimal_value': np.float64(-6.1205242402067555),
     'optimizer_evals': None,
-    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7fb8ad45a870&gt;,
-    'optimizer_time': 0.10258769989013672}</code></pre>
+    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7f8ebc1a7530&gt;,
+    'optimizer_time': 0.12110710144042969}</code></pre>
 </div>
 </div>
-<div id="43bfbdc7" class="cell" data-execution_count="16">
+<div id="e344a05c" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {}</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> result.eigenstate:</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    key_str <span class="op">=</span> <span class="bu">format</span>(key, <span class="st">'b'</span>).zfill(<span class="dv">5</span>)</span>
@@ -880,7 +880,7 @@ Objective value computed by QAOA is -4.0</code></pre>
 </div>
 </div>
 </div>
-<div id="015425fb" class="cell" data-execution_count="17">
+<div id="955577b6" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sample_most_likely(result.eigenstate)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span>
@@ -891,7 +891,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 <p>Let’s check what is going on behind it. We can check the ansatz that QAOA creates.</p>
-<div id="51bdb247" class="cell" data-execution_count="18">
+<div id="9a46c12b" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>qaoa.ansatz.draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -901,7 +901,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 </div>
-<div id="556125cf" class="cell" data-execution_count="19">
+<div id="9b4cd252" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>qaoa.ansatz.decompose().draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <div>
@@ -911,7 +911,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 </div>
-<div id="00ee8a8c" class="cell" data-execution_count="20">
+<div id="3609c0f6" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>qaoa.ansatz.decompose(reps<span class="op">=</span><span class="dv">2</span>).draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <div>
@@ -922,37 +922,37 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 <p>As we can see the ansatz is build following the Adiabatic Quantum Computing scheme where a block of <span class="math inline">\(X\)</span> rotations is applied, and alternated with the problem hamiltonian (<span class="math inline">\(Z + ZZ\)</span> interactions) as many times as repetitions are performed.</p>
-<div id="f0118420" class="cell" data-execution_count="21">
+<div id="e9a62681" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>qaoa <span class="op">=</span> QAOA(sampler, optimizer, reps<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> qaoa.compute_minimum_eigenvalue(H_op)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{   'aux_operators_evaluated': None,
     'best_measurement': {   'bitstring': '01001',
-                            'probability': np.float64(0.2969296731649448),
+                            'probability': np.float64(0.3988311357465058),
                             'state': 9,
                             'value': np.complex128(-10+0j)},
-    'cost_function_evals': 344,
-    'eigenstate': {0: np.float64(0.000453024900294), 1: np.float64(0.002062036199293), 2: np.float64(0.001741936433361), 3: np.float64(0.000663969653728), 4: np.float64(0.001741936433361), 5: np.float64(0.000663969653728), 6: np.float64(0.000499900121228), 7: np.float64(0.001586510362614), 8: np.float64(0.048666277747469), 9: np.float64(0.295387876302482), 10: np.float64(0.003013282235983), 11: np.float64(0.002942548368288), 12: np.float64(0.017308826641895), 13: np.float64(0.006582685890357), 14: np.float64(0.001090612598507), 15: np.float64(0.00031381344534), 16: np.float64(0.048666277747469), 17: np.float64(0.295387876302482), 18: np.float64(0.017308826641896), 19: np.float64(0.006582685890357), 20: np.float64(0.003013282235983), 21: np.float64(0.002942548368288), 22: np.float64(0.001090612598507), 23: np.float64(0.00031381344534), 24: np.float64(0.029022677130276), 25: np.float64(0.201269236338122), 26: np.float64(0.000901194124604), 27: np.float64(0.002916969766901), 28: np.float64(0.000901194124604), 29: np.float64(0.002916969766901), 30: np.float64(0.001628331209258), 31: np.float64(0.000418297321084)},
-    'eigenvalue': np.float64(-8.002889313833947),
-    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7fb89e42daf0&gt;,
-    'optimal_parameters': {   ParameterVectorElement(β[1]): np.float64(3.8138230722329127),
-                              ParameterVectorElement(γ[1]): np.float64(-1.7067582502981529),
-                              ParameterVectorElement(β[2]): np.float64(-3.952025236182687),
-                              ParameterVectorElement(β[3]): np.float64(-1.2748853848413528),
-                              ParameterVectorElement(γ[0]): np.float64(-2.182059393931004),
-                              ParameterVectorElement(γ[2]): np.float64(-2.1089986253567288),
-                              ParameterVectorElement(β[0]): np.float64(-1.5267892102475886),
-                              ParameterVectorElement(γ[3]): np.float64(-6.058568225385443)},
-    'optimal_point': array([-1.52678921,  3.81382307, -3.95202524, -1.27488538, -2.18205939,
-       -1.70675825, -2.10899863, -6.05856823]),
-    'optimal_value': np.float64(-8.002889313833947),
+    'cost_function_evals': 244,
+    'eigenstate': {0: np.float64(0.000530684218711), 1: np.float64(0.011198077036463), 2: np.float64(0.000831624230685), 3: np.float64(0.001316617507453), 4: np.float64(0.000831624230685), 5: np.float64(0.001316617507453), 6: np.float64(0.000933621843304), 7: np.float64(0.000120224452911), 8: np.float64(0.054288665408576), 9: np.float64(0.398390724916929), 10: np.float64(0.000567442140562), 11: np.float64(0.002721891059328), 12: np.float64(0.002696074562334), 13: np.float64(0.004590973787192), 14: np.float64(0.000104337364676), 15: np.float64(0.000208641115453), 16: np.float64(0.054288665408576), 17: np.float64(0.398390724916929), 18: np.float64(0.002696074562334), 19: np.float64(0.004590973787192), 20: np.float64(0.000567442140562), 21: np.float64(0.002721891059328), 22: np.float64(0.000104337364676), 23: np.float64(0.000208641115453), 24: np.float64(0.001903239681294), 25: np.float64(0.052725707975051), 26: np.float64(0.000174527160689), 27: np.float64(0.000209315915221), 28: np.float64(0.000174527160689), 29: np.float64(0.000209315915221), 30: np.float64(0.000301950510836), 31: np.float64(8.4823943232e-05)},
+    'eigenvalue': np.float64(-9.063925897479807),
+    'optimal_circuit': &lt;qiskit.circuit.quantumcircuit.QuantumCircuit object at 0x7f8eb81794c0&gt;,
+    'optimal_parameters': {   ParameterVectorElement(β[1]): np.float64(5.765988427620452),
+                              ParameterVectorElement(γ[2]): np.float64(3.3207735430510774),
+                              ParameterVectorElement(β[2]): np.float64(1.8210643697850672),
+                              ParameterVectorElement(γ[1]): np.float64(3.9493927858081928),
+                              ParameterVectorElement(β[0]): np.float64(0.6441443864405619),
+                              ParameterVectorElement(β[3]): np.float64(1.7809750699544706),
+                              ParameterVectorElement(γ[0]): np.float64(1.6363212943299053),
+                              ParameterVectorElement(γ[3]): np.float64(-0.4156991374379471)},
+    'optimal_point': array([ 0.64414439,  5.76598843,  1.82106437,  1.78097507,  1.63632129,
+        3.94939279,  3.32077354, -0.41569914]),
+    'optimal_value': np.float64(-9.063925897479807),
     'optimizer_evals': None,
-    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7fb89fcb9790&gt;,
-    'optimizer_time': 2.6943359375}</code></pre>
+    'optimizer_result': &lt;qiskit_algorithms.optimizers.optimizer.OptimizerResult object at 0x7f8eb88cd5b0&gt;,
+    'optimizer_time': 2.0359904766082764}</code></pre>
 </div>
 </div>
-<div id="6d9111e3" class="cell" data-execution_count="22">
+<div id="e8b8e01d" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>qaoa.ansatz.draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div>
@@ -962,7 +962,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 </div>
-<div id="71ded5ae" class="cell" data-execution_count="23">
+<div id="ac200fea" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>qaoa.ansatz.decompose().decompose().draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div>
@@ -973,7 +973,7 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 <p>Obtained solution distribution really points out to the solutions that provide solutions to our problem, superposed in a state that is the one minimizing the outcome of the circuit with respect to the expectation value of the hamitlonian.</p>
-<div id="fef9b8a2" class="cell" data-execution_count="24">
+<div id="ac306c61" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> {}</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> result.eigenstate:</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    key_str <span class="op">=</span> <span class="bu">format</span>(key, <span class="st">'b'</span>).zfill(<span class="dv">5</span>)</span>
@@ -988,8 +988,8 @@ Objective value computed by QAOA is -5.0</code></pre>
 </div>
 </div>
 </div>
-<p>Therefore, is we are able to encode our problem into an Ising Hamiltonian it looks like we could easily design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationaly trained scheduling function.</p>
-<div id="343cfa56" class="cell" data-execution_count="25">
+<p>Therefore, we are able to encode our problem into an Ising Hamiltonian, so that we can <em>easily</em> design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationaly trained scheduling function.</p>
+<div id="13314343" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>qaoa.ansatz.depth()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>10</code></pre>
