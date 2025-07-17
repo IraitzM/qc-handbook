@@ -5,7 +5,7 @@ You may wonder, another book about Quantum Computing? More documentation? We alr
 * [Qiskit documentation](https://docs.quantum.ibm.com/guides/hello-world)
 * DWave's documentation around [optimization](https://docs.dwavequantum.com/en/latest/index.html)
 * Pennylane for [QML and simulation](https://pennylane.ai/qml) and [codebooks](https://pennylane.ai/codebook/learning-paths)
-* Even some relevant works that go in detail on this, books and stuff [@dewolf2023quantumcomputinglecturenotes; @nielsen2010quantum; @yanofsky2008quantum]
+* Even some relevant works that go in detail on this, books and stuff [@dewolf2023quantumcomputinglecturenotes; @watrous2025understandingquantuminformationcomputation; @nielsen2010quantum; @yanofsky2008quantum]
 
 Well, by telling it from a different perspective it may help people coming from different fields (meaning, non-physicists) grasp the idea behind quantum computing. This is also a work for myself, as it will definitely help me better understand some of the concepts. Just by explaining things I found it is the best way to challenge ones knowledge about a field you are trying to master.
 

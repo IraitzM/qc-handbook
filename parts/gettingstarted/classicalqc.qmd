@@ -82,5 +82,5 @@ And many more. They also include nice simulators for GPU based simulation, based
 
 If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like [TensorNetwork.org](https://tensornetwork.org/) to look into useful resources and some nice references to get deeper into the field [@biamonte2017tensornetworksnutshell].
 
-In any case, this is not a trivial task. In fact, some have already claimed to be a Herculean task [@xu2023herculeantaskclassicalsimulation]. Let's keep it simple for now and deal with algorithm implementations.
+In any case, this is not a trivial task. In fact, some have already claimed to be a Herculean task [@xu2023herculeantaskclassicalsimulation]. There is a useful guide by google on [how to choose your hardware](https://quantumai.google/qsim/choose_hw). Let's keep it simple for now and deal with algorithm implementations.
 

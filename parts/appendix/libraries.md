@@ -9,3 +9,8 @@
 * [QUIMB](https://quimb.readthedocs.io/en/latest/index.html) for those wanting to get deep into Tensor Network _stuff_.
 * [sQUlearn](https://squlearn.github.io/) focused on QML with great documentation
 * [TensorFlow Quantum](https://www.tensorflow.org/quantum) looking into interoperability between the classical and quantum world.
+* [QIBO](https://qibo.science/) for simulation and working as a middleware
+
+## For problem formulation
+
+* [QUBOVERT](https://qubovert.readthedocs.io/en/latest/index.html)
