@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,14 +90,15 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7e4a4a558061dde3bc9923c7fe672504.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -159,7 +160,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -205,7 +206,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
@@ -606,7 +609,7 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap, RealAmplitudes</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>num_inputs <span class="op">=</span> <span class="dv">2</span></span>
@@ -617,7 +620,7 @@ window.Quarto = {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(num_inputs)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>qc.compose(feature_map, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>qc.compose(ansatz, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>qc.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>qc.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Real amplitudes is just an ansatz available to us following this shape below. It is versatile enough so it will help us reach the outcome we would like to obtain. But, your choice if you would like any other design for your ansatz.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
@@ -636,7 +639,7 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.algorithms.optimizers <span class="im">import</span> COBYLA</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.algorithms.optimizers <span class="im">import</span> COBYLA</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.algorithms.classifiers <span class="im">import</span> NeuralNetworkClassifier</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.neural_networks <span class="im">import</span> EstimatorQNN</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -648,10 +651,10 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># construct neural network classifier</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>estimator_classifier <span class="op">=</span> NeuralNetworkClassifier(</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    estimator_qnn, optimizer<span class="op">=</span>COBYLA(maxiter<span class="op">=</span><span class="dv">60</span>), callback<span class="op">=</span>callback_graph</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>And compose a training procedure as it is often done, by calling <em>.fit</em> function and evaluating the prediction.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>estimator_classifier.fit(features, labels)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>estimator_classifier.score(features, labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>estimator_classifier.fit(features, labels)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>estimator_classifier.score(features, labels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Multi-label classification can also be covered but in many cases a stacked set of QNNs (one-vs-all) is preferred so that we get a set of <span class="math inline">\(N\)</span> specialized networks to balance the vote for <span class="math inline">\(N\)</span> potential classes. Instead of manually creating all those circuits and datasets we can simply invoke prepared classes in frameworks such as Qiskit that will be able to deal with those internal complexities. One should pay attention though that training various models will increase the number of iterations/executions of the circuit needed for parameter fitting (as many times as classes are).</p>
 <p>Regression tasks can also be performed if we consider the expectation value the one mapping our target value. In that case a simple change of evaluation function would do the trick. We will see that actually it is easy as well to invoke but as we already know, getting the expectation value over simple circuit sampling may require several evaluations of the circuit in order to get all basis changes for a proper expectation value evaluation.</p>
 <section id="choosing-your-feature-maps-and-ansätze" class="level2">
@@ -660,11 +663,11 @@ window.Quarto = {
 <p>A <span class="math inline">\(4\)</span> qubit system represents a <span class="math inline">\(2^4 = 16\)</span> dimension Hilbert space (<span class="math inline">\(\mathcal{H}\)</span>). How can we measure how expressive our ansatz is? Evaluating analytically the coverage of the Hilbert space might not be practical, but we could simply sample from the circuit a set of times and compare the states we get in terms of distance for said space. <strong>Fidelity</strong> can be used to measure the <em>distance</em> between two states as we saw <a href="../../parts/qml/kernels.html">before</a>, so we get and compare it with what would be the ideal scenario, a uniform distribution of the entire fidelity space for maximal expressivity <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim, Johnson, and Aspuru-Guzik 2019</a>)</span>. If the states generated by our circuit can render all distances, from same sate (fidelity of one) to the orthogonal case (fidelity of zero) then our circuit can cover the whole spectrum to our Hilbert space. You can read more on the appendix about <a href="../../parts/appendix/quantumfeatures.html">quantum features</a>.</p>
 <p>The easiest way forward is to look into the previous work, that way we can cut some corners and go straight to the configurations that worked for others. We have some references in the literature but the people working at sQUlearn have already implemented plenty options for us.</p>
 <p>Imagine you would like to test the encoding at <em>Reduction of finite sampling noise in quantum neural networks</em> <span class="citation" data-cites="Kreplin_2024">(<a href="../references.html#ref-Kreplin_2024" role="doc-biblioref">Kreplin and Roth 2024</a>)</span>.</p>
-<div id="f9c85d12" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> ChebyshevPQC</span>
+<div id="1ca357bf" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> ChebyshevPQC</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> ChebyshevPQC(num_qubits <span class="op">=</span> <span class="dv">4</span>, num_features <span class="op">=</span> <span class="dv">1</span>, num_layers <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pqc.draw(<span class="st">"mpl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pqc.draw(<span class="st">"mpl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <figure class="figure">
@@ -674,11 +677,11 @@ window.Quarto = {
 </div>
 </div>
 <p>Easy pease! Same with others like <em>Training Quantum Embedding Kernels on Near-Term Quantum Computers</em> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span></p>
-<div id="b353e109" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
+<div id="5cab669b" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> HubregtsenEncodingCircuit(num_qubits<span class="op">=</span><span class="dv">4</span>, num_features<span class="op">=</span><span class="dv">2</span>, num_layers<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pqc.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pqc.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <figure class="figure">
@@ -688,8 +691,8 @@ window.Quarto = {
 </div>
 </div>
 <p>But you can also let your creativity flow…</p>
-<div id="a9058cc5" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> LayeredEncodingCircuit</span>
+<div id="eb8d5579" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> LayeredEncodingCircuit</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit.layered_encoding_circuit <span class="im">import</span> Layer</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>encoding_circuit <span class="op">=</span> LayeredEncodingCircuit(num_qubits<span class="op">=</span><span class="dv">4</span>,num_features<span class="op">=</span><span class="dv">2</span>)</span>
@@ -701,7 +704,7 @@ window.Quarto = {
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>layer.cx_entangling(<span class="st">"NN"</span>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>encoding_circuit.add_layer(layer,num_layers<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>encoding_circuit.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>encoding_circuit.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <figure class="figure">
@@ -784,13 +787,14 @@ Sim, Sukin, Peter D Johnson, and Alán Aspuru-Guzik. 2019. <span>“Expressibili
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

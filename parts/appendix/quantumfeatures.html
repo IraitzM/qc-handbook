@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,14 +89,15 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7e4a4a558061dde3bc9923c7fe672504.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -158,7 +159,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -204,7 +205,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
@@ -582,12 +585,12 @@ window.Quarto = {
 <p>where <span class="math inline">\(\hat{P}_{PQC}(F; \theta)\)</span> is the estimated probability distribution of fidelities resulting while sampling states from a PQC with parameters <span class="math inline">\(\theta\)</span>. <span class="math inline">\(F_j\)</span> represents the fidelity at <span class="math inline">\(j\)</span>th bin.</p>
 <p>Thus, we need to generate a <em>histogram</em> of the elements of <span class="math inline">\(F\)</span>. The output of this histogram is a set of bins <span class="math inline">\(B = \{(l_1, u_1), (l_2, u_2), \cdots \}\)</span> where <span class="math inline">\(l_{j}\)</span> (<span class="math inline">\(u_j\)</span>) denotes the lower (upper) limit of bin <span class="math inline">\(j\)</span>. It also produces an empirical probability distribution function <span class="math inline">\(\mathrm{P}_{\text{PQC}}(j)\)</span>, which is simply the probability that a given value of <span class="math inline">\(F\)</span> falls in a bin <span class="math inline">\(j\)</span>.</p>
 <p>Let’s take the ansatz defined by an idle circuit as an example.</p>
-<div id="099b5761" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<div id="9405f70b" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <figure class="figure">
@@ -596,12 +599,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="a09e0de1" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
+<div id="eb3200c5" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_bloch_multivector</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <figure class="figure">
@@ -611,8 +614,8 @@ window.Quarto = {
 </div>
 </div>
 <p>No matter what we do, the ansatz won’t change, therefore its expressivity should be equal to none.</p>
-<div id="5b9c8385" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div id="2b047c49" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_aer <span class="im">import</span> AerSimulator</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -670,7 +673,7 @@ window.Quarto = {
 <span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>plt.plot(bins_x, p_haar_hist, label<span class="op">=</span><span class="st">"Haar"</span>)</span>
 <span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -682,26 +685,26 @@ window.Quarto = {
 <section id="zero-means-maximal-expressivity" class="level3">
 <h3 class="anchored" data-anchor-id="zero-means-maximal-expressivity">Zero means maximal expressivity</h3>
 <p>We can see how all fidelities are probability of zero except for fidelity 1, which means there is only one state we can render with this circuit. The expressivity works backwards, meaning a distance of zero represents the fidelity probability landscape equal to the uniform distribution. Therefore, all states (pure) in the Hilbert space can be produced with the right set of parameters (<span class="math inline">\(\theta\)</span>). Thus the expressivity will take the maximum value as the <span class="math inline">\(log(N)\)</span> where <span class="math inline">\(N\)</span> is the number of bins selected for the histogram.</p>
-<div id="b8c4344e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> rel_entr <span class="co"># For entropy calculation</span></span>
+<div id="a0db8148" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> rel_entr <span class="co"># For entropy calculation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Expr =  4.595119850134598</code></pre>
 </div>
 </div>
 <p>This will numerically approximate the value of</p>
-<div id="819bd5d1" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.log(dims)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="83341944" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.log(dims)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>np.float64(4.605170185988092)</code></pre>
 </div>
 </div>
 <p>hence, 0 is the maximum expressivity we can get.</p>
 <p>We can see what would be the effect if we introduce a parameterized gate instead, something more complex with a free parameter such as:</p>
-<div id="eee5a7c9" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<div id="db865797" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Parameter(<span class="st">'a'</span>)</span>
@@ -710,7 +713,7 @@ window.Quarto = {
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>qc.h(<span class="dv">0</span>)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>qc.rz(a, <span class="dv">0</span>)</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 <figure class="figure">
@@ -719,8 +722,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="c3cf743a" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> random</span>
+<div id="da62dc2e" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> random</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible Bin</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>bins_list <span class="op">=</span> []</span>
@@ -775,7 +778,7 @@ window.Quarto = {
 <span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>plt.plot(bins_x, p_haar_hist, label<span class="op">=</span><span class="st">"Haar"</span>)</span>
 <span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -784,16 +787,16 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="1389d0f3" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6c5381e8" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Expr =  0.26559002316439534</code></pre>
+<pre><code>Expr =  0.25190083703511096</code></pre>
 </div>
 </div>
 <p>We can extend this acting on more than one axis, which should end up with the maximum coverage over the bloch sphere for this one single qubit case.</p>
-<div id="10c3e251" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<div id="1bbbaa1d" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> Parameter(<span class="st">'a'</span>)</span>
@@ -804,7 +807,7 @@ window.Quarto = {
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>qc.rz(a, <span class="dv">0</span>)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>qc.rx(b, <span class="dv">0</span>)</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>qc.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 <figure class="figure">
@@ -813,8 +816,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="2bbcbdab" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible Bin</span></span>
+<div id="df3e6991" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible Bin</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>bins_list <span class="op">=</span> []</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(dims):</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    bins_list.append((i) <span class="op">/</span> (dims <span class="op">-</span> <span class="dv">1</span>))</span>
@@ -869,7 +872,7 @@ window.Quarto = {
 <span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>plt.plot(bins_x, p_haar_hist, label<span class="op">=</span><span class="st">"Haar"</span>)</span>
 <span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -878,11 +881,11 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="ca5e84a6" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c68e1d2e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Expr =  0.0588346343597008</code></pre>
+<pre><code>Expr =  0.08138314320157641</code></pre>
 </div>
 </div>
 <p>These plots should resemble those at the original work <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim, Johnson, and Aspuru-Guzik 2019</a>)</span>.</p>
@@ -948,13 +951,14 @@ Sim, Sukin, Peter D Johnson, and Alán Aspuru-Guzik. 2019. <span>“Expressibili
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

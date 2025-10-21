@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,14 +90,15 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-7e4a4a558061dde3bc9923c7fe672504.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -159,7 +160,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -205,7 +206,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Quantum Computing Handbook</a> 
         <div class="sidebar-tools-main">
@@ -612,7 +615,7 @@ s.t. \quad \sum_i b_i x_i = c
 <p>which can be directly related to previously seen Ising type of Hamiltonian by the transformation <span class="math inline">\(x_i \in \{0,1\}\)</span> to <span class="math inline">\(s_i = \pm 1\)</span>.</p>
 <p>One clear limitation from the Ising formulation (or the native Hamiltonian of the target device) is the limitation for quadratic terms (<span class="math inline">\(x_ix_j\)</span>) so no high-order relationship between variables can be implemented as a general norm. Also, binary characterization is needed, no continuous variable can be introduced within the problem as it is. Of course, there are ways to tackle problems that may require this modifications but it may need an extra effort when mapping our non-QUBO problem to the device.</p>
 <p>D-Wave already envisioned a way to ease this tasks, so it provides libraries and functionalities that should help with part of the work to be done. Particularly, transforming from one shape to another and submitting problems to their devices (or trying to solve them locally).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyqubo <span class="im">import</span> Spin</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyqubo <span class="im">import</span> Spin</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>s1, s2, s3, s4 <span class="op">=</span> Spin(<span class="st">"s1"</span>), Spin(<span class="st">"s2"</span>), Spin(<span class="st">"s3"</span>), Spin(<span class="st">"s4"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -635,14 +638,14 @@ s.t. \quad \sum_i b_i x_i = c
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s2'</span>, <span class="st">'s4'</span>): <span class="fl">16.0</span>,</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s3'</span>, <span class="st">'s3'</span>): <span class="op">-</span><span class="fl">196.0</span>,</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s3'</span>, <span class="st">'s4'</span>): <span class="fl">56.0</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s4'</span>, <span class="st">'s4'</span>): <span class="op">-</span><span class="fl">52.0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>(<span class="st">'s4'</span>, <span class="st">'s4'</span>): <span class="op">-</span><span class="fl">52.0</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://pyqubo.readthedocs.io/en/latest/">PyQUBO documentation</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dimod.qubo_to_ising({(<span class="st">'x1'</span>, <span class="st">'x1'</span>): <span class="op">-</span><span class="dv">22</span>, (<span class="st">'x2'</span>, <span class="st">'x2'</span>): <span class="op">-</span><span class="dv">6</span>, (<span class="st">'x3'</span>, <span class="st">'x3'</span>): <span class="op">-</span><span class="dv">14</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                     (<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="dv">20</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="dv">28</span>},</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                     offset<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>({<span class="st">'x1'</span>: <span class="fl">1.0</span>, <span class="st">'x2'</span>: <span class="fl">2.0</span>, <span class="st">'x3'</span>: <span class="fl">0.0</span>}, {(<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="fl">5.0</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="fl">7.0</span>}, <span class="fl">0.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>({<span class="st">'x1'</span>: <span class="fl">1.0</span>, <span class="st">'x2'</span>: <span class="fl">2.0</span>, <span class="st">'x3'</span>: <span class="fl">0.0</span>}, {(<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="fl">5.0</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="fl">7.0</span>}, <span class="fl">0.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://docs.ocean.dwavesys.com/en/stable/docs_dimod/">dimod documentation</a></p>
 <p>Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in <a href="../../hybridsolvers.qmd">B Hybrid Solvers</a></p>
 </section>
@@ -751,13 +754,14 @@ Cai, Jun, William G. Macready, and Aidan Roy. 2014. <span>“A Practical Heurist
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
