@@ -235,9 +235,7 @@ budget = 16
 For this case 2 slack variables might be enough to characterize the excess of $S$.
 
 $$
-
 8x_1 + 6x_2 + 5x_3 + 3x_4 + 1s_0 + 2s_1 = 16
-
 $$
 
 ```{python}
