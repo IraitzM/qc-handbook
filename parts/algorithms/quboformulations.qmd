@@ -109,7 +109,7 @@ There you go, it is the actual solution.
 Maximum cut is another canonical example often use to characterize the flow between the nodes of a network mapping a distribution network, electricity or telecommunication networks or even circuit design. The main idea comes from splitting the vertices of a graph into two complementary sets such that the number of edges is maximally cut.
 
 ::: {.callout-note}
-NetworkX package will need to be added to your Python environment for this example_
+_NetworkX package will need to be added to your Python environment for this example_
 :::
 
 ```{python}
@@ -327,12 +327,32 @@ G.add_weighted_edges_from({
 nx.draw(G)
 ```
 
+Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
+
 ```{python}
-# Usually a good estimate for a lagrange parameter is between 75-150%
-# of the objective function value, so we come up with an estimate for 
-# tour length and use that.
 lagrange = 100
 ```
+
+Then according to previous indications, our formulation should follow the intuition that:
+
+* If a node has exactly one active position ($k=1$) the penalty is 0 (good choice)
+* Otherwise the penalty is positive and grows as $(k-1)^2$.
+* We implement the penalty as: $$\text{Penalty}_n = \lambda\left(\sum_{p=0}^{N-1} x_{n,p} - 1\right)^2$$ indicating that a single occupied variable should happen per node at a high cost ($\lambda$) for its potential positions ($p$ here as a general approach to the time indexed $it$).
+
+**How does this map to QUBO form**
+
+Considering we will solve this as a minimization problem (minimize the cost of traveling)
+
+- Linear (diagonal) term: `Q[((node, pos), (node, pos))] -= lagrange` implements the $-\lambda \;x_{n,p}$ contribution.
+- Pairwise (off-diagonal) term: `Q[((node, pos1), (node, pos2))] += lagrange` adds half of the $2\lambda$ coupling; the symmetric entry provides the other half in the QUBO matrix representation.
+
+**Penalty examples:**
+
+- $k=1 \rightarrow$ Penalty $=0$
+- $k=0$ or $k=2 \rightarrow$ Penalty $=\lambda$
+- $k=3 \rightarrow$ Penalty $=4\lambda$
+
+
 
 ```{python}
 from collections import defaultdict
@@ -348,17 +368,21 @@ for node in G:
     for pos_1 in range(N):
         Q[((node, pos_1), (node, pos_1))] -= lagrange
         for pos_2 in range(pos_1+1, N):
-            Q[((node, pos_1), (node, pos_2))] += lagrange
+            Q[((node, pos_1), (node, pos_2))] += lagrange # Cost of not moving
 
 # Constraint that each col has exactly one 1
 for pos in range(N):
     for node_1 in G:
         Q[((node_1, pos), (node_1, pos))] -= lagrange
         for node_2 in set(G)-{node_1}:
-            # QUBO coefficient is 2*lagrange, but we are placing this value 
-            # above *and* below the diagonal, so we put half in each position.
-            Q[((node_1, pos), (node_2, pos))] += lagrange
+            Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
+```
 
+Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies $Q_{X_{i},X_{j}}$ and $Q_{X_{j},X_{i}}$ positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.
+
+Now is a matter of indicating the cost of each decision of movement.
+
+```{python}
 # Objective that minimizes distance
 for u, v in G.edges:
     for pos in range(N):
@@ -368,7 +392,7 @@ for u, v in G.edges:
         try:
             value = G[u][v]["weight"]
         except KeyError:
-            value = lagrange
+            value = lagrange # Non existent route cost
 
         Q[((u, pos), (v, nextpos))] += value
 
@@ -376,12 +400,18 @@ for u, v in G.edges:
         try:
             value = G[v][u]["weight"]
         except KeyError:
-            value = lagrange
+            value = lagrange # Non existent route cost
 
         Q[((v, pos), (u, nextpos))] += value
 ```
 
-This challenges have been also classically solved using simulated annealing procedures.
+Which ends up rendering the following matrix...
+
+```{python}
+Q
+```
+
+These challenges have been also classically solved using simulated annealing procedures.
 
 ```{python}
 from networkx.algorithms import approximation as approx
@@ -400,12 +430,10 @@ sampler = dimod.ExactSolver()
 
 response = sampler.sample_qubo(Q)
 
-print(response.slice(0, 10))
+print(response.slice(0, 15))
 ```
 
-```{python}
-response.first.sample
-```
+Several options show to be optimal, which is the case. This is one of this examples where quantum superposition could render a estate that reveals all optimal configurations.
 
 ```{python}
 route = response.first.sample
@@ -419,6 +447,8 @@ cycle[-1] = cycle[0]
 cost = sum(G[n][nbr]["weight"] for n, nbr in nx.utils.pairwise(cycle))
 print(f"Cost for route {cycle} is {cost}")
 ```
+
+Using [DWave's package](https://github.com/dwavesystems/dwave-neal) we could also check SA performance.
 
 ```{python}
 import neal
@@ -441,3 +471,4 @@ cost = sum(G[n][nbr]["weight"] for n, nbr in nx.utils.pairwise(cycle))
 print(f"Cost for route {cycle} is {cost}")
 ```
 
+We will recover this formulation for the comparison example on the different ways of implementing the solution to this challenge.
