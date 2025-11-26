@@ -719,6 +719,22 @@ window.Quarto = {
 </div>
 </div>
 <p>Now results can be retrieved and you should see the effect on the noise.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Retrieving results
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In Qiskit V1.x retrieving data for counts may require you to refer <em>c</em> or <em>cr</em> in case of using <em>ClassicalRegister</em> fro measurements. Try looking into replacing <em>data.meas.get_counts()</em> with <em>data.c.get_counts()</em> if code below fails.</p>
+</div>
+</div>
+</div>
 <div id="06d82d5c" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -735,7 +751,7 @@ window.Quarto = {
 </div>
 <p>Well, not the ideal run we were expecting. It might have to do with device noise and errors… I guess. You can find plenty on how much optimization you can squeeze into these devices in IBM’s <a href="https://quantum.cloud.ibm.com/docs/es/tutorials/circuit-transpilation-settings">documentation</a>. Do not hesitate checking it out.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -744,7 +760,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>In the past it was possible to model the noise and insert it into the simulator to run locally something that would resemble the hardware execution but it is getting harder and harder given that a 133 qubit device like the one we used requires a lot of resources to perform a full <a href="../../parts/gettingstarted/classicalqc.html#simulators">density matrix simulation</a>.</p>
 </div>
