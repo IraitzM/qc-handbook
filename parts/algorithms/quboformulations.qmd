@@ -295,6 +295,17 @@ Another example problem that has been covered in the literature. It is a problem
     <img src="../../assets/4nodetsp.png" width="20%"/>
 </center>
 
+```{python}
+G = nx.DiGraph()
+G.add_weighted_edges_from({
+    ("A", "B", 20), ("A", "C", 42), ("A", "D", 35), ("B", "A", 20),
+    ("B", "C", 30), ("B", "D", 34), ("C", "A", 42),("C", "B", 30),
+    ("C", "D", 12), ("D", "A", 35), ("D", "B", 34), ("D", "C", 12)
+})
+
+nx.draw(G)
+```
+
 Let's start by defining our variables $x_{ij}$ which will take the positive value when the route is connected by node $i$ to $j$.
 
 $$
@@ -312,22 +323,15 @@ $$
 $$
 
 
-But a set of conditions need to be met, in particular there is a temporal axis we will also need to consider so that by starting at a given position each time step requires movements forward. This will add a $t$ for each step of the whole route to our previous variables (cost won't be affected much) so that we can identify the start and ending point ($x_{ijt}$). Therefore, previous case will require a $2^4 \times 2^4$ matrix to characterize the whole set of possible edges (those that exist and those which don't).
+But a set of conditions need to be met, in particular there is a temporal axis we will also need to consider so that by starting at a given position each time step requires movements forward. This will add a $t$ for each step of the whole route to our previous variables (cost won't be affected much) so that we can identify the start and ending point ($x_{ijt}$). Therefore, previous case will require a $2^4 \times 2^4$ matrix to characterize the whole set of possible edges (those that exist and those which don't) considering the transitions being made.
 
-Constraints to have in mind, the salesperson should use each road only once. That means we should limit $\forall i \in \{0...n\} \sum_t \sum_i^n \sum_{j, j \ne i} x_{ijt} = 1$ both row and column-wise.
+$$
+\min \sum_p\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)}
+$$
 
-```{python}
-G = nx.DiGraph()
-G.add_weighted_edges_from({
-    ("A", "B", 20), ("A", "C", 42), ("A", "D", 35), ("B", "A", 20),
-    ("B", "C", 30), ("B", "D", 34), ("C", "A", 42),("C", "B", 30),
-    ("C", "D", 12), ("D", "A", 35), ("D", "B", 34), ("D", "C", 12)
-})
+Constraints to have in mind, the salesperson should use each road only once. That means we should limit $\forall i \in \{0...n\} \sum_i^n x_{ip} = 1$ both row and column-wise, meaning salesperson is in one place at each time $p$ and can only be in one $n$ alone..
 
-nx.draw(G)
-```
-
-Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
+In our QUBO setup, this constraints need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
 
 ```{python}
 lagrange = 100
@@ -337,7 +341,25 @@ Then according to previous indications, our formulation should follow the intuit
 
 * If a node has exactly one active position ($k=1$) the penalty is 0 (good choice)
 * Otherwise the penalty is positive and grows as $(k-1)^2$.
-* We implement the penalty as: $$\text{Penalty}_n = \lambda\left(\sum_{p=0}^{N-1} x_{n,p} - 1\right)^2$$ indicating that a single occupied variable should happen per node at a high cost ($\lambda$) for its potential positions ($p$ here as a general approach to the time indexed $it$).
+* We implement the penalty as: $$\text{Penalty}_n = \lambda\left(\sum_{p=0}^{P-1} x_{n,p} - 1\right)^2$$ indicating that a single occupied variable should happen per node at a high cost ($\lambda$) for its potential positions ($p$ here as a general approach to the time indexed $it$).
+
+If we expand the Penalty term
+
+$$
+\text{Penalty}_n = \lambda\left(\sum_p x_{n,p}^2 + 2\sum_{p<q} x_{n,p}x_{n,q} - 2\sum_p x_{n,p} + 1\right)
+$$
+
+Since $x^2 = x$ for binary variables this simplifies to:
+
+$$
+\text{Penalty}_n = \lambda\left(-\sum_p x_{n,p} + 2\sum_{p<q} x_{n,p}x_{n,q} + 1\right)
+$$
+
+**Penalty examples:**
+
+- Single active node:  $k=1 \rightarrow$ Penalty $=0$
+- $k=0$ or $k=2 \rightarrow$ Penalty $=\lambda$
+- $k=3 \rightarrow$ Penalty $=4\lambda$
 
 **How does this map to QUBO form**
 
@@ -346,12 +368,10 @@ Considering we will solve this as a minimization problem (minimize the cost of t
 - Linear (diagonal) term: `Q[((node, pos), (node, pos))] -= lagrange` implements the $-\lambda \;x_{n,p}$ contribution.
 - Pairwise (off-diagonal) term: `Q[((node, pos1), (node, pos2))] += lagrange` adds half of the $2\lambda$ coupling; the symmetric entry provides the other half in the QUBO matrix representation.
 
-**Penalty examples:**
-
-- $k=1 \rightarrow$ Penalty $=0$
-- $k=0$ or $k=2 \rightarrow$ Penalty $=\lambda$
-- $k=3 \rightarrow$ Penalty $=4\lambda$
-
+This gives us the final shape
+$$
+\min \sum_p\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=1}^N\lambda\left(-\sum_p x_{n,p} + 2\sum_{p<q} x_{n,p}x_{n,q} + 1\right)
+$$
 
 
 ```{python}
@@ -368,7 +388,7 @@ for node in G:
     for pos_1 in range(N):
         Q[((node, pos_1), (node, pos_1))] -= lagrange
         for pos_2 in range(pos_1+1, N):
-            Q[((node, pos_1), (node, pos_2))] += lagrange # Cost of not moving
+            Q[((node, pos_1), (node, pos_2))] += lagrange
 
 # Constraint that each col has exactly one 1
 for pos in range(N):

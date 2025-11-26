@@ -86,6 +86,7 @@ book:
     - parts/appendix/hybridsolvers.qmd
     - parts/appendix/submit_circuit.ipynb
     - parts/appendix/quantumfeatures.qmd
+    - parts/examples/tsp.qmd
 
 bibliography: parts/references.bib
 bibliographystyle: american-physics-society
