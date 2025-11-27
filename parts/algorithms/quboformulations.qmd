@@ -218,7 +218,7 @@ max \sum_{i=1}^{n-1} \sum_{j=i}^n w_{ij}x_i x_j - P\left(\sum_{j=1}^n a_j x_j + 
 $$
 
 ::: {.callout-note}
-Test case from: https://arxiv.org/pdf/1811.11538.pdf
+Test case from [Quantum Bridge Analytics I](https://arxiv.org/pdf/1811.11538.pdf)
 :::
 
 ```{python}
@@ -289,7 +289,7 @@ Play around with the penalty term to check its effect in the final solution. Cha
 
 ## Traveling Salesperson Problem
 
-Another example problem that has been covered in the literature. It is a problem that tries to identify the optimal route to cover a set of cities given that there is a cost associated to going from point $a$ to point $b$.
+Another example problem that has been covered in the literature [@lucas2014ising] is the Hamiltonian cycles or Paths. It is a problem that tries to identify the optimal route to cover a set of cities given that there is a cost associated to going from point $a$ to point $b$ considering a cycle is obtained and its resolution renders the minimum cost for any other potential cycle.
 
 <center>
     <img src="../../assets/4nodetsp.png" width="20%"/>
@@ -306,7 +306,7 @@ G.add_weighted_edges_from({
 nx.draw(G)
 ```
 
-Let's start by defining our variables $x_{ij}$ which will take the positive value when the route is connected by node $i$ to $j$.
+We will try to come up with a simplified version that may not capture the entirety of the cycles but it is easier to understand. Let's start by defining our variables $x_{ij}$ which will take the positive value when the route is connected by node $i$ to $j$.
 
 $$
 x_{i \, j} = 
@@ -316,7 +316,7 @@ x_{i \, j} =
     \end{cases}
 $$
 
-with a distance/cost of $c_{ij}$. The idea is to visit all nodes but without going over the same route more than once. An ideally doing it at a minimum cost. Therefore,
+with a distance/cost of $c_{ij}$. The idea is to visit all nodes but without going over the same road in the route more than once (like the Könisberg bridge problem [@mezard2009information]). An ideally doing it at a minimum cost. Therefore,
 
 $$
 \min \sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{ij}
@@ -326,12 +326,16 @@ $$
 But a set of conditions need to be met, in particular there is a temporal axis we will also need to consider so that by starting at a given position each time step requires movements forward. This will add a $t$ for each step of the whole route to our previous variables (cost won't be affected much) so that we can identify the start and ending point ($x_{ijt}$). Therefore, previous case will require a $2^4 \times 2^4$ matrix to characterize the whole set of possible edges (those that exist and those which don't) considering the transitions being made.
 
 $$
-\min \sum_p\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)}
+\min \sum_p^P\sum_i^N \sum_{j, j \ne i}^N c_{ij}x_{i,p}x_{j,(p+1)}
 $$
 
 Constraints to have in mind, the salesperson should use each road only once. That means we should limit $\forall i \in \{0...n\} \sum_i^n x_{ip} = 1$ both row and column-wise, meaning salesperson is in one place at each time $p$ and can only be in one $n$ alone..
 
-In our QUBO setup, this constraints need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
+$$
+H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lambda\sum_{p=0}^P\left( 1 - \sum_{n=0}^N x_{n,p}\right)^2 + \lambda\sum_{(i,j)\notin G}\sum_{p=0}^P x_{i,p}x_{j,p+q}
+$$
+
+In our QUBO setup, this constraint need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
 
 ```{python}
 lagrange = 100
@@ -341,7 +345,7 @@ Then according to previous indications, our formulation should follow the intuit
 
 * If a node has exactly one active position ($k=1$) the penalty is 0 (good choice)
 * Otherwise the penalty is positive and grows as $(k-1)^2$.
-* We implement the penalty as: $$\text{Penalty}_n = \lambda\left(\sum_{p=0}^{P-1} x_{n,p} - 1\right)^2$$ indicating that a single occupied variable should happen per node at a high cost ($\lambda$) for its potential positions ($p$ here as a general approach to the time indexed $it$).
+* We implement the penalty unit block inside $H_{penalty}$: $$\text{Penalty}_n = \lambda\left(\sum_{p=0}^{P-1} x_{n,p} - 1\right)^2$$ indicating that a single occupied variable should happen per node at a high cost ($\lambda$) for its potential positions ($p$ here as a general approach to the time indexed $it$).
 
 If we expand the Penalty term
 
@@ -352,14 +356,8 @@ $$
 Since $x^2 = x$ for binary variables this simplifies to:
 
 $$
-\text{Penalty}_n = \lambda\left(-\sum_p x_{n,p} + 2\sum_{p<q} x_{n,p}x_{n,q} + 1\right)
+\text{Penalty}_n = -\lambda\sum_p x_{n,p} + 2\lambda\sum_{p<q} x_{n,p}x_{n,q} + 1
 $$
-
-**Penalty examples:**
-
-- Single active node:  $k=1 \rightarrow$ Penalty $=0$
-- $k=0$ or $k=2 \rightarrow$ Penalty $=\lambda$
-- $k=3 \rightarrow$ Penalty $=4\lambda$
 
 **How does this map to QUBO form**
 
@@ -370,9 +368,10 @@ Considering we will solve this as a minimization problem (minimize the cost of t
 
 This gives us the final shape
 $$
-\min \sum_p\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=1}^N\lambda\left(-\sum_p x_{n,p} + 2\sum_{p<q} x_{n,p}x_{n,q} + 1\right)
+\min \sum_p^P\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=0}^N\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{p<q} x_{n,p}x_{n,q} + 1\right) + \sum_{p=0}^P\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{(i,j)}^G x_{i,p}x_{j,p} + 1\right)
 $$
 
+assuming non existent edges are also added at a high cost ($\lambda$).
 
 ```{python}
 from collections import defaultdict
@@ -383,26 +382,6 @@ Q = defaultdict(float)
 # number of steps
 N = G.number_of_nodes()
 
-# Constraint that each row has exactly one 1
-for node in G:
-    for pos_1 in range(N):
-        Q[((node, pos_1), (node, pos_1))] -= lagrange
-        for pos_2 in range(pos_1+1, N):
-            Q[((node, pos_1), (node, pos_2))] += lagrange
-
-# Constraint that each col has exactly one 1
-for pos in range(N):
-    for node_1 in G:
-        Q[((node_1, pos), (node_1, pos))] -= lagrange
-        for node_2 in set(G)-{node_1}:
-            Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
-```
-
-Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies $Q_{X_{i},X_{j}}$ and $Q_{X_{j},X_{i}}$ positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.
-
-Now is a matter of indicating the cost of each decision of movement.
-
-```{python}
 # Objective that minimizes distance
 for u, v in G.edges:
     for pos in range(N):
@@ -423,9 +402,23 @@ for u, v in G.edges:
             value = lagrange # Non existent route cost
 
         Q[((v, pos), (u, nextpos))] += value
+
+# Constraint that each row has exactly one 1
+for node in G:
+    for pos_1 in range(N):
+        Q[((node, pos_1), (node, pos_1))] -= lagrange
+        for pos_2 in range(pos_1+1, N): # Next positions
+            Q[((node, pos_1), (node, pos_2))] += lagrange
+
+# Constraint that each col has exactly one 1
+for pos in range(N):
+    for node_1 in G:
+        Q[((node_1, pos), (node_1, pos))] -= lagrange
+        for node_2 in set(G)-{node_1}:
+            Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
 ```
 
-Which ends up rendering the following matrix...
+Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies $Q_{i,j}$ and $Q_{j,i}$ positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.
 
 ```{python}
 Q
@@ -491,4 +484,4 @@ cost = sum(G[n][nbr]["weight"] for n, nbr in nx.utils.pairwise(cycle))
 print(f"Cost for route {cycle} is {cost}")
 ```
 
-We will recover this formulation for the comparison example on the different ways of implementing the solution to this challenge.
+We will recover this formulation for the comparison example on the different ways of implementing the solution to this challenge. There do exist other approaches based on [dynamic programming](https://arxiv.org/pdf/2502.08853v1) but better stick to the basics for now.

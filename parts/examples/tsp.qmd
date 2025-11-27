@@ -13,8 +13,8 @@ import networkx as nx
 
 G = nx.DiGraph()
 G.add_weighted_edges_from({
-    ("A", "B", 2), ("A", "C", 4), ("B", "A", 2),
-    ("B", "C", 3), ("C", "A", 4),("C", "B", 3)
+    ("A", "B", 20), ("A", "C", 42), ("B", "A", 20),
+    ("B", "C", 30), ("C", "A", 42),("C", "B", 30)
 })
 
 nx.draw(G)
@@ -24,27 +24,13 @@ So that our final QUBO is represented as...
 ```{python}
 from collections import defaultdict
 
-lagrange = 12
+lagrange = 120
 
 # Creating the QUBO
 Q = defaultdict(float)
 
 # number of steps
 N = G.number_of_nodes()
-
-# Constraint that each row has exactly one 1
-for node in G:
-    for pos_1 in range(N):
-        Q[((node, pos_1), (node, pos_1))] -= lagrange
-        for pos_2 in range(pos_1+1, N):
-            Q[((node, pos_1), (node, pos_2))] += lagrange # Cost of not moving
-
-# Constraint that each col has exactly one 1
-for pos in range(N):
-    for node_1 in G:
-        Q[((node_1, pos), (node_1, pos))] -= lagrange
-        for node_2 in set(G)-{node_1}:
-            Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
 
 # Objective that minimizes distance
 for u, v in G.edges:
@@ -55,10 +41,31 @@ for u, v in G.edges:
         try:
             value = G[u][v]["weight"]
         except KeyError:
-            value = G[v][u]["weight"] # Non existent route cost
+            value = lagrange # Non existent route cost
 
         Q[((u, pos), (v, nextpos))] += value
+
+        # going from v -> u
+        try:
+            value = G[v][u]["weight"]
+        except KeyError:
+            value = lagrange # Non existent route cost
+
         Q[((v, pos), (u, nextpos))] += value
+
+# Constraint that each row has exactly one 1
+for node in G:
+    for pos_1 in range(N):
+        Q[((node, pos_1), (node, pos_1))] -= lagrange
+        for pos_2 in range(pos_1+1, N): # Next positions
+            Q[((node, pos_1), (node, pos_2))] += lagrange
+
+# Constraint that each col has exactly one 1
+for pos in range(N):
+    for node_1 in G:
+        Q[((node_1, pos), (node_1, pos))] -= lagrange
+        for node_2 in set(G)-{node_1}:
+            Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
 ```
 
 ## Exact solver
@@ -232,6 +239,12 @@ print(f"Potential solutions {r}")
 We would need to extract the binary representation of this integer to understand the variables being selected for our solution, but having six values would represent a degenerated basis state with six optimal solutions. We could then perform the state evolution as we did before to get that state from an initial state evolution and see what velocity of mixing Hamiltonians works best.
 
 ```{python}
+#| echo: false
+import warnings
+warnings.filterwarnings("ignore")
+```
+
+```{python}
 import matplotlib.pyplot as plt
 
 def get_eigenspectra(h_mat):
@@ -255,11 +268,13 @@ for lambda_t in time_range:
     e0.append(vals[0])
     e1.append(vals[1])
 
-plt.plot(time_range, e0, time_range, e1)
+plt.plot(time_range, e0, label="$E_0$")
+plt.plot(time_range, e1, label="$E_1$")
+plt.legend(loc="upper left")
 plt.show()
 ```
 
-We could of course, once there is a quantum mechanical procedure, implement it using a [digitized approach](../algorithms/examplesfordaqc.qmd).
+We it sounds that we are working with a really small gap in this setup, not a good option if we would like use adiabatic computing as [we saw before](../algorithms/adiabatic.qmd). We could of course, once there is a quantum mechanical procedure, implement it using a [digitized approach](../algorithms/examplesfordaqc.qmd).
 
 ```{python}
 from qiskit import QuantumCircuit
