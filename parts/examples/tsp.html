@@ -564,13 +564,13 @@ window.Quarto = {
 <img src="../../assets/4nodetsp.png" width="20%">
 </center>
 <p>We will check a simplified version of this problem with just three nodes.</p>
-<div id="01ba0201" class="cell" data-execution_count="1">
+<div id="d70751d9" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>G.add_weighted_edges_from({</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">2</span>), (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">4</span>), (<span class="st">"B"</span>, <span class="st">"A"</span>, <span class="dv">2</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">3</span>), (<span class="st">"C"</span>, <span class="st">"A"</span>, <span class="dv">4</span>),(<span class="st">"C"</span>, <span class="st">"B"</span>, <span class="dv">3</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">20</span>), (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">42</span>), (<span class="st">"B"</span>, <span class="st">"A"</span>, <span class="dv">20</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"B"</span>, <span class="st">"C"</span>, <span class="dv">30</span>), (<span class="st">"C"</span>, <span class="st">"A"</span>, <span class="dv">42</span>),(<span class="st">"C"</span>, <span class="st">"B"</span>, <span class="dv">30</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>nx.draw(G)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -583,10 +583,10 @@ window.Quarto = {
 </div>
 </div>
 <p>So that our final QUBO is represented as…</p>
-<div id="e8b6b15f" class="cell" data-execution_count="2">
+<div id="8d141f8f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lagrange <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lagrange <span class="op">=</span> <span class="dv">120</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the QUBO</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> defaultdict(<span class="bu">float</span>)</span>
@@ -594,38 +594,45 @@ window.Quarto = {
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># number of steps</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> G.number_of_nodes()</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each row has exactly one 1</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos_1 <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        Q[((node, pos_1), (node, pos_1))] <span class="op">-=</span> lagrange</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pos_2 <span class="kw">in</span> <span class="bu">range</span>(pos_1<span class="op">+</span><span class="dv">1</span>, N):</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            Q[((node, pos_1), (node, pos_2))] <span class="op">+=</span> lagrange <span class="co"># Cost of not moving</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each col has exactly one 1</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node_1 <span class="kw">in</span> G:</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        Q[((node_1, pos), (node_1, pos))] <span class="op">-=</span> lagrange</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node_2 <span class="kw">in</span> <span class="bu">set</span>(G)<span class="op">-</span>{node_1}:</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            Q[((node_1, pos), (node_2, pos))] <span class="op">+=</span> lagrange <span class="co"># Cost of being in more than one place</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Objective that minimizes distance</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> u, v <span class="kw">in</span> G.edges:</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        nextpos <span class="op">=</span> (pos <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> N</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Objective that minimizes distance</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> u, v <span class="kw">in</span> G.edges:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        nextpos <span class="op">=</span> (pos <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> N</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from u -&gt; v</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[u][v][<span class="st">"weight"</span>]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> lagrange <span class="co"># Non existent route cost</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        Q[((u, pos), (v, nextpos))] <span class="op">+=</span> value</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from v -&gt; u</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[v][u][<span class="st">"weight"</span>]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> lagrange <span class="co"># Non existent route cost</span></span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from u -&gt; v</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[u][v][<span class="st">"weight"</span>]</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[v][u][<span class="st">"weight"</span>] <span class="co"># Non existent route cost</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        Q[((u, pos), (v, nextpos))] <span class="op">+=</span> value</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        Q[((v, pos), (u, nextpos))] <span class="op">+=</span> value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        Q[((v, pos), (u, nextpos))] <span class="op">+=</span> value</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each row has exactly one 1</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos_1 <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        Q[((node, pos_1), (node, pos_1))] <span class="op">-=</span> lagrange</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pos_2 <span class="kw">in</span> <span class="bu">range</span>(pos_1<span class="op">+</span><span class="dv">1</span>, N): <span class="co"># Next positions</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>            Q[((node, pos_1), (node, pos_2))] <span class="op">+=</span> lagrange</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each col has exactly one 1</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node_1 <span class="kw">in</span> G:</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        Q[((node_1, pos), (node_1, pos))] <span class="op">-=</span> lagrange</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node_2 <span class="kw">in</span> <span class="bu">set</span>(G)<span class="op">-</span>{node_1}:</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            Q[((node_1, pos), (node_2, pos))] <span class="op">+=</span> lagrange <span class="co"># Cost of being in more than one place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="exact-solver" class="level2" data-number="E.1">
 <h2 data-number="E.1" class="anchored" data-anchor-id="exact-solver"><span class="header-section-number">E.1</span> Exact solver</h2>
 <p>Not always available, in particular if we scale up the number of nodes, time-steps and traveling people but a good way to check how good our proposed algorithms are solving it.</p>
-<div id="16ed4ee9" class="cell" data-execution_count="3">
+<div id="171bb7d6" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> dimod.ExactSolver()</span>
@@ -634,25 +641,25 @@ window.Quarto = {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ('A', 0) ('A', 1) ('A', 2) ('B', 0) ('B', 1) ... ('C', 2) energy num_oc.
-0         1        0        0        0        0 ...        0  -54.0       1
-1         0        1        0        1        0 ...        1  -54.0       1
-2         0        0        1        0        1 ...        0  -54.0       1
-3         0        0        1        1        0 ...        0  -54.0       1
-4         0        1        0        0        0 ...        0  -54.0       1
-5         1        0        0        0        1 ...        1  -54.0       1
-6         1        0        0        0        1 ...        0  -52.0       1
-7         0        1        1        1        0 ...        0  -52.0       1
-8         0        0        1        1        1 ...        0  -52.0       1
-9         1        1        0        0        0 ...        0  -52.0       1
-10        0        1        0        1        0 ...        0  -52.0       1
-11        1        0        1        0        1 ...        0  -52.0       1
-12        0        0        0        1        0 ...        0  -48.0       1
-13        0        0        0        0        1 ...        0  -48.0       1
-14        0        0        0        1        0 ...        1  -48.0       1
+0         0        0        1        0        1 ...        0 -536.0       1
+1         1        0        0        0        1 ...        1 -536.0       1
+2         0        1        0        1        0 ...        1 -536.0       1
+3         0        0        1        1        0 ...        0 -536.0       1
+4         0        1        0        0        0 ...        0 -536.0       1
+5         1        0        0        0        0 ...        0 -536.0       1
+6         1        0        1        0        1 ...        0 -520.0       1
+7         1        0        0        0        1 ...        0 -520.0       1
+8         0        1        1        1        0 ...        0 -520.0       1
+9         0        1        0        1        0 ...        0 -520.0       1
+10        0        0        1        1        1 ...        0 -520.0       1
+11        1        1        0        0        0 ...        0 -520.0       1
+12        0        0        0        0        1 ...        1 -480.0       1
+13        0        0        0        1        0 ...        1 -480.0       1
+14        0        0        0        1        0 ...        0 -480.0       1
 ['BINARY', 15 rows, 15 samples, 9 variables]</code></pre>
 </div>
 </div>
-<div id="e05560fd" class="cell" data-execution_count="4">
+<div id="f8700760" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span>(N<span class="op">+</span><span class="dv">1</span>)</span>
@@ -664,20 +671,20 @@ window.Quarto = {
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cost for route ['A', 'C', 'B', 'A'] is 9</code></pre>
+<pre><code>Cost for route ['C', 'B', 'A', 'C'] is 92</code></pre>
 </div>
 </div>
 </section>
 <section id="simulated-annealing" class="level2" data-number="E.2">
 <h2 data-number="E.2" class="anchored" data-anchor-id="simulated-annealing"><span class="header-section-number">E.2</span> Simulated annealing</h2>
-<div id="72e66468" class="cell" data-execution_count="5">
+<div id="86032421" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.algorithms <span class="im">import</span> approximation <span class="im">as</span> approx</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> approx.simulated_annealing_tsp(G, <span class="st">"greedy"</span>, source<span class="op">=</span><span class="st">"A"</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cost for route ['A', 'B', 'C', 'A'] is 9</code></pre>
+<pre><code>Cost for route ['A', 'B', 'C', 'A'] is 92</code></pre>
 </div>
 </div>
 </section>
@@ -699,12 +706,12 @@ window.Quarto = {
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>hybrid_solver <span class="op">=</span> HybridSolver(API_KEY)</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>qubo.solve(hybrid_solver, params)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ising is commonly used for pure quantum approaches.</p>
-<div id="7571ea36" class="cell" data-execution_count="6">
+<div id="673477a7" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bqm <span class="op">=</span> dimod.BinaryQuadraticModel.from_qubo(Q)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>h, J, offset <span class="op">=</span> bqm.to_ising()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If we follow the instructions in <a href="https://docs.quantagonia.com/examples.html">Quantagonia’s documentation</a> we can see it offers a seamless integration with Qiskit and DWave’s modelling libraries. We could also get the pure data out of the dictionaries with named variables so that it gets easier to manage using indexes for the qubits.</p>
-<div id="3b81e171" class="cell" data-execution_count="7">
+<div id="ab1392a1" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the variable names</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>indexes <span class="op">=</span> <span class="bu">list</span>(h.keys())</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -719,7 +726,7 @@ window.Quarto = {
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            jp[(i,j)] <span class="op">=</span> J[(name_i,name_j)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>For this simple problem we could follow the approach to a local simulation of the problem implementing the canonical evolution <a href="../algorithms/aqc.html">described before</a>. The issue might be managing the problem size that renders a <span class="math inline">\(2^N \times 2^N\)</span> matrix.</p>
-<div id="bb71f1f7" class="cell" data-execution_count="8">
+<div id="5556b452" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Pauli matrices</span></span>
@@ -776,7 +783,7 @@ window.Quarto = {
 <span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>H_problem <span class="op">=</span> problem_hamiltonian(size, hp, jp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We could check if the solution ot our problem matches the expected one.</p>
-<div id="ad793679" class="cell" data-execution_count="9">
+<div id="6e42824d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.linalg <span class="im">import</span> eig</span>
@@ -802,11 +809,11 @@ window.Quarto = {
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.nonzero(get_gs(H_problem))[<span class="dv">0</span>]</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Potential solutions </span><span class="sc">{</span>r<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Potential solutions [238 245 350 371 413 427]</code></pre>
+<pre><code>Potential solutions [126 235 373 414 435 461]</code></pre>
 </div>
 </div>
 <p>We would need to extract the binary representation of this integer to understand the variables being selected for our solution, but having six values would represent a degenerated basis state with six optimal solutions. We could then perform the state evolution as we did before to get that state from an initial state evolution and see what velocity of mixing Hamiltonians works best.</p>
-<div id="ec02c2d8" class="cell" data-execution_count="10">
+<div id="a1b4a4a4" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_eigenspectra(h_mat):</span>
@@ -830,157 +837,153 @@ window.Quarto = {
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    e0.append(vals[<span class="dv">0</span>])</span>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    e1.append(vals[<span class="dv">1</span>])</span>
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>plt.plot(time_range, e0, time_range, e1)</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/matplotlib/cbook.py:1719: ComplexWarning: Casting complex values to real discards the imaginary part
-  return math.isfinite(val)
-/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/matplotlib/cbook.py:1355: ComplexWarning: Casting complex values to real discards the imaginary part
-  return np.asarray(x, float)</code></pre>
-</div>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>plt.plot(time_range, e0, label<span class="op">=</span><span class="st">"$E_0$"</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>plt.plot(time_range, e1, label<span class="op">=</span><span class="st">"$E_1$"</span>)</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tsp_files/figure-html/cell-11-output-2.png" width="577" height="411" class="figure-img"></p>
+<p><img src="tsp_files/figure-html/cell-12-output-1.png" width="586" height="411" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>We could of course, once there is a quantum mechanical procedure, implement it using a <a href="../../parts/algorithms/examplesfordaqc.html">digitized approach</a>.</p>
-<div id="35f19741" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>initial_state <span class="op">=</span> QuantumCircuit(size)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Hadamard gate</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> qb_i <span class="kw">in</span> initial_state.qubits:</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    initial_state.h(qb_i)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>initial_state.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<div>
-<figure class="figure">
-<p><img src="tsp_files/figure-html/cell-12-output-1.png" width="170" height="600" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="8238ecd9" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a parameter to instantiate</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">beta$"</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>mixer <span class="op">=</span> QuantumCircuit(size,size)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    mixer.rx(<span class="dv">2</span><span class="op">*</span>beta<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>), i)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>mixer.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We it sounds that we are working with a really small gap in this setup, not a good option if we would like use adiabatic computing as <a href="../algorithms/adiabatic.qmd">we saw before</a>. We could of course, once there is a quantum mechanical procedure, implement it using a <a href="../../parts/algorithms/examplesfordaqc.html">digitized approach</a>.</p>
+<div id="a7767572" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>initial_state <span class="op">=</span> QuantumCircuit(size)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Hadamard gate</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> qb_i <span class="kw">in</span> initial_state.qubits:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    initial_state.h(qb_i)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>initial_state.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 <figure class="figure">
-<p><img src="tsp_files/figure-html/cell-13-output-1.png" width="170" height="662" class="figure-img"></p>
+<p><img src="tsp_files/figure-html/cell-13-output-1.png" width="170" height="600" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="4e4559f7" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a parameter to instantiate</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">gamma$"</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>problem <span class="op">=</span> QuantumCircuit(size,size)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node, h_val <span class="kw">in</span> <span class="bu">enumerate</span>(hp):</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    problem.rz(<span class="dv">2</span><span class="op">*</span>gamma<span class="op">*</span>h_val, node)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> jp:</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    problem.rzz(<span class="dv">2</span><span class="op">*</span>gamma<span class="op">*</span>jp[key], key[<span class="dv">0</span>], key[<span class="dv">1</span>])</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>problem.draw(<span class="st">'mpl'</span>, fold<span class="op">=-</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b1c62375" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a parameter to instantiate</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">beta$"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mixer <span class="op">=</span> QuantumCircuit(size,size)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    mixer.rx(<span class="dv">2</span><span class="op">*</span>beta<span class="op">*</span>(<span class="op">-</span><span class="dv">1</span>), i)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>mixer.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 <figure class="figure">
-<p><img src="tsp_files/figure-html/cell-14-output-1.png" width="4620" height="662" class="figure-img"></p>
+<p><img src="tsp_files/figure-html/cell-14-output-1.png" width="170" height="662" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="b0ca65fc" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a parameter to instantiate</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>gamma <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">gamma$"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>problem <span class="op">=</span> QuantumCircuit(size,size)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node, h_val <span class="kw">in</span> <span class="bu">enumerate</span>(hp):</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    problem.rz(<span class="dv">2</span><span class="op">*</span>gamma<span class="op">*</span>h_val, node)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> jp:</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    problem.rzz(<span class="dv">2</span><span class="op">*</span>gamma<span class="op">*</span>jp[key], key[<span class="dv">0</span>], key[<span class="dv">1</span>])</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>problem.draw(<span class="st">'mpl'</span>, fold<span class="op">=-</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+<figure class="figure">
+<p><img src="tsp_files/figure-html/cell-15-output-1.png" width="4620" height="662" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>With these three blocks we just need to define how we are going to digitize the evolution towards the solution to our problem.</p>
-<div id="41b4aa0e" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tsp_circ <span class="op">=</span> QuantumCircuit(size,size)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tsp_circ.compose(initial_state, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Length of the equidistant steps</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lt <span class="kw">in</span> np.arange(<span class="fl">0.1</span>, <span class="fl">1.1</span>, dt):</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    tsp_circ.compose(problem.assign_parameters({gamma: lt}), inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    tsp_circ.compose(mixer.assign_parameters({beta: (<span class="dv">1</span><span class="op">-</span>lt)}), inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>tsp_circ.measure(<span class="bu">range</span>(size), <span class="bu">range</span>(size))</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>tsp_circ.draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">500</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div id="3b9c8daf" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tsp_circ <span class="op">=</span> QuantumCircuit(size,size)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>tsp_circ.compose(initial_state, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Length of the equidistant steps</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lt <span class="kw">in</span> np.arange(<span class="fl">0.1</span>, <span class="fl">1.1</span>, dt):</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    tsp_circ.compose(problem.assign_parameters({gamma: lt}), inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    tsp_circ.compose(mixer.assign_parameters({beta: (<span class="dv">1</span><span class="op">-</span>lt)}), inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>tsp_circ.measure(<span class="bu">range</span>(size), <span class="bu">range</span>(size))</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>tsp_circ.draw(<span class="st">'mpl'</span>, fold<span class="op">=</span><span class="dv">500</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 <figure class="figure">
-<p><img src="tsp_files/figure-html/cell-15-output-1.png" width="31011" height="1342" class="figure-img"></p>
+<p><img src="tsp_files/figure-html/cell-16-output-1.png" width="31011" height="1342" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Get’s harder to see. We can check for that evolution the final response but also some interesting features like circuit depth or number of operations, which will become relevant when trying to quantify the accuracy of our simulation associated with a given device noise/error.</p>
-<div id="aed999b4" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tsp_circ.depth()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div id="36e72d41" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tsp_circ.depth()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>118</code></pre>
 </div>
 </div>
-<div id="df13f10a" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tsp_circ.num_nonlocal_gates()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div id="569bb07b" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tsp_circ.num_nonlocal_gates()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>360</code></pre>
 </div>
 </div>
 <p>Let’s simulate the distribution…</p>
-<div id="c5206079" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_aer <span class="im">import</span> AerSimulator</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the quantum circuit</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>backend <span class="op">=</span> AerSimulator()</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the quantum circuit</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> backend.run(tsp_circ, shots<span class="op">=</span><span class="dv">10_000</span>).result()</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(tsp_circ)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plot_histogram(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="249e8a96" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_aer <span class="im">import</span> AerSimulator</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the quantum circuit</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>backend <span class="op">=</span> AerSimulator()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the quantum circuit</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> backend.run(tsp_circ, shots<span class="op">=</span><span class="dv">10_000</span>).result()</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(tsp_circ)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>plot_histogram(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 <figure class="figure">
-<p><img src="tsp_files/figure-html/cell-18-output-1.png" width="599" height="474" class="figure-img"></p>
+<p><img src="tsp_files/figure-html/cell-19-output-1.png" width="599" height="474" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>And its energy profile…</p>
-<div id="391e325e" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>energy <span class="op">=</span> []</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>success_probability <span class="op">=</span> [] </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bit_string <span class="kw">in</span> counts:</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> [<span class="bu">int</span>(char) <span class="cf">for</span> char <span class="kw">in</span> bit_string]</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    solution_dict <span class="op">=</span> {}</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(indexes):</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        solution_dict[v] <span class="op">=</span> solution[i]</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    energy.append(bqm.energy(solution_dict))</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    success_probability.append(counts[bit_string]<span class="op">/</span><span class="dv">10_000</span>)</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>plt.bar(energy, height<span class="op">=</span>success_probability, label<span class="op">=</span><span class="st">"Digitized AQC"</span>)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f8673535" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>energy <span class="op">=</span> []</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>success_probability <span class="op">=</span> [] </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bit_string <span class="kw">in</span> counts:</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    solution <span class="op">=</span> [<span class="bu">int</span>(char) <span class="cf">for</span> char <span class="kw">in</span> bit_string]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    solution_dict <span class="op">=</span> {}</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(indexes):</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        solution_dict[v] <span class="op">=</span> solution[i]</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    energy.append(bqm.energy(solution_dict))</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    success_probability.append(counts[bit_string]<span class="op">/</span><span class="dv">10_000</span>)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>plt.bar(energy, height<span class="op">=</span>success_probability, label<span class="op">=</span><span class="st">"Digitized AQC"</span>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tsp_files/figure-html/cell-19-output-1.png" width="596" height="411" class="figure-img"></p>
+<p><img src="tsp_files/figure-html/cell-20-output-1.png" width="596" height="411" class="figure-img"></p>
 </figure>
 </div>
 </div>

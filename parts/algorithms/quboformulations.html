@@ -634,7 +634,7 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 \min_x \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 \]</span></p>
 <p>Let’s select a particular instance for <span class="math inline">\(S\)</span> and <span class="math inline">\(b\)</span>.</p>
-<div id="417e03f5" class="cell" data-execution_count="1">
+<div id="95e8675f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([</span>
@@ -645,7 +645,7 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">17</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So, now we can start composing our <span class="math inline">\(Q\)</span> matrix.</p>
-<div id="6237982d" class="cell" data-execution_count="2">
+<div id="0ce4bd79" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> S.shape[<span class="dv">1</span>]</span>
@@ -676,7 +676,7 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 </div>
 </div>
 <p>As you can see the matrix is symetric as there is a natural symmetry between <span class="math inline">\(x_ix_j\)</span> and <span class="math inline">\(x_jx_i\)</span>. We could brute force our solution.</p>
-<div id="a8bab4e5" class="cell" data-execution_count="3">
+<div id="4f463e83" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>min_sol <span class="op">=</span> []</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -692,13 +692,13 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 </div>
 </div>
 <p>So our solution should be [1 1 0 1 1], let’s check.</p>
-<div id="fbc711e4" class="cell" data-execution_count="4">
+<div id="3a70b28c" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.matmul(S, [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>array([10, 13, 17])</code></pre>
 </div>
 </div>
-<div id="9f064331" class="cell" data-execution_count="5">
+<div id="b5967b6c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([10, 13, 17])</code></pre>
@@ -722,7 +722,7 @@ Note
 <p><em>NetworkX package will need to be added to your Python environment for this example</em></p>
 </div>
 </div>
-<div id="e491b8c2" class="cell" data-execution_count="6">
+<div id="0d6b4aad" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.generators.random_graphs <span class="im">import</span> gnm_random_graph</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -731,7 +731,7 @@ Note
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> gnm_random_graph(size, size, seed<span class="op">=</span>seed)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gnm_random_graph(size, size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3c7fbd51" class="cell" data-execution_count="7">
+<div id="ee62818d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> gen_graph(<span class="dv">5</span>, <span class="va">None</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>nx.draw(G)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -748,7 +748,7 @@ Note
 \max \sum_{(i,j)} (x_i + x_j - 2x_ix_j)
 \]</span></p>
 <p>which we can convert to a minimization problem by changing the sign.</p>
-<div id="3e2debd9" class="cell" data-execution_count="8">
+<div id="187ea679" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> G.order()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> <span class="bu">list</span>(G.nodes)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -765,17 +765,17 @@ Note
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">*</span>Q <span class="co"># Min</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4b7de21e" class="cell" data-execution_count="9">
+<div id="24b63e33" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>array([[-2.,  1.,  1., -0., -0.],
-       [ 1., -2., -0., -0.,  1.],
-       [ 1., -0., -2.,  1., -0.],
-       [-0., -0.,  1., -2.,  1.],
-       [-0.,  1., -0.,  1., -2.]])</code></pre>
+<pre><code>array([[-2., -0.,  1., -0.,  1.],
+       [-0., -1., -0.,  1., -0.],
+       [ 1., -0., -3.,  1.,  1.],
+       [-0.,  1.,  1., -2., -0.],
+       [ 1., -0.,  1., -0., -2.]])</code></pre>
 </div>
 </div>
-<div id="dce97c73" class="cell" data-execution_count="10">
+<div id="ff1b9154" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>min_sol <span class="op">=</span> []</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -787,16 +787,16 @@ Note
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(min_sol, <span class="st">"|"</span>, min_val)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[0 0 1 0 1] | -4.0</code></pre>
+<pre><code>[0 0 0 1 1] | -4.0</code></pre>
 </div>
 </div>
 <p>This case is a little bit more complicatd as more than one option can be selected. Ideally we would like to obtain all potential solutions.</p>
-<div id="f31bbffa" class="cell" data-execution_count="11">
+<div id="305d28da" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> np.array(min_sol)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>red_team <span class="op">=</span> np.where(solution <span class="op">==</span> <span class="dv">1</span>) </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>blue_team <span class="op">=</span> np.where(solution <span class="op">==</span> <span class="dv">0</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b512673a" class="cell" data-execution_count="12">
+<div id="be550a0c" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G)  <span class="co"># positions for all nodes</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># nodes</span></span>
@@ -841,10 +841,10 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Test case from: https://arxiv.org/pdf/1811.11538.pdf</p>
+<p>Test case from <a href="https://arxiv.org/pdf/1811.11538.pdf">Quantum Bridge Analytics I</a></p>
 </div>
 </div>
-<div id="ef6598ab" class="cell" data-execution_count="13">
+<div id="28076904" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> np.array([</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>],</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">3</span>],</span>
@@ -858,7 +858,7 @@ Note
 <p><span class="math display">\[
 8x_1 + 6x_2 + 5x_3 + 3x_4 + 1s_0 + 2s_1 = 16
 \]</span></p>
-<div id="b2828ac1" class="cell" data-execution_count="14">
+<div id="d6f34994" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>costs.append(<span class="dv">1</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>costs.append(<span class="dv">2</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>costs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -867,10 +867,10 @@ Note
 </div>
 </div>
 <p>And penalty, well, we need to decide on a figure.</p>
-<div id="f86626ab" class="cell" data-execution_count="15">
+<div id="fd643109" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="3074c048" class="cell" data-execution_count="16">
+<div id="f09522a4" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(costs)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> np.zeros((n, n))</span>
@@ -887,7 +887,7 @@ Note
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">*</span>Q <span class="co"># min</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c12e8a56" class="cell" data-execution_count="17">
+<div id="4c569b06" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>array([[-1922.,   476.,   397.,   235.,    80.,   160.],
@@ -898,7 +898,7 @@ Note
        [  160.,   120.,   100.,    60.,    20.,  -600.]])</code></pre>
 </div>
 </div>
-<div id="7bb50267" class="cell" data-execution_count="18">
+<div id="f7d68d86" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>min_sol <span class="op">=</span> []</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -917,11 +917,11 @@ Note
 </section>
 <section id="traveling-salesperson-problem" class="level2">
 <h2 class="anchored" data-anchor-id="traveling-salesperson-problem">Traveling Salesperson Problem</h2>
-<p>Another example problem that has been covered in the literature. It is a problem that tries to identify the optimal route to cover a set of cities given that there is a cost associated to going from point <span class="math inline">\(a\)</span> to point <span class="math inline">\(b\)</span>.</p>
+<p>Another example problem that has been covered in the literature <span class="citation" data-cites="lucas2014ising">(<a href="../references.html#ref-lucas2014ising" role="doc-biblioref">Lucas 2014</a>)</span> is the Hamiltonian cycles or Paths. It is a problem that tries to identify the optimal route to cover a set of cities given that there is a cost associated to going from point <span class="math inline">\(a\)</span> to point <span class="math inline">\(b\)</span> considering a cycle is obtained and its resolution renders the minimum cost for any other potential cycle.</p>
 <center>
 <img src="../../assets/4nodetsp.png" width="20%">
 </center>
-<div id="6750f924" class="cell" data-execution_count="19">
+<div id="4eb4a707" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>G.add_weighted_edges_from({</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">20</span>), (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">42</span>), (<span class="st">"A"</span>, <span class="st">"D"</span>, <span class="dv">35</span>), (<span class="st">"B"</span>, <span class="st">"A"</span>, <span class="dv">20</span>),</span>
@@ -938,7 +938,7 @@ Note
 </div>
 </div>
 </div>
-<p>Let’s start by defining our variables <span class="math inline">\(x_{ij}\)</span> which will take the positive value when the route is connected by node <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>.</p>
+<p>We will try to come up with a simplified version that may not capture the entirety of the cycles but it is easier to understand. Let’s start by defining our variables <span class="math inline">\(x_{ij}\)</span> which will take the positive value when the route is connected by node <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>.</p>
 <p><span class="math display">\[
 x_{i \, j} =
     \begin{cases}
@@ -946,24 +946,27 @@ x_{i \, j} =
         0, &amp; \text{otherwise}
     \end{cases}
 \]</span></p>
-<p>with a distance/cost of <span class="math inline">\(c_{ij}\)</span>. The idea is to visit all nodes but without going over the same route more than once. An ideally doing it at a minimum cost. Therefore,</p>
+<p>with a distance/cost of <span class="math inline">\(c_{ij}\)</span>. The idea is to visit all nodes but without going over the same road in the route more than once (like the Könisberg bridge problem <span class="citation" data-cites="mezard2009information">(<a href="../references.html#ref-mezard2009information" role="doc-biblioref">Mezard and Montanari 2009</a>)</span>). An ideally doing it at a minimum cost. Therefore,</p>
 <p><span class="math display">\[
 \min \sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{ij}
 \]</span></p>
 <p>But a set of conditions need to be met, in particular there is a temporal axis we will also need to consider so that by starting at a given position each time step requires movements forward. This will add a <span class="math inline">\(t\)</span> for each step of the whole route to our previous variables (cost won’t be affected much) so that we can identify the start and ending point (<span class="math inline">\(x_{ijt}\)</span>). Therefore, previous case will require a <span class="math inline">\(2^4 \times 2^4\)</span> matrix to characterize the whole set of possible edges (those that exist and those which don’t) considering the transitions being made.</p>
 <p><span class="math display">\[
-\min \sum_p\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)}
+\min \sum_p^P\sum_i^N \sum_{j, j \ne i}^N c_{ij}x_{i,p}x_{j,(p+1)}
 \]</span></p>
 <p>Constraints to have in mind, the salesperson should use each road only once. That means we should limit <span class="math inline">\(\forall i \in \{0...n\} \sum_i^n x_{ip} = 1\)</span> both row and column-wise, meaning salesperson is in one place at each time <span class="math inline">\(p\)</span> and can only be in one <span class="math inline">\(n\)</span> alone..</p>
-<p>In our QUBO setup, this constraints need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.</p>
-<div id="99914b46" class="cell" data-execution_count="20">
+<p><span class="math display">\[
+H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lambda\sum_{p=0}^P\left( 1 - \sum_{n=0}^N x_{n,p}\right)^2 + \lambda\sum_{(i,j)\notin G}\sum_{p=0}^P x_{i,p}x_{j,p+q}
+\]</span></p>
+<p>In our QUBO setup, this constraint need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.</p>
+<div id="b4af81f2" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>lagrange <span class="op">=</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then according to previous indications, our formulation should follow the intuition that:</p>
 <ul>
 <li>If a node has exactly one active position (<span class="math inline">\(k=1\)</span>) the penalty is 0 (good choice)</li>
 <li>Otherwise the penalty is positive and grows as <span class="math inline">\((k-1)^2\)</span>.</li>
-<li>We implement the penalty as: <span class="math display">\[\text{Penalty}_n = \lambda\left(\sum_{p=0}^{P-1} x_{n,p} - 1\right)^2\]</span> indicating that a single occupied variable should happen per node at a high cost (<span class="math inline">\(\lambda\)</span>) for its potential positions (<span class="math inline">\(p\)</span> here as a general approach to the time indexed <span class="math inline">\(it\)</span>).</li>
+<li>We implement the penalty unit block inside <span class="math inline">\(H_{penalty}\)</span>: <span class="math display">\[\text{Penalty}_n = \lambda\left(\sum_{p=0}^{P-1} x_{n,p} - 1\right)^2\]</span> indicating that a single occupied variable should happen per node at a high cost (<span class="math inline">\(\lambda\)</span>) for its potential positions (<span class="math inline">\(p\)</span> here as a general approach to the time indexed <span class="math inline">\(it\)</span>).</li>
 </ul>
 <p>If we expand the Penalty term</p>
 <p><span class="math display">\[
@@ -971,14 +974,8 @@ x_{i \, j} =
 \]</span></p>
 <p>Since <span class="math inline">\(x^2 = x\)</span> for binary variables this simplifies to:</p>
 <p><span class="math display">\[
-\text{Penalty}_n = \lambda\left(-\sum_p x_{n,p} + 2\sum_{p&lt;q} x_{n,p}x_{n,q} + 1\right)
+\text{Penalty}_n = -\lambda\sum_p x_{n,p} + 2\lambda\sum_{p&lt;q} x_{n,p}x_{n,q} + 1
 \]</span></p>
-<p><strong>Penalty examples:</strong></p>
-<ul>
-<li>Single active node: <span class="math inline">\(k=1 \rightarrow\)</span> Penalty <span class="math inline">\(=0\)</span></li>
-<li><span class="math inline">\(k=0\)</span> or <span class="math inline">\(k=2 \rightarrow\)</span> Penalty <span class="math inline">\(=\lambda\)</span></li>
-<li><span class="math inline">\(k=3 \rightarrow\)</span> Penalty <span class="math inline">\(=4\lambda\)</span></li>
-</ul>
 <p><strong>How does this map to QUBO form</strong></p>
 <p>Considering we will solve this as a minimization problem (minimize the cost of traveling)</p>
 <ul>
@@ -986,9 +983,10 @@ x_{i \, j} =
 <li>Pairwise (off-diagonal) term: <code>Q[((node, pos1), (node, pos2))] += lagrange</code> adds half of the <span class="math inline">\(2\lambda\)</span> coupling; the symmetric entry provides the other half in the QUBO matrix representation.</li>
 </ul>
 <p>This gives us the final shape <span class="math display">\[
-\min \sum_p\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=1}^N\lambda\left(-\sum_p x_{n,p} + 2\sum_{p&lt;q} x_{n,p}x_{n,q} + 1\right)
+\min \sum_p^P\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=0}^N\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{p&lt;q} x_{n,p}x_{n,q} + 1\right) + \sum_{p=0}^P\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{(i,j)}^G x_{i,p}x_{j,p} + 1\right)
 \]</span></p>
-<div id="252064ca" class="cell" data-execution_count="21">
+<p>assuming non existent edges are also added at a high cost (<span class="math inline">\(\lambda\)</span>).</p>
+<div id="bda0be3a" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the QUBO</span></span>
@@ -997,50 +995,95 @@ x_{i \, j} =
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># number of steps</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> G.number_of_nodes()</span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each row has exactly one 1</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos_1 <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        Q[((node, pos_1), (node, pos_1))] <span class="op">-=</span> lagrange</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pos_2 <span class="kw">in</span> <span class="bu">range</span>(pos_1<span class="op">+</span><span class="dv">1</span>, N):</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>            Q[((node, pos_1), (node, pos_2))] <span class="op">+=</span> lagrange</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each col has exactly one 1</span></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node_1 <span class="kw">in</span> G:</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>        Q[((node_1, pos), (node_1, pos))] <span class="op">-=</span> lagrange</span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node_2 <span class="kw">in</span> <span class="bu">set</span>(G)<span class="op">-</span>{node_1}:</span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>            Q[((node_1, pos), (node_2, pos))] <span class="op">+=</span> lagrange <span class="co"># Cost of being in more than one place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Objective that minimizes distance</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> u, v <span class="kw">in</span> G.edges:</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        nextpos <span class="op">=</span> (pos <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> N</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from u -&gt; v</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[u][v][<span class="st">"weight"</span>]</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> lagrange <span class="co"># Non existent route cost</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>        Q[((u, pos), (v, nextpos))] <span class="op">+=</span> value</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from v -&gt; u</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[v][u][<span class="st">"weight"</span>]</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> lagrange <span class="co"># Non existent route cost</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>        Q[((v, pos), (u, nextpos))] <span class="op">+=</span> value</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each row has exactly one 1</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G:</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos_1 <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>        Q[((node, pos_1), (node, pos_1))] <span class="op">-=</span> lagrange</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pos_2 <span class="kw">in</span> <span class="bu">range</span>(pos_1<span class="op">+</span><span class="dv">1</span>, N): <span class="co"># Next positions</span></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>            Q[((node, pos_1), (node, pos_2))] <span class="op">+=</span> lagrange</span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Constraint that each col has exactly one 1</span></span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node_1 <span class="kw">in</span> G:</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>        Q[((node_1, pos), (node_1, pos))] <span class="op">-=</span> lagrange</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> node_2 <span class="kw">in</span> <span class="bu">set</span>(G)<span class="op">-</span>{node_1}:</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>            Q[((node_1, pos), (node_2, pos))] <span class="op">+=</span> lagrange <span class="co"># Cost of being in more than one place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies <span class="math inline">\(Q_{X_{i},X_{j}}\)</span> and <span class="math inline">\(Q_{X_{j},X_{i}}\)</span> positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.</p>
-<p>Now is a matter of indicating the cost of each decision of movement.</p>
-<div id="bbf2dcb8" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Objective that minimizes distance</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> u, v <span class="kw">in</span> G.edges:</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>        nextpos <span class="op">=</span> (pos <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> N</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from u -&gt; v</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[u][v][<span class="st">"weight"</span>]</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> lagrange <span class="co"># Non existent route cost</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        Q[((u, pos), (v, nextpos))] <span class="op">+=</span> value</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># going from v -&gt; u</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> G[v][u][<span class="st">"weight"</span>]</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">KeyError</span>:</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>            value <span class="op">=</span> lagrange <span class="co"># Non existent route cost</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        Q[((v, pos), (u, nextpos))] <span class="op">+=</span> value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Which ends up rendering the following matrix…</p>
-<div id="29d761b5" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<p>Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies <span class="math inline">\(Q_{i,j}\)</span> and <span class="math inline">\(Q_{j,i}\)</span> positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.</p>
+<div id="512bd263" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>defaultdict(float,
-            {(('B', 0), ('B', 0)): -200.0,
+            {(('B', 0), ('A', 1)): 40.0,
+             (('A', 0), ('B', 1)): 40.0,
+             (('B', 1), ('A', 2)): 40.0,
+             (('A', 1), ('B', 2)): 40.0,
+             (('B', 2), ('A', 3)): 40.0,
+             (('A', 2), ('B', 3)): 40.0,
+             (('B', 3), ('A', 0)): 40.0,
+             (('A', 3), ('B', 0)): 40.0,
+             (('B', 0), ('C', 1)): 60.0,
+             (('C', 0), ('B', 1)): 60.0,
+             (('B', 1), ('C', 2)): 60.0,
+             (('C', 1), ('B', 2)): 60.0,
+             (('B', 2), ('C', 3)): 60.0,
+             (('C', 2), ('B', 3)): 60.0,
+             (('B', 3), ('C', 0)): 60.0,
+             (('C', 3), ('B', 0)): 60.0,
+             (('B', 0), ('D', 1)): 68.0,
+             (('D', 0), ('B', 1)): 68.0,
+             (('B', 1), ('D', 2)): 68.0,
+             (('D', 1), ('B', 2)): 68.0,
+             (('B', 2), ('D', 3)): 68.0,
+             (('D', 2), ('B', 3)): 68.0,
+             (('B', 3), ('D', 0)): 68.0,
+             (('D', 3), ('B', 0)): 68.0,
+             (('A', 0), ('D', 1)): 70.0,
+             (('D', 0), ('A', 1)): 70.0,
+             (('A', 1), ('D', 2)): 70.0,
+             (('D', 1), ('A', 2)): 70.0,
+             (('A', 2), ('D', 3)): 70.0,
+             (('D', 2), ('A', 3)): 70.0,
+             (('A', 3), ('D', 0)): 70.0,
+             (('D', 3), ('A', 0)): 70.0,
+             (('A', 0), ('C', 1)): 84.0,
+             (('C', 0), ('A', 1)): 84.0,
+             (('A', 1), ('C', 2)): 84.0,
+             (('C', 1), ('A', 2)): 84.0,
+             (('A', 2), ('C', 3)): 84.0,
+             (('C', 2), ('A', 3)): 84.0,
+             (('A', 3), ('C', 0)): 84.0,
+             (('C', 3), ('A', 0)): 84.0,
+             (('C', 0), ('D', 1)): 24.0,
+             (('D', 0), ('C', 1)): 24.0,
+             (('C', 1), ('D', 2)): 24.0,
+             (('D', 1), ('C', 2)): 24.0,
+             (('C', 2), ('D', 3)): 24.0,
+             (('D', 2), ('C', 3)): 24.0,
+             (('C', 3), ('D', 0)): 24.0,
+             (('D', 3), ('C', 0)): 24.0,
+             (('B', 0), ('B', 0)): -200.0,
              (('B', 0), ('B', 1)): 100.0,
              (('B', 0), ('B', 2)): 100.0,
              (('B', 0), ('B', 3)): 100.0,
@@ -1060,16 +1103,6 @@ x_{i \, j} =
              (('A', 2), ('A', 2)): -200.0,
              (('A', 2), ('A', 3)): 100.0,
              (('A', 3), ('A', 3)): -200.0,
-             (('D', 0), ('D', 0)): -200.0,
-             (('D', 0), ('D', 1)): 100.0,
-             (('D', 0), ('D', 2)): 100.0,
-             (('D', 0), ('D', 3)): 100.0,
-             (('D', 1), ('D', 1)): -200.0,
-             (('D', 1), ('D', 2)): 100.0,
-             (('D', 1), ('D', 3)): 100.0,
-             (('D', 2), ('D', 2)): -200.0,
-             (('D', 2), ('D', 3)): 100.0,
-             (('D', 3), ('D', 3)): -200.0,
              (('C', 0), ('C', 0)): -200.0,
              (('C', 0), ('C', 1)): 100.0,
              (('C', 0), ('C', 2)): 100.0,
@@ -1080,194 +1113,159 @@ x_{i \, j} =
              (('C', 2), ('C', 2)): -200.0,
              (('C', 2), ('C', 3)): 100.0,
              (('C', 3), ('C', 3)): -200.0,
+             (('D', 0), ('D', 0)): -200.0,
+             (('D', 0), ('D', 1)): 100.0,
+             (('D', 0), ('D', 2)): 100.0,
+             (('D', 0), ('D', 3)): 100.0,
+             (('D', 1), ('D', 1)): -200.0,
+             (('D', 1), ('D', 2)): 100.0,
+             (('D', 1), ('D', 3)): 100.0,
+             (('D', 2), ('D', 2)): -200.0,
+             (('D', 2), ('D', 3)): 100.0,
+             (('D', 3), ('D', 3)): -200.0,
              (('B', 0), ('A', 0)): 100.0,
              (('B', 0), ('C', 0)): 100.0,
              (('B', 0), ('D', 0)): 100.0,
              (('A', 0), ('C', 0)): 100.0,
-             (('A', 0), ('B', 0)): 100.0,
              (('A', 0), ('D', 0)): 100.0,
-             (('D', 0), ('A', 0)): 100.0,
-             (('D', 0), ('B', 0)): 100.0,
-             (('D', 0), ('C', 0)): 100.0,
+             (('A', 0), ('B', 0)): 100.0,
              (('C', 0), ('A', 0)): 100.0,
-             (('C', 0), ('B', 0)): 100.0,
              (('C', 0), ('D', 0)): 100.0,
+             (('C', 0), ('B', 0)): 100.0,
+             (('D', 0), ('A', 0)): 100.0,
+             (('D', 0), ('C', 0)): 100.0,
+             (('D', 0), ('B', 0)): 100.0,
              (('B', 1), ('A', 1)): 100.0,
              (('B', 1), ('C', 1)): 100.0,
              (('B', 1), ('D', 1)): 100.0,
              (('A', 1), ('C', 1)): 100.0,
-             (('A', 1), ('B', 1)): 100.0,
              (('A', 1), ('D', 1)): 100.0,
-             (('D', 1), ('A', 1)): 100.0,
-             (('D', 1), ('B', 1)): 100.0,
-             (('D', 1), ('C', 1)): 100.0,
+             (('A', 1), ('B', 1)): 100.0,
              (('C', 1), ('A', 1)): 100.0,
-             (('C', 1), ('B', 1)): 100.0,
              (('C', 1), ('D', 1)): 100.0,
+             (('C', 1), ('B', 1)): 100.0,
+             (('D', 1), ('A', 1)): 100.0,
+             (('D', 1), ('C', 1)): 100.0,
+             (('D', 1), ('B', 1)): 100.0,
              (('B', 2), ('A', 2)): 100.0,
              (('B', 2), ('C', 2)): 100.0,
              (('B', 2), ('D', 2)): 100.0,
              (('A', 2), ('C', 2)): 100.0,
-             (('A', 2), ('B', 2)): 100.0,
              (('A', 2), ('D', 2)): 100.0,
-             (('D', 2), ('A', 2)): 100.0,
-             (('D', 2), ('B', 2)): 100.0,
-             (('D', 2), ('C', 2)): 100.0,
+             (('A', 2), ('B', 2)): 100.0,
              (('C', 2), ('A', 2)): 100.0,
-             (('C', 2), ('B', 2)): 100.0,
              (('C', 2), ('D', 2)): 100.0,
+             (('C', 2), ('B', 2)): 100.0,
+             (('D', 2), ('A', 2)): 100.0,
+             (('D', 2), ('C', 2)): 100.0,
+             (('D', 2), ('B', 2)): 100.0,
              (('B', 3), ('A', 3)): 100.0,
              (('B', 3), ('C', 3)): 100.0,
              (('B', 3), ('D', 3)): 100.0,
              (('A', 3), ('C', 3)): 100.0,
-             (('A', 3), ('B', 3)): 100.0,
              (('A', 3), ('D', 3)): 100.0,
-             (('D', 3), ('A', 3)): 100.0,
-             (('D', 3), ('B', 3)): 100.0,
-             (('D', 3), ('C', 3)): 100.0,
+             (('A', 3), ('B', 3)): 100.0,
              (('C', 3), ('A', 3)): 100.0,
-             (('C', 3), ('B', 3)): 100.0,
              (('C', 3), ('D', 3)): 100.0,
-             (('B', 0), ('A', 1)): 40.0,
-             (('A', 0), ('B', 1)): 40.0,
-             (('B', 1), ('A', 2)): 40.0,
-             (('A', 1), ('B', 2)): 40.0,
-             (('B', 2), ('A', 3)): 40.0,
-             (('A', 2), ('B', 3)): 40.0,
-             (('B', 3), ('A', 0)): 40.0,
-             (('A', 3), ('B', 0)): 40.0,
-             (('B', 0), ('D', 1)): 68.0,
-             (('D', 0), ('B', 1)): 68.0,
-             (('B', 1), ('D', 2)): 68.0,
-             (('D', 1), ('B', 2)): 68.0,
-             (('B', 2), ('D', 3)): 68.0,
-             (('D', 2), ('B', 3)): 68.0,
-             (('B', 3), ('D', 0)): 68.0,
-             (('D', 3), ('B', 0)): 68.0,
-             (('B', 0), ('C', 1)): 60.0,
-             (('C', 0), ('B', 1)): 60.0,
-             (('B', 1), ('C', 2)): 60.0,
-             (('C', 1), ('B', 2)): 60.0,
-             (('B', 2), ('C', 3)): 60.0,
-             (('C', 2), ('B', 3)): 60.0,
-             (('B', 3), ('C', 0)): 60.0,
-             (('C', 3), ('B', 0)): 60.0,
-             (('A', 0), ('D', 1)): 70.0,
-             (('D', 0), ('A', 1)): 70.0,
-             (('A', 1), ('D', 2)): 70.0,
-             (('D', 1), ('A', 2)): 70.0,
-             (('A', 2), ('D', 3)): 70.0,
-             (('D', 2), ('A', 3)): 70.0,
-             (('A', 3), ('D', 0)): 70.0,
-             (('D', 3), ('A', 0)): 70.0,
-             (('A', 0), ('C', 1)): 84.0,
-             (('C', 0), ('A', 1)): 84.0,
-             (('A', 1), ('C', 2)): 84.0,
-             (('C', 1), ('A', 2)): 84.0,
-             (('A', 2), ('C', 3)): 84.0,
-             (('C', 2), ('A', 3)): 84.0,
-             (('A', 3), ('C', 0)): 84.0,
-             (('C', 3), ('A', 0)): 84.0,
-             (('D', 0), ('C', 1)): 24.0,
-             (('C', 0), ('D', 1)): 24.0,
-             (('D', 1), ('C', 2)): 24.0,
-             (('C', 1), ('D', 2)): 24.0,
-             (('D', 2), ('C', 3)): 24.0,
-             (('C', 2), ('D', 3)): 24.0,
-             (('D', 3), ('C', 0)): 24.0,
-             (('C', 3), ('D', 0)): 24.0})</code></pre>
+             (('C', 3), ('B', 3)): 100.0,
+             (('D', 3), ('A', 3)): 100.0,
+             (('D', 3), ('C', 3)): 100.0,
+             (('D', 3), ('B', 3)): 100.0})</code></pre>
 </div>
 </div>
 <p>These challenges have been also classically solved using simulated annealing procedures.</p>
-<div id="12a4ac8f" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.algorithms <span class="im">import</span> approximation <span class="im">as</span> approx</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> approx.simulated_annealing_tsp(G, <span class="st">"greedy"</span>, source<span class="op">=</span><span class="st">"D"</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e96609ac" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.algorithms <span class="im">import</span> approximation <span class="im">as</span> approx</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> approx.simulated_annealing_tsp(G, <span class="st">"greedy"</span>, source<span class="op">=</span><span class="st">"D"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cost for route ['D', 'C', 'B', 'A', 'D'] is 97</code></pre>
 </div>
 </div>
 <p>And can be also solved by traversing the whole solution space (if possible).</p>
-<div id="32330808" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> dimod.ExactSolver()</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> sampler.sample_qubo(Q)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="368bbb27" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> dimod.ExactSolver()</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> sampler.sample_qubo(Q)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ('A', 0) ('A', 1) ('A', 2) ('A', 3) ('B', 0) ... ('D', 3) energy num_oc.
-0         0        1        0        0        1 ...        0 -606.0       1
-1         0        0        1        0        0 ...        1 -606.0       1
-2         1        0        0        0        0 ...        0 -606.0       1
-3         0        0        0        1        1 ...        0 -606.0       1
+0         0        1        0        0        0 ...        0 -606.0       1
+1         1        0        0        0        0 ...        0 -606.0       1
+2         1        0        0        0        0 ...        1 -606.0       1
+3         0        0        1        0        0 ...        0 -606.0       1
 4         0        0        0        1        0 ...        0 -606.0       1
-5         0        1        0        0        0 ...        0 -606.0       1
-6         0        0        1        0        0 ...        0 -606.0       1
-7         1        0        0        0        0 ...        1 -606.0       1
+5         0        0        0        1        1 ...        0 -606.0       1
+6         0        0        1        0        0 ...        1 -606.0       1
+7         0        1        0        0        1 ...        0 -606.0       1
 8         0        1        0        0        1 ...        1 -584.0       1
 9         0        0        1        0        0 ...        0 -584.0       1
-10        0        0        1        0        0 ...        0 -584.0       1
-11        0        0        0        1        0 ...        0 -584.0       1
-12        1        0        0        0        0 ...        0 -584.0       1
+10        0        0        0        1        0 ...        0 -584.0       1
+11        1        0        0        0        0 ...        0 -584.0       1
+12        0        1        0        0        0 ...        1 -584.0       1
 13        0        0        0        1        1 ...        0 -584.0       1
-14        0        1        0        0        0 ...        1 -584.0       1
+14        0        0        1        0        0 ...        0 -584.0       1
 ['BINARY', 15 rows, 15 samples, 16 variables]</code></pre>
 </div>
 </div>
 <p>Several options show to be optimal, which is the case. This is one of this examples where quantum superposition could render a estate that reveals all optimal configurations.</p>
-<div id="01f2c5f6" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> route:</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> route[key] <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        cycle[key[<span class="dv">1</span>]] <span class="op">=</span> key[<span class="dv">0</span>]</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>cycle[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> cycle[<span class="dv">0</span>]</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a0ccd456" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> route:</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> route[key] <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>        cycle[key[<span class="dv">1</span>]] <span class="op">=</span> key[<span class="dv">0</span>]</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>cycle[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> cycle[<span class="dv">0</span>]</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cost for route ['B', 'A', 'D', 'C', 'B'] is 97</code></pre>
+<pre><code>Cost for route ['D', 'A', 'B', 'C', 'D'] is 97</code></pre>
 </div>
 </div>
 <p>Using <a href="https://github.com/dwavesystems/dwave-neal">DWave’s package</a> we could also check SA performance.</p>
-<div id="24055fa3" class="cell" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> neal</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> neal.SimulatedAnnealingSampler()</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> sampler.sample_qubo(Q)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e5d67449" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> neal</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> neal.SimulatedAnnealingSampler()</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> sampler.sample_qubo(Q)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ('A', 0) ('A', 1) ('A', 2) ('A', 3) ('B', 0) ... ('D', 3) energy num_oc.
-0        1        0        0        0        0 ...        0 -584.0       1
+0        1        0        0        0        0 ...        1 -606.0       1
 ['BINARY', 1 rows, 1 samples, 16 variables]</code></pre>
 </div>
 </div>
-<div id="12ce852f" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> route:</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> route[key] <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>        cycle[key[<span class="dv">1</span>]] <span class="op">=</span> key[<span class="dv">0</span>]</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>cycle[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> cycle[<span class="dv">0</span>]</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c1ea1d58" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> route:</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> route[key] <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>        cycle[key[<span class="dv">1</span>]] <span class="op">=</span> key[<span class="dv">0</span>]</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>cycle[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> cycle[<span class="dv">0</span>]</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cost for route ['A', 'C', 'D', 'B', 'A'] is 108</code></pre>
+<pre><code>Cost for route ['A', 'B', 'C', 'D', 'A'] is 97</code></pre>
 </div>
 </div>
-<p>We will recover this formulation for the comparison example on the different ways of implementing the solution to this challenge.</p>
+<p>We will recover this formulation for the comparison example on the different ways of implementing the solution to this challenge. There do exist other approaches based on <a href="https://arxiv.org/pdf/2502.08853v1">dynamic programming</a> but better stick to the basics for now.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-lucas2014ising" class="csl-entry" role="listitem">
 Lucas, Andrew. 2014. <span>“Ising Formulations of Many NP Problems.”</span> <em>Frontiers in Physics</em> 2: 5.
+</div>
+<div id="ref-mezard2009information" class="csl-entry" role="listitem">
+Mezard, Marc, and Andrea Montanari. 2009. <em>Information, Physics, and Computation</em>. Oxford University Press.
 </div>
 </div>
 </section>
