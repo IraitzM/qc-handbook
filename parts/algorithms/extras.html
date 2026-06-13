@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Final remarks – Quantum Computing Handbook</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -24,7 +27,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,15 +57,14 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5f8839f8281ea5a7d02c34c26640a9a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -544,7 +545,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section id="qaoa" class="level2">
 <h2 class="anchored" data-anchor-id="qaoa">QAOA</h2>
 <p>Like VQE, QAOA has been put to a test and several <em>improvements</em> have been propose to tackle detected inefficiencies or simply try to boost its performance.</p>
-<p><strong>W</strong>arm-<strong>S</strong>tarted QAOA <span class="citation" data-cites="egger2021warm">(<a href="../references.html#ref-egger2021warm" role="doc-biblioref">Egger, Mareček, and Woerner 2021</a>)</span> proposes classically solving the relaxed version fo the problem so that it is used to warm-start the problem (replacing our initial state towards the one of the relaxed solution). An interesting guide can be found here <a href="https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html">https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html</a>.</p>
+<p><strong>W</strong>arm-<strong>S</strong>tarted QAOA <span class="citation" data-cites="egger2021warm">(<a href="../references.html#ref-egger2021warm" role="doc-biblioref">Egger et al. 2021</a>)</span> proposes classically solving the relaxed version fo the problem so that it is used to warm-start the problem (replacing our initial state towards the one of the relaxed solution). An interesting guide can be found here <a href="https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html">https://qiskit.org/ecosystem/optimization/tutorials/10_warm_start_qaoa.html</a>.</p>
 <p>By following a Reinforcement learning approach one can try to find the optimal policy by which ideal parameters can be proposed <em>a priori</em> avoiding any gradient based approach that may lead to localized solutions <span class="citation" data-cites="wauters2020reinforcement">(<a href="../references.html#ref-wauters2020reinforcement" role="doc-biblioref">Wauters et al. 2020</a>)</span>. On the bad side of this approach, reinforcement learning requires quite some computing time to <em>try-fail-learn</em> the ideal parameters to be used.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
@@ -571,7 +572,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>In general, the systems we often work with have a hard limitation on how big our problems can be. Some options have appeared but classical solvers can also handle pretty well small size problems so we may find there is no huge gain in many cases. Nevertheless, we will explore what can be done.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-anastasiou2024tetris" class="csl-entry" role="listitem">
 Anastasiou, Panagiotis G, Yanzhu Chen, Nicholas J Mayhall, Edwin Barnes, and Sophia E Economou. 2024. <span>“TETRIS-ADAPT-VQE: An Adaptive Algorithm That Yields Shallower, Denser Circuit Ans<span>ä</span>tze.”</span> <em>Physical Review Research</em> 6 (1): 013254.
 </div>
@@ -588,7 +589,7 @@ Leone, Lorenzo, Salvatore FE Oliviero, Lukasz Cincio, and Marco Cerezo. 2024. <s
 McClean, Jarrod R, Sergio Boixo, Vadim N Smelyanskiy, Ryan Babbush, and Hartmut Neven. 2018. <span>“Barren Plateaus in Quantum Neural Network Training Landscapes.”</span> <em>Nature Communications</em> 9 (1): 4812.
 </div>
 <div id="ref-ponce2025graph" class="csl-entry" role="listitem">
-Ponce, Moises, Rebekah Herrman, Phillip C Lotshaw, Sarah Powers, George Siopsis, Travis Humble, and James Ostrowski. 2025. <span>“Graph Decomposition Techniques for Solving Combinatorial Optimization Problems with Variational Quantum Algorithms.”</span> <em>Quantum Information Processing</em> 24 (2): 60.
+Ponce, Moises, Rebekah Herrman, Phillip C Lotshaw, et al. 2025. <span>“Graph Decomposition Techniques for Solving Combinatorial Optimization Problems with Variational Quantum Algorithms.”</span> <em>Quantum Information Processing</em> 24 (2): 60.
 </div>
 <div id="ref-wauters2020reinforcement" class="csl-entry" role="listitem">
 Wauters, Matteo M, Emanuele Panizon, Glen B Mbeng, and Giuseppe E Santoro. 2020. <span>“Reinforcement-Learning-Assisted Quantum Optimization.”</span> <em>Physical Review Research</em> 2 (3): 033446.

@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Quantum Neural Networks – Quantum Computing Handbook</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5f8839f8281ea5a7d02c34c26640a9a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -147,7 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -584,7 +585,7 @@ window.Quarto = {
 <li>Quantum Computing = linear (up until measurement)</li>
 <li>Quantum Neural Networks = ?</li>
 </ul>
-<p>but in fact the literature keeps growing about the potential of these techniques to provide similar results to those obtained within the state of the art but with much fewer resources <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia, Scarpa, and Pozas-Kerstjens 2023</a>)</span>.</p>
+<p>but in fact the literature keeps growing about the potential of these techniques to provide similar results to those obtained within the state of the art but with much fewer resources <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia et al. 2023</a>)</span>.</p>
 <p>We already know classical data can be converted into quantum states. What if we take the chance to extend the existing quantum circuit so that it also performs the whole action until a class is selected as part of the measurement process?</p>
 <p>The generic name of this type of circuit is the <strong>Variational Quantum Classifier</strong> and shows following structure.</p>
 <figure class="figure">
@@ -663,11 +664,11 @@ window.Quarto = {
 <p>Regression tasks can also be performed if we consider the expectation value the one mapping our target value. In that case a simple change of evaluation function would do the trick. We will see that actually it is easy as well to invoke but as we already know, getting the expectation value over simple circuit sampling may require several evaluations of the circuit in order to get all basis changes for a proper expectation value evaluation.</p>
 <section id="choosing-your-feature-maps-and-ansätze" class="level2">
 <h2 class="anchored" data-anchor-id="choosing-your-feature-maps-and-ansätze">Choosing your feature maps and ansätze</h2>
-<p>Now we need to decide which ansatz is the best option in our case. There are several features we would like to consider but one of the most relevant ones might be <strong>expressivity</strong>. <strong>Expressivity</strong> is a key aspect with any function approximator, like with neural networks which are known to be universal approximators <span class="citation" data-cites="kidger2020universal">(<a href="../references.html#ref-kidger2020universal" role="doc-biblioref">Kidger and Lyons 2020</a>)</span>. We expect Quantum Neural Networks to provide similar capacity as they have already being evaluated in similar terms <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia, Scarpa, and Pozas-Kerstjens 2023</a>)</span> but this will be limited by the ansatz selection. The ansatz is essentially where a given Quantum Neural Network will produce states for a particular Hilbert space and expressivity, in those terms, refers to the capacity of covering said Hilbert space.</p>
-<p>A <span class="math inline">\(4\)</span> qubit system represents a <span class="math inline">\(2^4 = 16\)</span> dimension Hilbert space (<span class="math inline">\(\mathcal{H}\)</span>). How can we measure how expressive our ansatz is? Evaluating analytically the coverage of the Hilbert space might not be practical, but we could simply sample from the circuit a set of times and compare the states we get in terms of distance for said space. <strong>Fidelity</strong> can be used to measure the <em>distance</em> between two states as we saw <a href="../../parts/qml/kernels.html">before</a>, so we get and compare it with what would be the ideal scenario, a uniform distribution of the entire fidelity space for maximal expressivity <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim, Johnson, and Aspuru-Guzik 2019</a>)</span>. If the states generated by our circuit can render all distances, from same sate (fidelity of one) to the orthogonal case (fidelity of zero) then our circuit can cover the whole spectrum to our Hilbert space. You can read more on the appendix about <a href="../../parts/appendix/quantumfeatures.html">quantum features</a>.</p>
+<p>Now we need to decide which ansatz is the best option in our case. There are several features we would like to consider but one of the most relevant ones might be <strong>expressivity</strong>. <strong>Expressivity</strong> is a key aspect with any function approximator, like with neural networks which are known to be universal approximators <span class="citation" data-cites="kidger2020universal">(<a href="../references.html#ref-kidger2020universal" role="doc-biblioref">Kidger and Lyons 2020</a>)</span>. We expect Quantum Neural Networks to provide similar capacity as they have already being evaluated in similar terms <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia et al. 2023</a>)</span> but this will be limited by the ansatz selection. The ansatz is essentially where a given Quantum Neural Network will produce states for a particular Hilbert space and expressivity, in those terms, refers to the capacity of covering said Hilbert space.</p>
+<p>A <span class="math inline">\(4\)</span> qubit system represents a <span class="math inline">\(2^4 = 16\)</span> dimension Hilbert space (<span class="math inline">\(\mathcal{H}\)</span>). How can we measure how expressive our ansatz is? Evaluating analytically the coverage of the Hilbert space might not be practical, but we could simply sample from the circuit a set of times and compare the states we get in terms of distance for said space. <strong>Fidelity</strong> can be used to measure the <em>distance</em> between two states as we saw <a href="../../parts/qml/kernels.html">before</a>, so we get and compare it with what would be the ideal scenario, a uniform distribution of the entire fidelity space for maximal expressivity <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et al. 2019</a>)</span>. If the states generated by our circuit can render all distances, from same sate (fidelity of one) to the orthogonal case (fidelity of zero) then our circuit can cover the whole spectrum to our Hilbert space. You can read more on the appendix about <a href="../../parts/appendix/quantumfeatures.html">quantum features</a>.</p>
 <p>The easiest way forward is to look into the previous work, that way we can cut some corners and go straight to the configurations that worked for others. We have some references in the literature but the people working at sQUlearn have already implemented plenty options for us.</p>
 <p>Imagine you would like to test the encoding at <em>Reduction of finite sampling noise in quantum neural networks</em> <span class="citation" data-cites="Kreplin_2024">(<a href="../references.html#ref-Kreplin_2024" role="doc-biblioref">Kreplin and Roth 2024</a>)</span>.</p>
-<div id="29abfa61" class="cell" data-execution_count="1">
+<div id="8e7e3878" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> ChebyshevPQC</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> ChebyshevPQC(num_qubits <span class="op">=</span> <span class="dv">4</span>, num_features <span class="op">=</span> <span class="dv">1</span>, num_layers <span class="op">=</span> <span class="dv">2</span>)</span>
@@ -681,7 +682,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Easy pease! Same with others like <em>Training Quantum Embedding Kernels on Near-Term Quantum Computers</em> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span></p>
-<div id="79ffb394" class="cell" data-execution_count="2">
+<div id="e6988196" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> HubregtsenEncodingCircuit(num_qubits<span class="op">=</span><span class="dv">4</span>, num_features<span class="op">=</span><span class="dv">2</span>, num_layers<span class="op">=</span><span class="dv">2</span>)</span>
@@ -695,7 +696,7 @@ window.Quarto = {
 </div>
 </div>
 <p>But you can also let your creativity flow…</p>
-<div id="20f1b9e2" class="cell" data-execution_count="3">
+<div id="6699d972" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> LayeredEncodingCircuit</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit.layered_encoding_circuit <span class="im">import</span> Layer</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -720,12 +721,12 @@ window.Quarto = {
 <p>More on this on <a href="https://squlearn.github.io/user_guide/encoding_circuits.html">sQUlearn’s documentation</a>. Do check it out.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-Hubregtsen_2022" class="csl-entry" role="listitem">
 Hubregtsen, Thomas, David Wierichs, Elies Gil-Fuster, Peter-Jan H. S. Derks, Paul K. Faehrmann, and Johannes Jakob Meyer. 2022. <span>“Training Quantum Embedding Kernels on Near-Term Quantum Computers.”</span> <em>Physical Review A</em> 106 (4). <a href="https://doi.org/10.1103/physreva.106.042431">https://doi.org/10.1103/physreva.106.042431</a>.
 </div>
 <div id="ref-kidger2020universal" class="csl-entry" role="listitem">
-Kidger, Patrick, and Terry Lyons. 2020. <span>“Universal Approximation with Deep Narrow Networks.”</span> In <em>Conference on Learning Theory</em>, 2306–27. PMLR.
+Kidger, Patrick, and Terry Lyons. 2020. <span>“Universal Approximation with Deep Narrow Networks.”</span> <em>Conference on Learning Theory</em>, 2306–27.
 </div>
 <div id="ref-Kreplin_2024" class="csl-entry" role="listitem">
 Kreplin, David A., and Marco Roth. 2024. <span>“Reduction of Finite Sampling Noise in Quantum Neural Networks.”</span> <em>Quantum</em> 8 (June): 1385. <a href="https://doi.org/10.22331/q-2024-06-25-1385">https://doi.org/10.22331/q-2024-06-25-1385</a>.

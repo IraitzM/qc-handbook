@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>QUBO formulation – Quantum Computing Handbook</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5f8839f8281ea5a7d02c34c26640a9a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -147,7 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -634,7 +635,7 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 \min_x \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 \]</span></p>
 <p>Let’s select a particular instance for <span class="math inline">\(S\)</span> and <span class="math inline">\(b\)</span>.</p>
-<div id="95e8675f" class="cell" data-execution_count="1">
+<div id="6e5877ed" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> np.array([</span>
@@ -645,7 +646,7 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">17</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>So, now we can start composing our <span class="math inline">\(Q\)</span> matrix.</p>
-<div id="0ce4bd79" class="cell" data-execution_count="2">
+<div id="37ec3003" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> S.shape[<span class="dv">1</span>]</span>
@@ -676,7 +677,7 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 </div>
 </div>
 <p>As you can see the matrix is symetric as there is a natural symmetry between <span class="math inline">\(x_ix_j\)</span> and <span class="math inline">\(x_jx_i\)</span>. We could brute force our solution.</p>
-<div id="4f463e83" class="cell" data-execution_count="3">
+<div id="8acea451" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>min_sol <span class="op">=</span> []</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -692,13 +693,13 @@ H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
 </div>
 </div>
 <p>So our solution should be [1 1 0 1 1], let’s check.</p>
-<div id="3a70b28c" class="cell" data-execution_count="4">
+<div id="37c5d8db" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.matmul(S, [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>array([10, 13, 17])</code></pre>
 </div>
 </div>
-<div id="b5967b6c" class="cell" data-execution_count="5">
+<div id="782c9d50" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>array([10, 13, 17])</code></pre>
@@ -722,7 +723,7 @@ Note
 <p><em>NetworkX package will need to be added to your Python environment for this example</em></p>
 </div>
 </div>
-<div id="0d6b4aad" class="cell" data-execution_count="6">
+<div id="b6978071" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.generators.random_graphs <span class="im">import</span> gnm_random_graph</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -731,7 +732,7 @@ Note
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> gnm_random_graph(size, size, seed<span class="op">=</span>seed)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gnm_random_graph(size, size)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ee62818d" class="cell" data-execution_count="7">
+<div id="9fa572b3" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> gen_graph(<span class="dv">5</span>, <span class="va">None</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>nx.draw(G)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -748,7 +749,7 @@ Note
 \max \sum_{(i,j)} (x_i + x_j - 2x_ix_j)
 \]</span></p>
 <p>which we can convert to a minimization problem by changing the sign.</p>
-<div id="187ea679" class="cell" data-execution_count="8">
+<div id="ee9266bc" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> G.order()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> <span class="bu">list</span>(G.nodes)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -765,17 +766,17 @@ Note
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">*</span>Q <span class="co"># Min</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="24b63e33" class="cell" data-execution_count="9">
+<div id="7cd92b30" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>array([[-2., -0.,  1., -0.,  1.],
-       [-0., -1., -0.,  1., -0.],
-       [ 1., -0., -3.,  1.,  1.],
+<pre><code>array([[-1., -0.,  1., -0., -0.],
+       [-0., -3.,  1.,  1.,  1.],
+       [ 1.,  1., -3.,  1., -0.],
        [-0.,  1.,  1., -2., -0.],
-       [ 1., -0.,  1., -0., -2.]])</code></pre>
+       [-0.,  1., -0., -0., -1.]])</code></pre>
 </div>
 </div>
-<div id="ff1b9154" class="cell" data-execution_count="10">
+<div id="bb23a26b" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>min_sol <span class="op">=</span> []</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -787,16 +788,16 @@ Note
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(min_sol, <span class="st">"|"</span>, min_val)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[0 0 0 1 1] | -4.0</code></pre>
+<pre><code>[0 0 1 0 1] | -4.0</code></pre>
 </div>
 </div>
 <p>This case is a little bit more complicatd as more than one option can be selected. Ideally we would like to obtain all potential solutions.</p>
-<div id="305d28da" class="cell" data-execution_count="11">
+<div id="e0109625" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> np.array(min_sol)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>red_team <span class="op">=</span> np.where(solution <span class="op">==</span> <span class="dv">1</span>) </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>blue_team <span class="op">=</span> np.where(solution <span class="op">==</span> <span class="dv">0</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="be550a0c" class="cell" data-execution_count="12">
+<div id="d1beba41" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G)  <span class="co"># positions for all nodes</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># nodes</span></span>
@@ -844,7 +845,7 @@ Note
 <p>Test case from <a href="https://arxiv.org/pdf/1811.11538.pdf">Quantum Bridge Analytics I</a></p>
 </div>
 </div>
-<div id="28076904" class="cell" data-execution_count="13">
+<div id="5de53af9" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> np.array([</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>],</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">3</span>],</span>
@@ -858,7 +859,7 @@ Note
 <p><span class="math display">\[
 8x_1 + 6x_2 + 5x_3 + 3x_4 + 1s_0 + 2s_1 = 16
 \]</span></p>
-<div id="d6f34994" class="cell" data-execution_count="14">
+<div id="9e2439ec" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>costs.append(<span class="dv">1</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>costs.append(<span class="dv">2</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>costs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -867,10 +868,10 @@ Note
 </div>
 </div>
 <p>And penalty, well, we need to decide on a figure.</p>
-<div id="fd643109" class="cell" data-execution_count="15">
+<div id="85f4287d" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f09522a4" class="cell" data-execution_count="16">
+<div id="d4e1a88d" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(costs)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> np.zeros((n, n))</span>
@@ -887,7 +888,7 @@ Note
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>Q <span class="op">=</span> <span class="op">-</span><span class="fl">1.0</span><span class="op">*</span>Q <span class="co"># min</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4c569b06" class="cell" data-execution_count="17">
+<div id="1f9f85b3" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>array([[-1922.,   476.,   397.,   235.,    80.,   160.],
@@ -898,7 +899,7 @@ Note
        [  160.,   120.,   100.,    60.,    20.,  -600.]])</code></pre>
 </div>
 </div>
-<div id="f7d68d86" class="cell" data-execution_count="18">
+<div id="32fdb657" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>min_val <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>min_sol <span class="op">=</span> []</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -921,7 +922,7 @@ Note
 <center>
 <img src="../../assets/4nodetsp.png" width="20%">
 </center>
-<div id="4eb4a707" class="cell" data-execution_count="19">
+<div id="c768f378" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>G.add_weighted_edges_from({</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="dv">20</span>), (<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="dv">42</span>), (<span class="st">"A"</span>, <span class="st">"D"</span>, <span class="dv">35</span>), (<span class="st">"B"</span>, <span class="st">"A"</span>, <span class="dv">20</span>),</span>
@@ -959,7 +960,7 @@ x_{i \, j} =
 H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lambda\sum_{p=0}^P\left( 1 - \sum_{n=0}^N x_{n,p}\right)^2 + \lambda\sum_{(i,j)\notin G}\sum_{p=0}^P x_{i,p}x_{j,p+q}
 \]</span></p>
 <p>In our QUBO setup, this constraint need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.</p>
-<div id="b4af81f2" class="cell" data-execution_count="20">
+<div id="0140a8fc" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>lagrange <span class="op">=</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then according to previous indications, our formulation should follow the intuition that:</p>
@@ -986,7 +987,7 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 \min \sum_p^P\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=0}^N\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{p&lt;q} x_{n,p}x_{n,q} + 1\right) + \sum_{p=0}^P\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{(i,j)}^G x_{i,p}x_{j,p} + 1\right)
 \]</span></p>
 <p>assuming non existent edges are also added at a high cost (<span class="math inline">\(\lambda\)</span>).</p>
-<div id="bda0be3a" class="cell" data-execution_count="21">
+<div id="9a6f9823" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the QUBO</span></span>
@@ -1031,19 +1032,11 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 <span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>            Q[((node_1, pos), (node_2, pos))] <span class="op">+=</span> lagrange <span class="co"># Cost of being in more than one place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies <span class="math inline">\(Q_{i,j}\)</span> and <span class="math inline">\(Q_{j,i}\)</span> positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.</p>
-<div id="512bd263" class="cell" data-execution_count="22">
+<div id="6184f5fc" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>Q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>defaultdict(float,
-            {(('B', 0), ('A', 1)): 40.0,
-             (('A', 0), ('B', 1)): 40.0,
-             (('B', 1), ('A', 2)): 40.0,
-             (('A', 1), ('B', 2)): 40.0,
-             (('B', 2), ('A', 3)): 40.0,
-             (('A', 2), ('B', 3)): 40.0,
-             (('B', 3), ('A', 0)): 40.0,
-             (('A', 3), ('B', 0)): 40.0,
-             (('B', 0), ('C', 1)): 60.0,
+            {(('B', 0), ('C', 1)): 60.0,
              (('C', 0), ('B', 1)): 60.0,
              (('B', 1), ('C', 2)): 60.0,
              (('C', 1), ('B', 2)): 60.0,
@@ -1059,22 +1052,14 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
              (('D', 2), ('B', 3)): 68.0,
              (('B', 3), ('D', 0)): 68.0,
              (('D', 3), ('B', 0)): 68.0,
-             (('A', 0), ('D', 1)): 70.0,
-             (('D', 0), ('A', 1)): 70.0,
-             (('A', 1), ('D', 2)): 70.0,
-             (('D', 1), ('A', 2)): 70.0,
-             (('A', 2), ('D', 3)): 70.0,
-             (('D', 2), ('A', 3)): 70.0,
-             (('A', 3), ('D', 0)): 70.0,
-             (('D', 3), ('A', 0)): 70.0,
-             (('A', 0), ('C', 1)): 84.0,
-             (('C', 0), ('A', 1)): 84.0,
-             (('A', 1), ('C', 2)): 84.0,
-             (('C', 1), ('A', 2)): 84.0,
-             (('A', 2), ('C', 3)): 84.0,
-             (('C', 2), ('A', 3)): 84.0,
-             (('A', 3), ('C', 0)): 84.0,
-             (('C', 3), ('A', 0)): 84.0,
+             (('B', 0), ('A', 1)): 40.0,
+             (('A', 0), ('B', 1)): 40.0,
+             (('B', 1), ('A', 2)): 40.0,
+             (('A', 1), ('B', 2)): 40.0,
+             (('B', 2), ('A', 3)): 40.0,
+             (('A', 2), ('B', 3)): 40.0,
+             (('B', 3), ('A', 0)): 40.0,
+             (('A', 3), ('B', 0)): 40.0,
              (('C', 0), ('D', 1)): 24.0,
              (('D', 0), ('C', 1)): 24.0,
              (('C', 1), ('D', 2)): 24.0,
@@ -1083,6 +1068,22 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
              (('D', 2), ('C', 3)): 24.0,
              (('C', 3), ('D', 0)): 24.0,
              (('D', 3), ('C', 0)): 24.0,
+             (('C', 0), ('A', 1)): 84.0,
+             (('A', 0), ('C', 1)): 84.0,
+             (('C', 1), ('A', 2)): 84.0,
+             (('A', 1), ('C', 2)): 84.0,
+             (('C', 2), ('A', 3)): 84.0,
+             (('A', 2), ('C', 3)): 84.0,
+             (('C', 3), ('A', 0)): 84.0,
+             (('A', 3), ('C', 0)): 84.0,
+             (('A', 0), ('D', 1)): 70.0,
+             (('D', 0), ('A', 1)): 70.0,
+             (('A', 1), ('D', 2)): 70.0,
+             (('D', 1), ('A', 2)): 70.0,
+             (('A', 2), ('D', 3)): 70.0,
+             (('D', 2), ('A', 3)): 70.0,
+             (('A', 3), ('D', 0)): 70.0,
+             (('D', 3), ('A', 0)): 70.0,
              (('B', 0), ('B', 0)): -200.0,
              (('B', 0), ('B', 1)): 100.0,
              (('B', 0), ('B', 2)): 100.0,
@@ -1093,16 +1094,6 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
              (('B', 2), ('B', 2)): -200.0,
              (('B', 2), ('B', 3)): 100.0,
              (('B', 3), ('B', 3)): -200.0,
-             (('A', 0), ('A', 0)): -200.0,
-             (('A', 0), ('A', 1)): 100.0,
-             (('A', 0), ('A', 2)): 100.0,
-             (('A', 0), ('A', 3)): 100.0,
-             (('A', 1), ('A', 1)): -200.0,
-             (('A', 1), ('A', 2)): 100.0,
-             (('A', 1), ('A', 3)): 100.0,
-             (('A', 2), ('A', 2)): -200.0,
-             (('A', 2), ('A', 3)): 100.0,
-             (('A', 3), ('A', 3)): -200.0,
              (('C', 0), ('C', 0)): -200.0,
              (('C', 0), ('C', 1)): 100.0,
              (('C', 0), ('C', 2)): 100.0,
@@ -1113,6 +1104,16 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
              (('C', 2), ('C', 2)): -200.0,
              (('C', 2), ('C', 3)): 100.0,
              (('C', 3), ('C', 3)): -200.0,
+             (('A', 0), ('A', 0)): -200.0,
+             (('A', 0), ('A', 1)): 100.0,
+             (('A', 0), ('A', 2)): 100.0,
+             (('A', 0), ('A', 3)): 100.0,
+             (('A', 1), ('A', 1)): -200.0,
+             (('A', 1), ('A', 2)): 100.0,
+             (('A', 1), ('A', 3)): 100.0,
+             (('A', 2), ('A', 2)): -200.0,
+             (('A', 2), ('A', 3)): 100.0,
+             (('A', 3), ('A', 3)): -200.0,
              (('D', 0), ('D', 0)): -200.0,
              (('D', 0), ('D', 1)): 100.0,
              (('D', 0), ('D', 2)): 100.0,
@@ -1124,57 +1125,57 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
              (('D', 2), ('D', 3)): 100.0,
              (('D', 3), ('D', 3)): -200.0,
              (('B', 0), ('A', 0)): 100.0,
-             (('B', 0), ('C', 0)): 100.0,
              (('B', 0), ('D', 0)): 100.0,
-             (('A', 0), ('C', 0)): 100.0,
-             (('A', 0), ('D', 0)): 100.0,
-             (('A', 0), ('B', 0)): 100.0,
+             (('B', 0), ('C', 0)): 100.0,
+             (('C', 0), ('B', 0)): 100.0,
              (('C', 0), ('A', 0)): 100.0,
              (('C', 0), ('D', 0)): 100.0,
-             (('C', 0), ('B', 0)): 100.0,
+             (('A', 0), ('B', 0)): 100.0,
+             (('A', 0), ('D', 0)): 100.0,
+             (('A', 0), ('C', 0)): 100.0,
+             (('D', 0), ('B', 0)): 100.0,
              (('D', 0), ('A', 0)): 100.0,
              (('D', 0), ('C', 0)): 100.0,
-             (('D', 0), ('B', 0)): 100.0,
              (('B', 1), ('A', 1)): 100.0,
-             (('B', 1), ('C', 1)): 100.0,
              (('B', 1), ('D', 1)): 100.0,
-             (('A', 1), ('C', 1)): 100.0,
-             (('A', 1), ('D', 1)): 100.0,
-             (('A', 1), ('B', 1)): 100.0,
+             (('B', 1), ('C', 1)): 100.0,
+             (('C', 1), ('B', 1)): 100.0,
              (('C', 1), ('A', 1)): 100.0,
              (('C', 1), ('D', 1)): 100.0,
-             (('C', 1), ('B', 1)): 100.0,
+             (('A', 1), ('B', 1)): 100.0,
+             (('A', 1), ('D', 1)): 100.0,
+             (('A', 1), ('C', 1)): 100.0,
+             (('D', 1), ('B', 1)): 100.0,
              (('D', 1), ('A', 1)): 100.0,
              (('D', 1), ('C', 1)): 100.0,
-             (('D', 1), ('B', 1)): 100.0,
              (('B', 2), ('A', 2)): 100.0,
-             (('B', 2), ('C', 2)): 100.0,
              (('B', 2), ('D', 2)): 100.0,
-             (('A', 2), ('C', 2)): 100.0,
-             (('A', 2), ('D', 2)): 100.0,
-             (('A', 2), ('B', 2)): 100.0,
+             (('B', 2), ('C', 2)): 100.0,
+             (('C', 2), ('B', 2)): 100.0,
              (('C', 2), ('A', 2)): 100.0,
              (('C', 2), ('D', 2)): 100.0,
-             (('C', 2), ('B', 2)): 100.0,
+             (('A', 2), ('B', 2)): 100.0,
+             (('A', 2), ('D', 2)): 100.0,
+             (('A', 2), ('C', 2)): 100.0,
+             (('D', 2), ('B', 2)): 100.0,
              (('D', 2), ('A', 2)): 100.0,
              (('D', 2), ('C', 2)): 100.0,
-             (('D', 2), ('B', 2)): 100.0,
              (('B', 3), ('A', 3)): 100.0,
-             (('B', 3), ('C', 3)): 100.0,
              (('B', 3), ('D', 3)): 100.0,
-             (('A', 3), ('C', 3)): 100.0,
-             (('A', 3), ('D', 3)): 100.0,
-             (('A', 3), ('B', 3)): 100.0,
+             (('B', 3), ('C', 3)): 100.0,
+             (('C', 3), ('B', 3)): 100.0,
              (('C', 3), ('A', 3)): 100.0,
              (('C', 3), ('D', 3)): 100.0,
-             (('C', 3), ('B', 3)): 100.0,
+             (('A', 3), ('B', 3)): 100.0,
+             (('A', 3), ('D', 3)): 100.0,
+             (('A', 3), ('C', 3)): 100.0,
+             (('D', 3), ('B', 3)): 100.0,
              (('D', 3), ('A', 3)): 100.0,
-             (('D', 3), ('C', 3)): 100.0,
-             (('D', 3), ('B', 3)): 100.0})</code></pre>
+             (('D', 3), ('C', 3)): 100.0})</code></pre>
 </div>
 </div>
 <p>These challenges have been also classically solved using simulated annealing procedures.</p>
-<div id="e96609ac" class="cell" data-execution_count="23">
+<div id="91c7f935" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.algorithms <span class="im">import</span> approximation <span class="im">as</span> approx</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> approx.simulated_annealing_tsp(G, <span class="st">"greedy"</span>, source<span class="op">=</span><span class="st">"D"</span>)</span>
@@ -1185,7 +1186,7 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 </div>
 </div>
 <p>And can be also solved by traversing the whole solution space (if possible).</p>
-<div id="368bbb27" class="cell" data-execution_count="24">
+<div id="ce8170fe" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> dimod.ExactSolver()</span>
@@ -1195,26 +1196,26 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ('A', 0) ('A', 1) ('A', 2) ('A', 3) ('B', 0) ... ('D', 3) energy num_oc.
-0         0        1        0        0        0 ...        0 -606.0       1
+0         0        0        1        0        0 ...        0 -606.0       1
 1         1        0        0        0        0 ...        0 -606.0       1
-2         1        0        0        0        0 ...        1 -606.0       1
-3         0        0        1        0        0 ...        0 -606.0       1
-4         0        0        0        1        0 ...        0 -606.0       1
-5         0        0        0        1        1 ...        0 -606.0       1
-6         0        0        1        0        0 ...        1 -606.0       1
-7         0        1        0        0        1 ...        0 -606.0       1
-8         0        1        0        0        1 ...        1 -584.0       1
+2         0        0        0        1        0 ...        0 -606.0       1
+3         1        0        0        0        0 ...        1 -606.0       1
+4         0        0        0        1        1 ...        0 -606.0       1
+5         0        1        0        0        1 ...        0 -606.0       1
+6         0        1        0        0        0 ...        0 -606.0       1
+7         0        0        1        0        0 ...        1 -606.0       1
+8         0        0        0        1        0 ...        0 -584.0       1
 9         0        0        1        0        0 ...        0 -584.0       1
-10        0        0        0        1        0 ...        0 -584.0       1
+10        1        0        0        0        0 ...        0 -584.0       1
 11        1        0        0        0        0 ...        0 -584.0       1
-12        0        1        0        0        0 ...        1 -584.0       1
-13        0        0        0        1        1 ...        0 -584.0       1
-14        0        0        1        0        0 ...        0 -584.0       1
+12        0        0        0        1        1 ...        0 -584.0       1
+13        0        1        0        0        0 ...        1 -584.0       1
+14        0        1        0        0        1 ...        1 -584.0       1
 ['BINARY', 15 rows, 15 samples, 16 variables]</code></pre>
 </div>
 </div>
 <p>Several options show to be optimal, which is the case. This is one of this examples where quantum superposition could render a estate that reveals all optimal configurations.</p>
-<div id="a0ccd456" class="cell" data-execution_count="25">
+<div id="4960c595" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span></span>
@@ -1226,11 +1227,11 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 <span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>cost <span class="op">=</span> <span class="bu">sum</span>(G[n][nbr][<span class="st">"weight"</span>] <span class="cf">for</span> n, nbr <span class="kw">in</span> nx.utils.pairwise(cycle))</span>
 <span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cost for route </span><span class="sc">{</span>cycle<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>cost<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Cost for route ['D', 'A', 'B', 'C', 'D'] is 97</code></pre>
+<pre><code>Cost for route ['C', 'D', 'A', 'B', 'C'] is 97</code></pre>
 </div>
 </div>
 <p>Using <a href="https://github.com/dwavesystems/dwave-neal">DWave’s package</a> we could also check SA performance.</p>
-<div id="e5d67449" class="cell" data-execution_count="26">
+<div id="3ee69be1" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> neal</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> neal.SimulatedAnnealingSampler()</span>
@@ -1242,7 +1243,7 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 ['BINARY', 1 rows, 1 samples, 16 variables]</code></pre>
 </div>
 </div>
-<div id="c1ea1d58" class="cell" data-execution_count="27">
+<div id="cc418cb8" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>route <span class="op">=</span> response.first.sample</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>cycle <span class="op">=</span> [<span class="va">None</span>]<span class="op">*</span><span class="dv">5</span></span>
@@ -1260,7 +1261,7 @@ H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lam
 <p>We will recover this formulation for the comparison example on the different ways of implementing the solution to this challenge. There do exist other approaches based on <a href="https://arxiv.org/pdf/2502.08853v1">dynamic programming</a> but better stick to the basics for now.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-lucas2014ising" class="csl-entry" role="listitem">
 Lucas, Andrew. 2014. <span>“Ising Formulations of Many NP Problems.”</span> <em>Frontiers in Physics</em> 2: 5.
 </div>

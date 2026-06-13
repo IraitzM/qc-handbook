@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>2&nbsp; Quantum Neural Networks – Quantum Computing Handbook</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -90,15 +92,14 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5f8839f8281ea5a7d02c34c26640a9a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -147,7 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -687,7 +688,7 @@ weighted avg       0.77      0.76      0.76        33
 </code></pre>
 </div>
 </div>
-<p>Cool! You can check other compositions, like the Data Re-Uploading one or othes used in different benchmarks in the literature <span class="citation" data-cites="P_rez_Salinas_2020 bowles2024betterclassicalsubtleart">(<a href="../references.html#ref-P_rez_Salinas_2020" role="doc-biblioref">Pérez-Salinas et al. 2020</a>; <a href="../references.html#ref-bowles2024betterclassicalsubtleart" role="doc-biblioref">Bowles, Ahmed, and Schuld 2024</a>)</span>.</p>
+<p>Cool! You can check other compositions, like the Data Re-Uploading one or othes used in different benchmarks in the literature <span class="citation" data-cites="P_rez_Salinas_2020 bowles2024betterclassicalsubtleart">(<a href="../references.html#ref-P_rez_Salinas_2020" role="doc-biblioref">Pérez-Salinas et al. 2020</a>; <a href="../references.html#ref-bowles2024betterclassicalsubtleart" role="doc-biblioref">Bowles et al. 2024</a>)</span>.</p>
 <div id="cell-16" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -722,9 +723,9 @@ weighted avg       0.89      0.88      0.88        33
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-bowles2024betterclassicalsubtleart" class="csl-entry" role="listitem">
-Bowles, Joseph, Shahnawaz Ahmed, and Maria Schuld. 2024. <span>“Better Than Classical? The Subtle Art of Benchmarking Quantum Machine Learning Models.”</span> <a href="https://arxiv.org/abs/2403.07059">https://arxiv.org/abs/2403.07059</a>.
+Bowles, Joseph, Shahnawaz Ahmed, and Maria Schuld. 2024. <em>Better Than Classical? The Subtle Art of Benchmarking Quantum Machine Learning Models</em>. <a href="https://arxiv.org/abs/2403.07059">https://arxiv.org/abs/2403.07059</a>.
 </div>
 <div id="ref-P_rez_Salinas_2020" class="csl-entry" role="listitem">
 Pérez-Salinas, Adrián, Alba Cervera-Lierta, Elies Gil-Fuster, and José I. Latorre. 2020. <span>“Data Re-Uploading for a Universal Quantum Classifier.”</span> <em>Quantum</em> 4 (February): 226. <a href="https://doi.org/10.22331/q-2020-02-06-226">https://doi.org/10.22331/q-2020-02-06-226</a>.

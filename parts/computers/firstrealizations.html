@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>First realizations – Quantum Computing Handbook</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -24,7 +27,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -55,15 +57,14 @@ div.csl-indent {
 <link href="../../cover.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-628e8940dffb525988e468817a778fae.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5f8839f8281ea5a7d02c34c26640a9a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,7 +113,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -545,7 +546,7 @@ window.Quarto = {
 
 <p>Motivated by Shor’s algorithm <span class="citation" data-cites="shor1994algorithms">(<a href="../references.html#ref-shor1994algorithms" role="doc-biblioref">Shor 1994</a>)</span>, during late 90s there was quite some motivation to provide a physical realization of what up to that moment was mostly theoretical work.</p>
 <p>Any two-level physical system could be a good candidate for a qubit but we need to a find a physical realization that allows for operation and performing the set of tasks we could consider an algorithm.</p>
-<p>In 1998, using nuclear magnetic resonance (NMR) both Oxford University and Stanford achieved the first implementations of two qubit algorithms <span class="citation" data-cites="chuang1998experimental">(<a href="../references.html#ref-chuang1998experimental" role="doc-biblioref">Chuang, Gershenfeld, and Kubinec 1998</a>)</span>. More or less in the same period, Yasunobu Nakamura and Jaw-Shen Tsai demonstrated how a superconducting chip can be used as a qubit by controlling the current through it <span class="citation" data-cites="nakamura2001rabi">(<a href="../references.html#ref-nakamura2001rabi" role="doc-biblioref">Nakamura, Pashkin, and Tsai 2001</a>)</span>.</p>
+<p>In 1998, using nuclear magnetic resonance (NMR) both Oxford University and Stanford achieved the first implementations of two qubit algorithms <span class="citation" data-cites="chuang1998experimental">(<a href="../references.html#ref-chuang1998experimental" role="doc-biblioref">Chuang et al. 1998</a>)</span>. More or less in the same period, Yasunobu Nakamura and Jaw-Shen Tsai demonstrated how a superconducting chip can be used as a qubit by controlling the current through it <span class="citation" data-cites="nakamura2001rabi">(<a href="../references.html#ref-nakamura2001rabi" role="doc-biblioref">Nakamura et al. 2001</a>)</span>.</p>
 <p>2007 is known to be a key date as the first <strong>transmon</strong> was born. It is the equivalent of the transistor in the quantum regime <span class="citation" data-cites="koch2007charge">(<a href="../references.html#ref-koch2007charge" role="doc-biblioref">Koch et al. 2007</a>)</span>. So first qubits exist since early 2000 which is not much but from manufacturing a qubit to building a whole computer… that is a long road.</p>
 <p>Many metrics will be used to compare different devices and realizations in following sections so better get them clear now.</p>
 <p><strong>T1 time</strong></p>
@@ -587,21 +588,21 @@ F(\rho, \sigma) = |\langle \psi | \phi \rangle | ^2
 <p>With this recipe many platforms have been proposed using different physical realizations for the technology.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-chuang1998experimental" class="csl-entry" role="listitem">
 Chuang, Isaac L, Neil Gershenfeld, and Mark Kubinec. 1998. <span>“Experimental Implementation of Fast Quantum Searching.”</span> <em>Physical Review Letters</em> 80 (15): 3408.
 </div>
 <div id="ref-divincenzo1997topics" class="csl-entry" role="listitem">
-DiVincenzo, David P. 1997. <span>“Topics in Quantum Computers.”</span> In <em>Mesoscopic Electron Transport</em>, 657–77. Springer.
+DiVincenzo, David P. 1997. <span>“Topics in Quantum Computers.”</span> In <em>Mesoscopic Electron Transport</em>. Springer.
 </div>
 <div id="ref-koch2007charge" class="csl-entry" role="listitem">
-Koch, Jens, Terri M Yu, Jay Gambetta, Andrew A Houck, David I Schuster, Johannes Majer, Alexandre Blais, Michel H Devoret, Steven M Girvin, and Robert J Schoelkopf. 2007. <span>“Charge-Insensitive Qubit Design Derived from the Cooper Pair Box.”</span> <em>Physical Review A—Atomic, Molecular, and Optical Physics</em> 76 (4): 042319.
+Koch, Jens, Terri M Yu, Jay Gambetta, et al. 2007. <span>“Charge-Insensitive Qubit Design Derived from the Cooper Pair Box.”</span> <em>Physical Review A—Atomic, Molecular, and Optical Physics</em> 76 (4): 042319.
 </div>
 <div id="ref-nakamura2001rabi" class="csl-entry" role="listitem">
 Nakamura, Y, Yu A Pashkin, and Jaw Shen Tsai. 2001. <span>“Rabi Oscillations in a Josephson-Junction Charge Two-Level System.”</span> <em>Physical Review Letters</em> 87 (24): 246601.
 </div>
 <div id="ref-shor1994algorithms" class="csl-entry" role="listitem">
-Shor, Peter W. 1994. <span>“Algorithms for Quantum Computation: Discrete Logarithms and Factoring.”</span> In <em>Proceedings 35th Annual Symposium on Foundations of Computer Science</em>, 124–34. Ieee.
+Shor, Peter W. 1994. <span>“Algorithms for Quantum Computation: Discrete Logarithms and Factoring.”</span> <em>Proceedings 35th Annual Symposium on Foundations of Computer Science</em>, 124–34.
 </div>
 </div>
 </section>
