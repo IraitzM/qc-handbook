@@ -135,7 +135,7 @@ These techniques try to diminish the effect of noise during the execution by com
 
 ![Redout error](../../assets/readoutmitigation.png)
 
-Or when expectation value is the obtained value, characterize the noise level and extrapolate the value we would have obtained in absence of noise for a given device.
+Or when expectation value is the objective, characterizing the noise level and extrapolating the value we could obtain what the value would be in absence of noise for a given device.
 
 ![Zero noise extrapolation (ZNE)](../../assets/zne.png){width=60%}
 
