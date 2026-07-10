@@ -14,6 +14,8 @@ Also, it costs nothing so, no harm done. Code snippets are easier to maintain so
 
 ## About me
 
-Mi name is Iraitz Montalbán, Computer Scientist by background, I started in the field of Quantum Computing by chance, while doing an internship in 2010 there were some guys doing something called _quantum computing_, which was a mathematical framework back then. I kept my interest in the field and ended up doing a masters on Quantum Computing Technologies at UPM and working with some startups in the field.
+My name is Iraitz Montalbán. I have a background in Computer Science, and I first encountered quantum computing by chance during an internship in 2010. At the time, a group of researchers was working on something called quantum computing, which, back then, was largely a mathematical framework rather than a practical technology.
+
+That experience sparked my interest in the field, and I continued to follow its evolution. Eventually, I pursued a Master's degree in Quantum Computing Technologies at UPM and went on to work with several startups developing quantum computing technologies.
 
 Feel free to keep in touch at [iraitz.info](https://iraitz.info/).
