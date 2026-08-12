@@ -1,6 +1,6 @@
 # Phases {.unnumbered}
 
-You may wonder, do we use the complex part at all? So far, I haven't seen any usage of it. Well, we do. In fact it is key to many of the algorithms we unlock with quantum computing. Moving around the X-axis of the bloch sphere and acting upon it.
+You may wonder, do we use the complex part at all? So far, I haven't seen any usage of it. Well, we do. In fact it is key to many of the algorithms we unlock with quantum computing. Moving around the X-axis of the Bloch sphere and acting upon it.
 
 Let's take an example on a superposed state.
 
@@ -22,7 +22,7 @@ psi  = Statevector.from_instruction(qc)
 plot_bloch_multivector(psi)
 ```
 
-What is that state, we can check its mathematical formulation which end up being
+What is that state? We can check its mathematical formulation, which ends up being
 
 $$
 |\psi\rangle = \frac{1}{2}\left(|00\rangle + |01\rangle + |10\rangle +|11\rangle\right)
@@ -59,11 +59,11 @@ $$
 |\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + |1\rangle\right) = |1+\rangle
 $$
 
-which shows a state where one qubit is in the 1 state (all odds into reading the 1 value int he computational basis), while the other qubit looks still in a superposition (50-50 chances of getting 0 or 1 in the computational basis). As we mentioned before, this is not an [entangled](../gettingstarted/gates.qmd#entanglement) state as it is separable. Hence, the tensor product symbol.
+which shows a state where one qubit is in the 1 state (all odds on reading the 1 value in the computational basis), while the other qubit looks still in a superposition (50-50 chances of getting 0 or 1 in the computational basis). As we mentioned before, this is not an [entangled](../gettingstarted/gates.qmd#entanglement) state as it is separable. Hence, the tensor product symbol.
 
 ::: {.callout-warning collapse=true}
 # Qubit readout ordering
-You found weird the state was $|1+\rangle$ instead of $|+1\rangle$ ? You are not alone, check [this entry](https://lukaszpalt.com/behind-the-mystery-of-wrong-qubit-ordering-in-qiskit/) by Lukasz Palt for further clarification.
+Did you find it weird that the state was $|1+\rangle$ instead of $|+1\rangle$ ? You are not alone, check [this entry](https://lukaszpalt.com/behind-the-mystery-of-wrong-qubit-ordering-in-qiskit/) by Lukasz Palt for further clarification.
 :::
 
 ## Phase kickback
@@ -91,7 +91,7 @@ from qiskit.visualization import array_to_latex
 array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
 ```
 
-Wait, there is a $i$ in there? Yeap. We changed the phase of one of the elements in the control qubit. It is not only in between 0 and 1 poles, but also we added a phase to it that is represented by the sign direction in the complex axis.
+Wait, there is an $i$ in there? Yep. We changed the phase of one of the elements in the control qubit. It is not only in between 0 and 1 poles, but we have also added a phase to it that is represented by the sign direction in the complex axis.
 
 $$
 |\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1+\rangle
@@ -117,5 +117,5 @@ This is a great resource going deep in some of the algorithms that use this effe
 
 {{< video https://www.youtube.com/watch?v=455pmYaZXKw >}}
 
-And for those that prefer Pennylane or reading about it, [this is a great tutorial](https://pennylane.ai/qml/demos/tutorial_phase_kickback) on the basics on how phase allows as to identify specific states in our search sapce.
+And for those that prefer Pennylane or reading about it, [this is a great tutorial](https://pennylane.ai/qml/demos/tutorial_phase_kickback) on the basics on how phase allows us to identify specific states in our search space.
 :::
