@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -541,14 +541,21 @@ window.Quarto = {
 </header>
 
 
-<p>Variational Quantum Eigensolver (VQE) proposed some years back <span class="citation" data-cites="peruzzo2014variational">(<a href="../references.html#ref-peruzzo2014variational" role="doc-biblioref">Peruzzo et al. 2014</a>)</span> does an upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minimum energy level (let’s call it <span class="math inline">\(E_0\)</span>). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which quantum state is actually associated to the minimum energy value.</p>
+<p>Variational Quantum Eigensolver (VQE) <span class="citation" data-cites="peruzzo2014variational">(<a href="../references.html#ref-peruzzo2014variational" role="doc-biblioref">Peruzzo et al. 2014</a>)</span> is a hybrid quantum-classical algorithm for approximating the lowest eigenvalue of a Hamiltonian. The ground state of a Hamiltonian is the eigenstate <span class="math inline">\(|\psi_0\rangle\)</span> associated with the smallest eigenvalue <span class="math inline">\(E_0\)</span>:</p>
 <p><span class="math display">\[
 H|\psi_{\lambda}\rangle = E_{\lambda}|\psi_{\lambda}\rangle
 \]</span></p>
-<p>This is useful when, for example, looking to the state that minimizes system energy in chemistry. But of course if our problem is mapped to a Hamiltonian and its minimum energy is the outcome of our cost function minimization, then the obtained quantum state will therefore render as the solution to our problem.</p>
-<p>Thus, this way to approximate the minimum energy of the system could be quite useful as it requires less computation than the actual calculation of the eigenstates of our system.</p>
-<p>We do know that for a set of parameters on a parameterized ansatz, the outcome will be a target state <span class="math inline">\(|\psi\rangle\)</span> and that we can compute the energy level of a given state as <span class="math inline">\(\langle \psi | H |\psi\rangle = E(\psi)\)</span>. If this state is driven by a parameterized quantum circuit then we could modify the parameters looking for different states (<span class="math inline">\(|\phi\rangle\)</span>) hopefully in the direction so that <span class="math inline">\(E(\phi) \lt E(\psi)\)</span>.</p>
-<p>By variationally iterating over potential states we could approximate this state and get our result. Let’s do a simple example, let’s take for example the following Hamiltonian</p>
+<p>For any normalized state <span class="math inline">\(|\psi\rangle\)</span>, the variational principle gives</p>
+<p><span class="math display">\[
+\langle \psi | H | \psi \rangle \ge E_0,
+\]</span></p>
+<p>with equality only when <span class="math inline">\(|\psi\rangle\)</span> is exactly the ground state. This means that if we parametrize a trial state <span class="math inline">\(|\psi(\theta)\rangle\)</span> and minimize the expectation value</p>
+<p><span class="math display">\[
+C(\theta) = \langle \psi(\theta) | H | \psi(\theta) \rangle,
+\]</span></p>
+<p>we obtain an upper bound on <span class="math inline">\(E_0\)</span>. In practice, a classical optimizer updates <span class="math inline">\(\theta\)</span> until this bound is as small as possible. The corresponding state is then the best approximation to the ground state reachable by the chosen ansatz.</p>
+<p>This is especially useful when the full diagonalization of <span class="math inline">\(H\)</span> is too expensive, but an approximate ground-state energy is sufficient for the task at hand. That is the case in many chemistry and optimization problems, where the minimum-energy state encodes the desired solution.</p>
+<p>To see how this works, consider the following Hamiltonian:</p>
 <p><span class="math display">\[
 H = \left[
 \begin{array}{cc}
@@ -557,78 +564,107 @@ H = \left[
 \end{array}
 \right]
 \]</span></p>
-<p>which can be decomposed into a linear combination of Pauli operators <span class="math inline">\(2Z + X + I\)</span>. Or a linear decomposition of Hamiltonians <span class="math inline">\(H_1 = 2Z\)</span>, <span class="math inline">\(H_2 = X\)</span> and <span class="math inline">\(H_3 = I\)</span>, hence <span class="math inline">\(H = H_1+H_2+H_3\)</span>. We will get back to this.</p>
-<p>VQE only requires an ansatz expressive enough so that target state can be mapped but nothing related to our target Hamiltonian. Therefore, our ansatz could be as simple as a <span class="math inline">\(R_y(\theta)\)</span> rotation.</p>
-<p>One thing that should be relevant is the idea of measurement and basis. For <span class="math inline">\(H_2\)</span> we might need to add additional rotation operations over our initial circuit so that we can properly measure it.</p>
-<p>Let’s start with <span class="math inline">\(\theta = 0\)</span>. Our generated state would be of the shape:</p>
+<p>which can be decomposed into a linear combination of Pauli operators as</p>
 <p><span class="math display">\[
-R_y(0)|0\rangle =
-\left[
-\begin{array}{cc}
-1 &amp; 0 \\
-0 &amp; 1
-\end{array}
-\right]\left[
-\begin{array}{c}
-1 \\
-0
-\end{array}
-\right] = |0\rangle
+H = I + X + 2Z.
 \]</span></p>
-<p>Therefore the expectation value for <span class="math inline">\(H_1\)</span> equals:</p>
+<p>Using the standard Pauli matrices in the computational basis,</p>
 <p><span class="math display">\[
-\langle 0 | H_1 |0\rangle = \left[
-\begin{array}{cc}
-1 &amp; 0
-\end{array}
-\right]
-\left[
-\begin{array}{cc}
-2 &amp; 0 \\
-0 &amp; -2
-\end{array}
-\right]\left[
-\begin{array}{c}
-1 \\
-0
-\end{array}
-\right] = 2
+I = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix},
+\quad
+X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix},
+\quad
+Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix},
 \]</span></p>
-<p><span class="math inline">\(H_3 = 1\)</span> but evaluating <span class="math inline">\(H_2\)</span> may require a basis change as we would need to measure it corresponding to the <span class="math inline">\(\{|+\rangle, |-\rangle\}\)</span> basis. Therefore, we would need to add a <span class="math inline">\(R_y(-\pi/2)\)</span> to our circuit.</p>
+<p>we recover the original matrix form</p>
 <p><span class="math display">\[
-R_y(-\pi/2)|0\rangle =
-\left[
-\begin{array}{cc}
-\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} \\
--\frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}}
-\end{array}
-\right]\left[
-\begin{array}{c}
-1 \\
-0
-\end{array}
-\right] = \frac{|0\rangle-|1\rangle}{\sqrt{2}} = |\psi\rangle
+H = I + X + 2Z =
+\begin{pmatrix}
+1 &amp; 0 \\ 0 &amp; 1
+\end{pmatrix}
++
+\begin{pmatrix}
+0 &amp; 1 \\ 1 &amp; 0
+\end{pmatrix}
++
+\begin{pmatrix}
+2 &amp; 0 \\ 0 &amp; -2
+\end{pmatrix}
+=
+\begin{pmatrix}
+3 &amp; 1 \\ 1 &amp; -1
+\end{pmatrix}.
 \]</span></p>
-<p>so the expectation value can be computed on its normalized form as</p>
+<p>Equivalently, <span class="math inline">\(H = H_1 + H_2 + H_3\)</span> with <span class="math inline">\(H_1 = I\)</span>, <span class="math inline">\(H_2 = X\)</span>, and <span class="math inline">\(H_3 = 2Z\)</span>.</p>
+<p>VQE does not require the ansatz to be tailored to the Hamiltonian itself; it only needs to be expressive enough to represent a state close to the ground state. A simple choice is therefore the single-parameter rotation</p>
 <p><span class="math display">\[
-\langle \psi | H_2 | \psi\rangle = \left[
-\begin{array}{cc}
-0 &amp; 1
-\end{array}
-\right]
-\left[
-\begin{array}{cc}
-0 &amp; 1 \\
-1 &amp; 0
-\end{array}
-\right]\left[
-\begin{array}{c}
-0 \\
--1
-\end{array}
-\right] = 0
+|\psi(\theta)\rangle = R_y(\theta)|0\rangle = \cos\frac{\theta}{2}|0\rangle + \sin\frac{\theta}{2}|1\rangle.
 \]</span></p>
-<p>Therefore the overall expectation value for <span class="math inline">\(H\)</span> over <span class="math inline">\(|0\rangle\)</span> is 3. We could iterate over all potential values of <span class="math inline">\(\theta\)</span> until we find the actual state that gives us the lowest value but that would also consume quite some time. The important fact here is that, given the basis change, we might need to evaluate our ansatz per parameter iteration more than once if the expectation value needs to be obtained at each iteration in order to know the direction in which those parameters should be changed.</p>
+<p>A practical detail is that different Pauli terms are measured in different bases. For <span class="math inline">\(Z\)</span>, the computational basis is already suitable. For <span class="math inline">\(X\)</span>, we must rotate the qubit before measuring so that the measurement effectively happens in the <span class="math inline">\(\{|+\rangle,| -\rangle\}\)</span> basis. Concretely, <span class="math inline">\(X = R_y(\pi/2) Z R_y(-\pi/2)\)</span>, so measuring <span class="math inline">\(X\)</span> in the computational basis is equivalent to measuring <span class="math inline">\(Z\)</span> after a <span class="math inline">\(R_y(-\pi/2)\)</span> rotation.</p>
+<p>With this ansatz, the energy expectation value is</p>
+<p><span class="math display">\[
+E(\theta) = \langle \psi(\theta) | H | \psi(\theta) \rangle = 1 + \sin\theta + 2\cos\theta.
+\]</span></p>
+<p>Indeed, for <span class="math inline">\(|\psi(\theta)\rangle = (\cos\frac{\theta}{2}, \sin\frac{\theta}{2})^T\)</span>,</p>
+<p><span class="math display">\[
+\langle Z \rangle = \cos\theta, \qquad \langle X \rangle = \sin\theta,
+\]</span></p>
+<p>so the total energy is the sum of the three Pauli contributions: <span class="math inline">\(1 + 2\langle Z\rangle + \langle X\rangle\)</span>.</p>
+<p>At <span class="math inline">\(\theta = 0\)</span>, the trial state is <span class="math inline">\(|0\rangle\)</span>, and therefore</p>
+<p><span class="math display">\[
+E(0) = \langle 0 | H | 0 \rangle = 3.
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Step-by-step matrix view of the initial example
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The original derivation can be written explicitly as a sequence of operations. Starting from <span class="math inline">\(|0\rangle = (1,0)^T\)</span>,</p>
+<p><span class="math display">\[
+|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix},
+\qquad
+Z|0\rangle = \begin{pmatrix} 1 \\ 0 \end{pmatrix},
+\qquad
+X|0\rangle = \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\langle 0 | Z | 0 \rangle = 1,
+\qquad
+\langle 0 | X | 0 \rangle = 0,
+\]</span></p>
+<p>and the total expectation value becomes</p>
+<p><span class="math display">\[
+\langle 0 | H | 0 \rangle
+= \langle 0 | I | 0 \rangle + \langle 0 | X | 0 \rangle + 2\langle 0 | Z | 0 \rangle
+= 1 + 0 + 2 = 3.
+\]</span></p>
+<p>If we instead choose the rotated state <span class="math inline">\(|+\rangle = H|0\rangle = \frac{1}{\sqrt{2}}(1,1)^T\)</span>, then</p>
+<p><span class="math display">\[
+\langle + | X | + \rangle = 1,
+\qquad
+\langle + | Z | + \rangle = 0,
+\]</span></p>
+<p>which shows how the same Hamiltonian can be evaluated in different bases depending on which Pauli term is measured. This is the origin of the basis-rotation step in practical VQE implementations.</p>
+</div>
+</div>
+</div>
+<p>As <span class="math inline">\(\theta\)</span> changes, the optimizer searches for the minimum of <span class="math inline">\(E(\theta)\)</span>. The global minimum is reached at</p>
+<p><span class="math display">\[
+\theta^* = \pi + \arctan\left(\frac{1}{2}\right),
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+E(\theta^*) = 1 - \sqrt{5} \approx -1.236.
+\]</span></p>
+<p>This is the ground-state energy of the Hamiltonian and matches the smallest eigenvalue of <span class="math inline">\(H\)</span>. In a realistic VQE workflow, the optimizer evaluates the expectation value repeatedly, and each evaluation may require measuring different Pauli terms in different bases. The important point is that the variational loop updates the parameters until the measured energy is minimized, while the classical optimizer guides the search in parameter space.</p>
 <p><strong>Hybrid workload</strong></p>
 <p>The way to explore the options is by setting a cost function that will help us drive the value into the right direction. Here, expectation value is of great help as we do know it will provide an approximation to the ground state of the system (depending on the amount of time we let it iterate).</p>
 <p>This is when traditional or classical optimization routines come in handy. We could employ existing methods for classical optimization such as Stochastic Gradient Descent (SGD), Powell’s method or Nelder-Mead method looking for efficiently traversing the potential solution space for all values <span class="math inline">\(\theta\)</span> could take.</p>

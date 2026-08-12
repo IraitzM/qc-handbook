@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -600,7 +600,7 @@ window.Quarto = {
 <p>where <span class="math inline">\(\hat{P}_{PQC}(F; \theta)\)</span> is the estimated probability distribution of fidelities resulting while sampling states from a PQC with parameters <span class="math inline">\(\theta\)</span>. <span class="math inline">\(F_j\)</span> represents the fidelity at <span class="math inline">\(j\)</span>th bin.</p>
 <p>Thus, we need to generate a <em>histogram</em> of the elements of <span class="math inline">\(F\)</span>. The output of this histogram is a set of bins <span class="math inline">\(B = \{(l_1, u_1), (l_2, u_2), \cdots \}\)</span> where <span class="math inline">\(l_{j}\)</span> (<span class="math inline">\(u_j\)</span>) denotes the lower (upper) limit of bin <span class="math inline">\(j\)</span>. It also produces an empirical probability distribution function <span class="math inline">\(\mathrm{P}_{\text{PQC}}(j)\)</span>, which is simply the probability that a given value of <span class="math inline">\(F\)</span> falls in a bin <span class="math inline">\(j\)</span>.</p>
 <p>Let’s take the ansatz defined by an idle circuit as an example.</p>
-<div id="48613c14" class="cell" data-execution_count="1">
+<div id="267db2ef" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">1</span>, <span class="dv">1</span>)</span>
@@ -614,7 +614,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="705b4621" class="cell" data-execution_count="2">
+<div id="c7d125b0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_bloch_multivector</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -629,7 +629,7 @@ window.Quarto = {
 </div>
 </div>
 <p>No matter what we do, the ansatz won’t change, therefore its expressivity should be equal to none.</p>
-<div id="8f39022e" class="cell" data-execution_count="3">
+<div id="4a13e86f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_aer <span class="im">import</span> AerSimulator</span>
@@ -700,7 +700,7 @@ window.Quarto = {
 <section id="zero-means-maximal-expressivity" class="level3">
 <h3 class="anchored" data-anchor-id="zero-means-maximal-expressivity">Zero means maximal expressivity</h3>
 <p>We can see how all fidelities have probability zero except for fidelity 1, which means there is only one state we can render with this circuit. The metric works backwards: a distance of zero represents a fidelity probability landscape equal to the Haar one and therefore all states (pure) in the Hilbert space can be produced with the right set of parameters (<span class="math inline">\(\theta\)</span>). Our idle circuit sits at the opposite end, dumping all of its mass into a single bin, so the divergence will take the largest value it can take here, <span class="math inline">\(log(N)\)</span> where <span class="math inline">\(N\)</span> is the number of bins selected for the histogram.</p>
-<div id="ea75ea84" class="cell" data-execution_count="4">
+<div id="3fd65ca4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> rel_entr <span class="co"># For entropy calculation</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
@@ -710,7 +710,7 @@ window.Quarto = {
 </div>
 </div>
 <p>This matches the value we anticipated, keeping in mind that <code>dims</code> counts the edges of the histogram so the number of bins is one less.</p>
-<div id="1de0d437" class="cell" data-execution_count="5">
+<div id="1b0d7a58" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.log(dims <span class="op">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>np.float64(4.59511985013459)</code></pre>
@@ -718,7 +718,7 @@ window.Quarto = {
 </div>
 <p>Being a distance, the score runs the other way around than one would expect: 0 is the best we can get, not the largest value.</p>
 <p>We can see what would be the effect if we introduce a parameterized gate instead, something more complex with a free parameter such as:</p>
-<div id="b6728b52" class="cell" data-execution_count="6">
+<div id="85deb294" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -738,7 +738,7 @@ window.Quarto = {
 </div>
 </div>
 <p>To get a fidelity out of two random parameter choices <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\phi\)</span> we append the inverse of the circuit to itself, so that we run <span class="math inline">\(U^\dagger(\phi)U(\theta)\)</span> and count how often we land back on the initial state. That frequency is precisely <span class="math inline">\(F = |\langle 0 |U^\dagger(\phi)U(\theta)| 0 \rangle|^2\)</span>.</p>
-<div id="5c077efc" class="cell" data-execution_count="7">
+<div id="346aec31" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> random</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible Bin</span></span>
@@ -806,15 +806,15 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="7a6c50e8" class="cell" data-execution_count="8">
+<div id="3a312424" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Expr =  0.23899163276419166</code></pre>
+<pre><code>Expr =  0.20235840767718577</code></pre>
 </div>
 </div>
 <p>We can extend this acting on more than one axis, which should end up with the maximum coverage over the bloch sphere for this one single qubit case.</p>
-<div id="05a499ec" class="cell" data-execution_count="9">
+<div id="6c46dc2b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -835,7 +835,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="62b8f88c" class="cell" data-execution_count="10">
+<div id="8181d95b" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Possible Bin</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>bins_list <span class="op">=</span> []</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(dims):</span>
@@ -898,16 +898,16 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="quantumfeatures_files/figure-html/cell-11-output-1.png" width="596" height="411" class="figure-img"></p>
+<p><img src="quantumfeatures_files/figure-html/cell-11-output-1.png" width="587" height="413" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="51a095e0" class="cell" data-execution_count="11">
+<div id="3af4a859" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pi_hist <span class="op">=</span> np.histogram(fidelities, bins<span class="op">=</span>bins_list, weights<span class="op">=</span>weights, <span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>])[<span class="dv">0</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Expr = "</span>, <span class="bu">sum</span>(rel_entr(pi_hist, p_haar_hist)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Expr =  0.054093152992569164</code></pre>
+<pre><code>Expr =  0.06514934602140747</code></pre>
 </div>
 </div>
 <p>These plots should resemble those at the original work <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et al. 2019</a>)</span>.</p>
@@ -926,7 +926,7 @@ Q(|\psi\rangle) = 2\left( 1 - \frac{1}{n}\sum_{k=1}^{n} \text{Tr}\left[\rho_k^2\
 \text{Ent} = \frac{1}{|S|}\sum_{\theta_i \in S} Q(|\psi_{\theta_i}\rangle)
 \]</span></p>
 <p>with <span class="math inline">\(S\)</span> the set of sampled parameter vectors. Unlike the expressivity, here the scale is the intuitive one: <span class="math inline">\(0\)</span> means the circuit never entangles anything and <span class="math inline">\(1\)</span> that it always outputs maximally entangled states.</p>
-<div id="ab3baff8" class="cell" data-execution_count="12">
+<div id="4720a58e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> partial_trace</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> meyer_wallach(circuit):</span>
@@ -944,7 +944,7 @@ Q(|\psi\rangle) = 2\left( 1 - \frac{1}{n}\sum_{k=1}^{n} \text{Tr}\left[\rho_k^2\
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">float</span>(np.clip(<span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> purities <span class="op">/</span> n), <span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s check it against states we already know the answer for.</p>
-<div id="c292a3f7" class="cell" data-execution_count="13">
+<div id="03894ced" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A product state, no interaction whatsoever</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>product <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>product.h(<span class="dv">0</span>)</span>
@@ -972,7 +972,7 @@ Q(GHZ) = 1.000</code></pre>
 <section id="averaging-over-the-parameter-space" class="level3">
 <h3 class="anchored" data-anchor-id="averaging-over-the-parameter-space">Averaging over the parameter space</h3>
 <p>Now we can do with the entangling capability what we did with the expressivity: sample random parameters and look at the resulting distribution. Let’s compare three two-qubit ansätze that differ only in how (or whether) the wires talk to each other.</p>
-<div id="08ec70cf" class="cell" data-execution_count="14">
+<div id="ace84ca6" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> only_rotations(rng):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Two independent qubits, nothing connects them."""</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>)</span>
@@ -991,7 +991,7 @@ Q(GHZ) = 1.000</code></pre>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    qc.crx(rng.uniform(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi), <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> qc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9874489b" class="cell" data-execution_count="15">
+<div id="75e06e98" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> entangling_capability(builder, nsamples<span class="op">=</span><span class="dv">1_000</span>, seed<span class="op">=</span><span class="dv">1234</span>):</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([meyer_wallach(builder(rng)) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(nsamples)])</span>
@@ -1028,7 +1028,7 @@ Q(GHZ) = 1.000</code></pre>
 <section id="more-layers-more-entanglement" class="level3">
 <h3 class="anchored" data-anchor-id="more-layers-more-entanglement">More layers, more entanglement</h3>
 <p>The usual knob to turn is depth. Repeating a rotation block followed by an entangling ladder should progressively spread correlations across the register.</p>
-<div id="48439f9c" class="cell" data-execution_count="16">
+<div id="572b0dc7" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hardware_efficient(rng, layers, num_qubits<span class="op">=</span><span class="dv">4</span>):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    qc <span class="op">=</span> QuantumCircuit(num_qubits)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(layers):</span>
@@ -1048,7 +1048,7 @@ Q(GHZ) = 1.000</code></pre>
 </div>
 </div>
 </div>
-<div id="68669ee4" class="cell" data-execution_count="17">
+<div id="1c89b825" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>layers <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ent_per_layer <span class="op">=</span> [</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    entangling_capability(</span>
@@ -1076,7 +1076,7 @@ Q(GHZ) = 1.000</code></pre>
 <section id="both-metrics-tell-different-stories" class="level3">
 <h3 class="anchored" data-anchor-id="both-metrics-tell-different-stories">Both metrics tell different stories</h3>
 <p>It is tempting to assume that a circuit entangling a lot is automatically expressive, but the two quantities are independent enough to be worth measuring separately. We can reuse the machinery above, this time computing the fidelities directly from the statevectors instead of sampling shots. It is the same quantity as before, only free of shot noise.</p>
-<div id="6b4ae7fc" class="cell" data-execution_count="18">
+<div id="54176f00" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> expressivity(builder, num_qubits, nsamples<span class="op">=</span><span class="dv">1_000</span>, seed<span class="op">=</span><span class="dv">1234</span>):</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1098,7 +1098,7 @@ Q(GHZ) = 1.000</code></pre>
 <span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(rel_entr(pqc_hist, p_haar_hist))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fea1086a" class="cell" data-execution_count="19">
+<div id="fa8a98d2" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ansatze <span class="op">=</span> [</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Only rotations"</span>, only_rotations),</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"CNOT"</span>, with_cnot),</span>
