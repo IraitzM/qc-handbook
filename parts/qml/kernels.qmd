@@ -1,6 +1,6 @@
 # Kernels {.unnumbered}
 
-Before going into details of what quantum kernels might be let's discuss the simplest classifier one could build. If we re provided with one number we could build a classifier saying if its negative or positive. Or if we go to a $\mathcal{R}^2$ example we would like to know if our samples belong to the pink or blue category.
+Before going into details of what quantum kernels might be let's discuss the simplest classifier one could build. If we are provided with one number we could build a classifier saying if it is negative or positive. Or if we go to a $\mathcal{R}^2$ example we would like to know if our samples belong to the pink or blue category.
 
 <figure markdown>
 ![Binary classification problem](../../assets/twoclass.png)
@@ -12,7 +12,7 @@ We could try to draw the line that places our samples into the corresponding cat
 ![Finding separation hyperplane](../../assets/twoclasssol.png)
 </figure>
 
-We would like to find the hyperplane that better splits the two groups, meaning that the _margin_ from the line to the data points is maximal. Something like
+We would like to find the hyperplane that best splits the two groups, meaning that the _margin_ from the line to the data points is maximal. Something like
 
 $$
     \min \frac{1}{2}\|w\|^2 + C\sum_j \epsilon_j
@@ -22,7 +22,7 @@ $$
     \text{s.t.}\quad y_j(w.x_j + b) \ge 1 - \epsilon_j, \quad \epsilon_j \ge 0
 $$
 
-being $C$ a hyperparameter of our choosing. The main problem about this setup is that it can only perform linear separations. We could perform the **kernel trick** which consist of mapping the data space into a higher dimensional space in order to compute the inner product of the samples without actual computation of the coordinates so that a linear separation would render a low-dimensional non-linear classifier.
+with $C$ being a hyperparameter of our choosing. The main problem about this setup is that it can only perform linear separations. We could perform the **kernel trick** which consists of mapping the data space into a higher dimensional space in order to compute the inner product of the samples without actual computation of the coordinates so that a linear separation would render a low-dimensional non-linear classifier.
 
 **Kernel functions** are mappers of members of a non-empty set ($x \in \mathbb{X}$) into a real value
 
@@ -57,9 +57,9 @@ kernel = feature_map.compose(feature_map.inverse())
 kernel.decompose().draw('mpl', fold = 150)
 ```
 
-By computing the number of times we get $|0\rangle^n$ after this execution we can get the closeness of these to feature map prepared states. If orthogonal states are evaluated (ex. $\langle 0 | 1\rangle$) then we can assume their states to be as distant as possible within the Hilbert space.
+By computing the number of times we get $|0\rangle^n$ after this execution we can get the closeness of these two feature map prepared states. If orthogonal states are evaluated (ex. $\langle 0 | 1\rangle$) then we can assume their states to be as distant as possible within the Hilbert space.
 
-This way we could easily compute the **fidelity** between states on a higher dimensional feature space by just running this exercise of each sample pair ($O(N^2)$) in what it is called a **Fidelity Kernel** [@Hubregtsen_2022].
+This way we could easily compute the **fidelity** between states on a higher dimensional feature space by just running this exercise for each sample pair ($O(N^2)$) in what it is called a **Fidelity Kernel** [@Hubregtsen_2022].
 
 :::{.callout-important collapse="true"}
 # Fidelity
@@ -68,12 +68,12 @@ Fidelity comes from the formula
 $$
 F(\rho, \sigma) = \|\langle\psi_{\rho}|\psi_{\sigma}\rangle\|^2
 $$
-where both states are considered to be pure. for the mixed state case, fidelity [differs](https://en.wikipedia.org/wiki/Fidelity_of_quantum_states).
+where both states are considered to be pure. For the mixed state case, fidelity [differs](https://en.wikipedia.org/wiki/Fidelity_of_quantum_states).
 
 :::
 
-Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the **Quantum Support Vector Classifier** [@Rebentrost_2014].
+Then, adding a classical classification method that, using that measure of distance, can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the **Quantum Support Vector Classifier** [@Rebentrost_2014].
 
 <figure markdown>
-![Quantum Support Vector Classifier (SQVC)](../../assets/qsvc.svg)
+![Quantum Support Vector Classifier (QSVC)](../../assets/qsvc.svg)
 </figure>

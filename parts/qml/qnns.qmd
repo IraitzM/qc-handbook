@@ -16,18 +16,18 @@ The generic name of this type of circuit is the **Variational Quantum Classifier
 ![Variational Quantum Classifier (VQC)](../../assets/vqc.svg)
 </figure>
 
-It is all based in the same concept of trainable parameterized quantum circuits and we already have the means to adapt the parameters according to a target function. We might need to device if expectation value or a given sample is the ideal measure we would like to obtain from the circuit. This is often decided depending on which type of model we would like to obtain, a classification or a regression model.
+It is all based on the same concept of trainable parameterized quantum circuits and we already have the means to adapt the parameters according to a target function. We might need to decide if expectation value or a given sample is the ideal measure we would like to obtain from the circuit. This is often decided depending on which type of model we would like to obtain, a classification or a regression model.
 
-Which ansatz should we select for the trainable part of the QNN? Well, this is an open question with no direct answer. As it happens in classical NN the amount of circuits we could select for our QNN is infinite. Classical NN architectures by means of experimentation and better understanding the inner workings of our brain, have come to an agreement of what seem to be clever guesses according to specific tasks:
+Which ansatz should we select for the trainable part of the QNN? Well, this is an open question with no direct answer. As it happens in classical NN the amount of circuits we could select for our QNN is infinite. Classical NN architectures by means of experimentation and better understanding the inner workings of our brain, have come to an agreement on what seem to be clever guesses according to specific tasks:
 
 * For artificial vision: Convolutional Neural Networks
 * For forecasting in general: Recurrent Neural Networks
 * For text and context aware tasks: Transformers
 * For self-driving cars: Liquid Neural Networks
 
-So we will need to point to the literature to better understand which ansatz compositions will render best performance in our particular case. Many frameworks do provide already a set of ansatz actually implemented that reflect those existing in the literature (often also published by the same teams working at IBM or Xanadu) but they do provide interesting benchmarks that may help in our decision making process.
+So we will need to point to the literature to better understand which ansatz compositions will render best performance in our particular case. Many frameworks do provide already a set of ansätze actually implemented that reflect those existing in the literature (often also published by the same teams working at IBM or Xanadu) but they do provide interesting benchmarks that may help in our decision making process.
 
-In essence we need to create two block, one encoding our data into quantum states (feature map) and a Parameterized Quantum Circuit (also ansatz) so that the circuit can be trained/tuned towards a specific purpose.
+In essence we need to create two blocks, one encoding our data into quantum states (feature map) and a Parameterized Quantum Circuit (also ansatz) so that the circuit can be trained/tuned towards a specific purpose.
 
 <figure markdown>
 ![QNN basic structure](../../assets/qnn_base.png)
@@ -83,15 +83,15 @@ estimator_classifier.fit(features, labels)
 estimator_classifier.score(features, labels)
 ```
 
-Multi-label classification can also be covered but in many cases a stacked set of QNNs (one-vs-all) is preferred so that we get a set of $N$ specialized networks to balance the vote for $N$ potential classes. Instead of manually creating all those circuits and datasets we can simply invoke prepared classes in frameworks such as Qiskit that will be able to deal with those internal complexities. One should pay attention though that training various models will increase the number of iterations/executions of the circuit needed for parameter fitting (as many times as classes are).
+Multi-label classification can also be covered but in many cases a stacked set of QNNs (one-vs-all) is preferred so that we get a set of $N$ specialized networks to balance the vote for $N$ potential classes. Instead of manually creating all those circuits and datasets we can simply invoke prepared classes in frameworks such as Qiskit that will be able to deal with those internal complexities. One should pay attention though that training various models will increase the number of iterations/executions of the circuit needed for parameter fitting (as many times as there are classes).
 
-Regression tasks can also be performed if we consider the expectation value the one mapping our target value. In that case a simple change of evaluation function would do the trick. We will see that actually it is easy as well to invoke but as we already know, getting the expectation value over simple circuit sampling may require several evaluations of the circuit in order to get all basis changes for a proper expectation value evaluation.
+Regression tasks can also be performed if we consider the expectation value as the one mapping our target value. In that case a simple change of evaluation function would do the trick. We will see that actually it is easy as well to invoke but as we already know, getting the expectation value over simple circuit sampling may require several evaluations of the circuit in order to get all basis changes for a proper expectation value evaluation.
 
 ## Choosing your feature maps and ansätze
 
-Now we need to decide which ansatz is the best option in our case. There are several features we would like to consider but one of the most relevant ones might be **expressivity**. **Expressivity** is a key aspect with any function approximator, like with neural networks which are known to be universal approximators [@kidger2020universal]. We expect Quantum Neural Networks to provide similar capacity as they have already being evaluated in similar terms [@Pe_a_Tapia_2023] but this will be limited by the ansatz selection. The ansatz is essentially where a given Quantum Neural Network will produce states for a particular Hilbert space and expressivity, in those terms, refers to the capacity of covering said Hilbert space.
+Now we need to decide which ansatz is the best option in our case. There are several features we would like to consider but one of the most relevant ones might be **expressivity**. **Expressivity** is a key aspect with any function approximator, like with neural networks which are known to be universal approximators [@kidger2020universal]. We expect Quantum Neural Networks to provide similar capacity as they have already been evaluated in similar terms [@Pe_a_Tapia_2023] but this will be limited by the ansatz selection. The ansatz is essentially where a given Quantum Neural Network will produce states for a particular Hilbert space and expressivity, in those terms, refers to the capacity of covering said Hilbert space.
 
-A $4$ qubit system represents a $2^4 = 16$ dimension Hilbert space ($\mathcal{H}$). How can we measure how expressive our ansatz is? Evaluating analytically the coverage of the Hilbert space might not be practical, but we could simply sample from the circuit a set of times and compare the states we get in terms of distance for said space. **Fidelity** can be used to measure the _distance_ between two states as we saw [before](kernels.qmd), so we get and compare it with what would be the ideal scenario, a uniform distribution of the entire fidelity space for maximal expressivity [@sim2019expressibility]. If the states generated by our circuit can render all distances, from same sate (fidelity of one) to the orthogonal case (fidelity of zero) then our circuit can cover the whole spectrum to our Hilbert space. You can read more on the appendix about [quantum features](../appendix/quantumfeatures.qmd).
+A $4$ qubit system represents a $2^4 = 16$ dimension Hilbert space ($\mathcal{H}$). How can we measure how expressive our ansatz is? Evaluating analytically the coverage of the Hilbert space might not be practical, but we could simply sample from the circuit a set of times and compare the states we get in terms of distance for said space. **Fidelity** can be used to measure the _distance_ between two states as we saw [before](kernels.qmd), so we get it and compare it with what would be the ideal scenario, a uniform distribution of the entire fidelity space for maximal expressivity [@sim2019expressibility]. If the states generated by our circuit can render all distances, from the same state (fidelity of one) to the orthogonal case (fidelity of zero) then our circuit can cover the whole spectrum of our Hilbert space. You can read more on the appendix about [quantum features](../appendix/quantumfeatures.qmd).
 
 The easiest way forward is to look into the previous work, that way we can cut some corners and go straight 
 to the configurations that worked for others. We have some references in the literature but the people working at sQUlearn have
@@ -105,7 +105,7 @@ pqc = ChebyshevPQC(num_qubits = 4, num_features = 1, num_layers = 2)
 pqc.draw("mpl")
 ```
 
-Easy pease! Same with others like _Training Quantum Embedding Kernels on Near-Term Quantum Computers_ [@Hubregtsen_2022]
+Easy peasy! Same with others like _Training Quantum Embedding Kernels on Near-Term Quantum Computers_ [@Hubregtsen_2022]
 ```{python}
 from squlearn.encoding_circuit import HubregtsenEncodingCircuit
 
