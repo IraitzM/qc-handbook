@@ -15,4 +15,4 @@ Here goes a little roadmap on what has happened in the field in the last two dec
   ![QC timeline](../../assets/timeline.png)
 </figure>
 
-There are plenty of good references on the basic stuff so we will try to link those as well as we cover some specifics around _optimization_ and _machine learning_ more in detail. But let's start with the basics: quantum states and qubits.
+There are plenty of good references on the basic stuff so we will try to link those as well as we cover some specifics around _optimization_ and _machine learning_ in more detail. But let's start with the basics: quantum states and qubits.
