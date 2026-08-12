@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -567,10 +567,10 @@ window.Quarto = {
 </header>
 
 
-<p>After working a while with simulators you might feel curious about what would look like if you run it on hardware. Well let’s find out.</p>
+<p>After working a while with simulators you might feel curious about what it would look like if you run it on hardware. Well let’s find out.</p>
 <section id="create-the-circuit" class="level2" data-number="C.1">
 <h2 data-number="C.1" class="anchored" data-anchor-id="create-the-circuit"><span class="header-section-number">C.1</span> Create the circuit</h2>
-<p>First you need to create your own circuit, let’s start with something simple like a 5 qubit <span class="math inline">\(|GHZ\rangle\)</span> state.</p>
+<p>First you need to create your own circuit, let’s start with something simple like a 5-qubit <span class="math inline">\(|GHZ\rangle\)</span> state.</p>
 <div id="f1744a10" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -691,7 +691,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Specific qubits have been selected that allow for the connectivity to take place, prioritizing low error rates. Also, Hadamard and CNOT gates have been translating to those available in the device, like <span class="math inline">\(\sqrt{X}\)</span> and <span class="math inline">\(Z\)</span> rotation gates for replacing <span class="math inline">\(H\)</span> gate, and <span class="math inline">\(E_{cr}\)</span> for two qubit interactions.</p>
+<p>Specific qubits have been selected that allow for the connectivity to take place, prioritizing low error rates. Also, Hadamard and CNOT gates have been translated to those available in the device, like <span class="math inline">\(\sqrt{X}\)</span> and <span class="math inline">\(Z\)</span> rotation gates for replacing <span class="math inline">\(H\)</span> gate, and <span class="math inline">\(E_{cr}\)</span> for two-qubit interactions.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -742,7 +742,7 @@ window.Quarto = {
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In Qiskit V1.x retrieving data for counts may require you to refer <em>c</em> or <em>cr</em> in case of using <em>ClassicalRegister</em> fro measurements. Try looking into replacing <em>data.meas.get_counts()</em> with <em>data.c.get_counts()</em> if code below fails.</p>
+<p>In Qiskit V1.x retrieving data for counts may require you to refer to <em>c</em> or <em>cr</em> in case of using <em>ClassicalRegister</em> for measurements. Try looking into replacing <em>data.meas.get_counts()</em> with <em>data.c.get_counts()</em> if code below fails.</p>
 </div>
 </div>
 </div>
@@ -760,7 +760,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Well, not the ideal run we were expecting. It might have to do with device noise and errors… I guess. You can find plenty on how much optimization you can squeeze into these devices in IBM’s <a href="https://quantum.cloud.ibm.com/docs/es/tutorials/circuit-transpilation-settings">documentation</a>. Do not hesitate checking it out.</p>
+<p>Well, not the ideal run we were expecting. It might have to do with device noise and errors… I guess. You can find plenty on how much optimization you can squeeze into these devices in IBM’s <a href="https://quantum.cloud.ibm.com/docs/es/tutorials/circuit-transpilation-settings">documentation</a>. Do not hesitate to check it out.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -773,7 +773,7 @@ window.Quarto = {
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In the past it was possible to model the noise and insert it into the simulator to run locally something that would resemble the hardware execution but it is getting harder and harder given that a 133 qubit device like the one we used requires a lot of resources to perform a full <a href="../../parts/gettingstarted/classicalqc.html#simulators">density matrix simulation</a>.</p>
+<p>In the past it was possible to model the noise and insert it into the simulator to run locally something that would resemble the hardware execution but it is getting harder and harder given that a 133-qubit device like the one we used requires a lot of resources to perform a full <a href="../../parts/gettingstarted/classicalqc.html#simulators">density matrix simulation</a>.</p>
 </div>
 </div>
 </div>

@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -582,7 +582,7 @@ window.Quarto = {
 </header>
 
 
-<p>Before going into details of what quantum kernels might be let’s discuss the simplest classifier one could build. If we re provided with one number we could build a classifier saying if its negative or positive. Or if we go to a <span class="math inline">\(\mathcal{R}^2\)</span> example we would like to know if our samples belong to the pink or blue category.</p>
+<p>Before going into details of what quantum kernels might be let’s discuss the simplest classifier one could build. If we are provided with one number we could build a classifier saying if it is negative or positive. Or if we go to a <span class="math inline">\(\mathcal{R}^2\)</span> example we would like to know if our samples belong to the pink or blue category.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -600,14 +600,14 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>We would like to find the hyperplane that better splits the two groups, meaning that the <em>margin</em> from the line to the data points is maximal. Something like</p>
+<p>We would like to find the hyperplane that best splits the two groups, meaning that the <em>margin</em> from the line to the data points is maximal. Something like</p>
 <p><span class="math display">\[
     \min \frac{1}{2}\|w\|^2 + C\sum_j \epsilon_j
 \]</span></p>
 <p><span class="math display">\[
     \text{s.t.}\quad y_j(w.x_j + b) \ge 1 - \epsilon_j, \quad \epsilon_j \ge 0
 \]</span></p>
-<p>being <span class="math inline">\(C\)</span> a hyperparameter of our choosing. The main problem about this setup is that it can only perform linear separations. We could perform the <strong>kernel trick</strong> which consist of mapping the data space into a higher dimensional space in order to compute the inner product of the samples without actual computation of the coordinates so that a linear separation would render a low-dimensional non-linear classifier.</p>
+<p>with <span class="math inline">\(C\)</span> being a hyperparameter of our choosing. The main problem about this setup is that it can only perform linear separations. We could perform the <strong>kernel trick</strong> which consists of mapping the data space into a higher dimensional space in order to compute the inner product of the samples without actual computation of the coordinates so that a linear separation would render a low-dimensional non-linear classifier.</p>
 <p><strong>Kernel functions</strong> are mappers of members of a non-empty set (<span class="math inline">\(x \in \mathbb{X}\)</span>) into a real value</p>
 <p><span class="math display">\[
 K(x_i, x_j) \ge 0
@@ -624,7 +624,7 @@ k(x_i, x_j) = \langle\psi(x_i)|\psi(x_j)\rangle
 k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 \]</span></p>
 <p>which can be easily performed by flipping the original circuit backwards and adding it to the initial feature map.</p>
-<div id="e0fb4040" class="cell" data-execution_count="1">
+<div id="1d8ab776" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">2</span>)</span>
@@ -639,8 +639,8 @@ k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 </div>
 </div>
 </div>
-<p>By computing the number of times we get <span class="math inline">\(|0\rangle^n\)</span> after this execution we can get the closeness of these to feature map prepared states. If orthogonal states are evaluated (ex. <span class="math inline">\(\langle 0 | 1\rangle\)</span>) then we can assume their states to be as distant as possible within the Hilbert space.</p>
-<p>This way we could easily compute the <strong>fidelity</strong> between states on a higher dimensional feature space by just running this exercise of each sample pair (<span class="math inline">\(O(N^2)\)</span>) in what it is called a <strong>Fidelity Kernel</strong> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span>.</p>
+<p>By computing the number of times we get <span class="math inline">\(|0\rangle^n\)</span> after this execution we can get the closeness of these two feature map prepared states. If orthogonal states are evaluated (ex. <span class="math inline">\(\langle 0 | 1\rangle\)</span>) then we can assume their states to be as distant as possible within the Hilbert space.</p>
+<p>This way we could easily compute the <strong>fidelity</strong> between states on a higher dimensional feature space by just running this exercise for each sample pair (<span class="math inline">\(O(N^2)\)</span>) in what it is called a <strong>Fidelity Kernel</strong> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et al. 2022</a>)</span>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -655,16 +655,16 @@ k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
 <div class="callout-body-container callout-body">
 <p>Fidelity comes from the formula <span class="math display">\[
 F(\rho, \sigma) = \|\langle\psi_{\rho}|\psi_{\sigma}\rangle\|^2
-\]</span> where both states are considered to be pure. for the mixed state case, fidelity <a href="https://en.wikipedia.org/wiki/Fidelity_of_quantum_states">differs</a>.</p>
+\]</span> where both states are considered to be pure. For the mixed state case, fidelity <a href="https://en.wikipedia.org/wiki/Fidelity_of_quantum_states">differs</a>.</p>
 </div>
 </div>
 </div>
-<p>Then, adding a classical classification method that using that measure of distance can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the <strong>Quantum Support Vector Classifier</strong> <span class="citation" data-cites="Rebentrost_2014">(<a href="../references.html#ref-Rebentrost_2014" role="doc-biblioref">Rebentrost et al. 2014</a>)</span>.</p>
+<p>Then, adding a classical classification method that, using that measure of distance, can separate between both classes, we would obtain a hybrid quantum-classical method. In fact, by chaining a Support Vector Machine classifier we would have obtained the <strong>Quantum Support Vector Classifier</strong> <span class="citation" data-cites="Rebentrost_2014">(<a href="../references.html#ref-Rebentrost_2014" role="doc-biblioref">Rebentrost et al. 2014</a>)</span>.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/qsvc.svg" class="img-fluid figure-img"></p>
-<figcaption>Quantum Support Vector Classifier (SQVC)</figcaption>
+<figcaption>Quantum Support Vector Classifier (QSVC)</figcaption>
 </figure>
 </div>
 </figure>

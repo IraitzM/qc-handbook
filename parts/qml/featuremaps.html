@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -591,12 +591,12 @@ window.Quarto = {
 <p>Feature maps are the way in which classical data gets transformed into quantum states. A good point to start is to use existing templates from libraries like <a href="https://docs.pennylane.ai/en/stable/introduction/templates.html">Pennylane</a>.</p>
 <section id="basis-encoding" class="level2">
 <h2 class="anchored" data-anchor-id="basis-encoding">Basis encoding</h2>
-<p>Basis encoding might be one of the most simplistic ways to map classical data in quantum states. It requires our data to be composed by integers and maps its binary representation to the basis state that maps the same binary string: <span class="math inline">\(n = 4, \quad b_n = 1001, \quad |b_n\rangle = |1001\rangle\)</span>.</p>
+<p>Basis encoding might be one of the most simplistic ways to map classical data into quantum states. It requires our data to be composed of integers and maps its binary representation to the basis state that maps the same binary string: <span class="math inline">\(n = 4, \quad b_n = 1001, \quad |b_n\rangle = |1001\rangle\)</span>.</p>
 <p><span class="math display">\[
 |X\rangle = \frac{1}{\sqrt{M}}\sum_{m=1}^M |x^m \rangle
 \]</span></p>
 <p>It is not often used as it limits the data that can be embedded and requires quite some resources from the quantum side which are not fully utilized.</p>
-<div id="30275cc2" class="cell" data-execution_count="1">
+<div id="c9902942" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -626,8 +626,8 @@ window.Quarto = {
 <p><span class="math display">\[
 (R_z(x_1) \otimes R_z(x_2) \otimes \dots \otimes R_z(x_n))|0\rangle^{\otimes n}
 \]</span></p>
-<p>data must be in the regime where those rotations take effect (<span class="math inline">\([0, 2\pi]\)</span>) and may be more suitable if a cyclic nature is already present. Normalization of data may be relevant preprocessing step in this case but we should also pay attention at the rotation axis, <span class="math inline">\(Z\)</span> in this case.</p>
-<div id="8ec1fb74" class="cell" data-execution_count="2">
+<p>data must be in the regime where those rotations take effect (<span class="math inline">\([0, 2\pi]\)</span>) and may be more suitable if a cyclic nature is already present. Normalization of data may be a relevant preprocessing step in this case but we should also pay attention to the rotation axis, <span class="math inline">\(Z\)</span> in this case.</p>
+<div id="73efbe07" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane.numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -650,11 +650,11 @@ window.Quarto = {
 </section>
 <section id="amplitude-encoding" class="level2">
 <h2 class="anchored" data-anchor-id="amplitude-encoding">Amplitude encoding</h2>
-<p>Amplitude encoding takes the probability amplitude of elements on an array and matches those to the position the where placed at. Assuming our data is composed by <span class="math inline">\(n\)</span> values (<span class="math inline">\(X = [x_0, x_1,...,x_n]\)</span> ) its representation would take the shape</p>
+<p>Amplitude encoding takes the probability amplitude of elements on an array and matches those to the position they were placed at. Assuming our data is composed of <span class="math inline">\(n\)</span> values (<span class="math inline">\(X = [x_0, x_1,...,x_n]\)</span> ) its representation would take the shape</p>
 <p><span class="math display">\[
 |\phi\rangle = \frac{1}{\sqrt{\sum_k x_k^2}} \sum_{k=0}^{2 -1} x_k|k\rangle
 \]</span></p>
-<div id="ce50df56" class="cell" data-execution_count="3">
+<div id="8a93e390" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">'default.qubit'</span>, wires<span class="op">=</span><span class="dv">2</span>)</span>
@@ -672,12 +672,12 @@ window.Quarto = {
 </section>
 <section id="iqp-circuits" class="level2">
 <h2 class="anchored" data-anchor-id="iqp-circuits">IQP circuits</h2>
-<p>Based on some works in the field <span class="citation" data-cites="Havl_ek_2019">(<a href="../references.html#ref-Havl_ek_2019" role="doc-biblioref">Havlíček et al. 2019</a>)</span>, IQP circuit family was proposed as a potential good transformation given its hardness when it comes to classical simulation. If there is something quantum that adds to the mixture, this circuits mush be a good way to have those intrinsically added.</p>
+<p>Based on some works in the field <span class="citation" data-cites="Havl_ek_2019">(<a href="../references.html#ref-Havl_ek_2019" role="doc-biblioref">Havlíček et al. 2019</a>)</span>, IQP circuit family was proposed as a potential good transformation given its hardness when it comes to classical simulation. If there is something quantum that adds to the mixture, these circuits must be a good way to have those intrinsically added.</p>
 <section id="zz-feature-map" class="level3">
 <h3 class="anchored" data-anchor-id="zz-feature-map">ZZ feature map</h3>
 <p>This is a particular version of the Pauli feature map that we will be able to find in <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZZFeatureMap">Qiskit</a>. It performs the same rotations we saw in the angle encoding but with an extra <span class="math inline">\(ZZ\)</span> interaction between data points to capture the correlating observations to further boost their representation. We can also perform several repetitions of the mapping providing a more complex iteration.</p>
-<p>Given that it uses <span class="math inline">\(Z\)</span> rotations it is common to see Hadamard gates preceding those rotations so that by moving our <span class="math inline">\(|0\rangle\)</span> states to <span class="math inline">\(|+\rangle\)</span> will make sure those rotations have some meaningful effect.</p>
-<div id="2515cddd" class="cell" data-execution_count="4">
+<p>Given that it uses <span class="math inline">\(Z\)</span> rotations it is common to see Hadamard gates preceding those rotations so that moving our <span class="math inline">\(|0\rangle\)</span> states to <span class="math inline">\(|+\rangle\)</span> will make sure those rotations have some meaningful effect.</p>
+<div id="832bf7ef" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">3</span>)</span>
@@ -690,7 +690,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="6851f593" class="cell" data-execution_count="5">
+<div id="aa7b3173" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>feature_map.decompose().draw(<span class="st">'mpl'</span>, fold<span class="op">=-</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -700,8 +700,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap">general case</a> allows to define a complete specification of Pauli rotations and entanglement layout so that one can customize the feature map to its specifications.</p>
-<div id="cb68e771" class="cell" data-execution_count="6">
+<p>The <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap">general case</a> allows us to define a complete specification of Pauli rotations and entanglement layout so that one can customize the feature map to their specifications.</p>
+<div id="6d15f422" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> PauliFeatureMap</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> PauliFeatureMap(<span class="dv">3</span>, paulis<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"YZ"</span>], entanglement<span class="op">=</span><span class="st">'linear'</span>)</span>
@@ -714,7 +714,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Why is this mapping good? Or bad? How many repetitions need to be used? Well, indeed, some of the approaches have no particular rational behind and are much more experimental. We can always look into the literature relevant papers exploring the qualities of each feature map trying to find the one that could be beneficial for our project <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et al. 2019</a>)</span>.</p>
+<p>Why is this mapping good? Or bad? How many repetitions need to be used? Well, indeed, some of the approaches have no particular rationale behind them and are much more experimental. We can always look into the literature for relevant papers exploring the qualities of each feature map trying to find the one that could be beneficial for our project <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et al. 2019</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -522,14 +522,14 @@ window.Quarto = {
 </header>
 
 
-<p>A key aspect in both classical and quantum machine learning is that these are purely evidence based approaches. We need to have data in order to reverse engineer the dynamics of a given system or relationship between collected evidences and target values of the task.</p>
+<p>A key aspect in both classical and quantum machine learning is that these are purely evidence based approaches. We need to have data in order to reverse engineer the dynamics of a given system or relationship between collected evidence and target values of the task.</p>
 <p>Most companies harvest a huge amount of data but this data is classical for now. Our quantum devices can only work with quantum states as we saw <a href="../../parts/gettingstarted/basics.html">previously</a>. We also know that when measuring any outcome of a quantum device, a mapping is done from quantum to classical regime where plenty of information is lost</p>
 <p><span class="math display">\[
 |0\rangle \rightarrow 0 \quad \&amp; \quad |1\rangle \rightarrow 1,
 \]</span></p>
 <p>For the machine to be aware of our classical data we should find the opposite action, we would need to introduce our data into the quantum device creating a state that is meaningful for our task. Most likely it will also require a more complex representation than simple bits, as we will be using different data representations in our classical datasets (boolean, categorical and continuous variables among others).</p>
 <p>A special type of circuits exists meant for this particular step. This action is performed by <strong>feature maps</strong>, and the name comes from the mapping action between the original data space <span class="math inline">\(\in \mathbb{R}^n\)</span> to a new feature space of different dimension and complexity (<span class="math inline">\(\in \mathbb{C}^m\)</span>).</p>
-<p>Many techniques in the classical domain use this technique, mapping into a higher-dimensional space so that data becomes easy to separable. This is mostly performed by the definition of <a href="https://en.wikipedia.org/wiki/Kernel_method">kernels</a> in techniques like <a href="https://scikit-learn.org/stable/modules/svm.html">Support Vector Machines</a>.</p>
+<p>Many methods in the classical domain use this technique, mapping into a higher-dimensional space so that data becomes easily separable. This is mostly performed by the definition of <a href="https://en.wikipedia.org/wiki/Kernel_method">kernels</a> in techniques like <a href="https://scikit-learn.org/stable/modules/svm.html">Support Vector Machines</a>.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -548,7 +548,7 @@ window.Quarto = {
 </div>
 </figure>
 <p>Often, these techniques require a good understanding from the classical side in order to create the best mapping possible to the latent space. It should be able to accurately synthesize the information removing all redundant information from the original data space.</p>
-<p>So, by definition, our mapping into the quantum regime belongs to the first family as it is in generally assumed the higher dimensional nature of quantum formalism. But each type of mapping may benefit different objectives as we previously stated.</p>
+<p>So, by definition, our mapping into the quantum regime belongs to the first family as the higher dimensional nature of quantum formalism is generally assumed. But each type of mapping may benefit different objectives as we previously stated.</p>
 
 
 

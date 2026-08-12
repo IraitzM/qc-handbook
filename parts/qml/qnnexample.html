@@ -102,7 +102,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -599,7 +599,7 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> X_scaled.shape[<span class="dv">1</span>]</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X_scaled, Y, test_size<span class="op">=</span><span class="fl">0.33</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Done! Now we can start creating out QNN structure. First we need something to embed the data into a quantum state.</p>
+<p>Done! Now we can start creating our QNN structure. First we need something to embed the data into a quantum state.</p>
 <div id="cell-5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> YZ_CX_EncodingCircuit</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -636,7 +636,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Now we have composed the <span class="math inline">\(U_{\theta_1}(x)\)</span> feature map and <span class="math inline">\(V(\theta_2)\)</span> parameterized circuit that produce the state <span class="math inline">\(|\Psi(x, \theta)\rangle\)</span>. By measuring the observable <span class="math inline">\(O\)</span> we can then evaluate the put of the QNN structure as</p>
+<p>Now we have composed the <span class="math inline">\(U_{\theta_1}(x)\)</span> feature map and <span class="math inline">\(V(\theta_2)\)</span> parameterized circuit that produce the state <span class="math inline">\(|\Psi(x, \theta)\rangle\)</span>. By measuring the observable <span class="math inline">\(O\)</span> we can then evaluate the output of the QNN structure as</p>
 <p><span class="math display">\[
 f(x,\theta) = \langle \Psi(x, \theta) | O |\Psi(x, \theta)\rangle
 \]</span></p>
@@ -651,7 +651,7 @@ f(x,\theta) = \langle \Psi(x, \theta) | O |\Psi(x, \theta)\rangle
 </div>
 </div>
 </div>
-<p>A single <span class="math inline">\(Z\)</span> observable over a specific qubit may do the trick. At the end, we know it will return either 1 or -1 so we are fine for binary classiciation tasks.</p>
+<p>A single <span class="math inline">\(Z\)</span> observable over a specific qubit may do the trick. At the end, we know it will return either 1 or -1 so we are fine for binary classification tasks.</p>
 <div id="cell-11" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.observables <span class="im">import</span> CustomObservable</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -662,7 +662,7 @@ f(x,\theta) = \langle \Psi(x, \theta) | O |\Psi(x, \theta)\rangle
               coeffs=[ParameterExpression(1.0*p[0])])</code></pre>
 </div>
 </div>
-<p>And with that we just neet to select our simulation mechanism and optimization routine to start training our model.</p>
+<p>And with that we just need to select our simulation mechanism and optimization routine to start training our model.</p>
 <div id="cell-13" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.qnn <span class="im">import</span> QNNClassifier, SquaredLoss</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.optimizers <span class="im">import</span> Adam</span>
@@ -691,7 +691,7 @@ weighted avg       0.77      0.76      0.76        33
 </code></pre>
 </div>
 </div>
-<p>Cool! You can check other compositions, like the Data Re-Uploading one or othes used in different benchmarks in the literature <span class="citation" data-cites="P_rez_Salinas_2020 bowles2024betterclassicalsubtleart">(<a href="../references.html#ref-P_rez_Salinas_2020" role="doc-biblioref">Pérez-Salinas et al. 2020</a>; <a href="../references.html#ref-bowles2024betterclassicalsubtleart" role="doc-biblioref">Bowles et al. 2024</a>)</span>.</p>
+<p>Cool! You can check other compositions, like the Data Re-Uploading one or others used in different benchmarks in the literature <span class="citation" data-cites="P_rez_Salinas_2020 bowles2024betterclassicalsubtleart">(<a href="../references.html#ref-P_rez_Salinas_2020" role="doc-biblioref">Pérez-Salinas et al. 2020</a>; <a href="../references.html#ref-bowles2024betterclassicalsubtleart" role="doc-biblioref">Bowles et al. 2024</a>)</span>.</p>
 <div id="cell-16" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>

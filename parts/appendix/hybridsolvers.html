@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -552,34 +552,34 @@ window.Quarto = {
 
 
 <p>Even though we talked about Quantum Computers and how we can use them to solve specific problems, complex problems; what percentage of the problem is solved by each device (classical and quantum) depends on the specific problem we would like to solve.</p>
-<p>Think about Shor’s algorithm. It revolutionized the field and worried a couple of CSO/CISOs in the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that tep there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.</p>
+<p>Think about Shor’s algorithm. It revolutionized the field and worried a couple of CSO/CISOs along the way. But it only changes one little step from the conventional Prime Factorization algorithm. Thanks to that step there is a significant speedup in the algorithm taking it down from exponential order to polynomial one.</p>
 <p>A more detailed explanation can be found in <a href="https://learning.quantum.ibm.com/course/fundamentals-of-quantum-algorithms/phase-estimation-and-factoring">IBM’s documentation</a> but this type of hybrid approaches can really benefit from NISQ era hardware in other regimes like optimization.</p>
 <section id="hybrid-annealers" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="hybrid-annealers">Hybrid Annealers</h2>
-<p>Our approach to optimization is already limited to the QUBO formulation but this is an imposed restrictions given our hardware. We may want to find solutions to problems whose variables can be integers, for example. This type of problems are classically solved by using <em>branch and bound</em> strategies. Taken a problem of the shape</p>
+<p>Our approach to optimization is already limited to the QUBO formulation but this is an imposed restriction given our hardware. We may want to find solutions to problems whose variables can be integers, for example. These types of problems are classically solved by using <em>branch and bound</em> strategies. Taking a problem of the shape</p>
 <p><span class="math display">\[
 \max_{x\in\mathbb{R}^n} f(x) \\
 \quad  \text{s.t.  } c(c) \le 0 \\
     \quad \quad x_i \in \mathbb{Z}, i \in I
 \]</span></p>
-<p>where <span class="math inline">\(f\)</span> and <span class="math inline">\(c\)</span> are nonlinear and non-convex functions. This makes our target problem a non-convex mixed-integer nonlinear problem (MINLP). Having guarantee that we not only reach a solution but <strong>the</strong> solution is indeed a demanding task.</p>
+<p>where <span class="math inline">\(f\)</span> and <span class="math inline">\(c\)</span> are nonlinear and non-convex functions. This makes our target problem a non-convex mixed-integer nonlinear problem (MINLP). Having a guarantee that we not only reach a solution but <strong>the</strong> solution is indeed a demanding task.</p>
 <p>Good news is that non-convex QUBOs can be made convex as follows</p>
 <p><span class="math display">\[
 \max_{x\in\{0,1\}^n} x^T (Q + diag(s))x + s^Tx
 \]</span></p>
-<p>where <span class="math inline">\(S\)</span> refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving and auxiliary Semidefinite Optimization Problem (SDP) that returns larges eigenvalue of <span class="math inline">\(Q\)</span> <span class="citation" data-cites="billionnet2007using">(<a href="../references.html#ref-billionnet2007using" role="doc-biblioref">Billionnet and Elloumi 2007</a>)</span>. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways <span class="citation" data-cites="montanaro2020quantum augustino2025solvingsemidefiniterelaxationqubos">(<a href="../references.html#ref-montanaro2020quantum" role="doc-biblioref">Montanaro 2020</a>; <a href="../references.html#ref-augustino2025solvingsemidefiniterelaxationqubos" role="doc-biblioref">Augustino et al. 2025</a>)</span>. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.</p>
+<p>where <span class="math inline">\(S\)</span> refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving an auxiliary Semidefinite Optimization Problem (SDP) that returns the largest eigenvalue of <span class="math inline">\(Q\)</span> <span class="citation" data-cites="billionnet2007using">(<a href="../references.html#ref-billionnet2007using" role="doc-biblioref">Billionnet and Elloumi 2007</a>)</span>. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways <span class="citation" data-cites="montanaro2020quantum augustino2025solvingsemidefiniterelaxationqubos">(<a href="../references.html#ref-montanaro2020quantum" role="doc-biblioref">Montanaro 2020</a>; <a href="../references.html#ref-augustino2025solvingsemidefiniterelaxationqubos" role="doc-biblioref">Augustino et al. 2025</a>)</span>. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.</p>
 <section id="d-waves-hybrid-solvers" class="level3">
 <h3 class="anchored" data-anchor-id="d-waves-hybrid-solvers">D-Wave’s Hybrid solvers</h3>
-<p>D-Wave was one of the first to leverage this complex workflows involving classical and quantum resources and came with a practical solution anybody used to their service can use. They released a set of <a href="https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html">hybrid solvers</a>. These solvers are particularly convenient when instead of Binary Quadratic Models we would like to formulate our problem as:</p>
+<p>D-Wave was one of the first to leverage these complex workflows involving classical and quantum resources and came up with a practical solution anybody used to their service can use. They released a set of <a href="https://docs.dwavesys.com/docs/latest/doc_leap_hybrid.html">hybrid solvers</a>. These solvers are particularly convenient when instead of Binary Quadratic Models we would like to formulate our problem as:</p>
 <ul>
 <li><a href="https://docs.ocean.dwavesys.com/en/stable/concepts/cqm.html#cqm-sdk">Constrained Quadratic Models</a>: problems that might include real, integer and/or binary variables and one or more constraints.</li>
 <li><a href="https://docs.ocean.dwavesys.com/en/stable/concepts/dqm.html#dqm-sdk">Discrete Quadratic Models</a>: problems containing discrete variables in their core variable formulation.</li>
 </ul>
-<p>As you can see, there is no silver bullet, but being aware of all the posibilites technology brings can make a difference when facing our business use cases for that extra percentage that makes us competitive.</p>
+<p>As you can see, there is no silver bullet, but being aware of all the possibilities technology brings can make a difference when facing our business use cases for that extra percentage that makes us competitive.</p>
 </section>
 <section id="quantagonia" class="level3">
 <h3 class="anchored" data-anchor-id="quantagonia">Quantagonia</h3>
-<p>Due to their change on pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by <a href="https://www.quantagonia.com/">Quantagonia</a>.</p>
+<p>Due to their change in pricing strategy, we can no longer mess around with their devices as much as we would like to so, an interesting alternative is the service provided by <a href="https://www.quantagonia.com/">Quantagonia</a>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/quantagonia.png" class="img-fluid figure-img"></p>
