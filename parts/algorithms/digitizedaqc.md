@@ -2,7 +2,7 @@
 
 Digitized quantum computers work indeed in a different manner. Hamiltonians are _less_ important from a program perspective. All we need is the set of instructions to be provided for them to run. Of course, these instructions cannot come out of the blue, so we still apply previous principles but with the flexibility of being able to tweak how the initial quantum state evolves. We are not limited by a given algorithm or device configuration, as there exist no default setup other than the initial state of the system ($|0\rangle^n$). It is up to our design how it will work and how much juice we squeeze out of the machine.
 
-As an example, we can still benefit from the AQC paradigm and implement a time dependent Hamiltonian that solves our problem like before. One critical aspect though is the fact that digitized quantum computers work in cycles and actions will need to be discretized (bounded in time) in order to implement our wanted state evolution. But it gives us more room to change some of the parameters machines like D-Wave's ones have fixed for us. That way, we may more options to explore.
+As an example, we can still benefit from the AQC paradigm and implement a time dependent Hamiltonian that solves our problem like before. One critical aspect though is the fact that digitized quantum computers work in cycles and actions will need to be discretized (bounded in time) in order to implement our wanted state evolution. But it gives us more room to change some of the parameters machines like D-Wave's ones have fixed for us. That way, we may have more options to explore.
 
 ## Trotter-Suzuki decomposition
 
@@ -12,15 +12,15 @@ Approximating a time-dependent Hamiltonian can be challenging as working with co
 ![Piecewise linear function](../../assets/piecewise-linear.png)
 </figure>
 
-If we consider out unitary evolution for the Hamiltonian $U(T,t_0)$ we could take same approach and approximate its results by extending its definition to discrete intervals.
+If we consider our unitary evolution for the Hamiltonian $U(T,t_0)$ we could take the same approach and approximate its results by extending its definition to discrete intervals.
 
 $$
 U(T,t_0) = U(t_n, t_{n-1})U(t_{n-1}, t_{n-2}) \dots U(t_1, t_0)
 $$
 
-The smaller the step the better we will approximate ideal continuous case. Take also into consideration that $\delta t_i = t_{i+1} - t_i$ do not have to be equally spaced for all $i$s even though it does help for generalization purposes.
+The smaller the step the better we will approximate the ideal continuous case. Take also into consideration that $\delta t_i = t_{i+1} - t_i$ do not have to be equally spaced for all $i$s even though it does help for generalization purposes.
 
-In quantum mechanics there exists a concreta example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape $e^{A+B}$ its limit can be defined
+In quantum mechanics there exists a concrete example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape $e^{A+B}$ its limit can be defined
 
 $$
 e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
@@ -30,13 +30,13 @@ Meaning we can alternate the effect of a decomposed Hamiltonian ($H = H_A + H_B$
 
 ## A practical example
 
-Let's go step by step. Our digitized annealing algorithm will be composed by three main blocks as we already explained before.
+Let's go step by step. Our digitized annealing algorithm will be composed of three main blocks as we already explained before.
 
 <figure markdown>
 ![Digitized Quantum Annealing](../../assets/digitized-qa.png)
 </figure>
 
-The mixing cycle is where the mixture between our initial Hamiltonian and problem Hamiltonian happen according to the scheduling function.
+The mixing cycle is where the mixture between our initial Hamiltonian and problem Hamiltonian happens according to the scheduling function.
 
 [Some support material](https://arxiv.org/abs/1906.08948)
 
@@ -56,7 +56,7 @@ init_state.draw('mpl')
 ![Initial state (superposition of all possible basis states)](../../assets/init_state.png)
 </figure>
 
-Then, we need to produce the combination of our two hamiltonians. We will continue with previously seen examples. First the initial hamiltonian:
+Then, we need to produce the combination of our two Hamiltonians. We will continue with previously seen examples. First the initial Hamiltonian:
 
 $$
 H_A = -\sum_i^n \sigma_{x_i}
@@ -122,7 +122,7 @@ Hp.draw('mpl')
 ![Problem Hamiltonian (the one we want to obtain the ground state from)](../../assets/problem_hamiltonian.png)
 </figure>
 
-With these three pieces we can build our digitized version for an adiabatic computation. Just by selecting the resolution of the $\lambda (t)$ function (often called the number of trotter steps) we can build the whole end to end circuit.
+With these three pieces we can build our digitized version for an adiabatic computation. Just by selecting the resolution of the $\lambda (t)$ function (often called the number of Trotter steps) we can build the whole end to end circuit.
 
 ```py
 from qiskit import QuantumCircuit

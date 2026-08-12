@@ -1,6 +1,6 @@
 We do have a mathematical formalism to perform computation and devices capable of processing these instructions for us. Now we only need a set of relevant hard to solve problems that could benefit from those resources.
 
-A relevant aspect of quantum computing is that given the low level at which we will work, the words **circuit** and **algorithm** interchange. Classical computing algorithms are way more abstract nowadays than in the original days, closer to the actual electronics. This is where quantum computing still may confuse you as the steps of an algorithms are represented in blocks of logical gates composing a circuit.
+A relevant aspect of quantum computing is that given the low level at which we will work, the words **circuit** and **algorithm** are interchangeable. Classical computing algorithms are way more abstract nowadays than in the early days, closer to the actual electronics. This is where quantum computing still may confuse you as the steps of an algorithm are represented in blocks of logical gates composing a circuit.
 
 ## Types of algorithms {.unnumbered}
 
@@ -18,7 +18,7 @@ _Quantum Key Distribution_ (QKD), _Superdense Coding_ and _Quantum Teleportation
 
 Certain circuits/algorithms are also building blocks of more complex algorithms. For example, _Quantum Fourier Transform_ (QFT) is used to map a given input to a phase change on the $Z$ axis.
 
-Its inverse, makes the opposite, any operation that only rotates the status of a qubit on $Z$ axis will render a superposition state when measured. Therefore, iQFT transforms this amplitude into a final state triggering the phase change of a given quantum state.
+Its inverse does the opposite, any operation that only rotates the status of a qubit on $Z$ axis will render a superposition state when measured. Therefore, iQFT transforms this amplitude into a final state triggering the phase change of a given quantum state.
 
 <figure markdown>
 ![Quantum Fourier Transform](../../assets/qft.png){width=60%}
@@ -39,18 +39,18 @@ There are some algorithms every quantum computing specialist should be familiar 
 
 Most of them are hard to realize due to the ancillary qubits required for the implementation. Other than basic examples, as soon as the problem grows in size it becomes challenging to implement those even using local simulators.
 
-Our main focus for this following section will be dedicated to **combinatorial optimization**. In this regime some specific quantum computing forms will be visited and how existing services can be used to actually implement those algorithms for specific purposes.
+Our main focus for the following section will be dedicated to **combinatorial optimization**. In this regime some specific quantum computing forms will be visited, along with how existing services can be used to actually implement those algorithms for specific purposes.
 
 ## Computational complexity
 
-If one looks at the media it looks that <_ENTER THE NEW TREND HERE_> will be much better than whatever we might be using now. This is something Quantum Computing has also been affected by. Thus, it is important to frame the potential gain QC may introduce to our processes as depending on the complexity of it could well be there is no justification to adopt a new paradigm given the effort it requires.
+If one looks at the media it looks like <_ENTER THE NEW TREND HERE_> will be much better than whatever we might be using now. This is something Quantum Computing has also been affected by. Thus, it is important to frame the potential gain QC may introduce to our processes as, depending on the complexity of it, it could well be that there is no justification to adopt a new paradigm given the effort it requires.
 
-BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space. Several problems fall into this category and are subject to be solved using quantum computing solutions [@wocjan2006naturalbqpcompleteproblems].
+BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space. Several problems fall into this category and are candidates to be solved using quantum computing solutions [@wocjan2006naturalbqpcompleteproblems].
 
 <figure markdown>
 ![Complexity depiction Taken from https://arxiv.org/pdf/1611.04471](../../assets/complexity.png)
 </figure>
 
-So, let's be aware that some problems can as well be efficiently solved by existing classical resources. Others, might be not even suitable for quantum computers being too hard to solve as well. So there is a sweet-spot where a set of problems may benefit from being solved using QC. Let's not assume superiority by default.
+So, let's be aware that some problems can as well be efficiently solved by existing classical resources. Others might not even be suitable for quantum computers being too hard to solve as well. So there is a sweet-spot where a set of problems may benefit from being solved using QC. Let's not assume superiority by default.
 
 We will start with a critical process for many companies and part of the key processes when it comes to Machine Learning.

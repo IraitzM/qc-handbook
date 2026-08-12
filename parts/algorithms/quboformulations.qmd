@@ -1,9 +1,9 @@
 # QUBO formulation {.unnumbered}
 
 
-As we saw during class, one important part of being able to use those quantum computing devices is posing our problem as a matrix representation following the QUBO formulation. We could then convert it to Ising type if needed but we will see some of the most common frameworks already provide a translation mechanism between the too.
+As we saw during class, one important part of being able to use those quantum computing devices is posing our problem as a matrix representation following the QUBO formulation. We could then convert it to Ising type if needed but we will see some of the most common frameworks already provide a translation mechanism between the two.
 
-Therefore a critical aspect of it will be knowing how to transform our penalty terms so that the fit into the objective function to be minimized.
+Therefore a critical aspect of it will be knowing how to transform our penalty terms so that they fit into the objective function to be minimized.
 
 Known penalties
 
@@ -16,13 +16,13 @@ Known penalties
 | $x_1 + x_2 + x_3  \le 1$ | $P(x_1 x_2 + x_1 x_3 + x_2 x_3)$ |
 | $x = y$ | $P(x+y- 2xy)$ |
 
-being $P$ a positive scalar characterizing the effect of the penalty over the cost function. Is is [a topic on its own](https://docs.dwavequantum.com/en/latest/quantum_research/reformulating.html#constraints-conflict-graph-technique).
+with $P$ being a positive scalar characterizing the effect of the penalty over the cost function. It is [a topic on its own](https://docs.dwavequantum.com/en/latest/quantum_research/reformulating.html#constraints-conflict-graph-technique).
 
-We will see how some classical problems can be mapped to their QUBO form so that this problems can be solved by Quantum Algorithms.
+We will see how some classical problems can be mapped to their QUBO form so that these problems can be solved by Quantum Algorithms.
 
 ## Binary Linear Programming
 
-Taken from [@lucas2014ising], Binary Linear Programming problem tries to solve a problem of the shape $Sx = b$ where $x$ is the unknown vector of binary variables to be solved. It is a simple example as it already provides the shape we need being variables binary, no higher order relation exists and has no constraints to care about. In order to solve this problem we will need to reformulate our previous form into:
+Taken from [@lucas2014ising], Binary Linear Programming problem tries to solve a problem of the shape $Sx = b$ where $x$ is the unknown vector of binary variables to be solved. It is a simple example as it already provides the shape we need with variables being binary, no higher order relation exists and has no constraints to care about. In order to solve this problem we will need to reformulate our previous form into:
 
 $$
 \arg \min_{x} \| Sx - b \|
@@ -77,7 +77,7 @@ for j in range(m):
 Q
 ```
 
-As you can see the matrix is symetric as there is a natural symmetry between $x_ix_j$ and $x_jx_i$. We could brute force our solution.
+As you can see the matrix is symmetric as there is a natural symmetry between $x_ix_j$ and $x_jx_i$. We could brute force our solution.
 
 ```{python}
 min_val = 0
@@ -106,7 +106,7 @@ There you go, it is the actual solution.
 
 ## MaxCut
 
-Maximum cut is another canonical example often use to characterize the flow between the nodes of a network mapping a distribution network, electricity or telecommunication networks or even circuit design. The main idea comes from splitting the vertices of a graph into two complementary sets such that the number of edges is maximally cut.
+Maximum cut is another canonical example often used to characterize the flow between the nodes of a network mapping a distribution network, electricity or telecommunication networks or even circuit design. The main idea comes from splitting the vertices of a graph into two complementary sets such that the number of edges is maximally cut.
 
 ::: {.callout-note}
 _NetworkX package will need to be added to your Python environment for this example_
@@ -127,9 +127,9 @@ G = gen_graph(5, None)
 nx.draw(G)
 ```
 
-We can model this problem by identifying each node $j$ in one or other set of the two possible options ($x_j = 0$ or $x_j = 1$). With that we can set the formula $x_i + x_j - 2x_ix_j$ so that identifies whether edge $(ij)$ is in the cut (if only one $x$ is active then it will equal two 1).
+We can model this problem by identifying each node $j$ in one or other set of the two possible options ($x_j = 0$ or $x_j = 1$). With that we can set the formula $x_i + x_j - 2x_ix_j$ so that it identifies whether edge $(ij)$ is in the cut (if only one $x$ is active then it will equal 1).
 
-That let's us with the general formula
+That leaves us with the general formula
 
 $$
 \max \sum_{(i,j)} (x_i + x_j - 2x_ix_j)
@@ -172,7 +172,7 @@ for x in np.c_[tuple(i.ravel() for i in np.mgrid[:2, :2, :2, :2, :2])]:  # noqa
 print(min_sol, "|", min_val)
 ```
 
-This case is a little bit more complicatd as more than one option can be selected. Ideally we would like to obtain all potential solutions.
+This case is a little bit more complicated as more than one option can be selected. Ideally we would like to obtain all potential solutions.
 
 ```{python}
 solution = np.array(min_sol)
@@ -193,9 +193,9 @@ nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5);
 
 ## Knapsack problem (quadratic)
 
-Fitting a set of assets according to the size of the bag we want to use can be a hard combinatorial problem. Not that we are going to fo the full fledge example but it is interesting to look at it from an implementation perspective.
+Fitting a set of assets according to the size of the bag we want to use can be a hard combinatorial problem. Not that we are going to do the full fledged example but it is interesting to look at it from an implementation perspective.
 
-Quadratic Knapsack corresponds to the problem where interaction exists into the variables we would like to model:
+Quadratic Knapsack corresponds to the problem where interaction exists between the variables we would like to model:
 
 $$
 max \sum_{i=1}^{n-1} \sum_{j=i}^n w_{ij}x_i x_j
@@ -209,7 +209,7 @@ $$
 
 Variables $x_i$ represent the mask of selecting or not $i$ element to be considered. $w_{ij}$ sets the value of taking in two elements at the same time, $a_j$ represents the weight associated to $j$ and $b$ sets the available budget for the whole thing (the size of our Knapsack indeed). As can be seen many different types of problems can be mapped to this canonical example.
 
-On relevant aspect of inequalities is that we will need to add slack variables to take the excess of the constraint $a_j x_j + S = b $. In this case $S$ will be a value between 0 and $b$ so we would need to characterize its binary representation so that the problem is still a binary quadratic problem still ($S = 2^ns_n + \dots + 2^0s_0$)
+One relevant aspect of inequalities is that we will need to add slack variables to take the excess of the constraint $a_j x_j + S = b $. In this case $S$ will be a value between 0 and $b$ so we would need to characterize its binary representation so that the problem is still a binary quadratic problem ($S = 2^ns_n + \dots + 2^0s_0$)
 
 We can start by adding the restriction to the objective function followed by a penalty term.
 
@@ -311,12 +311,12 @@ We will try to come up with a simplified version that may not capture the entire
 $$
 x_{i \, j} = 
     \begin{cases} 
-        1, & \text{$i$ is conected to $j$} \\
+        1, & \text{$i$ is connected to $j$} \\
         0, & \text{otherwise} 
     \end{cases}
 $$
 
-with a distance/cost of $c_{ij}$. The idea is to visit all nodes but without going over the same road in the route more than once (like the Könisberg bridge problem [@mezard2009information]). An ideally doing it at a minimum cost. Therefore,
+with a distance/cost of $c_{ij}$. The idea is to visit all nodes but without going over the same road in the route more than once (like the Königsberg bridge problem [@mezard2009information]). And ideally doing it at a minimum cost. Therefore,
 
 $$
 \min \sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{ij}
@@ -329,13 +329,13 @@ $$
 \min \sum_p^P\sum_i^N \sum_{j, j \ne i}^N c_{ij}x_{i,p}x_{j,(p+1)}
 $$
 
-Constraints to have in mind, the salesperson should use each road only once. That means we should limit $\forall i \in \{0...n\} \sum_i^n x_{ip} = 1$ both row and column-wise, meaning salesperson is in one place at each time $p$ and can only be in one $n$ alone..
+Constraints to have in mind, the salesperson should use each road only once. That means we should limit $\forall i \in \{0...n\} \sum_i^n x_{ip} = 1$ both row and column-wise, meaning salesperson is in one place at each time $p$ and can only be in one $n$ alone.
 
 $$
 H_{penalty} = \lambda\sum_{n=0}^N\left( 1 - \sum_{p=0}^P x_{n,p}\right)^2 + \lambda\sum_{p=0}^P\left( 1 - \sum_{n=0}^N x_{n,p}\right)^2 + \lambda\sum_{(i,j)\notin G}\sum_{p=0}^P x_{i,p}x_{j,p+q}
 $$
 
-In our QUBO setup, this constraint need to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
+In our QUBO setup, this constraint needs to be part of the objective function acting as a maximizer in our example. Usually a good estimate for a Lagrange parameter is between 75-150% of the objective function value, so we come up with an estimate for tour length and use that.
 
 ```{python}
 lagrange = 100
@@ -418,7 +418,7 @@ for pos in range(N):
             Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
 ```
 
-Consider that our QUBO is symmetric, then each penalty should be divided by two if occupies $Q_{i,j}$ and $Q_{j,i}$ positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering to trajectories for the same period.
+Consider that our QUBO is symmetric, then each penalty should be divided by two if it occupies $Q_{i,j}$ and $Q_{j,i}$ positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering two trajectories for the same period.
 
 ```{python}
 Q
@@ -446,7 +446,7 @@ response = sampler.sample_qubo(Q)
 print(response.slice(0, 15))
 ```
 
-Several options show to be optimal, which is the case. This is one of this examples where quantum superposition could render a estate that reveals all optimal configurations.
+Several options show up as optimal, which is the case. This is one of those examples where quantum superposition could render a state that reveals all optimal configurations.
 
 ```{python}
 route = response.first.sample

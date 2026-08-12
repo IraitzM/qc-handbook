@@ -13,8 +13,8 @@ import networkx as nx
 
 G = nx.DiGraph()
 G.add_weighted_edges_from({
-    ("A", "B", 20), ("A", "C", 42), ("B", "A", 20),
-    ("B", "C", 30), ("C", "A", 42),("C", "B", 30)
+    ("A", "B", 2), ("A", "C", 4.2), ("B", "A", 2),
+    ("B", "C", 3), ("C", "A", 4.2),("C", "B", 3)
 })
 
 nx.draw(G)
@@ -24,7 +24,7 @@ So that our final QUBO is represented as...
 ```{python}
 from collections import defaultdict
 
-lagrange = 120
+lagrange = 12
 
 # Creating the QUBO
 Q = defaultdict(float)

@@ -21,7 +21,7 @@ where $t\in[0, T]$ for the total time evolution $T$. The temporal schedules ($A(
 * $H_A$ is known, by known it also means we know its ground state and that we will be able to make it so that $|\psi(t_0)\rangle$ matches that state.
 * $H_B$ is our target Hamiltonian. A mapping that represents our combinatorial optimization problem. We would like to obtain its ground state.
 
-By making the schedule functions meet the conditions $A(t_0) = 1$, $B(t_0)  =0$, $A(T) = 0$ and $B(T) = 1$ we are able to produce an interpolated mixture of both Hamiltonians so that if the evolution is slow enough and the gap between ground state and other existed states remains the state produced at the end of the evolution should match the ground state of our final Hamiltonian ($H(T) = H_B$).
+By making the schedule functions meet the conditions $A(t_0) = 1$, $B(t_0)  =0$, $A(T) = 0$ and $B(T) = 1$ we are able to produce an interpolated mixture of both Hamiltonians so that if the evolution is slow enough and the gap between ground state and other excited states remains, the state produced at the end of the evolution should match the ground state of our final Hamiltonian ($H(T) = H_B$).
 
 <figure markdown>
 ![Annealing schedules, credit to DWave's documentation](../../assets/annealing-schedules.png)
@@ -38,7 +38,7 @@ Visually, you can see the issues.
 ![Energy gap (https://arxiv.org/pdf/1611.04471)](../../assets/energygap.png)
 </figure>
 
-It might be risky if at those points the evolution moves _too fast_. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of maintaining in the global minima.
+It might be risky if at those points the evolution moves _too fast_. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of remaining in the global minimum.
 
 <figure markdown>
 ![Scheduling function](../../assets/schedulingfunc.gif)
@@ -46,7 +46,7 @@ It might be risky if at those points the evolution moves _too fast_. Therefore, 
 
 As long as this evolution is above zero, we should be quite confident of the result at the end of the process ($T$).
 
-A common form for the initial Hamiltonian is $H_A = -\sum_i^n \sigma_{x_i}$ being $\sigma_x$ the Pauli operator (previously mentioned $X$ operator) applied to each $i$ index qubit. This hamiltonian is chosen given that we do know its ground state $|+\rangle^n$ and how to prepare it in our systems (remember the Hadamard gate). One common target Hamiltonian form we can find in the literature is defined as the **Ising model**. It uses variables $s_i = \pm 1$ to characterize the magnetic dipole moment in order to characterize ferromagnetism. Its mathematical form is of the shape
+A common form for the initial Hamiltonian is $H_A = -\sum_i^n \sigma_{x_i}$ with $\sigma_x$ being the Pauli operator (previously mentioned $X$ operator) applied to each $i$ index qubit. This Hamiltonian is chosen given that we do know its ground state $|+\rangle^n$ and how to prepare it in our systems (remember the Hadamard gate). One common target Hamiltonian form we can find in the literature is defined as the **Ising model**. It uses variables $s_i = \pm 1$ to characterize the magnetic dipole moment in order to characterize ferromagnetism. Its mathematical form is of the shape
 
 $$
 H = -\sum_{\langle i j \rangle} J s_i s_j - \sum_j h s_j
@@ -58,4 +58,4 @@ where $h$ characterizes the spin energy as well as their _position preference_ (
 ![Ising](../../assets/ising-pic.png)
 </figure>
 
-It is the general case and many providers will likely have some decision already made for us (scheduling functions and initial Hamiltonian for example) but there are other cases where initial state and hamiltonian can be wisely selected so that the starting point is already close to the target state we would like to obtain. This example is quite common in cases like chemistry where HartreeFock states could be a better initialization or some relaxed version of the target problem could also be solved (classically) and its solution used to approximate the global optima (warm-starting).
+It is the general case and many providers will likely have some decision already made for us (scheduling functions and initial Hamiltonian for example) but there are other cases where initial state and Hamiltonian can be wisely selected so that the starting point is already close to the target state we would like to obtain. This example is quite common in cases like chemistry where Hartree-Fock states could be a better initialization or some relaxed version of the target problem could also be solved (classically) and its solution used to approximate the global optima (warm-starting).

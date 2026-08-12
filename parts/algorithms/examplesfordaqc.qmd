@@ -1,6 +1,6 @@
 # Digitized AQC {.unnumbered}
 
-We will use our previous example on MaxCut just to take it simple.
+We will use our previous example on MaxCut just to keep it simple.
 
 
 ```{python}
@@ -63,7 +63,7 @@ solution = {
 plot_histogram(solution)
 ```
 
-Ok, we don't always know the solution in advance but it is important for educational purposes. Let's take the three pieces from our digitized AQC and built block by block, starting by the quantum state that is the ground state of our $H_{init}=-\sum_n \sigma_i^n$
+Ok, we don't always know the solution in advance but it is important for educational purposes. Let's take the three pieces from our digitized AQC and build block by block, starting by the quantum state that is the ground state of our $H_{init}=-\sum_n \sigma_i^n$
 
 ```{python}
 from qiskit import QuantumCircuit
@@ -127,7 +127,7 @@ for i in range(size):
 mixer.draw('mpl')
 ```
 
-This following code is a particular version of the MaxCut instance as in a fully informed Ising model we would need to add $Z$ rotations depending on the weight of the _node_ and $ZZ$ rotations accoding to coupling strengh of each edge. But given that we have a sparse matrix, we can take advantage of that.
+This following code is a particular version of the MaxCut instance as in a fully informed Ising model we would need to add $Z$ rotations depending on the weight of the _node_ and $ZZ$ rotations according to coupling strength of each edge. But given that we have a sparse matrix, we can take advantage of that.
 
 ```{python}
 import numpy as np
@@ -164,7 +164,7 @@ We have the three main blocks for setting our digitized version of the problem. 
 * $\beta$ : (1-$\lambda(t)$)/$n$
 * $\gamma$ : ($\lambda(t)$)/$n$
 
-Wbeing $n$ the number of trotter steps. We can do a first approach with a simple stepwise linear approach.
+With $n$ being the number of Trotter steps. We can do a first approach with a simple stepwise linear approach.
 
 ```{python}
 maxcut = QuantumCircuit(size,size)
@@ -337,7 +337,7 @@ plt.bar(energy, height=success_probability, label="Digitized AQC")
 plt.show()
 ```
 
-Let's play around a bit with the time parameters and see if we get a good concentration of -5 energy states. Ideally our sampling from the ground state should be below $2^5 = 32$ samples, otherwise, brute forcing would be more efficient in this cases. But in absence of knowledge we should guess for a while.
+Let's play around a bit with the time parameters and see if we get a good concentration of -5 energy states. Ideally our sampling from the ground state should be below $2^5 = 32$ samples, otherwise, brute forcing would be more efficient in these cases. But in absence of knowledge we should guess for a while.
 
 We could rely on techniques known to be used to find parameters in a model. Yeah, **machine learning** techniques.
 

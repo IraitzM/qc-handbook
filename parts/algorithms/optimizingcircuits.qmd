@@ -143,7 +143,7 @@ def compute_expectation(params):
 compute_expectation(initial_point)
 ```
 
-Considering it the initial point, we could use our function to iterate over it and select gradient-free optimizer to try to find a better parameterization.
+Considering it the initial point, we could use our function to iterate over it and select a gradient-free optimizer to try to find a better parameterization.
 
 ```{python}
 from scipy.optimize import minimize
@@ -203,7 +203,7 @@ plot_histogram([counts, solution], legend=["VQE", "Ideal"])
 
 Not bad in terms of expectation value but probably we could find better options for the ansatz so that it becomes easier to find the target state. Any guesses?
 
-Well lets then do it the ML (machine learning) way and try the available options:
+Well let's then do it the ML (machine learning) way and try the available options:
 
 * Change the repetition parameter: ```..., reps=2)```
 * Try with other options in Qiskit https://docs.quantum.ibm.com/api/qiskit/circuit_library

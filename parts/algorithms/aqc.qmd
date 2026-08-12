@@ -1,8 +1,8 @@
 # AQC in practice {.unnumbered}
 
-We will make a simple example so that the formalism of this algorithm is clear to everyone. We will need for this exercise:
+We will do a simple example so that the formalism of this algorithm is clear to everyone. We will need for this exercise:
 
-* A initial Hamiltonian and its ground state
+* An initial Hamiltonian and its ground state
 * A final Hamiltonian
 * A Scheduling function that governs the evolution and mixture between the two
 
@@ -135,7 +135,7 @@ plt.show()
 stats[:, 0]
 ```
 
-There you go, the obtained state corresponds with the desired
+There you go, the obtained state corresponds to the desired
 
 $$
 |\psi\rangle = \frac{1}{2}|000\rangle + \frac{1}{2}|011\rangle + \frac{1}{2}|100\rangle + \frac{1}{2}|111\rangle.

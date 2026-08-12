@@ -1,7 +1,7 @@
-#  QAOA in partice {.unnumbered}
+#  QAOA in practice {.unnumbered}
 
 
-As we have seen before, QAOA take the best of both worlds (ideally) considering the ansatz out of the AQC but variationaly training it to obtain the best scheduling function out of the free parameters.
+As we have seen before, QAOA takes the best of both worlds (ideally) considering the ansatz out of the AQC but variationally training it to obtain the best scheduling function out of the free parameters.
 
 Continuing with previous example....
 
@@ -88,7 +88,7 @@ x = [0, 1, 1, 0, 1]
 print(np.dot(np.dot(np.transpose(x), H_problem), x))
 ```
 
-In fact, for this example we know there are more than one optimal solutions...
+In fact, for this example we know there is more than one optimal solution...
 
 ```{python}
 from qiskit.visualization import plot_histogram
@@ -130,7 +130,7 @@ H_op = SparsePauliOp.from_list(
 print(f"Number of qubits: {H_op.num_qubits}")
 ```
 
-In this case, we will start with the existing Qiskit functionality and do a drill-down to highlight what is done behind the scenes. Qiskit provides a ready to be used QAOA implementation that will only require the and optimizer and a way to extract information out of our quantum device (either Estimator or Sampler primitive).
+In this case, we will start with the existing Qiskit functionality and do a drill-down to highlight what is done behind the scenes. Qiskit provides a ready to be used QAOA implementation that will only require an optimizer and a way to extract information out of our quantum device (either Estimator or Sampler primitive).
 
 ```{python}
 from qiskit_algorithms.minimum_eigensolvers import QAOA
@@ -253,7 +253,7 @@ qaoa.ansatz.decompose().draw('mpl', fold=150)
 qaoa.ansatz.decompose(reps=2).draw('mpl', fold=150)
 ```
 
-As we can see the ansatz is build following the Adiabatic Quantum Computing scheme where a block of $X$ rotations is applied, and alternated with the problem hamiltonian ($Z + ZZ$ interactions) as many times as repetitions are performed.
+As we can see the ansatz is built following the Adiabatic Quantum Computing scheme where a block of $X$ rotations is applied, and alternated with the problem Hamiltonian ($Z + ZZ$ interactions) as many times as repetitions are performed.
 
 ```{python}
 qaoa = QAOA(sampler, optimizer, reps=4)
@@ -269,7 +269,7 @@ qaoa.ansatz.draw('mpl', fold=150)
 qaoa.ansatz.decompose().decompose().draw('mpl', fold=150)
 ```
 
-Obtained solution distribution really points out to the solutions that provide solutions to our problem, superposed in a state that is the one minimizing the outcome of the circuit with respect to the expectation value of the hamitlonian.
+Obtained solution distribution really points to the states that provide solutions to our problem, superposed in a state that is the one minimizing the outcome of the circuit with respect to the expectation value of the Hamiltonian.
 
 ```{python}
 counts = {}
@@ -280,11 +280,11 @@ for key in result.eigenstate:
 plot_histogram(counts)
 ```
 
-Therefore, we are able to encode our problem into an Ising Hamiltonian, so that we can _easily_ design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationaly trained scheduling function.
+Therefore, we are able to encode our problem into an Ising Hamiltonian, so that we can _easily_ design a circuit to obtain the results from the potential solution landscape. We may need to set up the repetitions needed in order to map the optimal parameters to our variationally trained scheduling function.
 
 ```{python}
 qaoa.ansatz.depth()
 ```
 
-Small problems will render shallow circuits, but we need to be aware that introducing many repetitions of those blocks or _layers_, it will require more operations to be squeezed in, the lifespan of the cubits will need to be longer and the more operations we add, more noise it will enter into our final state.
+Small problems will render shallow circuits, but we need to be aware that introducing many repetitions of those blocks or _layers_, it will require more operations to be squeezed in, the lifespan of the qubits will need to be longer and the more operations we add, the more noise will enter into our final state.
 
