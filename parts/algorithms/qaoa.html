@@ -631,7 +631,7 @@ window.Quarto = {
 </div>
 </figure>
 <p>This is the basis of the Quantum Approximate Optimization Algorithm (QAOA). We only need to select the number of steps (also called layers) in order to produce our template circuit. Then comes the time to select the values that should replace placeholder parameters <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\beta\)</span>.</p>
-<p>The selection of both Hamiltonians matters, as if we did not have a <em>good</em> initial Hamiltonian, our selection of parameters could make us fall into a higher energy level eigenstate (<span class="math inline">\(|\lambda_1\rangle\)</span>) and by continuously applying our unitary associated to the target Hamiltonian we would get stuck in the same quantum state forever (<span class="math inline">\(U|\psi_{\lambda_1}\rangle = E_{\lambda_1}|\psi_{\lambda_1}\rangle\)</span>). That is how our initial Hamiltonian throughout the whole evolution allows us to escape those local minima looking for the actual ground truth.</p>
+<p>The choice of mixer and cost Hamiltonians matters. If the state is an eigenstate of the cost Hamiltonian, applying only its unitary changes the state by a phase, not by its energy eigenvalue: <span class="math inline">\(U(\theta)|\psi_{\lambda_1}\rangle = e^{-i\theta E_{\lambda_1}}|\psi_{\lambda_1}\rangle\)</span>. QAOA alternates this cost evolution with a mixer, which can move amplitude between cost-Hamiltonian eigenstates. Its variational optimization does not guarantee avoidance of local optima or preparation of the exact ground state at finite depth.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

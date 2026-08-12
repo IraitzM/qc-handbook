@@ -541,12 +541,12 @@ window.Quarto = {
 </header>
 
 
-<p>Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is the main mechanism quantum computers use to obtain the minimum energy or ground state for a given problem, and it is the main approach we use to solve hard combinatorial optimization problems <span class="citation" data-cites="Albash_2018">(<a href="../references.html#ref-Albash_2018" role="doc-biblioref">Albash and Lidar 2018</a>)</span>.</p>
+<p>Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is one approach for encoding optimization problems as Hamiltonians and preparing low-energy states; gate-based quantum computing remains the dominant general-purpose model, while practical quantum annealing is a related but more restricted setting <span class="citation" data-cites="Albash_2018">(<a href="../references.html#ref-Albash_2018" role="doc-biblioref">Albash and Lidar 2018</a>)</span>.</p>
 <p>This type of quantum computing is based on continuous-time evolution of a quantum state <span class="math inline">\(|\psi(t)\rangle\)</span> from a well-defined initial value to compute a final observed value. The evolution is modeled by the time-dependent <a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Schrödinger equation</a></p>
 <p><span class="math display">\[
 i\hbar \frac{\partial|\psi(t)\rangle}{\partial t}= H(t)|\psi(t)\rangle
 \]</span></p>
-<p>operating in the presence of adiabatic changes to the governing Hamiltonian <span class="math inline">\(H(t)\)</span> over the range <span class="math inline">\(t\in\left[0,T\right]\)</span>, where <span class="math inline">\(\hbar\)</span> is Planck’s constant. Adiabatic computing is computationally equivalent to all other quantum computing models, including the circuit and topological models, and it can efficiently solve any problem in BQP <span class="citation" data-cites="aharonov2008adiabatic">(<a href="../references.html#ref-aharonov2008adiabatic" role="doc-biblioref">Aharonov et al. 2008</a>)</span>. However, it was originally proposed as a method for solving satisfiability problems <span class="citation" data-cites="farhi2000numerical">(<a href="../references.html#ref-farhi2000numerical" role="doc-biblioref">Farhi et al. 2000</a>)</span> and it has received attention for the simplicity by which combinatorial optimization problems can be cast in Hamiltonian forms <span class="citation" data-cites="lucas2014ising">(<a href="../references.html#ref-lucas2014ising" role="doc-biblioref">Lucas 2014</a>)</span>.</p>
+<p>operating in the presence of adiabatic changes to the governing Hamiltonian <span class="math inline">\(H(t)\)</span> over the range <span class="math inline">\(t\in\left[0,T\right]\)</span>, where <span class="math inline">\(\hbar\)</span> is Planck’s constant. Ideal universal adiabatic quantum computation is polynomially equivalent to the circuit model and can therefore solve problems in BQP with polynomial overhead <span class="citation" data-cites="aharonov2008adiabatic">(<a href="../references.html#ref-aharonov2008adiabatic" role="doc-biblioref">Aharonov et al. 2008</a>)</span>. This equivalence should not be conflated with the capabilities or guarantees of every practical quantum annealer. AQC was originally proposed as a method for solving satisfiability problems <span class="citation" data-cites="farhi2000numerical">(<a href="../references.html#ref-farhi2000numerical" role="doc-biblioref">Farhi et al. 2000</a>)</span> and has received attention because combinatorial optimization problems can be cast naturally as Hamiltonians <span class="citation" data-cites="lucas2014ising">(<a href="../references.html#ref-lucas2014ising" role="doc-biblioref">Lucas 2014</a>)</span>.</p>
 <p>The time dependent Hamiltonian for this type of computation is given by the following formula</p>
 <p><span class="math display">\[
 H(t) = A(t)H_{A} + B(t)H_B
@@ -565,7 +565,7 @@ H(t) = A(t)H_{A} + B(t)H_B
 </figure>
 </div>
 </figure>
-<p>A critical issue when performing this type of computation and selecting the right scheduling function is that the minimum spectral gap, energy spectrum gap between ground state and remaining excited states, is kept non-zero during the whole transition. Otherwise, no guarantee of obtaining the target state can exist. In particular, we should care about the gap expressed as</p>
+<p>A critical issue when performing this type of computation and selecting the right scheduling function is the minimum spectral gap, the energy difference between the ground state and the first relevant excited state. A nonzero gap is not by itself sufficient: the runtime must also be large relative to the Hamiltonian’s rate of change and the inverse gap scale. In particular, we should care about the gap expressed as</p>
 <p><span class="math display">\[
 g_{min} = \min_{0\le t \le T} \min_{j\ne0} |E_j(t) - E_0(t)|
 \]</span></p>
@@ -578,7 +578,7 @@ Visually, you can see the issues.
 </figure>
 </div>
 </figure>
-<p>It might be risky if at those points the evolution moves <em>too fast</em>. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of remaining in the global minimum.</p>
+<p>It might be risky if at those points the evolution moves <em>too fast</em>. Therefore, we should select a scheduling function that, apart from satisfying the initial conditions, also takes the changing gap into account to minimize transitions to higher-energy states. Nonadiabatic transitions can leave the system outside the ground state; they do not specifically imply that the result is a local optimum.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -587,7 +587,7 @@ Visually, you can see the issues.
 </figure>
 </div>
 </figure>
-<p>As long as this evolution is above zero, we should be quite confident of the result at the end of the process (<span class="math inline">\(T\)</span>).</p>
+<p>Even with a positive gap, confidence in the final ground state depends on the runtime, schedule, matrix elements, initialization, and implementation errors.</p>
 <p>A common form for the initial Hamiltonian is <span class="math inline">\(H_A = -\sum_i^n \sigma_{x_i}\)</span> with <span class="math inline">\(\sigma_x\)</span> being the Pauli operator (previously mentioned <span class="math inline">\(X\)</span> operator) applied to each <span class="math inline">\(i\)</span> index qubit. This Hamiltonian is chosen given that we do know its ground state <span class="math inline">\(|+\rangle^n\)</span> and how to prepare it in our systems (remember the Hadamard gate). One common target Hamiltonian form we can find in the literature is defined as the <strong>Ising model</strong>. It uses variables <span class="math inline">\(s_i = \pm 1\)</span> to characterize the magnetic dipole moment in order to characterize ferromagnetism. Its mathematical form is of the shape</p>
 <p><span class="math display">\[
 H = -\sum_{\langle i j \rangle} J s_i s_j - \sum_j h s_j
