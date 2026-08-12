@@ -397,7 +397,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -541,14 +541,14 @@ window.Quarto = {
 </header>
 
 
-<p>Variational Quantum Eigensolver (VQE) proposed some years back <span class="citation" data-cites="peruzzo2014variational">(<a href="../references.html#ref-peruzzo2014variational" role="doc-biblioref">Peruzzo et al. 2014</a>)</span> does a upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minium energy level (let’s call it <span class="math inline">\(E_0\)</span>). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which is actually the quantum state associate to the minimum energy value.</p>
+<p>Variational Quantum Eigensolver (VQE) proposed some years back <span class="citation" data-cites="peruzzo2014variational">(<a href="../references.html#ref-peruzzo2014variational" role="doc-biblioref">Peruzzo et al. 2014</a>)</span> does an upper bound approximation to the minimum energy of a given Hamiltonian. The ground state of a Hamiltonian represents the system state rendering the minimum energy level (let’s call it <span class="math inline">\(E_0\)</span>). If we decompose the eigenvalues and eigenvectors to our target Hamiltonian we would obtain the whole energy spectrum and see which quantum state is actually associated to the minimum energy value.</p>
 <p><span class="math display">\[
 H|\psi_{\lambda}\rangle = E_{\lambda}|\psi_{\lambda}\rangle
 \]</span></p>
 <p>This is useful when, for example, looking to the state that minimizes system energy in chemistry. But of course if our problem is mapped to a Hamiltonian and its minimum energy is the outcome of our cost function minimization, then the obtained quantum state will therefore render as the solution to our problem.</p>
-<p>Thus, this way to approximate the minimum energy of the system could be quite useful is it requires less computation than the actual calculation of the eigenstates of our system.</p>
+<p>Thus, this way to approximate the minimum energy of the system could be quite useful as it requires less computation than the actual calculation of the eigenstates of our system.</p>
 <p>We do know that for a set of parameters on a parameterized ansatz, the outcome will be a target state <span class="math inline">\(|\psi\rangle\)</span> and that we can compute the energy level of a given state as <span class="math inline">\(\langle \psi | H |\psi\rangle = E(\psi)\)</span>. If this state is driven by a parameterized quantum circuit then we could modify the parameters looking for different states (<span class="math inline">\(|\phi\rangle\)</span>) hopefully in the direction so that <span class="math inline">\(E(\phi) \lt E(\psi)\)</span>.</p>
-<p>By variationally iterating over potential states we could approximate this state and get our result. Let’s do a simple example, let take for example following Hamiltonian</p>
+<p>By variationally iterating over potential states we could approximate this state and get our result. Let’s do a simple example, let’s take for example the following Hamiltonian</p>
 <p><span class="math display">\[
 H = \left[
 \begin{array}{cc}
@@ -557,9 +557,9 @@ H = \left[
 \end{array}
 \right]
 \]</span></p>
-<p>which can be decomposed into a linear combination of Pauli operators <span class="math inline">\(2Z + X + I\)</span>. Or a linear decomposition of hamiltonians <span class="math inline">\(H_1 = 2Z\)</span>, <span class="math inline">\(H_2 = X\)</span> and <span class="math inline">\(H_3 = I\)</span>, hence <span class="math inline">\(H = H_1+H_2+H_3\)</span>. We will get back to this.</p>
+<p>which can be decomposed into a linear combination of Pauli operators <span class="math inline">\(2Z + X + I\)</span>. Or a linear decomposition of Hamiltonians <span class="math inline">\(H_1 = 2Z\)</span>, <span class="math inline">\(H_2 = X\)</span> and <span class="math inline">\(H_3 = I\)</span>, hence <span class="math inline">\(H = H_1+H_2+H_3\)</span>. We will get back to this.</p>
 <p>VQE only requires an ansatz expressive enough so that target state can be mapped but nothing related to our target Hamiltonian. Therefore, our ansatz could be as simple as a <span class="math inline">\(R_y(\theta)\)</span> rotation.</p>
-<p>One thing that should be relevant is the idea of measurement and basis. For <span class="math inline">\(H_2\)</span> we might neet to add additional rotation operations over our initial circuit so that we can properly measure it.</p>
+<p>One thing that should be relevant is the idea of measurement and basis. For <span class="math inline">\(H_2\)</span> we might need to add additional rotation operations over our initial circuit so that we can properly measure it.</p>
 <p>Let’s start with <span class="math inline">\(\theta = 0\)</span>. Our generated state would be of the shape:</p>
 <p><span class="math display">\[
 R_y(0)|0\rangle =
@@ -628,11 +628,11 @@ R_y(-\pi/2)|0\rangle =
 \end{array}
 \right] = 0
 \]</span></p>
-<p>Therefore the overall expectation value for <span class="math inline">\(H\)</span> over <span class="math inline">\(|0\rangle\)</span> is 3. We could iterate over all potential values of <span class="math inline">\(\theta\)</span> until we find the actual state that gives us the lowest value but that would also consume quite some time. The important fact here is that, given the basis change we might need to evaluate our ansatz per parameter iteration more than once if the expectation value needs to be obtained at each iteration in order to know the direction in which those parameters should be changed.</p>
+<p>Therefore the overall expectation value for <span class="math inline">\(H\)</span> over <span class="math inline">\(|0\rangle\)</span> is 3. We could iterate over all potential values of <span class="math inline">\(\theta\)</span> until we find the actual state that gives us the lowest value but that would also consume quite some time. The important fact here is that, given the basis change, we might need to evaluate our ansatz per parameter iteration more than once if the expectation value needs to be obtained at each iteration in order to know the direction in which those parameters should be changed.</p>
 <p><strong>Hybrid workload</strong></p>
 <p>The way to explore the options is by setting a cost function that will help us drive the value into the right direction. Here, expectation value is of great help as we do know it will provide an approximation to the ground state of the system (depending on the amount of time we let it iterate).</p>
-<p>This is when traditional or classical optimization routines come handy. We could employ existing methods for classical optimization such as Stochastic Gradient Descent (SDG), Powel’s method or Nelder-Mead method looking for efficiently traversing the potential solution space for all values <span class="math inline">\(\theta\)</span> could take.</p>
-<p>Also, given previous decomposition we could easily see how this calculations could be performed in parallel maximizing the usage of resources both from the classical and quantum side.</p>
+<p>This is when traditional or classical optimization routines come in handy. We could employ existing methods for classical optimization such as Stochastic Gradient Descent (SGD), Powell’s method or Nelder-Mead method looking for efficiently traversing the potential solution space for all values <span class="math inline">\(\theta\)</span> could take.</p>
+<p>Also, given previous decomposition we could easily see how these calculations could be performed in parallel maximizing the usage of resources both from the classical and quantum side.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -641,7 +641,7 @@ R_y(-\pi/2)|0\rangle =
 </figure>
 </div>
 </figure>
-<p>A key benefit for VQE is that it does not require any specific shape for our ansatz, so if a flexible enough option is selected we could benefit those who could better fit into our hardware connectivity topology to obtain the results.</p>
+<p>A key benefit for VQE is that it does not require any specific shape for our ansatz, so if a flexible enough option is selected we could benefit from those that better fit into our hardware connectivity topology to obtain the results.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

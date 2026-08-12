@@ -397,7 +397,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -556,7 +556,7 @@ H(t) = A(t)H_{A} + B(t)H_B
 <li><span class="math inline">\(H_A\)</span> is known, by known it also means we know its ground state and that we will be able to make it so that <span class="math inline">\(|\psi(t_0)\rangle\)</span> matches that state.</li>
 <li><span class="math inline">\(H_B\)</span> is our target Hamiltonian. A mapping that represents our combinatorial optimization problem. We would like to obtain its ground state.</li>
 </ul>
-<p>By making the schedule functions meet the conditions <span class="math inline">\(A(t_0) = 1\)</span>, <span class="math inline">\(B(t_0)  =0\)</span>, <span class="math inline">\(A(T) = 0\)</span> and <span class="math inline">\(B(T) = 1\)</span> we are able to produce an interpolated mixture of both Hamiltonians so that if the evolution is slow enough and the gap between ground state and other existed states remains the state produced at the end of the evolution should match the ground state of our final Hamiltonian (<span class="math inline">\(H(T) = H_B\)</span>).</p>
+<p>By making the schedule functions meet the conditions <span class="math inline">\(A(t_0) = 1\)</span>, <span class="math inline">\(B(t_0)  =0\)</span>, <span class="math inline">\(A(T) = 0\)</span> and <span class="math inline">\(B(T) = 1\)</span> we are able to produce an interpolated mixture of both Hamiltonians so that if the evolution is slow enough and the gap between ground state and other excited states remains, the state produced at the end of the evolution should match the ground state of our final Hamiltonian (<span class="math inline">\(H(T) = H_B\)</span>).</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -578,7 +578,7 @@ Visually, you can see the issues.
 </figure>
 </div>
 </figure>
-<p>It might be risky if at those points the evolution moves <em>too fast</em>. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of maintaining in the global minima.</p>
+<p>It might be risky if at those points the evolution moves <em>too fast</em>. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of remaining in the global minimum.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -588,7 +588,7 @@ Visually, you can see the issues.
 </div>
 </figure>
 <p>As long as this evolution is above zero, we should be quite confident of the result at the end of the process (<span class="math inline">\(T\)</span>).</p>
-<p>A common form for the initial Hamiltonian is <span class="math inline">\(H_A = -\sum_i^n \sigma_{x_i}\)</span> being <span class="math inline">\(\sigma_x\)</span> the Pauli operator (previously mentioned <span class="math inline">\(X\)</span> operator) applied to each <span class="math inline">\(i\)</span> index qubit. This hamiltonian is chosen given that we do know its ground state <span class="math inline">\(|+\rangle^n\)</span> and how to prepare it in our systems (remember the Hadamard gate). One common target Hamiltonian form we can find in the literature is defined as the <strong>Ising model</strong>. It uses variables <span class="math inline">\(s_i = \pm 1\)</span> to characterize the magnetic dipole moment in order to characterize ferromagnetism. Its mathematical form is of the shape</p>
+<p>A common form for the initial Hamiltonian is <span class="math inline">\(H_A = -\sum_i^n \sigma_{x_i}\)</span> with <span class="math inline">\(\sigma_x\)</span> being the Pauli operator (previously mentioned <span class="math inline">\(X\)</span> operator) applied to each <span class="math inline">\(i\)</span> index qubit. This Hamiltonian is chosen given that we do know its ground state <span class="math inline">\(|+\rangle^n\)</span> and how to prepare it in our systems (remember the Hadamard gate). One common target Hamiltonian form we can find in the literature is defined as the <strong>Ising model</strong>. It uses variables <span class="math inline">\(s_i = \pm 1\)</span> to characterize the magnetic dipole moment in order to characterize ferromagnetism. Its mathematical form is of the shape</p>
 <p><span class="math display">\[
 H = -\sum_{\langle i j \rangle} J s_i s_j - \sum_j h s_j
 \]</span></p>
@@ -601,7 +601,7 @@ H = -\sum_{\langle i j \rangle} J s_i s_j - \sum_j h s_j
 </figure>
 </div>
 </figure>
-<p>It is the general case and many providers will likely have some decision already made for us (scheduling functions and initial Hamiltonian for example) but there are other cases where initial state and hamiltonian can be wisely selected so that the starting point is already close to the target state we would like to obtain. This example is quite common in cases like chemistry where HartreeFock states could be a better initialization or some relaxed version of the target problem could also be solved (classically) and its solution used to approximate the global optima (warm-starting).</p>
+<p>It is the general case and many providers will likely have some decision already made for us (scheduling functions and initial Hamiltonian for example) but there are other cases where initial state and Hamiltonian can be wisely selected so that the starting point is already close to the target state we would like to obtain. This example is quite common in cases like chemistry where Hartree-Fock states could be a better initialization or some relaxed version of the target problem could also be solved (classically) and its solution used to approximate the global optima (warm-starting).</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

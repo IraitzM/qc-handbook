@@ -432,7 +432,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -585,8 +585,8 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>The initial and final Hamiltonian blocks (<span class="math inline">\(H_i\)</span> and <span class="math inline">\(H_f\)</span>) are the ones that get propagated according to the trotterization, the digitization of the mixing cycle. The challenge was defining the best possible scheduling function so that the evolution is absent of any transition of the ground state.</p>
-<p>Considering some of the previous concepts, we could free-up the scheduling function and come up with a better selection of parameters that minimizes the length of this evolution. If we take a large <span class="math inline">\(n\)</span> in our Suzuki-Trotter approximation we could move beyond the coherent threshold of a machine and setting static time-lapses for the whole evolution might not be the best approach to approximate the target evolution (which we do not fully know). One crucial point researchers focus on is generating the shallowest version of this evolution as the shorter it gets less error gets accumulated (see <a href="../../parts/computers/challenges.html#noise-and-errors">Noise and errors</a>). We refer as the <strong>depth</strong> of the circuit to the maximal length it reaches considering every set of gates that can be executed within the same execution cycle as the unit depth.</p>
+<p>The initial and final Hamiltonian blocks (<span class="math inline">\(H_i\)</span> and <span class="math inline">\(H_f\)</span>) are the ones that get propagated according to the trotterization, the digitization of the mixing cycle. The challenge was defining the best possible scheduling function so that the evolution is free of any transition from the ground state.</p>
+<p>Considering some of the previous concepts, we could free-up the scheduling function and come up with a better selection of parameters that minimizes the length of this evolution. If we take a large <span class="math inline">\(n\)</span> in our Suzuki-Trotter approximation we could move beyond the coherent threshold of a machine and setting static time-lapses for the whole evolution might not be the best approach to approximate the target evolution (which we do not fully know). One crucial point researchers focus on is generating the shallowest version of this evolution as the shorter it gets, the less error gets accumulated (see <a href="../../parts/computers/challenges.html#noise-and-errors">Noise and errors</a>). We refer to the <strong>depth</strong> of the circuit as the maximal length it reaches considering every set of gates that can be executed within the same execution cycle as the unit depth.</p>
 <p>If we could enter some placeholders and check how the circuit behaves for a different set of parameters we could maybe find a better solution than the canonical set of equally spaced steps that places the evolution at critical points of our scheduling curve.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -599,7 +599,7 @@ window.Quarto = {
 |\gamma, \beta\rangle = U(H_B,\beta_p)U(H_C, \gamma_p) \dots U(H_B,\beta_1)U(H_C, \gamma_1)|s\rangle
 \]</span></p>
 <p>where <span class="math inline">\(|s\rangle\)</span> is our starting state and <span class="math inline">\(U(H_m, \theta_m) = e^{-i\theta_mH_m}\)</span> is the unitary transformation parameterized for each step for a total of <span class="math inline">\(p\)</span> steps.</p>
-<p>We could setup a free-form circuit so that we could change the values for those rotation angles according to a different criteria than the one used before.</p>
+<p>We could setup a free-form circuit so that we could change the values for those rotation angles according to a different criterion than the one used before.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>init_state <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
@@ -630,8 +630,8 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>This is the basis of the Quantum Approximate Optimization Algorithm (QAOA). We only require to select the number of steps (also called layers when) in order to produce our template circuit. Then it comes the time to select the values that should replace placeholder parameters <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\beta\)</span>.</p>
-<p>The selection of both Hamiltonians, as if we did not have a <em>good</em> initial Hamiltonian, our selection of parameters could make as fall into a higher energy level eigenstate (<span class="math inline">\(|\lambda_1\rangle\)</span>) and by continuously applying our unitary associated to the target Hamiltonian we would get stuck in the same quantum state forever (<span class="math inline">\(U|\psi_{\lambda_1}\rangle = E_{\lambda_1}|\psi_{\lambda_1}\rangle\)</span>). That is how our initial Hamiltonian throughout the whole evolution allows us to scape those local minima looking for the actual ground truth.</p>
+<p>This is the basis of the Quantum Approximate Optimization Algorithm (QAOA). We only need to select the number of steps (also called layers) in order to produce our template circuit. Then comes the time to select the values that should replace placeholder parameters <span class="math inline">\(\gamma\)</span> and <span class="math inline">\(\beta\)</span>.</p>
+<p>The selection of both Hamiltonians matters, as if we did not have a <em>good</em> initial Hamiltonian, our selection of parameters could make us fall into a higher energy level eigenstate (<span class="math inline">\(|\lambda_1\rangle\)</span>) and by continuously applying our unitary associated to the target Hamiltonian we would get stuck in the same quantum state forever (<span class="math inline">\(U|\psi_{\lambda_1}\rangle = E_{\lambda_1}|\psi_{\lambda_1}\rangle\)</span>). That is how our initial Hamiltonian throughout the whole evolution allows us to escape those local minima looking for the actual ground truth.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -1048,8 +1048,8 @@ Farhi, Edward, Jeffrey Goldstone, and Sam Gutmann. 2014. <span>“A Quantum Appr
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../parts/algorithms/qaoaexample.html" class="pagination-link" aria-label="QAOA in partice">
-        <span class="nav-page-text">QAOA in partice</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../parts/algorithms/qaoaexample.html" class="pagination-link" aria-label="QAOA in practice">
+        <span class="nav-page-text">QAOA in practice</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

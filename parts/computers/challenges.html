@@ -397,7 +397,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -562,19 +562,19 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>From this family we have focused until now into the last bit, the <strong>Noisy Intermediate-Scale Quantum (NISQ)</strong> bit, the one related to actual quantum hardware but that does not mean those techniques and devices inspired by the challenges quantum mechanical systems pose are less than the actual hardware. In fact, one of the main problems to claim quantum advantage is the constant improvement and refinement of classical devices solving the same problems.</p>
+<p>From this family we have focused until now on the last bit, the <strong>Noisy Intermediate-Scale Quantum (NISQ)</strong> bit, the one related to actual quantum hardware but that does not mean those techniques and devices inspired by the challenges quantum mechanical systems pose are less than the actual hardware. In fact, one of the main problems to claim quantum advantage is the constant improvement and refinement of classical devices solving the same problems.</p>
 <p>We highly recommend looking into <strong>classical</strong> and <strong>quantum-inspired</strong> solutions before jumping into the complexities of dealing with quantum hardware. There are really interesting results when it comes to classically emulating this formalism in the range of 10s to 100s of qubits and also hybrid approaches benefiting from specific aspects of the quantum domain, but heavily relying on classical processes (like Shor’s algorithm in fact).</p>
 <p>You have been warned!</p>
 <section id="considerations" class="level2">
 <h2 class="anchored" data-anchor-id="considerations">Considerations</h2>
-<p>Before we enter into more cumbersome and obscure techniques, lets understand the context in which we are trying to use Quantum Computing to outperform classical means. It is not a fair comparison as we count with almost 70 years of development in the classical regime while quantum computers even though have been used for almost 25 years since the first realization of the qubit, might require some extra work until a similar status of maturity and confidence is reached.</p>
-<p>Following section will try to make the reader conscious about some of the issues they might face and how to tackle them, with a particular interest on Digital Quantum Computers.</p>
+<p>Before we enter into more cumbersome and obscure techniques, let’s understand the context in which we are trying to use Quantum Computing to outperform classical means. It is not a fair comparison as we have almost 70 years of development in the classical regime while quantum computers, even though they have been used for almost 25 years since the first realization of the qubit, might require some extra work until a similar status of maturity and confidence is reached.</p>
+<p>The following section will try to make the reader aware of some of the issues they might face and how to tackle them, with a particular interest on Digital Quantum Computers.</p>
 <section id="quantum-devices" class="level3">
 <h3 class="anchored" data-anchor-id="quantum-devices">Quantum devices</h3>
-<p>We have seen many different devices exist but, even between the ones that are based on same technology we will find discrepancies on how they implement their operations. When this operations are fully parameterized we call them Gates but even though engineering makes a substantial effort bridging the gap between theoretical framework and physical reality, we might need to make our part as well.</p>
+<p>We have seen many different devices exist but, even between the ones that are based on the same technology we will find discrepancies on how they implement their operations. When these operations are fully parameterized we call them Gates but even though engineering makes a substantial effort bridging the gap between theoretical framework and physical reality, we might need to do our part as well.</p>
 <section id="coupling-maps" class="level4">
 <h4 class="anchored" data-anchor-id="coupling-maps">Coupling maps</h4>
-<p>Coupling map refers to the connectivity between qubits. Most of our problems will be mapped to those qubits and we will need to define the strength of the action with respect to neighboring qubits. This ability to encode the interactions is reflected in the physical connection between the qubits on a given device and it is called the <strong>coupling map</strong>.</p>
+<p>The coupling map refers to the connectivity between qubits. Most of our problems will be mapped to those qubits and we will need to define the strength of the action with respect to neighboring qubits. This ability to encode the interactions is reflected in the physical connection between the qubits on a given device and it is called the <strong>coupling map</strong>.</p>
 <p>As an example, this is the coupling map of Rigetti:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -589,7 +589,7 @@ window.Quarto = {
 <figcaption>IonQ Aria topology</figcaption>
 </figure>
 </div>
-<p>Seems like ino-traps may be a better fit to combinatorial optimization problems as they already count with all-to-all connectivity, but they lack the scale of superconducting devices. So, can we make anything to virtually connect those qubits on Rigetti’s device all-to-all?</p>
+<p>Seems like ion-traps may be a better fit to combinatorial optimization problems as they already have all-to-all connectivity, but they lack the scale of superconducting devices. So, can we do anything to virtually connect those qubits on Rigetti’s device all-to-all?</p>
 <p><strong>SWAP gates</strong></p>
 <p>The SWAP gate affects two qubits by interchanging their state, such that</p>
 <p><span class="math display">\[
@@ -606,7 +606,7 @@ SWAP = \left[
 \end{array}
 \right].
 \]</span></p>
-<p>By iteratively applying this gates we can come up with a logical all-to-all connectivity even on sparsely connected devices. Swap strategies are quite common in the literature in particular when using superconducting devices. Different approaches can be found in the literature, and we will see in practice how it ends up being on reality, but in 2022 <span class="citation" data-cites="Weidenfeller_2022">(<a href="../references.html#ref-Weidenfeller_2022" role="doc-biblioref">Weidenfeller et al. 2022</a>)</span> they showed how adding interchanging SWAP layers produces an virtual all to all connectivity with minimal depth increase.</p>
+<p>By iteratively applying these gates we can come up with a logical all-to-all connectivity even on sparsely connected devices. Swap strategies are quite common in the literature in particular when using superconducting devices. Different approaches can be found in the literature, and we will see in practice how it ends up being in reality, but in 2022 <span class="citation" data-cites="Weidenfeller_2022">(<a href="../references.html#ref-Weidenfeller_2022" role="doc-biblioref">Weidenfeller et al. 2022</a>)</span> they showed how adding interchanging SWAP layers produces a virtual all-to-all connectivity with minimal depth increase.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/swapstrategies.png" class="img-fluid figure-img"></p>
@@ -616,10 +616,10 @@ SWAP = \left[
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/swapstrategies2.png" class="img-fluid figure-img"></p>
-<figcaption>Swaping for full connectivity</figcaption>
+<figcaption>Swapping for full connectivity</figcaption>
 </figure>
 </div>
-<p>They we will simply need to introduce an appropriate amount of SWAP gates when needed according to our target device coupling map. The downside of it is that our circuit depth will increase, more operations are added, but that is not bad, is it?</p>
+<p>Then we will simply need to introduce an appropriate amount of SWAP gates when needed according to our target device coupling map. The downside of it is that our circuit depth will increase, more operations are added, but that is not bad, is it?</p>
 </section>
 <section id="native-gates" class="level4">
 <h4 class="anchored" data-anchor-id="native-gates">Native gates</h4>
@@ -629,14 +629,14 @@ SWAP = \left[
 <li>Ion traps use lasers</li>
 <li>Neutral atoms use lasers as well, in a slightly different manner</li>
 </ul>
-<p>Therefore all operations need to find a translation that maps logical gates with the expected outcome of it, meaning a calibrated pulse needs to be found that renders the expected result. Following is the example of the Hadamard gate on a given qubit</p>
+<p>Therefore all operations need to find a translation that maps logical gates to the expected outcome of it, meaning a calibrated pulse needs to be found that renders the expected result. Following is the example of the Hadamard gate on a given qubit</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/hadamardpulse.png" class="img-fluid figure-img"></p>
 <figcaption>Hadamard pulse</figcaption>
 </figure>
 </div>
-<p>A Gaussian shape pulse of 128 system cycle unit duration and an amplitude of 0.1. If this was the level required to work, probably less people would embrace quantum computing, therefore most companies offer an already calibrated set of operations that even though they are not the whole set of gates of the formalism, sets a basic and universal set of operations so that any logical circuit can be transform to those native gates.</p>
+<p>A Gaussian shape pulse of 128 system cycle unit duration and an amplitude of 0.1. If this was the level required to work, probably less people would embrace quantum computing, therefore most companies offer an already calibrated set of operations that, even though it is not the whole set of gates of the formalism, forms a basic and universal set of operations so that any logical circuit can be transformed to those native gates.</p>
 <p>If we access any of the IBM Quantum Computing devices we can see how they already show relevant information where we can encounter those natively accessible gates named as the <em>basis gates</em></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -655,16 +655,16 @@ SWAP = \left[
 </section>
 <section id="transpilation" class="level3">
 <h3 class="anchored" data-anchor-id="transpilation">Transpilation</h3>
-<p>Transpilation refers to the systematic approach of changing a logical circuit to fit under the basis gates and coupling map for a given device. Reminds to the old compilation step needed in computer programs to fit a given architecture but in this case, given that still converts our source code in a different source-code, transpilation is the appropriate name.</p>
+<p>Transpilation refers to the systematic approach of changing a logical circuit to fit under the basis gates and coupling map for a given device. It is reminiscent of the old compilation step needed in computer programs to fit a given architecture but in this case, given that it still converts our source code into a different source-code, transpilation is the appropriate name.</p>
 <p>These logical steps, once transpiled can be interpreted by the device knowing the type of pulse that needs to be sent to each qubit to represent the requested operation.</p>
-<p>IBM counts with one of the most mature transpilation modules out there and it is often used to translate the logical circuits to specifications for other devices. It is composed by different circuit <em>passes</em> focusing on fixing specific issues between logical circuit and physical device.</p>
+<p>IBM has one of the most mature transpilation modules out there and it is often used to translate the logical circuits to specifications for other devices. It is composed of different circuit <em>passes</em> focusing on fixing specific issues between logical circuit and physical device.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/ibmpasses.png" class="img-fluid figure-img"></p>
 <figcaption>Passes for circuit transpilation using Qiskit</figcaption>
 </figure>
 </div>
-<p>At the end you will see the representation fo the pulsed schedule that is finally submitted to the deive following the architecture layer as in the image below.</p>
+<p>At the end you will see the representation of the pulsed schedule that is finally submitted to the device following the architecture layer as in the image below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/ibmpulse.png" class="img-fluid figure-img" style="width:60.0%"></p>
@@ -675,7 +675,7 @@ SWAP = \left[
 </section>
 <section id="noise-and-errors" class="level3">
 <h3 class="anchored" data-anchor-id="noise-and-errors">Noise and errors</h3>
-<p>And if that wasn’t enough, quantum devices are far from perfect when performing operations. Operations not always turn out as expected due to:</p>
+<p>And if that wasn’t enough, quantum devices are far from perfect when performing operations. Operations do not always turn out as expected due to:</p>
 <ul>
 <li>Measurement or Readout error</li>
 <li>Operation error rates</li>
@@ -687,10 +687,10 @@ SWAP = \left[
 <figcaption>IBM Jakarta</figcaption>
 </figure>
 </div>
-<p>All this goes against the effort we have put when trying to solve our problem accurately using quantum computers. Lucky for us, there is people researching on how these effects can be minimized or suppressed, so let’s see a couple of examples. It is also relevant to clarify the lingo as it might get messy. They are trying to take us to the <strong>Fault-Tolerant Quantum Computing</strong> era. Some of the areas people are working on will be highlighted below.</p>
+<p>All this goes against the effort we have put when trying to solve our problem accurately using quantum computers. Lucky for us, there are people researching how these effects can be minimized or suppressed, so let’s see a couple of examples. It is also relevant to clarify the lingo as it might get messy. They are trying to take us to the <strong>Fault-Tolerant Quantum Computing</strong> era. Some of the areas people are working on will be highlighted below.</p>
 <p><strong>Error suppression</strong></p>
-<p>Error suppression aims to leverage knowledge about the system and its fundamental errors to suppress their effect when someone runs a given circuit on those devices. It is often found at a fundamental level, really close o the hardware itself and should be easy to abstract the final user from these actions as they mostly require little knowledge about the executing circuit.</p>
-<p>A clear example of these techniques is <em>Dynamical Decoupling</em>. A techniques that introduces operations when qubits are idling so that they do not get affected by the surrounding qubtis and operations taking place.</p>
+<p>Error suppression aims to leverage knowledge about the system and its fundamental errors to suppress their effect when someone runs a given circuit on those devices. It is often found at a fundamental level, really close to the hardware itself and should be easy to abstract the end user from these actions as they mostly require little knowledge about the executing circuit.</p>
+<p>A clear example of these techniques is <em>Dynamical Decoupling</em>. A technique that introduces operations when qubits are idling so that they do not get affected by the surrounding qubits and operations taking place.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/ddqiskit.png" class="img-fluid figure-img"></p>
@@ -699,11 +699,11 @@ SWAP = \left[
 </div>
 <p>Derivative Removal by Adiabatic Gate (DRAG) as an additional example, adds a component to the standard pulse shape to reduce qubits entering states higher than the 0 and 1 states we use for calculations. These techniques aim to fix fundamental issues related to the physical implementation.</p>
 <p><strong>Error mitigation</strong></p>
-<p>These techniques try to diminish the effect of noise during the execution by compensating for the systematic issues of the device itself. We could statistically characterize the systematic error upon redout and compensate for it after execution of the circuit.</p>
+<p>These techniques try to diminish the effect of noise during the execution by compensating for the systematic issues of the device itself. We could statistically characterize the systematic error upon readout and compensate for it after execution of the circuit.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/readoutmitigation.png" class="img-fluid figure-img"></p>
-<figcaption>Redout error</figcaption>
+<figcaption>Readout error</figcaption>
 </figure>
 </div>
 <p>Or when expectation value is the objective, characterizing the noise level and extrapolating the value we could obtain what the value would be in absence of noise for a given device.</p>
@@ -715,30 +715,30 @@ SWAP = \left[
 </div>
 <p>Simple actions like layout selection, trying to select those qubits with less error on them or surrounding qubits might be simple and powerful enough for small circuits but it gets challenging on real use cases where depth and connectivity increase significantly.</p>
 <p><strong>Error correction</strong></p>
-<p>Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to fault-tolerant device. The trick here is that our qubits will be a logical representation of what we have seen until now</p>
+<p>Error correction refers to the ultimate goal of many quantum computing companies, in particular hardware providers, where a logical implementation using redundant physical actions may lead to a fault-tolerant device. The trick here is that our qubits will be a logical representation of what we have seen until now</p>
 <p><span class="math display">\[
 |0\rangle_L = |000000000\rangle
 \]</span></p>
-<p>And therefore, operations should also be modified to represent the actions on all physical qubits behind our logical actions. Below example is one of the canonical examples of error correcting codes designed by Peter Shor.</p>
+<p>And therefore, operations should also be modified to represent the actions on all physical qubits behind our logical actions. The example below is one of the canonical examples of error correcting codes designed by Peter Shor.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../assets/shorcode.png" class="img-fluid figure-img" style="width:60.0%"></p>
 <figcaption>Shor’s error code</figcaption>
 </figure>
 </div>
-<p><strong>Fault Tolerant Quantum Computing</strong> would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to million qubits needed for meaningful computation (see <a href="https://quantumai.google/learn/map">Google’s journey map</a>).</p>
+<p><strong>Fault Tolerant Quantum Computing</strong> would be the ideal scenario where a final user would only care about the logical implementation and the machine would deal with redundancy to fix errors and return the actual execution of the code in absence of noise. Sadly, we are still far from this future as it requires between hundreds and thousands of physical qubits to implement single logical qubits, increasing the scale up to a million qubits needed for meaningful computation (see <a href="https://quantumai.google/learn/map">Google’s journey map</a>).</p>
 <p>Therefore, we need to invest some time on manual error fixing and mitigation. Even though these techniques may sound complex, current status of frameworks such as Qiskit may help <a href="https://docs.quantum-computing.ibm.com/optimize">bridge the gap</a>.</p>
 </section>
 <section id="additional-means" class="level3">
 <h3 class="anchored" data-anchor-id="additional-means">Additional means</h3>
-<p>Well, I hope this wasn’t too intense. We got down to the inner workings of available Quantum Services and listed some of the impediments we might face when moving to actual devices. We did focus on Digital Quantum Computers being the ones that allow to move beyond the service offered by Quantum Annealers but does not require so much understanding as Analog Quantum Computers.</p>
-<p>Being aware of the techniques that can be used we also showed how easy it is to implement those on actual devices on IBM’s Qiskit Runtime. Other cloud providers may enable other devices but will require additional knowledge on how to implement those techniques. We can benefit of some of the methods made available by Unitary Fund’s open-source community or niche players like Q-Ctrl:</p>
+<p>Well, I hope this wasn’t too intense. We got down to the inner workings of available Quantum Services and listed some of the impediments we might face when moving to actual devices. We did focus on Digital Quantum Computers being the ones that allow us to move beyond the service offered by Quantum Annealers but do not require so much understanding as Analog Quantum Computers.</p>
+<p>Being aware of the techniques that can be used we also showed how easy it is to implement those on actual devices on IBM’s Qiskit Runtime. Other cloud providers may enable other devices but will require additional knowledge on how to implement those techniques. We can benefit from some of the methods made available by Unitary Fund’s open-source community or niche players like Q-Ctrl:</p>
 <ul>
 <li><a href="https://mitiq.readthedocs.io/en/stable/">Mitiq</a></li>
 <li><a href="https://q-ctrl.com/fire-opal">Fire Opal</a></li>
 <li><a href="https://superstaq.readthedocs.io/en/latest/">Superstaq</a></li>
 </ul>
-<p>Most likely quantum computing service providers will increase the abstraction making easier to implement algorithms in real hardware but for the moment, some work still needs to be done on our end as we saw. Let’s stick to simulators and emulators for now.</p>
+<p>Most likely quantum computing service providers will increase the abstraction making it easier to implement algorithms in real hardware but for the moment, some work still needs to be done on our end as we saw. Let’s stick to simulators and emulators for now.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

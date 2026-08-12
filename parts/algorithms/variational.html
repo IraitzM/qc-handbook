@@ -416,7 +416,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -567,10 +567,10 @@ window.Quarto = {
 </header>
 
 
-<p>It might have caught your attention that in our previous example there were some parameters set based on the scheduling function and the evolution of the Suzuki-Trotter approximation. But what if wou could harness the potential of classical optimization methods to find a better parametrization?</p>
-<p>In fact, we could potentially remove some of those blocks that may not add too much, producing the approximation for the functional they encode in a more compact way. This also benefits when going to the hardware. The shallower the circuit, the less noise it gets accumulated.</p>
+<p>It might have caught your attention that in our previous example there were some parameters set based on the scheduling function and the evolution of the Suzuki-Trotter approximation. But what if you could harness the potential of classical optimization methods to find a better parametrization?</p>
+<p>In fact, we could potentially remove some of those blocks that may not add too much, producing the approximation for the functional they encode in a more compact way. This also benefits when going to the hardware. The shallower the circuit, the less noise gets accumulated.</p>
 <p>The <strong>variational principle</strong> states a problem can be solved by using calculus of variations, which requires finding functions that optimize the values (parameters) that depend on those very same functions. This formal structure is extensively used when training machine learning models as those can be thought as parameterized functions whose target can be minimized by varying the weights (parameters) it is defined by.</p>
-<p>Variational Algorithm make use of these three basic principles:</p>
+<p>Variational Algorithms make use of these three basic principles:</p>
 <ul>
 <li>A parameterized quantum circuit or <em>ansatz</em></li>
 <li>An expectation value that sets the goal of the process</li>
@@ -585,12 +585,12 @@ window.Quarto = {
 </div>
 </figure>
 <p>These procedures therefore require the circuit to be evaluated (measured in some manner) and parameters changed ideally approximating a target value. This process is quite known for those coming from classical machine learning and therefore you can benefit from that ecosystem. Specifically, optimization techniques.</p>
-<p>The easiest ones are gradient-free optimization techniques. Those explore the solution space on a way such that no derivatives of the actual function (our circuit in our case) is required.</p>
+<p>The easiest ones are gradient-free optimization techniques. Those explore the solution space in a way such that no derivatives of the actual function (our circuit in our case) are required.</p>
 <p>A different approach is to extend those gradient based optimizers given that quantum circuits do provide a way in which their derivative can be approximated.</p>
 <section id="computing-gradients" class="level2">
 <h2 class="anchored" data-anchor-id="computing-gradients">Computing gradients</h2>
-<p>In order to fit the ideal set of parameters minimizing a cost function, gradient based approaches are quite popular as being aware of the direction in which this cost function is minimized it may shorten the time required for the method to find it target Quantum circuits have a similar capacity, we can free up the parameters of a given circuit and optimize based on a cost function which in most cases can be represented by the expectation value over some observable. For this, we would need to understand how these derivatives can be computed… at scale.</p>
-<div id="9bff07be" class="cell" data-execution_count="1">
+<p>In order to fit the ideal set of parameters minimizing a cost function, gradient based approaches are quite popular as being aware of the direction in which this cost function is minimized it may shorten the time required for the method to find its target. Quantum circuits have a similar capacity, we can free up the parameters of a given circuit and optimize based on a cost function which in most cases can be represented by the expectation value over some observable. For this, we would need to understand how these derivatives can be computed… at scale.</p>
+<div id="0a3c4854" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -605,11 +605,11 @@ q: ┤ Ry(a) ├
    └───────┘</pre>
 </div>
 </div>
-<p>This is a simple rotation over the Y axis of the bloch sphere. So we know that if we measure the observable X of a given state produced by this rotation we get:</p>
+<p>This is a simple rotation over the Y axis of the Bloch sphere. So we know that if we measure the observable X of a given state produced by this rotation we get:</p>
 <p><span class="math display">\[
 \langle Y(a) | X | Y(a) \rangle = \sin(\pi a)
 \]</span></p>
-<div id="1d1625df" class="cell" data-execution_count="2">
+<div id="13ba274e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> </span>
@@ -625,7 +625,7 @@ q: ┤ Ry(a) ├
             dims=(2,))</code></pre>
 </div>
 </div>
-<div id="b2f2a58d" class="cell" data-execution_count="3">
+<div id="54056595" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Pauli</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Target hamiltonian</span></span>
@@ -644,7 +644,7 @@ Sin function: 0.8090169943749475</code></pre>
 f^{'}(a) = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
 \]</span></p>
 <p>which essentially only requires two evaluations of our function.</p>
-<div id="0e2e4e43" class="cell" data-execution_count="4">
+<div id="3fbd35a0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>state <span class="op">=</span> Statevector(init)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>val <span class="op">=</span> <span class="fl">0.3</span></span>
@@ -672,7 +672,7 @@ Cosine formula:    1.8465818304904567</code></pre>
 \Delta_{\theta}f(x;\theta) = \frac{1}{2}\left[ f\left(x;\theta+\frac{\pi}{2}\right) - f\left(x;\theta+\frac{\pi}{2}\right)\right]
 \]</span></p>
 <p>Frameworks like Pennylane specialize in this field, providing direct access to gradients when our circuit is defined.</p>
-<div id="094147e7" class="cell" data-execution_count="5">
+<div id="43179bf6" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">"default.qubit"</span>, wires<span class="op">=</span><span class="dv">2</span>)</span>
@@ -685,7 +685,7 @@ Cosine formula:    1.8465818304904567</code></pre>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    qml.RX(weights[<span class="dv">2</span>], wires<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> qml.expval(qml.PauliZ(<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="49ed703c" class="cell" data-execution_count="6">
+<div id="cf64e5ea" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane.numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> np.array([<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>], requires_grad<span class="op">=</span><span class="va">True</span>)</span>
@@ -700,37 +700,37 @@ Cosine formula:    1.8465818304904567</code></pre>
 </div>
 </div>
 </div>
-<div id="e3e95351" class="cell" data-execution_count="7">
+<div id="22b828ef" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>circuit(weights)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>tensor(0.9316158, requires_grad=True)</code></pre>
 </div>
 </div>
-<div id="3f9ea374" class="cell" data-execution_count="8">
+<div id="7b799fa2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>qml.gradients.param_shift(circuit)(weights)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>tensor([-0.09347337, -0.18884787, -0.28818254], requires_grad=True)</code></pre>
 </div>
 </div>
-<p>One of the problems with calculating gradients this way is that now we have to evaluate our cost function in the range of 3 times more for each iteration and number of variables (as we will need to fix all of them except one to compute the gradient at each variable value). More in detail explanation and relevant references can be found <a href="https://pennylane.ai/qml/glossary/parameter_shift">here</a>.</p>
+<p>One of the problems with calculating gradients this way is that now we have to evaluate our cost function in the range of 3 times more for each iteration and number of variables (as we will need to fix all of them except one to compute the gradient at each variable value). A more detailed explanation and relevant references can be found <a href="https://pennylane.ai/qml/glossary/parameter_shift">here</a>.</p>
 <p>In many cases we will see how non-gradient based methods are made available to avoid the extensive usage of quantum hardware.</p>
 </section>
 <section id="expectation-value" class="level2">
 <h2 class="anchored" data-anchor-id="expectation-value">Expectation value</h2>
-<p>The guiding light when training circuit using the variational principle is to accurately define the <strong>objective</strong> and <strong>cost functions</strong>. What are we looking for? How can we measure the progress? In general, it is understood that the minimization of energy, looking for the quantum state that renders a minimal expectation value, can be tractable and a good measure of improvement. this, the <strong>expectation value</strong> described as</p>
+<p>The guiding light when training circuits using the variational principle is to accurately define the <strong>objective</strong> and <strong>cost functions</strong>. What are we looking for? How can we measure the progress? In general, it is understood that the minimization of energy, looking for the quantum state that renders a minimal expectation value, can be tractable and a good measure of improvement. Thus, the <strong>expectation value</strong> described as</p>
 <p><span class="math display">\[
 \langle \psi |H|\psi\rangle
 \]</span></p>
-<p>being <span class="math inline">\(H\)</span> the target hamiltonian or a hamiltonian characterizing the problem we would like to solve and <span class="math inline">\(|\psi\rangle\)</span> the quantum state we would obtain out of the circuit, we would have a way to evaluate our progress. We could also formulate it as</p>
+<p>with <span class="math inline">\(H\)</span> being the target Hamiltonian or a Hamiltonian characterizing the problem we would like to solve and <span class="math inline">\(|\psi\rangle\)</span> the quantum state we would obtain out of the circuit, we would have a way to evaluate our progress. We could also formulate it as</p>
 <p><span class="math display">\[
 \langle H \rangle_{\psi} = \sum_j \lambda_j |\langle \psi|\lambda_j\rangle|^2.
 \]</span></p>
-<p>It represents the summation of all eigenvalues conditioned by their probability of outcome given state <span class="math inline">\(|\psi\rangle\)</span>. That characterizes the mathematical nature of this value and it is evident the minimum value is reached when the there is a perfect overlap between <span class="math inline">\(|\psi\rangle\)</span> and the minimum value eigenstate (<span class="math inline">\(H|\lambda_0\rangle = \lambda_0|\lambda_0\rangle\)</span>).</p>
-<p>In principle, if you can get an infinite number of steps and choose angles which exactly mimic the adiabatic path, you will get the right results. Therefore, the main limitation is defining a circuit and find the set of parameters that actually do the job. But, already mentioned <a href="https://arxiv.org/abs/2004.09002">in the literature</a>:</p>
+<p>It represents the summation of all eigenvalues conditioned by their probability of outcome given state <span class="math inline">\(|\psi\rangle\)</span>. That characterizes the mathematical nature of this value and it is evident the minimum value is reached when there is a perfect overlap between <span class="math inline">\(|\psi\rangle\)</span> and the minimum value eigenstate (<span class="math inline">\(H|\lambda_0\rangle = \lambda_0|\lambda_0\rangle\)</span>).</p>
+<p>In principle, if you can get an infinite number of steps and choose angles which exactly mimic the adiabatic path, you will get the right results. Therefore, the main limitation is defining a circuit and finding the set of parameters that actually do the job. But, already mentioned <a href="https://arxiv.org/abs/2004.09002">in the literature</a>:</p>
 <blockquote class="blockquote">
 <p>“No one knows if a quantum computer running a quantum algorithm will be able to outperform a classical computer on a combinatorial search problem.”</p>
 </blockquote>
-<p><a href="../../parts/algorithms/vqe.html">Variational Quantum Eigensolver (VQE)</a> and <a href="../../parts/algorithms/qaoa.html">Quantum Approximate Optimization Algorithm (QAOA)</a> are probably the two most known techniques in this regime so we will explore them to better understand what are their pros and cons. You will see how most of the foundation already established by the digitization of the annealing procedure will pay off while trying to understand those <em>state-of-the-art</em> techniques.</p>
+<p><a href="../../parts/algorithms/vqe.html">Variational Quantum Eigensolver (VQE)</a> and <a href="../../parts/algorithms/qaoa.html">Quantum Approximate Optimization Algorithm (QAOA)</a> are probably the two most known techniques in this regime so we will explore them to better understand what their pros and cons are. You will see how most of the foundation already established by the digitization of the annealing procedure will pay off while trying to understand those <em>state-of-the-art</em> techniques.</p>
 
 
 </section>

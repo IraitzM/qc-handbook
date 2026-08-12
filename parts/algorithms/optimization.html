@@ -349,7 +349,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -505,9 +505,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section id="types-of-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="types-of-optimization">Types of Optimization</h2>
 <p>Different business problems require different optimization techniques, each suited to specific mathematical structures. These are particularized depending on the shape of the problem and its constraints.</p>
-<p>For example, if our problem has a convex shape (meaning it looks like a bowl), the there is an entire field dedicated to it.</p>
+<p>For example, if our problem has a convex shape (meaning it looks like a bowl), then there is an entire field dedicated to it.</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Convex_optimization">Convex Optimization</a>: studies the case when the objective function is convex (minimization) or concave (maximization) and the constraint set is convex. This can be viewed as a particular case of nonlinear programming or as generalization of linear or convex quadratic programming.
+<li><a href="https://en.wikipedia.org/wiki/Convex_optimization">Convex Optimization</a>: studies the case when the objective function is convex (minimization) or concave (maximization) and the constraint set is convex. This can be viewed as a particular case of nonlinear programming or as a generalization of linear or convex quadratic programming.
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Linear_programming">Linear Programming</a> (LP) handles problems where both the objective function and constraints are linear relationships. This is ideal for resource allocation problems, such as determining the optimal product mix to maximize profit given limited raw materials and production capacity.</li>
 <li><a href="https://en.wikipedia.org/wiki/Quadratic_programming">Quadratic Programming</a> (QP) addresses situations where the objective function contains quadratic terms, often appearing in portfolio optimization where risk (measured as variance) needs to be balanced against expected returns.</li>
@@ -519,11 +519,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Integer_programming">Integer Programming</a> (IP) where all variables must be integer values.</li>
 <li><a href="https://en.wikipedia.org/wiki/Integer_programming">Mixed-Integer Programming</a> (MIP) combines continuous and discrete decision variables, making it perfect for problems involving yes/no decisions alongside quantity decisions. Examples include facility location problems (whether to open a warehouse) combined with distribution decisions (how much to ship).</li>
-<li><a href="https://en.wikipedia.org/wiki/Integer_programming">Binary Optimization</a> (BO) is a special case of Integer programming where only to values are allowd for our variables, 0 or 1, hence the name binary.</li>
+<li><a href="https://en.wikipedia.org/wiki/Integer_programming">Binary Optimization</a> (BO) is a special case of Integer programming where only two values are allowed for our variables, 0 or 1, hence the name binary.</li>
 </ul>
-<p>These last problems often required a relaxed version of the problem where we solve using solvers suited for previous optimization techniques and then we iterate adding restrictions to approximate our goal. This technique is known as <a href="https://en.wikipedia.org/wiki/Branch_and_bound">Branch-and-Bound</a>.</p>
+<p>These last problems often require a relaxed version of the problem where we solve using solvers suited for previous optimization techniques and then we iterate adding restrictions to approximate our goal. This technique is known as <a href="https://en.wikipedia.org/wiki/Branch_and_bound">Branch-and-Bound</a>.</p>
 <p>The choice of optimization approach depends on the problem structure, data availability, and computational requirements. Modern businesses increasingly rely on these techniques as competitive advantages, using sophisticated software and algorithms to solve problems that would be impossible to address through intuition or simple heuristics alone. The key is matching the right optimization tool to the specific business challenge at hand.</p>
-<p>Knowing binary optimization is a challenging task and quantum computers took a chance as binary problems fall already in their nature.</p>
+<p>Binary optimization is a challenging task and quantum computers took a chance at it, as binary problems already fall in their nature.</p>
 
 
 </section>

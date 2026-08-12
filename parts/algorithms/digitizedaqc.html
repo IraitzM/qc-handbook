@@ -413,7 +413,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -565,7 +565,7 @@ window.Quarto = {
 
 
 <p>Digitized quantum computers work indeed in a different manner. Hamiltonians are <em>less</em> important from a program perspective. All we need is the set of instructions to be provided for them to run. Of course, these instructions cannot come out of the blue, so we still apply previous principles but with the flexibility of being able to tweak how the initial quantum state evolves. We are not limited by a given algorithm or device configuration, as there exist no default setup other than the initial state of the system (<span class="math inline">\(|0\rangle^n\)</span>). It is up to our design how it will work and how much juice we squeeze out of the machine.</p>
-<p>As an example, we can still benefit from the AQC paradigm and implement a time dependent Hamiltonian that solves our problem like before. One critical aspect though is the fact that digitized quantum computers work in cycles and actions will need to be discretized (bounded in time) in order to implement our wanted state evolution. But it gives us more room to change some of the parameters machines like D-Wave’s ones have fixed for us. That way, we may more options to explore.</p>
+<p>As an example, we can still benefit from the AQC paradigm and implement a time dependent Hamiltonian that solves our problem like before. One critical aspect though is the fact that digitized quantum computers work in cycles and actions will need to be discretized (bounded in time) in order to implement our wanted state evolution. But it gives us more room to change some of the parameters machines like D-Wave’s ones have fixed for us. That way, we may have more options to explore.</p>
 <section id="trotter-suzuki-decomposition" class="level2">
 <h2 class="anchored" data-anchor-id="trotter-suzuki-decomposition">Trotter-Suzuki decomposition</h2>
 <p>Approximating a time-dependent Hamiltonian can be challenging as working with continuous values on a cycle driven machine (digital machine) requires us to discretize the time evolution into piecewise linear steps.</p>
@@ -577,12 +577,12 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>If we consider out unitary evolution for the Hamiltonian <span class="math inline">\(U(T,t_0)\)</span> we could take same approach and approximate its results by extending its definition to discrete intervals.</p>
+<p>If we consider our unitary evolution for the Hamiltonian <span class="math inline">\(U(T,t_0)\)</span> we could take the same approach and approximate its results by extending its definition to discrete intervals.</p>
 <p><span class="math display">\[
 U(T,t_0) = U(t_n, t_{n-1})U(t_{n-1}, t_{n-2}) \dots U(t_1, t_0)
 \]</span></p>
-<p>The smaller the step the better we will approximate ideal continuous case. Take also into consideration that <span class="math inline">\(\delta t_i = t_{i+1} - t_i\)</span> do not have to be equally spaced for all <span class="math inline">\(i\)</span>s even though it does help for generalization purposes.</p>
-<p>In quantum mechanics there exists a concreta example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape <span class="math inline">\(e^{A+B}\)</span> its limit can be defined</p>
+<p>The smaller the step the better we will approximate the ideal continuous case. Take also into consideration that <span class="math inline">\(\delta t_i = t_{i+1} - t_i\)</span> do not have to be equally spaced for all <span class="math inline">\(i\)</span>s even though it does help for generalization purposes.</p>
+<p>In quantum mechanics there exists a concrete example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape <span class="math inline">\(e^{A+B}\)</span> its limit can be defined</p>
 <p><span class="math display">\[
 e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
 \]</span></p>
@@ -590,7 +590,7 @@ e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
 </section>
 <section id="a-practical-example" class="level2">
 <h2 class="anchored" data-anchor-id="a-practical-example">A practical example</h2>
-<p>Let’s go step by step. Our digitized annealing algorithm will be composed by three main blocks as we already explained before.</p>
+<p>Let’s go step by step. Our digitized annealing algorithm will be composed of three main blocks as we already explained before.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -599,7 +599,7 @@ e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
 </figure>
 </div>
 </figure>
-<p>The mixing cycle is where the mixture between our initial Hamiltonian and problem Hamiltonian happen according to the scheduling function.</p>
+<p>The mixing cycle is where the mixture between our initial Hamiltonian and problem Hamiltonian happens according to the scheduling function.</p>
 <p><a href="https://arxiv.org/abs/1906.08948">Some support material</a></p>
 <p>One critical aspect is to be able to initialize the system to the ground state of our initial Hamiltonian (<span class="math inline">\(|+\rangle\)</span> from our previous example). This can be easily achieved by Hadamard operations placed on each qubit.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
@@ -617,7 +617,7 @@ e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
 </figure>
 </div>
 </figure>
-<p>Then, we need to produce the combination of our two hamiltonians. We will continue with previously seen examples. First the initial hamiltonian:</p>
+<p>Then, we need to produce the combination of our two Hamiltonians. We will continue with previously seen examples. First the initial Hamiltonian:</p>
 <p><span class="math display">\[
 H_A = -\sum_i^n \sigma_{x_i}
 \]</span></p>
@@ -680,7 +680,7 @@ H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
 </figure>
 </div>
 </figure>
-<p>With these three pieces we can build our digitized version for an adiabatic computation. Just by selecting the resolution of the <span class="math inline">\(\lambda (t)\)</span> function (often called the number of trotter steps) we can build the whole end to end circuit.</p>
+<p>With these three pieces we can build our digitized version for an adiabatic computation. Just by selecting the resolution of the <span class="math inline">\(\lambda (t)\)</span> function (often called the number of Trotter steps) we can build the whole end to end circuit.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>

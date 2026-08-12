@@ -432,7 +432,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -582,28 +582,28 @@ window.Quarto = {
 </header>
 
 
-<p>So, now you know how a simulator works. Essentially performs the mathematical operations we expect a quantum computer will do. but there are quite some nuances on the way in which we do this. For example, it is not the same to use a <em>simulator</em> or an <em>emulator</em>.</p>
-<p>A <em>simulator</em> performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it was what the ideal machine should do. An <em>emulator</em> on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show how the same actions performed by a physical machine would look like.</p>
-<p>The of course, you have sending the job to a real device through a service like the ones offered by the <a href="https://quantum.cloud.ibm.com/">IBM Quantum Platform</a>. You will need to create an account but after that, you can submit all the circuits you want to real hardware. checkout <a href="../../submit_circuit.ipynb">this example</a>.</p>
+<p>So, now you know how a simulator works. It essentially performs the mathematical operations we expect a quantum computer will do, but there are quite some nuances on the way in which we do this. For example, using a <em>simulator</em> is not the same as using an <em>emulator</em>.</p>
+<p>A <em>simulator</em> performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it is what the ideal machine should do. An <em>emulator</em> on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show what the same actions performed by a physical machine would look like.</p>
+<p>Then of course, there is sending the job to a real device through a service like the ones offered by the <a href="https://quantum.cloud.ibm.com/">IBM Quantum Platform</a>. You will need to create an account but after that, you can submit all the circuits you want to real hardware. Check out <a href="../../submit_circuit.ipynb">this example</a>.</p>
 <section id="simulators" class="level2">
 <h2 class="anchored" data-anchor-id="simulators">Simulators</h2>
-<p>The actions we performed in <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as <strong>State Vector</strong> simulator (dah!) and it is common on some of the most used SDKs. The ability to simulate a given circuit is proportional to the resources needed to manipulate that state vector.</p>
+<p>The actions we performed in the <a href="../../parts/gettingstarted/simulations.html">previous exercise</a> were mimicking the state vector of our system and performing the unitary operations that drive the state. This is often known as <strong>State Vector</strong> simulator (dah!) and it is common on some of the most used SDKs. The ability to simulate a given circuit is proportional to the resources needed to manipulate that state vector.</p>
 <p><strong>GHZ-state case</strong></p>
-<p>Let’s take a GHZ state as an example, a 5 qubit GHZ state.</p>
+<p>Let’s take a GHZ state as an example, a 5-qubit GHZ state.</p>
 <p><span class="math display">\[
 |\psi\rangle = \frac{1}{\sqrt{2}}(|00000\rangle + |11111\rangle)
 \]</span></p>
-<p>A 5-qubit system requires a state vector in a Hilbert space of dimension <span class="math inline">\(2^5 = 32\)</span>. Each amplitude is a complex number, typically represented with double precision. So, making a back of the envelope calculation: <span class="math inline">\(32\)</span> amplitudes <span class="math inline">\(\times\)</span> <span class="math inline">\(16\)</span> bytes (8 bytes real part + 8 bytes imaginary part) <span class="math inline">\(= 512\)</span> bytes.</p>
+<p>A 5-qubit system requires a state vector in a Hilbert space of dimension <span class="math inline">\(2^5 = 32\)</span>. Each amplitude is a complex number, typically represented with double precision. So, making a back-of-the-envelope calculation: <span class="math inline">\(32\)</span> amplitudes <span class="math inline">\(\times\)</span> <span class="math inline">\(16\)</span> bytes (8 bytes real part + 8 bytes imaginary part) <span class="math inline">\(= 512\)</span> bytes.</p>
 <p>Beyond the state vector, a quantum simulator needs:</p>
 <ul>
 <li>Quantum gates (<span class="math inline">\(H\)</span> and <span class="math inline">\(CX\)</span> in this case). For 5 qubits, single-qubit gates are 2×2 matrices and two-qubit gates are 4×4: ~1-2 KB per gate.</li>
 <li>Temporary buffer for intermediate calculations of similar size.</li>
 <li>Simulator overhead for managing the circuit, data structures and conversions: ~10-50 KB</li>
 </ul>
-<p>Minimum theoretical memory: ~512 bytes + overhead ≈ 50-100 KB. Most of this goes into the simulator itself more than the simulation but as we scale those numbers up, a 10 qubit simulator manages ~16KB state vectors, 20-qubit one ~16MB and 30 qubit system uses only ~16GB just for the state vector representation. You might struggle beyond 22-25 qubits depending on how powerful your machine is.</p>
+<p>Minimum theoretical memory: ~512 bytes + overhead ≈ 50-100 KB. Most of this goes into the simulator itself more than the simulation but as we scale those numbers up, a 10-qubit simulator manages ~16KB state vectors, a 20-qubit one ~16MB and a 30-qubit system uses ~16GB just for the state vector representation. You might struggle beyond 22-25 qubits depending on how powerful your machine is.</p>
 <p>A less common approach, given the numbers we saw before, is the usage of the <strong>Density Matrix</strong> simulator, which renders the whole evolution considering the effect of noise and the potential of obtaining a mixed-state (which in reality happens a lot but unless we work trying to emulate the work of a device, we can skip it). This not only manages a state vector but a matrix evolution on each step.</p>
 <p>The <strong>Matrix Product State</strong> simulator is a method derived from Tensor Networks, a way to efficiently deal with large matrix operations, at least up to a precision. In many cases this method allows us to emulate larger circuits as it is the most resource efficient method although in some cases, unless you are using some bleeding-edge simulators, they do not offer the option of noise simulation.</p>
-<div id="5d78a10c" class="cell" data-execution_count="1">
+<div id="d56647a8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Qiskit</span></span>
@@ -649,7 +649,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Qiskit is not the only SDK we will be using so it is good to know this very same simulation techniques exist when, for example, using <a href="https://pennylane.ai/">Pennylane</a> you will have access to several <a href="https://pennylane.ai/devices/">devices</a> including:</p>
+<p>Qiskit is not the only SDK we will be using so it is good to know these very same simulation techniques exist when, for example, using <a href="https://pennylane.ai/">Pennylane</a> you will have access to several <a href="https://pennylane.ai/devices/">devices</a> including:</p>
 <ul>
 <li><code>default.qubit</code> for state vector simulation</li>
 <li><code>default.mixed</code> for dealing with mixed states</li>
@@ -657,7 +657,7 @@ window.Quarto = {
 </ul>
 <p>And many more. They also include nice simulators for GPU based simulation, based on <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum SDK</a> via <a href="https://www.xanadu.ai/products/lightning/">Lightning</a> which will be really helpful when we start talking about <a href="../../parts/algorithms/optimizingcircuits.html">training circuits</a>.</p>
 <p>If you are interested in Tensor Networks, this is not the right place, but I can recommend some resources like <a href="https://tensornetwork.org/">TensorNetwork.org</a> to look into useful resources and some nice references to get deeper into the field <span class="citation" data-cites="biamonte2017tensornetworksnutshell">(<a href="../references.html#ref-biamonte2017tensornetworksnutshell" role="doc-biblioref">Biamonte and Bergholm 2017</a>)</span>.</p>
-<p>In any case, this is not a trivial task. In fact, some have already claimed to be a Herculean task <span class="citation" data-cites="xu2023herculeantaskclassicalsimulation">(<a href="../references.html#ref-xu2023herculeantaskclassicalsimulation" role="doc-biblioref">Xu et al. 2023</a>)</span>. There is a useful guide by google on <a href="https://quantumai.google/qsim/choose_hw">how to choose your hardware</a>. Let’s keep it simple for now and deal with algorithm implementations.</p>
+<p>In any case, this is not a trivial task. In fact, some have already claimed it to be a Herculean task <span class="citation" data-cites="xu2023herculeantaskclassicalsimulation">(<a href="../references.html#ref-xu2023herculeantaskclassicalsimulation" role="doc-biblioref">Xu et al. 2023</a>)</span>. There is a useful guide by Google on <a href="https://quantumai.google/qsim/choose_hw">how to choose your hardware</a>. Let’s keep it simple for now and deal with algorithm implementations.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

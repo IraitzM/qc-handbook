@@ -397,7 +397,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -548,7 +548,7 @@ window.Quarto = {
 
 
 <p>We do have a mathematical formalism to perform computation and devices capable of processing these instructions for us. Now we only need a set of relevant hard to solve problems that could benefit from those resources.</p>
-<p>A relevant aspect of quantum computing is that given the low level at which we will work, the words <strong>circuit</strong> and <strong>algorithm</strong> interchange. Classical computing algorithms are way more abstract nowadays than in the original days, closer to the actual electronics. This is where quantum computing still may confuse you as the steps of an algorithms are represented in blocks of logical gates composing a circuit.</p>
+<p>A relevant aspect of quantum computing is that given the low level at which we will work, the words <strong>circuit</strong> and <strong>algorithm</strong> are interchangeable. Classical computing algorithms are way more abstract nowadays than in the early days, closer to the actual electronics. This is where quantum computing still may confuse you as the steps of an algorithm are represented in blocks of logical gates composing a circuit.</p>
 <p>In general by the term algorithm we refer to a set of operations that transform our initial quantum state into a final state. In this regard many types of algorithms can be found.</p>
 <p><strong>Communication</strong></p>
 <p><em>Quantum Key Distribution</em> (QKD), <em>Superdense Coding</em> and <em>Quantum Teleportation</em> are protocols involving quantum resources that help us communicate better, safer or faster.</p>
@@ -562,7 +562,7 @@ window.Quarto = {
 </figure>
 <p><strong>Building blocks</strong></p>
 <p>Certain circuits/algorithms are also building blocks of more complex algorithms. For example, <em>Quantum Fourier Transform</em> (QFT) is used to map a given input to a phase change on the <span class="math inline">\(Z\)</span> axis.</p>
-<p>Its inverse, makes the opposite, any operation that only rotates the status of a qubit on <span class="math inline">\(Z\)</span> axis will render a superposition state when measured. Therefore, iQFT transforms this amplitude into a final state triggering the phase change of a given quantum state.</p>
+<p>Its inverse does the opposite, any operation that only rotates the status of a qubit on <span class="math inline">\(Z\)</span> axis will render a superposition state when measured. Therefore, iQFT transforms this amplitude into a final state triggering the phase change of a given quantum state.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -582,11 +582,11 @@ window.Quarto = {
 <li><a href="https://en.wikipedia.org/wiki/Quantum_walk_search">Quantum walk search</a></li>
 </ul>
 <p>Most of them are hard to realize due to the ancillary qubits required for the implementation. Other than basic examples, as soon as the problem grows in size it becomes challenging to implement those even using local simulators.</p>
-<p>Our main focus for this following section will be dedicated to <strong>combinatorial optimization</strong>. In this regime some specific quantum computing forms will be visited and how existing services can be used to actually implement those algorithms for specific purposes.</p>
+<p>Our main focus for the following section will be dedicated to <strong>combinatorial optimization</strong>. In this regime some specific quantum computing forms will be visited, along with how existing services can be used to actually implement those algorithms for specific purposes.</p>
 <section id="computational-complexity" class="level2">
 <h2 class="anchored" data-anchor-id="computational-complexity">Computational complexity</h2>
-<p>If one looks at the media it looks that &lt;<em>ENTER THE NEW TREND HERE</em>&gt; will be much better than whatever we might be using now. This is something Quantum Computing has also been affected by. Thus, it is important to frame the potential gain QC may introduce to our processes as depending on the complexity of it could well be there is no justification to adopt a new paradigm given the effort it requires.</p>
-<p>BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space. Several problems fall into this category and are subject to be solved using quantum computing solutions <span class="citation" data-cites="wocjan2006naturalbqpcompleteproblems">(<a href="../references.html#ref-wocjan2006naturalbqpcompleteproblems" role="doc-biblioref">Wocjan and Zhang 2006</a>)</span>.</p>
+<p>If one looks at the media it looks like &lt;<em>ENTER THE NEW TREND HERE</em>&gt; will be much better than whatever we might be using now. This is something Quantum Computing has also been affected by. Thus, it is important to frame the potential gain QC may introduce to our processes as, depending on the complexity of it, it could well be that there is no justification to adopt a new paradigm given the effort it requires.</p>
+<p>BQP (bounded error, quantum, polynomial time) is a superset of polynomial complexity class within NP (nondeterministic polynomial) problem space. Several problems fall into this category and are candidates to be solved using quantum computing solutions <span class="citation" data-cites="wocjan2006naturalbqpcompleteproblems">(<a href="../references.html#ref-wocjan2006naturalbqpcompleteproblems" role="doc-biblioref">Wocjan and Zhang 2006</a>)</span>.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -595,7 +595,7 @@ window.Quarto = {
 </figure>
 </div>
 </figure>
-<p>So, let’s be aware that some problems can as well be efficiently solved by existing classical resources. Others, might be not even suitable for quantum computers being too hard to solve as well. So there is a sweet-spot where a set of problems may benefit from being solved using QC. Let’s not assume superiority by default.</p>
+<p>So, let’s be aware that some problems can as well be efficiently solved by existing classical resources. Others might not even be suitable for quantum computers being too hard to solve as well. So there is a sweet-spot where a set of problems may benefit from being solved using QC. Let’s not assume superiority by default.</p>
 <p>We will start with a critical process for many companies and part of the key processes when it comes to Machine Learning.</p>
 
 

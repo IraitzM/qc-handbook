@@ -432,7 +432,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -587,22 +587,22 @@ window.Quarto = {
 <p><span class="math display">\[
 H_{dwave} = -\frac{A(s)}{2}\left( \sum_i \sigma_x^i \right) + \frac{B(s)}{2}\left( \sum_i h_i \sigma_z^i + \sum_{i&gt;j} J_{ij} \sigma_z^i \sigma_z^j \right)
 \]</span></p>
-<p>where <span class="math inline">\(\sigma_{x,z}^i\)</span> are the Pauli matrices operating on qubit <span class="math inline">\(i\)</span> and <span class="math inline">\(h\)</span> and <span class="math inline">\(J\)</span> are problem related variables. So as you can see most of the selection has already been done. We won’t enter into more details for the moment but for those interested in how this is done more in detail do not hesitate goring through the <a href="https://docs.dwavesys.com/docs/latest/c_qpu_annealing.html">additional information</a>.</p>
+<p>where <span class="math inline">\(\sigma_{x,z}^i\)</span> are the Pauli matrices operating on qubit <span class="math inline">\(i\)</span> and <span class="math inline">\(h\)</span> and <span class="math inline">\(J\)</span> are problem related variables. So as you can see most of the selection has already been done. We won’t enter into more details for the moment but for those interested in how this is done in more detail do not hesitate going through the <a href="https://docs.dwavesys.com/docs/latest/c_qpu_annealing.html">additional information</a>.</p>
 <p>But how do you transform any classical combinatorial problem into a Hamiltonian that fits into this form? This is what we are going to focus on for the next section.</p>
 <section id="qubo-and-ising-models" class="level2">
 <h2 class="anchored" data-anchor-id="qubo-and-ising-models">QUBO and Ising models</h2>
-<p>We already discussed the Ising model and its potential limitations in terms of only managing quadratic relationships between variables. This is also limited by the hardware, so we will need to understand the way in which our classically formulated optimization problem may fit into this somehow <em>fixed</em> formulations.</p>
+<p>We already discussed the Ising model and its potential limitations in terms of only managing quadratic relationships between variables. This is also limited by the hardware, so we will need to understand the way in which our classically formulated optimization problem may fit into these somewhat <em>fixed</em> formulations.</p>
 <p>Let’s start with a simple example of the following form:</p>
 <p><span class="math display">\[
 \max_x \sum_i a_i x_i \quad
 s.t. \quad \sum_i b_i x_i = c
 \]</span></p>
 <p>where <span class="math inline">\(a_i\)</span> and <span class="math inline">\(b_i\)</span> are free variables and <span class="math inline">\(c\)</span> is a hard constraint. <span class="math inline">\(x_i \in \{0, 1\}\)</span> will be a mask over the selection on which variables should be selected to maximize our objective function. Why <strong>binary</strong> variables, well, in the end we can only obtain bit strings when reading our quantum states, so it seems sensible to make those the target variables of our problem.</p>
-<p>Immediately comes up is the management of restrictions as we will only be able to evaluate the energy level of the system so every bit of information will need to be handled within the objective function itself. That requires us to introduce constraints as regularization terms affecting the objective function in case of not being satisfied</p>
+<p>What immediately comes up is the management of restrictions as we will only be able to evaluate the energy level of the system so every bit of information will need to be handled within the objective function itself. That requires us to introduce constraints as regularization terms affecting the objective function in case of not being satisfied</p>
 <p><span class="math display">\[
 \sum_i b_i x_i = c \quad \rightarrow \quad \left( \sum_i x_i b_i - c\right)^2,
 \]</span></p>
-<p>being the power needed to value any deviation (negative or positive) from our target value <span class="math inline">\(c\)</span>. These terms need to be conditioned by weight operators so that the problem is regularized, balancing between cost and regularization terms as follows</p>
+<p>the power being needed to value any deviation (negative or positive) from our target value <span class="math inline">\(c\)</span>. These terms need to be conditioned by weight operators so that the problem is regularized, balancing between cost and regularization terms as follows</p>
 <p><span class="math display">\[
 \max_x \theta_1 \left( \sum_i a_i x_i \right) - \theta_2 \left( \sum_i x_i b_i - c\right)^2.
 \]</span></p>
@@ -611,18 +611,18 @@ s.t. \quad \sum_i b_i x_i = c
 <p><span class="math display">\[
 \min_x \theta_2 \left( \sum_i x_i b_i - c\right)^2 - \theta_1 \left( \sum_i a_i x_i \right)
 \]</span></p>
-<p>With this it should be easy to see hot we can convert this problem into its <strong>Quadratic Unconstrained Binary Optimization (QUBO)</strong> form</p>
+<p>With this it should be easy to see how we can convert this problem into its <strong>Quadratic Unconstrained Binary Optimization (QUBO)</strong> form</p>
 <p><span class="math display">\[
 \min_x x^TQx + k.
 \]</span></p>
 <p>Here <span class="math inline">\(Q\)</span> represents the value matrix between each pair of variables (with the notion of <span class="math inline">\(x_i^2 = x_i\)</span>) and the offset constant <span class="math inline">\(k\)</span> (which will be added to the final result but does not affect the optimality search).</p>
-<p>One interesting fact about this formulation is that it contains linear relations (<span class="math inline">\(Q_{ii}x_i\)</span>) and quadratic for off diagonal terms (<span class="math inline">\(Q_{ij}x_ix_j \text{ for } i\ne j\)</span>).We could pose it on its scalar form as well</p>
+<p>One interesting fact about this formulation is that it contains linear relations (<span class="math inline">\(Q_{ii}x_i\)</span>) and quadratic for off-diagonal terms (<span class="math inline">\(Q_{ij}x_ix_j \text{ for } i\ne j\)</span>). We could pose it on its scalar form as well</p>
 <p><span class="math display">\[
 \min_x \sum_i a_i x_i + \sum_i \sum_{j\ne i} b_{ij} x_i x_j + k
 \]</span></p>
 <p>which can be directly related to previously seen Ising type of Hamiltonian by the transformation <span class="math inline">\(x_i \in \{0,1\}\)</span> to <span class="math inline">\(s_i = \pm 1\)</span>.</p>
-<p>One clear limitation from the Ising formulation (or the native Hamiltonian of the target device) is the limitation for quadratic terms (<span class="math inline">\(x_ix_j\)</span>) so no high-order relationship between variables can be implemented as a general norm. Also, binary characterization is needed, no continuous variable can be introduced within the problem as it is. Of course, there are ways to tackle problems that may require this modifications but it may need an extra effort when mapping our non-QUBO problem to the device.</p>
-<p>D-Wave already envisioned a way to ease this tasks, so it provides libraries and functionalities that should help with part of the work to be done. Particularly, transforming from one shape to another and submitting problems to their devices (or trying to solve them locally).</p>
+<p>One clear limitation from the Ising formulation (or the native Hamiltonian of the target device) is the limitation for quadratic terms (<span class="math inline">\(x_ix_j\)</span>) so no high-order relationship between variables can be implemented as a general norm. Also, binary characterization is needed, no continuous variable can be introduced within the problem as it is. Of course, there are ways to tackle problems that may require these modifications but it may need an extra effort when mapping our non-QUBO problem to the device.</p>
+<p>D-Wave already envisioned a way to ease these tasks, so it provides libraries and functionalities that should help with part of the work to be done. Particularly, transforming from one shape to another and submitting problems to their devices (or trying to solve them locally).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyqubo <span class="im">import</span> Spin</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>s1, s2, s3, s4 <span class="op">=</span> Spin(<span class="st">"s1"</span>), Spin(<span class="st">"s2"</span>), Spin(<span class="st">"s3"</span>), Spin(<span class="st">"s4"</span>)</span>
@@ -655,7 +655,7 @@ s.t. \quad \sum_i b_i x_i = c
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>({<span class="st">'x1'</span>: <span class="fl">1.0</span>, <span class="st">'x2'</span>: <span class="fl">2.0</span>, <span class="st">'x3'</span>: <span class="fl">0.0</span>}, {(<span class="st">'x1'</span>, <span class="st">'x2'</span>): <span class="fl">5.0</span>, (<span class="st">'x1'</span>, <span class="st">'x3'</span>): <span class="fl">7.0</span>}, <span class="fl">0.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><a href="https://docs.ocean.dwavesys.com/en/stable/docs_dimod/">dimod documentation</a></p>
-<p>Being the first always give some advantage, so may of the companies that came after DWave have adopted this libraries and offer certain interoperability. You may find some examples in <a href="../../parts/appendix/hybridsolvers.html">B Hybrid Solvers</a></p>
+<p>Being the first always gives some advantage, so many of the companies that came after DWave have adopted these libraries and offer certain interoperability. You may find some examples in <a href="../../parts/appendix/hybridsolvers.html">B Hybrid Solvers</a></p>
 </section>
 <section id="mapping-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-the-problem">Mapping the problem</h2>
@@ -690,7 +690,7 @@ We will need to get a little bit used to the transformation between different fo
 </figure>
 </div>
 </figure>
-<p>That way if we look to solve our three variable problem into a 4 qubit chip, we might see more than three qubit related readout being reported.</p>
+<p>That way if we look to solve our three-variable problem on a 4-qubit chip, we might see more than three qubit-related readouts being reported.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -699,8 +699,8 @@ We will need to get a little bit used to the transformation between different fo
 </figure>
 </div>
 </figure>
-<p>In above example, 0 and 5 qubits are linked to the same problem variable so they should report same bit readout but qubit <em>chains</em> can break and therefore we will need to play with the chain strength to avoid any invalid solution.</p>
-<p>Sadly for us, the embedding of densely connected problems comes with the overhead of chaining a lot of physical qubits so we can make all those all-to-all connections that are not native to the device. In fact, we can check that the encoding they have made (by they we mean the people from D-Wave) we can see the maximum number of qubits of the problems encoded in hardware is in the order of 60 to 100. But is this using thousands of qubits? Yes, this is how bad the overhead can get <span class="citation" data-cites="cai2014practicalheuristicfindinggraph">(<a href="../references.html#ref-cai2014practicalheuristicfindinggraph" role="doc-biblioref">Cai et al. 2014</a>)</span>.</p>
+<p>In the above example, 0 and 5 qubits are linked to the same problem variable so they should report the same bit readout but qubit <em>chains</em> can break and therefore we will need to play with the chain strength to avoid any invalid solution.</p>
+<p>Sadly for us, the embedding of densely connected problems comes with the overhead of chaining a lot of physical qubits so we can make all those all-to-all connections that are not native to the device. In fact, if we check the encoding they have made (by they we mean the people from D-Wave) we can see the maximum number of qubits of the problems encoded in hardware is in the order of 60 to 100. But is this using thousands of qubits? Yes, this is how bad the overhead can get <span class="citation" data-cites="cai2014practicalheuristicfindinggraph">(<a href="../references.html#ref-cai2014practicalheuristicfindinggraph" role="doc-biblioref">Cai et al. 2014</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

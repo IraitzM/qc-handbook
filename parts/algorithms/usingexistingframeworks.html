@@ -413,7 +413,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">QAOA in partice</span></a>
+ <span class="menu-text">QAOA in practice</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -564,8 +564,8 @@ window.Quarto = {
 </header>
 
 
-<p>Following notebook will dig deeper into the existing tools that D-Wave and its ecosystem enables when tackling combinatorial problems.</p>
-<p>For this exercises following libraries will be used: <a href="https://pyqubo.readthedocs.io/en/latest/">PyQubo</a> as well as <em>dimod</em> and <em>dwave-ocean-sdk</em> from the DWave <a href="https://docs.ocean.dwavesys.com/en/stable/index.html">Ocean suite</a></p>
+<p>The following notebook will dig deeper into the existing tools that D-Wave and its ecosystem enables when tackling combinatorial problems.</p>
+<p>For these exercises the following libraries will be used: <a href="https://pyqubo.readthedocs.io/en/latest/">PyQubo</a> as well as <em>dimod</em> and <em>dwave-ocean-sdk</em> from the DWave <a href="https://docs.ocean.dwavesys.com/en/stable/index.html">Ocean suite</a></p>
 <p>Often the installation of the SDK already installs the other two dependencies, but just in case make sure all are present.</p>
 <div id="cell-1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dimod</span>
@@ -581,7 +581,7 @@ window.Quarto = {
 <p>PyQubo offers a simple way to come up with those formulations, express them in a simple way and then materialize the QUBO matrix or Ising coefficients.</p>
 <section id="portfolio-optimization" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="portfolio-optimization"><span class="header-section-number">1.1</span> Portfolio optimization</h2>
-<p>Portfolio optimization is a simple exercise that matches pretty nicely the type of formulation we would like to produce. Comes from the definition of Markowitz’s seminal work.</p>
+<p>Portfolio optimization is a simple exercise that matches pretty nicely the type of formulation we would like to produce. It comes from the definition of Markowitz’s seminal work.</p>
 <p><span class="math display">\[
 \max \sum_i r_ix_i - \sum_i \sum_j c_{ij}x_ix_j \\
 \text{ s. t. } \sum_i b_ix_i \le B
@@ -698,7 +698,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Seems like a hard problem to be solved. Most of the energy values are really close around the global optima. Play around with the regularization parameters to check the difference in results.</p>
-<p>Now we can take our example to D-Wave’s samples and see what we get. Make sure you copy your token into the code below.</p>
+<p>Now we can take our example to D-Wave’s samplers and see what we get. Make sure you copy your token into the code below.</p>
 <div id="cell-18" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> minorminer</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dwave.system.samplers <span class="im">import</span> DWaveSampler</span>
@@ -815,7 +815,7 @@ window.Quarto = {
          [1, 4]      [2, 3, 5]     -5.0             5       </code></pre>
 </div>
 </div>
-<p>A pretty important piece of information here is that even though we started with <span class="math inline">\(2^N\)</span> potential solutions, finally we only got 4 that yield the same energy value. Therefore, our quantum state is the superposition of all those optimal solutions, therefore the ground state.</p>
+<p>A pretty important piece of information here is that even though we started with <span class="math inline">\(2^N\)</span> potential solutions, finally we only got 4 that yield the same energy value. Therefore, our quantum state is the superposition of all those optimal solutions, and therefore the ground state.</p>
 <div id="cell-29" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
