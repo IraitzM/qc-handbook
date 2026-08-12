@@ -33,10 +33,10 @@ array_to_latex(array=feature_map(X).T, prefix='| \\psi \\rangle = ', max_size=(1
 Angle encoding takes benefit from the ability to embed rotation angles into our gates so that we can introduce our numeric data as the rotation angle of a given qubit. Example, $x = [x_1, x_2,...,x_n]$ would be mapped to
 
 $$
-(R_x(x_1) \otimes R_x(x_2) \otimes \dots \otimes R_x(x_n))|0\rangle^{\otimes n}
+(R_z(x_1) \otimes R_z(x_2) \otimes \dots \otimes R_z(x_n))|0\rangle^{\otimes n}
 $$
 
-data must be in the regime where those rotations take effect ($[0, 2\pi]$) and may be more suitable if a cyclic nature is already present. Normalization of data may be relevant preprocessing step in this case.
+data must be in the regime where those rotations take effect ($[0, 2\pi]$) and may be more suitable if a cyclic nature is already present. Normalization of data may be relevant preprocessing step in this case but we should also pay attention at the rotation axis, $Z$ in this case.
 
 ```{python}
 import pennylane as qml
