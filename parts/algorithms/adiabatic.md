@@ -1,6 +1,6 @@
 # Adiabatic Theorem {.unnumbered}
 
-Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is the main mechanism quantum computers use to obtain the minimum energy or ground state for a given problem, and it is the main approach we use to solve hard combinatorial optimization problems [@Albash_2018].
+Adiabatic Quantum Computing (AQC) is a model of computation that uses quantum-mechanical processes operating under adiabatic conditions. It is one approach for encoding optimization problems as Hamiltonians and preparing low-energy states; gate-based quantum computing remains the dominant general-purpose model, while practical quantum annealing is a related but more restricted setting [@Albash_2018].
 
 This type of quantum computing is based on continuous-time evolution of a quantum state $|\psi(t)\rangle$ from a well-defined initial value to compute a final observed value. The evolution is modeled by the time-dependent [Schrödinger equation](https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation)
 
@@ -8,7 +8,7 @@ $$
 i\hbar \frac{\partial|\psi(t)\rangle}{\partial t}= H(t)|\psi(t)\rangle
 $$
 
-operating in the presence of adiabatic changes to the governing Hamiltonian $H(t)$ over the range $t\in\left[0,T\right]$, where $\hbar$ is Planck’s constant. Adiabatic computing is computationally equivalent to all other quantum computing models, including the circuit and topological models, and it can efficiently solve any problem in BQP [@aharonov2008adiabatic]. However, it was originally proposed as a method for solving satisfiability problems [@farhi2000numerical] and it has received attention for the simplicity by which combinatorial optimization problems can be cast in Hamiltonian forms [@lucas2014ising].
+operating in the presence of adiabatic changes to the governing Hamiltonian $H(t)$ over the range $t\in\left[0,T\right]$, where $\hbar$ is Planck’s constant. Ideal universal adiabatic quantum computation is polynomially equivalent to the circuit model and can therefore solve problems in BQP with polynomial overhead [@aharonov2008adiabatic]. This equivalence should not be conflated with the capabilities or guarantees of every practical quantum annealer. AQC was originally proposed as a method for solving satisfiability problems [@farhi2000numerical] and has received attention because combinatorial optimization problems can be cast naturally as Hamiltonians [@lucas2014ising].
 
 The time dependent Hamiltonian for this type of computation is given by the following formula
 
@@ -27,7 +27,7 @@ By making the schedule functions meet the conditions $A(t_0) = 1$, $B(t_0)  =0$,
 ![Annealing schedules, credit to DWave's documentation](../../assets/annealing-schedules.png)
 </figure>
 
-A critical issue when performing this type of computation and selecting the right scheduling function is that the minimum spectral gap, energy spectrum gap between ground state and remaining excited states, is kept non-zero during the whole transition. Otherwise, no guarantee of obtaining the target state can exist. In particular, we should care about the gap expressed as
+A critical issue when performing this type of computation and selecting the right scheduling function is the minimum spectral gap, the energy difference between the ground state and the first relevant excited state. A nonzero gap is not by itself sufficient: the runtime must also be large relative to the Hamiltonian’s rate of change and the inverse gap scale. In particular, we should care about the gap expressed as
 
 $$
 g_{min} = \min_{0\le t \le T} \min_{j\ne0} |E_j(t) - E_0(t)|
@@ -38,13 +38,13 @@ Visually, you can see the issues.
 ![Energy gap (https://arxiv.org/pdf/1611.04471)](../../assets/energygap.png)
 </figure>
 
-It might be risky if at those points the evolution moves _too fast_. Therefore, we should select a scheduling function that apart from initial conditions also takes into consideration the compensation of the gap evolution to minimize transitions to higher energy states. Therefore, ending on local optima instead of remaining in the global minimum.
+It might be risky if at those points the evolution moves _too fast_. Therefore, we should select a scheduling function that, apart from satisfying the initial conditions, also takes the changing gap into account to minimize transitions to higher-energy states. Nonadiabatic transitions can leave the system outside the ground state; they do not specifically imply that the result is a local optimum.
 
 <figure markdown>
 ![Scheduling function](../../assets/schedulingfunc.gif)
 </figure>
 
-As long as this evolution is above zero, we should be quite confident of the result at the end of the process ($T$).
+Even with a positive gap, confidence in the final ground state depends on the runtime, schedule, matrix elements, initialization, and implementation errors.
 
 A common form for the initial Hamiltonian is $H_A = -\sum_i^n \sigma_{x_i}$ with $\sigma_x$ being the Pauli operator (previously mentioned $X$ operator) applied to each $i$ index qubit. This Hamiltonian is chosen given that we do know its ground state $|+\rangle^n$ and how to prepare it in our systems (remember the Hadamard gate). One common target Hamiltonian form we can find in the literature is defined as the **Ising model**. It uses variables $s_i = \pm 1$ to characterize the magnetic dipole moment in order to characterize ferromagnetism. Its mathematical form is of the shape
 

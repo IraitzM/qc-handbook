@@ -74,18 +74,18 @@ $$
 R_y(-\pi/2)|0\rangle = 
 \left[
 \begin{array}{cc}
-0 & 1 \\
--1 & 0
+\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+-\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}
 \end{array}
 \right]\left[
 \begin{array}{c}
 1 \\
 0
 \end{array}
-\right] = -|1\rangle = |\psi\rangle
+\right] = \frac{|0\rangle-|1\rangle}{\sqrt{2}} = |\psi\rangle
 $$
 
-so the expectation value can be computed as
+so the expectation value can be computed on its normalized form as
 
 $$
 \langle \psi | H_2 | \psi\rangle = \left[

@@ -29,13 +29,13 @@ $$
 $$
 
 $$
-H_A = \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2
+H_A = \sum_{j=1}^m \left[b_j - \sum_{i=1}^N S_{ji}x_i \right]^2
 $$
 
 aiming to obtain our solution for $x$ when $H_A = 0$ so the minimization is done over $H_A$ like follows
 
 $$
-\min_x \sum_j^m \left[b_j - \sum_i^N S_{ji}x_ix_j \right]^2 
+\min_x \sum_{j=1}^m \left[b_j - \sum_{i=1}^N S_{ji}x_i \right]^2
 $$
 
 Let's select a particular instance for $S$ and $b$.
@@ -209,7 +209,7 @@ $$
 
 Variables $x_i$ represent the mask of selecting or not $i$ element to be considered. $w_{ij}$ sets the value of taking in two elements at the same time, $a_j$ represents the weight associated to $j$ and $b$ sets the available budget for the whole thing (the size of our Knapsack indeed). As can be seen many different types of problems can be mapped to this canonical example.
 
-One relevant aspect of inequalities is that we will need to add slack variables to take the excess of the constraint $a_j x_j + S = b $. In this case $S$ will be a value between 0 and $b$ so we would need to characterize its binary representation so that the problem is still a binary quadratic problem ($S = 2^ns_n + \dots + 2^0s_0$)
+One relevant aspect of inequalities is that we will need to add slack variables to turn the constraint into the equality $\sum_j a_j x_j + S = b$. Here $S$ ranges from 0 to $b$, so its binary encoding must be able to represent every value in that range while keeping the problem quadratic.
 
 We can start by adding the restriction to the objective function followed by a penalty term.
 
@@ -232,15 +232,14 @@ costs = [8, 6, 5, 3]
 budget = 16
 ```
 
-For this case 2 slack variables might be enough to characterize the excess of $S$.
+For this case, slack variables with weights $1, 2, 4, 8,$ and $16$ can represent every possible value of $S$ from 0 to the budget.
 
 $$
 8x_1 + 6x_2 + 5x_3 + 3x_4 + 1s_0 + 2s_1 = 16
 $$
 
 ```{python}
-costs.append(1)
-costs.append(2)
+costs.extend([1, 2, 4, 8, 16])
 costs
 ```
 
@@ -256,7 +255,7 @@ n = len(costs)
 Q = np.zeros((n, n))
 # First term
 for i in range(len(weight)):
-    for j in range(len(weight)):
+    for j in range(i, len(weight)):
         Q[i][j] += weight[i][j]
 
 # Constraint section
@@ -276,7 +275,8 @@ Q
 min_val = 0
 min_sol = []
 
-for x in np.c_[tuple(i.ravel() for i in np.mgrid[:2, :2, :2, :2, :2, :2])]:  # noqa
+for x in itertools.product([0, 1], repeat=n):
+    x = np.array(x)
     if x @ Q @ x.T < 0:
         if (x @ Q @ x.T) < min_val:
             min_val = x @ Q @ x.T
@@ -368,8 +368,10 @@ Considering we will solve this as a minimization problem (minimize the cost of t
 
 This gives us the final shape
 $$
-\min \sum_p^P\sum_i^n \sum_{j, j \ne i}^n c_{ij}x_{i,p}x_{j,(p+1)} + \sum_{n=0}^N\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{p<q} x_{n,p}x_{n,q} + 1\right) + \sum_{p=0}^P\left(-\lambda\sum_p x_{n,p} + 2\lambda\sum_{(i,j)}^G x_{i,p}x_{j,p} + 1\right)
+\min \; H_{cost} + H_{penalty}
 $$
+
+where $H_{cost}$ is the time-indexed travel cost above and $H_{penalty}$ is the sum of the node, position, and forbidden-edge penalties. For the two equality penalties, the expanded form is obtained by applying the same binary-variable identity shown above to each node and each position.
 
 assuming non existent edges are also added at a high cost ($\lambda$).
 
@@ -383,42 +385,33 @@ Q = defaultdict(float)
 N = G.number_of_nodes()
 
 # Objective that minimizes distance
-for u, v in G.edges:
-    for pos in range(N):
-        nextpos = (pos + 1) % N
-
-        # going from u -> v
-        try:
-            value = G[u][v]["weight"]
-        except KeyError:
-            value = lagrange # Non existent route cost
-
-        Q[((u, pos), (v, nextpos))] += value
-
-        # going from v -> u
-        try:
-            value = G[v][u]["weight"]
-        except KeyError:
-            value = lagrange # Non existent route cost
-
-        Q[((v, pos), (u, nextpos))] += value
+for u in G:
+    for v in G:
+        if u == v:
+            continue
+        value = G[u][v]["weight"] if G.has_edge(u, v) else lagrange
+        for pos in range(N):
+            nextpos = (pos + 1) % N
+            Q[((u, pos), (v, nextpos))] += value
 
 # Constraint that each row has exactly one 1
 for node in G:
     for pos_1 in range(N):
         Q[((node, pos_1), (node, pos_1))] -= lagrange
         for pos_2 in range(pos_1+1, N): # Next positions
-            Q[((node, pos_1), (node, pos_2))] += lagrange
+            Q[((node, pos_1), (node, pos_2))] += 2 * lagrange
 
 # Constraint that each col has exactly one 1
 for pos in range(N):
     for node_1 in G:
         Q[((node_1, pos), (node_1, pos))] -= lagrange
-        for node_2 in set(G)-{node_1}:
-            Q[((node_1, pos), (node_2, pos))] += lagrange # Cost of being in more than one place
+        node_list = list(G)
+        node_index = node_list.index(node_1)
+        for node_2 in node_list[node_index + 1:]:
+            Q[((node_1, pos), (node_2, pos))] += 2 * lagrange # Cost of being in more than one place
 ```
 
-Consider that our QUBO is symmetric, then each penalty should be divided by two if it occupies $Q_{i,j}$ and $Q_{j,i}$ positions in our matrix. That way we have filled our matrix with good and bad choice penalties, considering it is better to stay in a place than being in two places at once or considering two trajectories for the same period.
+The dictionary above stores each unordered pair once, so its coefficient is the full $2\lambda$ coupling from the expanded penalty. If a symmetric matrix representation is used instead, that coupling can be split equally between $Q_{i,j}$ and $Q_{j,i}$.
 
 ```{python}
 Q
