@@ -418,7 +418,7 @@ $$
 $$
 
 $$
-|\Psi^{+}\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle) \quad |\Psi^{-}\rangle = \frac{1}{\sqrt{2}}(|10\rangle - |10\rangle)
+|\Psi^{+}\rangle = \frac{1}{\sqrt{2}}(|01\rangle + |10\rangle) \quad |\Psi^{-}\rangle = \frac{1}{\sqrt{2}}(|01\rangle - |10\rangle)
 $$
 
 These are not separable, there is no tensorial product describing each part separately. We need to understand the system as a whole. Good thing is that if we measure one of the qubits we can instantly know what the state of the other qubit is even without measuring it.
