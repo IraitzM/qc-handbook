@@ -7,3 +7,4 @@
 
 # Env. variables
 .env
+**/*.quarto_ipynb

@@ -275,3 +275,204 @@ print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
 ```
 
 These plots should resemble those at the original work [@sim2019expressibility].
+
+## Entangling capability
+
+Expressivity tells us _how much_ of the Hilbert space our ansatz can reach, but it says nothing about the _kind_ of states it produces. A circuit made of single qubit rotations only, one per wire, may be perfectly able to cover every product state and still be classically simulable qubit by qubit. If we expect any advantage out of our parameterized circuit we should also ask how correlated the states it prepares are.
+
+The companion metric proposed in the same work is the _entangling capability_, built on top of the Meyer-Wallach measure $Q$ [@meyer2002global]. In the form derived by Brennen [@brennen2003observable] it is simply an average over how mixed each qubit looks once the rest of the register is ignored
+
+$$
+Q(|\psi\rangle) = 2\left( 1 - \frac{1}{n}\sum_{k=1}^{n} \text{Tr}\left[\rho_k^2\right] \right)
+$$
+
+where $\rho_k = \text{Tr}_{\bar{k}}\left(|\psi\rangle\langle\psi|\right)$ is the reduced density matrix of qubit $k$ after tracing out every other qubit, and $\text{Tr}[\rho_k^2]$ its _purity_. A product state leaves every qubit pure ($\text{Tr}[\rho_k^2] = 1$) so $Q = 0$, while a maximally entangled state leaves each qubit fully mixed ($\text{Tr}[\rho_k^2] = 1/2$) giving $Q = 1$.
+
+As before, this is a property of a single state and our ansatz produces a different one for each $\theta$. So we average over the parameter space
+
+$$
+\text{Ent} = \frac{1}{|S|}\sum_{\theta_i \in S} Q(|\psi_{\theta_i}\rangle)
+$$
+
+with $S$ the set of sampled parameter vectors. Contrary to the expressivity, here the scale is the intuitive one: $0$ means the circuit never entangles anything and $1$ that it always outputs maximally entangled states.
+
+```{python}
+from qiskit.quantum_info import partial_trace
+
+def meyer_wallach(circuit):
+    """Q measure for the state prepared by a (already bound) circuit."""
+    n = circuit.num_qubits
+    psi = Statevector.from_instruction(circuit)
+
+    purities = 0
+    for k in range(n):
+        # Every qubit but k gets traced out
+        rho_k = partial_trace(psi, [q for q in range(n) if q != k])
+        purities += rho_k.purity().real
+
+    # Numerical noise may push the result marginally outside its [0, 1] range
+    return float(np.clip(2 * (1 - purities / n), 0, 1))
+```
+
+Let's check it against states we already know the answer for.
+
+```{python}
+# A product state, no interaction whatsoever
+product = QuantumCircuit(2)
+product.h(0)
+product.ry(np.pi / 3, 1)
+
+# A Bell pair
+bell = QuantumCircuit(2)
+bell.h(0)
+bell.cx(0, 1)
+
+# A GHZ state over four qubits
+ghz = QuantumCircuit(4)
+ghz.h(0)
+for q in range(3):
+    ghz.cx(q, q + 1)
+
+for name, circuit in [("Product", product), ("Bell", bell), ("GHZ", ghz)]:
+    print(f"Q({name}) = {meyer_wallach(circuit):.3f}")
+```
+
+### Averaging over the parameter space
+
+Now we can do with the entangling capability what we did with the expressivity: sample random parameters and look at the resulting distribution. Let's compare three two-qubit ansätze that differ only on how (or whether) the wires talk to each other.
+
+```{python}
+def only_rotations(rng):
+    """Two independent qubits, nothing connects them."""
+    qc = QuantumCircuit(2)
+    for q in range(2):
+        qc.rx(rng.uniform(0, 2 * np.pi), q)
+        qc.rz(rng.uniform(0, 2 * np.pi), q)
+    return qc
+
+def with_cnot(rng):
+    qc = only_rotations(rng)
+    qc.cx(0, 1)
+    return qc
+
+def with_controlled_rotation(rng):
+    qc = only_rotations(rng)
+    qc.crx(rng.uniform(0, 2 * np.pi), 0, 1)
+    return qc
+```
+
+```{python}
+def entangling_capability(builder, nsamples=1_000, seed=1234):
+    rng = np.random.default_rng(seed)
+    return np.array([meyer_wallach(builder(rng)) for _ in range(nsamples)])
+
+samples = {
+    "Only rotations": entangling_capability(only_rotations),
+    "CNOT": entangling_capability(with_cnot),
+    "CRX": entangling_capability(with_controlled_rotation),
+}
+
+for label, q_values in samples.items():
+    plt.hist(
+        q_values,
+        bins=np.linspace(0, 1, 26),
+        histtype="step",
+        linewidth=2,
+        label=f"{label} (Ent = {q_values.mean():.3f})",
+    )
+plt.yscale("log")
+plt.xlabel("Q")
+plt.ylabel("Counts")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+The circuit without a two qubit gate piles up at $Q = 0$, as expected. The `CNOT` version spreads all the way to maximally entangled states, and the parameterized `CRX` sits in between: when its angle happens to be close to $0$ or $2\pi$ the gate barely acts, so low $Q$ values remain frequent.
+
+### More layers, more entanglement
+
+The usual knob to turn is depth. Repeating a rotation block followed by an entangling ladder should progressively spread correlations across the register.
+
+```{python}
+def hardware_efficient(rng, layers, num_qubits=4):
+    qc = QuantumCircuit(num_qubits)
+    for _ in range(layers):
+        for q in range(num_qubits):
+            qc.ry(rng.uniform(0, 2 * np.pi), q)
+            qc.rz(rng.uniform(0, 2 * np.pi), q)
+        for q in range(num_qubits - 1):
+            qc.cx(q, q + 1)
+    return qc
+
+hardware_efficient(np.random.default_rng(0), layers=2).draw('mpl')
+```
+
+```{python}
+layers = range(1, 6)
+ent_per_layer = [
+    entangling_capability(
+        lambda rng, d=depth: hardware_efficient(rng, d), nsamples=300
+    ).mean()
+    for depth in layers
+]
+
+plt.plot(list(layers), ent_per_layer, marker="o")
+plt.xlabel("Layers")
+plt.ylabel("Ent")
+plt.xticks(list(layers))
+plt.ylim(0, 1)
+plt.show()
+```
+
+Most of the gain comes from the very first layers and then it saturates, which is a recurring observation when picking an ansatz: past a certain depth we are paying in gates, noise and trainability without getting anything new in return.
+
+### Both metrics tell different stories
+
+It is tempting to assume that a circuit that entangles a lot is automatically expressive, but the two quantities are independent enough to be worth measuring separately. We can reuse the machinery above, this time computing the fidelities directly from the statevectors instead of sampling shots, which is the same quantity as before but free of shot noise.
+
+```{python}
+def expressivity(builder, num_qubits, nsamples=1_000, seed=1234):
+    rng = np.random.default_rng(seed)
+
+    bins_list = [i / (dims - 1) for i in range(dims)]
+    N = 2**num_qubits
+    p_haar_hist = [
+        (1 - bins_list[i]) ** (N - 1) - (1 - bins_list[i + 1]) ** (N - 1)
+        for i in range(dims - 1)
+    ]
+
+    fidelities = []
+    for _ in range(nsamples):
+        psi = Statevector.from_instruction(builder(rng))
+        phi = Statevector.from_instruction(builder(rng))
+        fidelities.append(np.abs(psi.inner(phi)) ** 2)
+
+    weights = np.ones(nsamples) / nsamples
+    pqc_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+
+    return sum(rel_entr(pqc_hist, p_haar_hist))
+```
+
+```{python}
+ansatze = [
+    ("Only rotations", only_rotations),
+    ("CNOT", with_cnot),
+    ("CRX", with_controlled_rotation),
+    ("2 layers", lambda rng: hardware_efficient(rng, 2, num_qubits=2)),
+    ("3 layers", lambda rng: hardware_efficient(rng, 3, num_qubits=2)),
+]
+
+print(f"{'Ansatz':<18}{'Expr':>8}{'Ent':>8}")
+for label, builder in ansatze:
+    print(
+        f"{label:<18}"
+        f"{expressivity(builder, num_qubits=2):>8.3f}"
+        f"{entangling_capability(builder).mean():>8.3f}"
+    )
+```
+
+Remember these are finite sample estimates over a binned histogram, so the absolute value of `Expr` carries a bias and only the comparison between rows is meaningful. Two things stand out there.
+
+The first one is that `Only rotations` and `CNOT` share exactly the same expressivity while their entangling capability could not be more different. The reason is that the `CNOT` sits at the very end of the circuit, acting as a fixed unitary common to every sample, and a common unitary leaves all the overlaps $|\langle\psi_{\theta_i}|\psi_{\theta_j}\rangle|^2$ untouched. Expressivity simply cannot see it, entangling capability can.
+
+The second one is that the `CRX` ansatz is more expressive than the `CNOT` one while entangling roughly half as much. Adding correlations and covering the Hilbert space are related but different goals, and a good ansatz is usually the one that reaches enough of both while staying shallow, since pushing either metric to its maximum is precisely the regime where barren plateaus [@mcclean2018barren] start to show up.
