@@ -9,10 +9,10 @@ $$
 \text{Expr} = D_{KL}\left( \hat{P}_{PQC}(F; \theta) \| P_{Haar}(F)\right) = \sum_{j} \hat{P}_{PQC}(F_j; \theta)\log\left(\frac{\hat{P}_{PQC}(F_j; \theta)}{P_{\text{Haar}(F_j)}}\right)
 $$
 
-where $\hat{P}_{PQC}(F; \theta)$ is the estimated probability distribution of fidelities resulting while sampling states from a
-PQC with parameters $\theta$. $F_j$ represents the fidelity at $j$th bin.
+where $\hat{P}_{PQC}(F; \theta)$ is the estimated probability distribution of fidelities resulting from sampling states from a
+PQC with parameters $\theta$. $F_j$ represents the fidelity at the $j$th bin.
 
-Thus, we need to generate a _histogram_ of the elements of $F$. The output of this histogram is a set of bins $B = \{(l_1, u_1), (l_2, u_2), \cdots \}$ where $l_{j}$ ($u_j$) denotes the lower (upper) limit of bin $j$. It also produces an empirical probability distribution function $\mathrm{P}_{\text{PQC}}(j)$, which is simply the probability that a given value of $F$ falls in a bin $j$.
+Thus, we need to generate a _histogram_ of the elements of $F$. The output of this histogram is a set of bins $B = \{(l_1, u_1), (l_2, u_2), \cdots \}$ where $l_{j}$ ($u_j$) denotes the lower (upper) limit of bin $j$. It also produces an empirical probability distribution function $\mathrm{P}_{\text{PQC}}(j)$, which is simply the probability that a given value of $F$ falls in bin $j$.
 
 Let's take the ansatz defined by an idle circuit as an example.
 
@@ -32,7 +32,7 @@ psi  = Statevector.from_instruction(qc)
 plot_bloch_multivector(psi)
 ```
 
-No matter what we do, the ansatz won't change, therefore its expressivity should be equal to none.
+No matter what we do, the ansatz won't change, therefore its expressivity should be nil.
 
 ```{python}
 import numpy as np
@@ -43,7 +43,7 @@ from qiskit_aer import AerSimulator
 dims = 100
 num_qubits = 1
 
-# Possible Bin
+# Bin edges
 bins_list = []
 for i in range(dims):
     bins_list.append((i) / (dims - 1))
@@ -98,7 +98,7 @@ plt.show()
 
 ### Zero means maximal expressivity
 
-We can see how all fidelities have probability zero except for fidelity 1, which means there is only one state we can render with this circuit. The metric works backwards: a distance of zero represents a fidelity probability landscape equal to the Haar one and therefore all states (pure) in the Hilbert space can be produced with the right set of parameters ($\theta$). Our idle circuit sits at the opposite end, dumping all of its mass into a single bin, so the divergence will take the largest value it can take here, $log(N)$ where $N$ is the number of bins selected for the histogram.
+We can see how all fidelities have probability zero except for fidelity 1, which means there is only one state we can render with this circuit. The metric works backwards: a distance of zero represents a fidelity probability landscape equal to the Haar one and therefore all states (pure) in the Hilbert space can be produced with the right set of parameters ($\theta$). Our idle circuit sits at the opposite end, dumping all of its mass into a single bin, so the divergence will take the largest value it can take here, $\log N$ where $N$ is the number of bins selected for the histogram.
 
 ```{python}
 from scipy.special import rel_entr # For entropy calculation
@@ -135,7 +135,7 @@ To get a fidelity out of two random parameter choices $\theta$ and $\phi$ we app
 ```{python}
 from random import random
 
-# Possible Bin
+# Bin edges
 bins_list = []
 for i in range(dims):
     bins_list.append((i) / (dims - 1))
@@ -199,7 +199,7 @@ pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1]
 print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
 ```
 
-We can extend this acting on more than one axis, which should end up with the maximum coverage over the bloch sphere for this one single qubit case.
+We can extend this acting on more than one axis, which should end up with the maximum coverage over the Bloch sphere for this single-qubit case.
 
 ```{python}
 from qiskit import QuantumCircuit
@@ -217,7 +217,7 @@ qc.draw('mpl')
 ```
 
 ```{python}
-# Possible Bin
+# Bin edges
 bins_list = []
 for i in range(dims):
     bins_list.append((i) / (dims - 1))
@@ -283,7 +283,7 @@ pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1]
 print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
 ```
 
-These plots should resemble those at the original work [@sim2019expressibility].
+These plots should resemble those in the original work [@sim2019expressibility].
 
 ## Entangling capability
 
