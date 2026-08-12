@@ -2,7 +2,7 @@
 
 ## Expressivity
 
-One simple approach is to compare the distribution of fidelities obtainer from sampling $n$ number of times with randomly selected parameters given a target PQC to be evaluated in comparison with the uniform distribution of fidelities for the same domain, like the ensemble of Haar random states.
+One simple approach is to compare the distribution of fidelities obtained by sampling a target PQC $n$ number of times with randomly selected parameters, against the distribution of fidelities we would get over the same domain out of an ensemble of Haar random states.
 
 Thus,
 $$
@@ -48,7 +48,7 @@ bins_list = []
 for i in range(dims):
     bins_list.append((i) / (dims - 1))
 
-# Harr histogram
+# Haar histogram
 p_haar_hist = []
 for i in range(dims - 1):
     p_haar_hist.append(
@@ -98,7 +98,7 @@ plt.show()
 
 ### Zero means maximal expressivity
 
-We can see how all fidelities are probability of zero except for fidelity 1, which means there is only one state we can render with this circuit. The expressivity works backwards, meaning a distance of zero represents the fidelity probability landscape equal to the uniform distribution. Therefore, all states (pure) in the Hilbert space can be produced with the right set of parameters ($\theta$). Thus the expressivity will take the maximum value as the $log(N)$ where $N$ is the number of bins selected for the histogram.
+We can see how all fidelities have probability zero except for fidelity 1, which means there is only one state we can render with this circuit. The metric works backwards: a distance of zero represents a fidelity probability landscape equal to the Haar one and therefore all states (pure) in the Hilbert space can be produced with the right set of parameters ($\theta$). Our idle circuit sits at the opposite end, dumping all of its mass into a single bin, so the divergence will take the largest value it can take here, $log(N)$ where $N$ is the number of bins selected for the histogram.
 
 ```{python}
 from scipy.special import rel_entr # For entropy calculation
@@ -107,12 +107,13 @@ pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1]
 print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
 ```
 
-This will numerically approximate the value of
+This matches the value we anticipated, keeping in mind that `dims` counts the edges of the histogram so the number of bins is one less.
 
 ```{python}
-np.log(dims)
+np.log(dims - 1)
 ```
-hence, 0 is the maximum expressivity we can get.
+
+Being a distance, the score runs the other way around than one would expect: 0 is the best we can get, not the largest value.
 
 We can see what would be the effect if we introduce a parameterized gate instead, something more complex with a free parameter such as:
 
@@ -128,6 +129,8 @@ qc.rz(a, 0)
 
 qc.draw('mpl')
 ```
+
+To get a fidelity out of two random parameter choices $\theta$ and $\phi$ we append the inverse of the circuit to itself, so that we run $U^\dagger(\phi)U(\theta)$ and count how often we land back on the initial state. That frequency is precisely $F = |\langle 0 |U^\dagger(\phi)U(\theta)| 0 \rangle|^2$.
 
 ```{python}
 from random import random
@@ -150,11 +153,14 @@ simulator = AerSimulator(method='matrix_product_state')
 # Sample from circuit
 fidelities=[]    
 for _ in range(nsamples):
+    theta = 2 * np.pi * random()
+    phi = 2 * np.pi * random()
+
     qc = QuantumCircuit(1, 1)
     qc.h(0)
-    qc.rz(2 * np.pi * random(), 0)
-    # Inverse of the circuit
-    qc.rz(2 * np.pi * random(), 0)
+    qc.rz(theta, 0)
+    # Inverse of the circuit, on a second independent set of parameters
+    qc.rz(-phi, 0)
     qc.h(0)
     qc.measure(0,0)
 
@@ -229,13 +235,16 @@ simulator = AerSimulator(method='matrix_product_state')
 # Sample from circuit
 fidelities=[]    
 for _ in range(nsamples):
+    theta, beta = 2 * np.pi * random(), 2 * np.pi * random()
+    phi, delta = 2 * np.pi * random(), 2 * np.pi * random()
+
     qc = QuantumCircuit(1, 1)
     qc.h(0)
-    qc.rz(2 * np.pi * random(), 0)
-    qc.rx(2 * np.pi * random(), 0)
-    # Inverse of the circuit
-    qc.rx(2 * np.pi * random(), 0)
-    qc.rz(2 * np.pi * random(), 0)
+    qc.rz(theta, 0)
+    qc.rx(beta, 0)
+    # Inverse of the circuit, on a second independent set of parameters
+    qc.rx(-delta, 0)
+    qc.rz(-phi, 0)
     qc.h(0)
     qc.measure(0,0)
 
@@ -278,7 +287,7 @@ These plots should resemble those at the original work [@sim2019expressibility].
 
 ## Entangling capability
 
-Expressivity tells us _how much_ of the Hilbert space our ansatz can reach, but it says nothing about the _kind_ of states it produces. A circuit made of single qubit rotations only, one per wire, may be perfectly able to cover every product state and still be classically simulable qubit by qubit. If we expect any advantage out of our parameterized circuit we should also ask how correlated the states it prepares are.
+Expressivity tells us _how much_ of the Hilbert space our ansatz can reach, but it says nothing about the _kind_ of states it produces. A circuit made of single-qubit rotations only, one per wire, may cover every product state we can think of and still be simulable one qubit at a time. If we expect any advantage out of our parameterized circuit we should also ask how correlated the states it prepares are.
 
 The companion metric proposed in the same work is the _entangling capability_, built on top of the Meyer-Wallach measure $Q$ [@meyer2002global]. In the form derived by Brennen [@brennen2003observable] it is simply an average over how mixed each qubit looks once the rest of the register is ignored
 
@@ -294,13 +303,13 @@ $$
 \text{Ent} = \frac{1}{|S|}\sum_{\theta_i \in S} Q(|\psi_{\theta_i}\rangle)
 $$
 
-with $S$ the set of sampled parameter vectors. Contrary to the expressivity, here the scale is the intuitive one: $0$ means the circuit never entangles anything and $1$ that it always outputs maximally entangled states.
+with $S$ the set of sampled parameter vectors. Unlike the expressivity, here the scale is the intuitive one: $0$ means the circuit never entangles anything and $1$ that it always outputs maximally entangled states.
 
 ```{python}
 from qiskit.quantum_info import partial_trace
 
 def meyer_wallach(circuit):
-    """Q measure for the state prepared by a (already bound) circuit."""
+    """Q measure for the state prepared by an already bound circuit."""
     n = circuit.num_qubits
     psi = Statevector.from_instruction(circuit)
 
@@ -339,7 +348,7 @@ for name, circuit in [("Product", product), ("Bell", bell), ("GHZ", ghz)]:
 
 ### Averaging over the parameter space
 
-Now we can do with the entangling capability what we did with the expressivity: sample random parameters and look at the resulting distribution. Let's compare three two-qubit ansätze that differ only on how (or whether) the wires talk to each other.
+Now we can do with the entangling capability what we did with the expressivity: sample random parameters and look at the resulting distribution. Let's compare three two-qubit ansätze that differ only in how (or whether) the wires talk to each other.
 
 ```{python}
 def only_rotations(rng):
@@ -387,7 +396,7 @@ plt.legend(loc="upper right")
 plt.show()
 ```
 
-The circuit without a two qubit gate piles up at $Q = 0$, as expected. The `CNOT` version spreads all the way to maximally entangled states, and the parameterized `CRX` sits in between: when its angle happens to be close to $0$ or $2\pi$ the gate barely acts, so low $Q$ values remain frequent.
+The circuit without a two-qubit gate piles up at $Q = 0$, as expected. The `CNOT` version spreads all the way to maximally entangled states, and the parameterized `CRX` sits in between: whenever its angle lands close to $0$ or $2\pi$ the gate barely entangles, so low $Q$ values remain frequent.
 
 ### More layers, more entanglement
 
@@ -424,11 +433,11 @@ plt.ylim(0, 1)
 plt.show()
 ```
 
-Most of the gain comes from the very first layers and then it saturates, which is a recurring observation when picking an ansatz: past a certain depth we are paying in gates, noise and trainability without getting anything new in return.
+Most of the gain comes from the very first layers and the curve flattens quickly afterwards, which is a recurring observation when picking an ansatz: past a certain depth we keep paying in gates, noise and trainability without getting anything new in return.
 
 ### Both metrics tell different stories
 
-It is tempting to assume that a circuit that entangles a lot is automatically expressive, but the two quantities are independent enough to be worth measuring separately. We can reuse the machinery above, this time computing the fidelities directly from the statevectors instead of sampling shots, which is the same quantity as before but free of shot noise.
+It is tempting to assume that a circuit entangling a lot is automatically expressive, but the two quantities are independent enough to be worth measuring separately. We can reuse the machinery above, this time computing the fidelities directly from the statevectors instead of sampling shots. It is the same quantity as before, only free of shot noise.
 
 ```{python}
 def expressivity(builder, num_qubits, nsamples=1_000, seed=1234):
@@ -471,8 +480,8 @@ for label, builder in ansatze:
     )
 ```
 
-Remember these are finite sample estimates over a binned histogram, so the absolute value of `Expr` carries a bias and only the comparison between rows is meaningful. Two things stand out there.
+Remember these are finite-sample estimates over a binned histogram, so the absolute value of `Expr` carries a bias and only the comparison between rows is meaningful. Two things stand out.
 
 The first one is that `Only rotations` and `CNOT` share exactly the same expressivity while their entangling capability could not be more different. The reason is that the `CNOT` sits at the very end of the circuit, acting as a fixed unitary common to every sample, and a common unitary leaves all the overlaps $|\langle\psi_{\theta_i}|\psi_{\theta_j}\rangle|^2$ untouched. Expressivity simply cannot see it, entangling capability can.
 
-The second one is that the `CRX` ansatz is more expressive than the `CNOT` one while entangling roughly half as much. Adding correlations and covering the Hilbert space are related but different goals, and a good ansatz is usually the one that reaches enough of both while staying shallow, since pushing either metric to its maximum is precisely the regime where barren plateaus [@mcclean2018barren] start to show up.
+The second one is that the `CRX` ansatz is more expressive than the `CNOT` one while entangling roughly half as much. Adding correlations and covering the Hilbert space are related but different goals, and a good ansatz is usually the one reaching enough of both while staying shallow, since pushing either metric to its limit lands us precisely in the regime where barren plateaus [@mcclean2018barren] start to show up.
