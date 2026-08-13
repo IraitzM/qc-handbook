@@ -213,7 +213,7 @@ This is what can run on IBM devices once we convert it
 ![Transpiled circuit](../../assets/ghz-transpiled.webp)
 </figure>
 
-We will see this in more detail later when we review [hardware providers](../hardware) and their actual implementation.
+We will see this in more detail later when we review [hardware providers](../computers/serviceproviders.md) and [their actual implementation](../computers/challenges.md#native-gates).
 
 # Multi-qubit systems
 

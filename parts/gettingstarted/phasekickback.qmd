@@ -94,7 +94,7 @@ array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
 Wait, there is an $i$ in there? Yep. We changed the phase of one of the elements in the control qubit. It is not only in between 0 and 1 poles, but we have also added a phase to it that is represented by the sign direction in the complex axis.
 
 $$
-|\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1+\rangle
+|\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1i\rangle
 $$
 
 ```{python}

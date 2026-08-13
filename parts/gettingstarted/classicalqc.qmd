@@ -4,7 +4,7 @@ So, now you know how a simulator works. It essentially performs the mathematical
 
 A _simulator_ performs specifically the actions of the mathematical framework, without any restriction or special case. Simply put, it is what the ideal machine should do. An _emulator_ on the other hand, performs the same set of actions but considering some of the limitations a particular device could have. Essentially it is trying to show what the same actions performed by a physical machine would look like.
 
-Then of course, there is sending the job to a real device through a service like the ones offered by the [IBM Quantum Platform](https://quantum.cloud.ibm.com/). You will need to create an account but after that, you can submit all the circuits you want to real hardware. Check out [this example](../../submit_circuit.ipynb).
+Then of course, there is sending the job to a real device through a service like the ones offered by the [IBM Quantum Platform](https://quantum.cloud.ibm.com/). You will need to create an account but after that, you can submit all the circuits you want to real hardware. Check out [this example](../appendix/submit_circuit.ipynb).
 
 ## Simulators
 

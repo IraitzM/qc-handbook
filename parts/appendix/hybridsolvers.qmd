@@ -24,7 +24,7 @@ $$
 \max_{x\in\{0,1\}^n} x^T (Q + diag(s))x + s^Tx
 $$
 
-where $S$ refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving an auxiliary Semidefinite Optimization Problem (SDP) that returns the largest eigenvalue of $Q$ [@billionnet2007using]. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways [@montanaro2020quantum; @augustino2025solvingsemidefiniterelaxationqubos]. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.
+where $s$ refers to a shift to be obtained. Different methods can be found to obtain said shift, such as solving an auxiliary Semidefinite Optimization Problem (SDP) that returns the largest eigenvalue of $Q$ [@billionnet2007using]. This shift computation can also be tackled by quantum computers mixing classical and quantum devices in different ways [@montanaro2020quantum; @augustino2025solvingsemidefiniterelaxationqubos]. Finding the right balance between classical and quantum resources should definitely boost processes without requiring the whole fault-tolerant service at scale.
 
 ### D-Wave's Hybrid solvers
 

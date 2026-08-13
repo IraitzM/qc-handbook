@@ -4,7 +4,7 @@ Now, do we have to create our own set of gates and operations? Well, it might be
 
 * Basis $|0\rangle$ and $|1\rangle$ states.
 * Tensor product operation
-* A universal set of gates ($R_x(\theta), R_x(\theta), R_x(\theta), P(\phi)$ phase shift gate and $CNOT$ may suffice).
+* A universal set of gates ($R_x(\theta), R_y(\theta), R_z(\theta), P(\phi)$ phase shift gate and $CNOT$ may suffice).
 
 We can then create our own set of functions and objects to simulate those computations.
 

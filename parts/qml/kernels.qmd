@@ -43,7 +43,7 @@ $$
 considering $\psi(x) = \Psi(x)|0\rangle$ where $\Psi(x)$ is a quantum feature map like the ones presented before. By taking its conjugate
 
 $$
-k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x)|\Psi(x_j)|0\rangle
+k(x_i, x_j) = \langle 0 |\Psi^{\dagger}(x_i)\Psi(x_j)|0\rangle
 $$
 
 which can be easily performed by flipping the original circuit backwards and adding it to the initial feature map.

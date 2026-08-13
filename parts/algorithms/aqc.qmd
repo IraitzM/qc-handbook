@@ -14,7 +14,7 @@ $$
 
 
 ```{python}
-N = 3 # 4 qubit system
+N = 3 # 3 qubit system
 ```
 
 ```{python}

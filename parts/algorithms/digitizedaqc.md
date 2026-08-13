@@ -20,7 +20,7 @@ $$
 
 The smaller the step the better we will approximate the ideal continuous case. Take also into consideration that $\delta t_i = t_{i+1} - t_i$ do not have to be equally spaced for all $i$s even though it does help for generalization purposes.
 
-In quantum mechanics there exists a concrete example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape $e^{A+B}$ its limit can be defined
+In quantum mechanics there exists a concrete example of this effect called the Suzuki-Trotter expansion or Trotterization [@trotter1959product; @suzuki1976generalized]. If the Hamiltonian has the shape $e^{A+B}$ its limit can be defined
 
 $$
 e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
@@ -74,13 +74,13 @@ That way we could introduce a parameterized quantum circuit in which a progressi
 from qiskit import QuantumCircuit
 from qiskit.circuit import Parameter
 
-lt = Parameter("$(1-\\lambda (t))$")
+ltA = Parameter("$(1-\\lambda (t))$")
 dt = Parameter("dt")
 
 Ha = QuantumCircuit(3)
 
 for qi in Ha.qubits:
-    Ha.rx(2*dt*lt, qi)
+    Ha.rx(2*dt*ltA, qi)
 
 Ha.draw('mpl')
 ```
@@ -95,7 +95,7 @@ And for our target Hamiltonian, if we select previous Ising type of Hamiltonian,
 from qiskit import QuantumCircuit
 from qiskit.circuit import Parameter
 
-lt = Parameter("$\\lambda (t)$")
+ltB = Parameter("$\\lambda (t)$")
 dt = Parameter("dt")
 
 h = []
@@ -110,11 +110,11 @@ for i in range(3):
 Hp = QuantumCircuit(3)
 
 for i in range(3):
-    Hp.rz(2*dt*lt*h[i], i)
+    Hp.rz(2*dt*ltB*h[i], i)
 
 for i in range(3):
     for j in range(i+1, 3):
-        Hp.rzz(2*dt*lt*J[(i, j)], i, j)
+        Hp.rzz(2*dt*ltB*J[(i, j)], i, j)
 
 Hp.draw('mpl')
 ```
