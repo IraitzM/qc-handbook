@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -83,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-59178276466d79bf7fff91776d159d7b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-89145b4b2f49a1b81f3347075f1f78e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -582,7 +601,7 @@ window.Quarto = {
 U(T,t_0) = U(t_n, t_{n-1})U(t_{n-1}, t_{n-2}) \dots U(t_1, t_0)
 \]</span></p>
 <p>The smaller the step the better we will approximate the ideal continuous case. Take also into consideration that <span class="math inline">\(\delta t_i = t_{i+1} - t_i\)</span> do not have to be equally spaced for all <span class="math inline">\(i\)</span>s even though it does help for generalization purposes.</p>
-<p>In quantum mechanics there exists a concrete example of this effect called the Suzuki-Trotter expansion or Trotterization [2]. If the Hamiltonian has the shape <span class="math inline">\(e^{A+B}\)</span> its limit can be defined</p>
+<p>In quantum mechanics there exists a concrete example of this effect called the Suzuki-Trotter expansion or Trotterization <span class="citation" data-cites="trotter1959product suzuki1976generalized">(<a href="../references.html#ref-trotter1959product" role="doc-biblioref">Trotter 1959</a>; <a href="../references.html#ref-suzuki1976generalized" role="doc-biblioref">Suzuki 1976</a>)</span>. If the Hamiltonian has the shape <span class="math inline">\(e^{A+B}\)</span> its limit can be defined</p>
 <p><span class="math display">\[
 e^{A+B} = \lim_{n\rightarrow\inf} \left( e^{\frac{A}{n}}e^{\frac{B}{n}}\right)^n
 \]</span></p>
@@ -629,13 +648,13 @@ H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lt <span class="op">=</span> Parameter(<span class="st">"$(1-</span><span class="ch">\\</span><span class="st">lambda (t))$"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ltA <span class="op">=</span> Parameter(<span class="st">"$(1-</span><span class="ch">\\</span><span class="st">lambda (t))$"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> Parameter(<span class="st">"dt"</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Ha <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> qi <span class="kw">in</span> Ha.qubits:</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Ha.rx(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>lt, qi)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Ha.rx(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>ltA, qi)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>Ha.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <figure class="figure">
@@ -650,7 +669,7 @@ H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>lt <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">lambda (t)$"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ltB <span class="op">=</span> Parameter(<span class="st">"$</span><span class="ch">\\</span><span class="st">lambda (t)$"</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> Parameter(<span class="st">"dt"</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> []</span>
@@ -665,11 +684,11 @@ H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>Hp <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    Hp.rz(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>lt<span class="op">*</span>h[i], i)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    Hp.rz(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>ltB<span class="op">*</span>h[i], i)</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="dv">3</span>):</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        Hp.rzz(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>lt<span class="op">*</span>J[(i, j)], i, j)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        Hp.rzz(<span class="dv">2</span><span class="op">*</span>dt<span class="op">*</span>ltB<span class="op">*</span>J[(i, j)], i, j)</span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>Hp.draw(<span class="st">'mpl'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <figure class="figure">
@@ -712,6 +731,14 @@ H(t) = (1-\lambda (t))\left( -\sum_i^n \sigma_{x_i} \right) + \lambda (t) H_p
 <!-- https://arxiv.org/pdf/2109.10145 -->
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-suzuki1976generalized" class="csl-entry" role="listitem">
+Suzuki, Masuo. 1976. <span>“Generalized Trotter’s Formula and Systematic Approximants of Exponential Operators and Inner Derivations with Applications to Many-Body Problems.”</span> <em>Communications in Mathematical Physics</em> 51 (2): 183–90.
+</div>
+<div id="ref-trotter1959product" class="csl-entry" role="listitem">
+Trotter, Hale F. 1959. <span>“On the Product of Semi-Groups of Operators.”</span> <em>Proceedings of the American Mathematical Society</em> 10 (4): 545–51.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
