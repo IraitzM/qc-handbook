@@ -45,6 +45,7 @@ book:
       - parts/computers/machinetypes.md
       - parts/computers/serviceproviders.md
       - parts/computers/challenges.md
+      - parts/computers/stack.md
 
     - part: "Algorithms"
       chapters:

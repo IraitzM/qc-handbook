@@ -16,3 +16,13 @@
 ## For problem formulation
 
 * [QUBOVERT](https://qubovert.readthedocs.io/en/latest/index.html)
+
+## For compilation and transpilation
+
+* [pytket](https://tket.quantinuum.com/): Quantinuum's TKET compiler, retargetable and available as a plugin for most SDKs.
+* [PyZX](https://github.com/zxcalc/pyzx) for circuit simplification via ZX-calculus rewriting.
+* [BQSKit](https://bqskit.lbl.gov/) for numerical resynthesis of circuit blocks.
+* [Superstaq](https://superstaq.readthedocs.io/en/latest/) for device-aware compilation across vendors.
+* [Stim](https://github.com/quantumlib/Stim) for very fast stabilizer circuit simulation, the reference tool for error correction work.
+
+More on how these fit together in [the quantum computing stack](../computers/stack.md).
