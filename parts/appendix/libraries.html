@@ -98,6 +98,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <meta property="og:title" content="Appendix A — Software packages – Quantum Computing Handbook">
+<meta property="og:description" content="">
 <meta property="og:image" content="https://iraitzm.github.io/qc-handbook/cover.png">
 <meta property="og:site_name" content="Quantum Computing Handbook">
 <meta property="og:image:height" content="1024">
@@ -232,6 +233,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="sidebar-item-container"> 
   <a href="../../parts/computers/challenges.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Challenges</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The quantum computing stack</span></a>
   </div>
 </li>
       </ul>
@@ -470,6 +477,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    
   <ul>
   <li><a href="#for-problem-formulation" id="toc-for-problem-formulation" class="nav-link active" data-scroll-target="#for-problem-formulation"><span class="header-section-number">A.1</span> For problem formulation</a></li>
+  <li><a href="#for-compilation-and-transpilation" id="toc-for-compilation-and-transpilation" class="nav-link" data-scroll-target="#for-compilation-and-transpilation"><span class="header-section-number">A.2</span> For compilation and transpilation</a></li>
   </ul>
 </nav>
     </div>
@@ -517,6 +525,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li><a href="https://qubovert.readthedocs.io/en/latest/index.html">QUBOVERT</a></li>
 </ul>
+</section>
+<section id="for-compilation-and-transpilation" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="for-compilation-and-transpilation"><span class="header-section-number">A.2</span> For compilation and transpilation</h2>
+<ul>
+<li><a href="https://tket.quantinuum.com/">pytket</a>: Quantinuum’s TKET compiler, retargetable and available as a plugin for most SDKs.</li>
+<li><a href="https://github.com/zxcalc/pyzx">PyZX</a> for circuit simplification via ZX-calculus rewriting.</li>
+<li><a href="https://bqskit.lbl.gov/">BQSKit</a> for numerical resynthesis of circuit blocks.</li>
+<li><a href="https://superstaq.readthedocs.io/en/latest/">Superstaq</a> for device-aware compilation across vendors.</li>
+<li><a href="https://github.com/quantumlib/Stim">Stim</a> for very fast stabilizer circuit simulation, the reference tool for error correction work.</li>
+</ul>
+<p>More on how these fit together in <a href="../../parts/computers/stack.html">the quantum computing stack</a>.</p>
 
 
 </section>
