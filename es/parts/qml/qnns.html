@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Redes Neuronales Cuánticas – Manual de Computación Cuántica</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/qml/qnnexample.html" rel="next">
+<link href="../../parts/qml/svm.html" rel="prev">
+<link href="../../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a5968c2ab3cc7abb01282b12e24a0357.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MXHDHE1HP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MXHDHE1HP5');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PLKHBRCG');</script>
+<!-- End Google Tag Manager -->
+
+<meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
+
+<!-- Language toggle (EN | ES) -->
+<style>
+.lang-toggle{display:inline-flex;align-items:center;gap:0;margin-left:.5rem;border:1px solid #637238;border-radius:999px;overflow:hidden;flex-shrink:0;font-size:.8rem;line-height:1}
+.lang-toggle a{padding:.35rem .6rem;color:#637238;text-decoration:none;font-weight:600}
+.lang-toggle a.active{background:#637238;color:#fff}
+.lang-toggle a:not(.active):hover{background:rgba(99,114,56,.12)}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Redes Neuronales Cuánticas – Manual de Computación Cuántica">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://iraitzm.github.io/qc-handbook/es/cover.png">
+<meta property="og:site_name" content="Manual de Computación Cuántica">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Saltar al contenido principal</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Barra de herramientas">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Aprendizaje automático cuántico</a></li><li class="breadcrumb-item"><a href="../../parts/qml/qnns.html">Redes Neuronales Cuánticas</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Sitio web">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Manual de Computación Cuántica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/IraitzM/qc-handbook" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Primeros pasos</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Alternar sección: Primeros pasos">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conceptos básicos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Puertas cuánticas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulaciones</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/phasekickback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/classicalqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Recursos clásicos</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Ordenadores cuánticos</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Primeras realizaciones</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tecnología</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipos de máquinas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proveedores de servicios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/challenges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Desafíos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/stack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">La pila de computación cuántica</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Algoritmos</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complejidad</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/algorithms/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Optimización</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Alternar sección: Optimización">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teorema Adiabático</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/aqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AQC en práctica</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Puesto del problema</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/quboformulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formulación QUBO</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/usingexistingframeworks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">D-Wave y su ecosistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/otherconsiderations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Otras consideraciones</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Ajuste de circuitos</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Alternar sección: Ajuste de circuitos">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción a la digitalización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AQC digitado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/variational.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">El enfoque variacional</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/vqe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Quantum Eigensolver</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/optimizingcircuits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimizando circuitos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">algoritmo QAOA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QAOA en la práctica</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Observaciones finales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/qml/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Aprendizaje automático cuántico</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Alternar sección: Aprendizaje automático cuántico">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Embedding de datos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapas de características</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/kernels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/svm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QSVC cuántico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnns.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Redes Neuronales Cuánticas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Redes neuronales cuánticas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resumen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Apéndices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Paquetes de software</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solvers híbridos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Envío de circuitos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Características interesantes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/examples/tsp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Problema del viajante</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#elegir-tus-mapas-de-características-y-ansätze" id="toc-elegir-tus-mapas-de-características-y-ansätze" class="nav-link active" data-scroll-target="#elegir-tus-mapas-de-características-y-ansätze">Elegir tus mapas de características y ansätze</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLKHBRCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Language toggle (EN | ES) -->
+<script>
+(function () {
+  var libs = document.querySelector('link[href*="site_libs/"], script[src*="site_libs/"]');
+  var libsHref = libs ? (libs.getAttribute("href") || libs.getAttribute("src")) : null;
+  var root = libsHref && libsHref.indexOf("site_libs/") >= 0
+    ? new URL(libsHref.slice(0, libsHref.indexOf("site_libs/")) || "./", window.location.href)
+    : new URL("./", window.location.href);
+  if (/\/es\/?$/.test(root.pathname)) {
+    root = new URL(root.pathname.replace(/es\/?$/, ""), root.origin);
+  }
+  var rel = window.location.pathname.slice(root.pathname.length);
+  var isEs = rel === "es" || rel.indexOf("es/") === 0;
+  var page = isEs ? rel.slice(3) : rel;
+  if (!page || page.charAt(page.length - 1) === "/") page += "index.html";
+  var enUrl = new URL(page, root).href + window.location.search;
+  var esUrl = new URL("es/" + page, root).href + window.location.search;
+  var esHome = new URL("es/index.html", root).href;
+  var nav = document.createElement("nav");
+  nav.className = "lang-toggle";
+  nav.setAttribute("aria-label", "Language / Idioma");
+  [["EN", enUrl, !isEs], ["ES", esUrl, isEs]].forEach(function (item) {
+    var a = document.createElement("a");
+    a.textContent = item[0];
+    a.href = item[1];
+    a.hreflang = item[0].toLowerCase();
+    if (item[2]) { a.className = "active"; a.setAttribute("aria-current", "true"); }
+    a.addEventListener("click", function (event) {
+      if (item[2]) { event.preventDefault(); return; }
+      event.preventDefault();
+      var target = item[1], fallback = item[0] === "ES" ? esHome : enUrl;
+      fetch(target.split("?")[0], { method: "HEAD" }).then(function (r) {
+        window.location.href = r.ok ? target : fallback;
+      }).catch(function () { window.location.href = target; });
+    });
+    nav.appendChild(a);
+  });
+  var tools = document.querySelector(".sidebar-tools-main");
+  var bar = document.querySelector(".quarto-secondary-nav .container-fluid");
+  var searchBtn = bar ? bar.querySelector(".quarto-search-button") : null;
+  if (tools) tools.appendChild(nav);
+  else if (bar && searchBtn) bar.insertBefore(nav, searchBtn);
+  else if (bar) bar.appendChild(nav);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/qml/index.html">Aprendizaje automático cuántico</a></li><li class="breadcrumb-item"><a href="../../parts/qml/qnns.html">Redes Neuronales Cuánticas</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Redes Neuronales Cuánticas</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Ha habido algunas críticas sobre esta adaptación del modelo bio-inspirado clásico.</p>
+<ul>
+<li>Redes Neuronales = no lineal</li>
+<li>Computing Cuántico = lineal (hasta el measurement)</li>
+<li>Redes Neuronales Cuánticas = ?</li>
+</ul>
+<p>aunque de hecho la literatura sigue creciendo sobre el potencial de estas técnicas para proporcionar resultados similares a los obtenidos dentro del state of the art pero con muchos menos recursos <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia et&nbsp;al. 2023</a>)</span>.</p>
+<p>Ya sabemos que los datos clásicos pueden convertirse en estados cuánticos. ¿Qué tal si aprovechamos la oportunidad para extender el circuito cuántico existente para que también realice toda la acción hasta que se seleccione una clase como parte del proceso de measurement?</p>
+<p>El nombre genérico de este tipo de circuito es el <strong>Variational Quantum Classifier</strong> y muestra una estructura siguiente.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../assets/vqc.svg" class="img-fluid figure-img"></p>
+<figcaption>Variational Quantum Classifier (VQC)</figcaption>
+</figure>
+</div>
+</figure>
+<p>Se basa en el mismo concepto de circuitos cuánticos paramétricos entrenables y ya tenemos los medios para adaptar los parámetros según una función objetivo. Podríamos necesitar decidir si el valor de expectación o una muestra dada es la medida ideal que nos gustaría obtener del circuito. Esto a menudo se decide dependiendo de qué tipo de modelo nos gustaría obtener, un modelo de clasificación o regresión.</p>
+<p>¿Qué ansatz deberíamos seleccionar para la parte entrenable del QNN? Bueno, esta es una pregunta abierta sin respuesta directa. Como sucede en las NN clásicas, la cantidad de circuitos que podríamos seleccionar para nuestro QNN es infinita. Las arquitecturas de NN clásicas por medio de experimentación y mejor comprensión el funcionamiento interno de nuestro cerebro, han llegado a un acuerdo sobre lo que parecen ser conjeturas inteligentes según tareas específicas:</p>
+<ul>
+<li>Para visión artificial: Convolutional Neural Networks</li>
+<li>Para pronóstico en general: Recurrent Neural Networks</li>
+<li>Para tareas conscientes de texto y contexto: Transformers</li>
+<li>Para autos autónomos: Liquid Neural Networks</li>
+</ul>
+<p>Así que necesitaremos apuntar a la literatura para mejor entender qué composiciones de ansatz renderizarán el mejor rendimiento en nuestro caso particular. Muchos frameworks ya proporcionan un conjunto de ansätze realmente implementados que reflejan los existentes en la literatura (a menudo también publicados por los mismos equipos que trabajan en IBM o Xanadu), pero proporcionan interesantes benchmarks que pueden ayudar en nuestra decisión.</p>
+<p>En esencia necesitamos crear dos bloques, uno codificando nuestros datos en estados cuánticos (feature map) y un Parameterized Quantum Circuit (también ansatz) para que el circuito pueda entrenarse/ajustarse hacia un propósito específico.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../assets/qnn_base.png" class="img-fluid figure-img"></p>
+<figcaption>QNN basic structure</figcaption>
+</figure>
+</div>
+</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap, RealAmplitudes</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>num_inputs <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(num_inputs)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ansatz <span class="op">=</span> RealAmplitudes(num_inputs, reps<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># construct QNN</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(num_inputs)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>qc.compose(feature_map, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>qc.compose(ansatz, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>qc.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Real amplitudes es solo un ansatz disponible para nosotros siguiendo esta forma abajo. Es lo suficientemente versátil como para ayudarnos a alcanzar el resultado que nos gustaría obtener. Pero, su elección si te gustaría cualquier otro diseño para tu ansatz.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../assets/realamplitudes.png" class="img-fluid figure-img"></p>
+<figcaption>Real amplitudes</figcaption>
+</figure>
+</div>
+</figure>
+<p>Luego podemos conectar cada pieza formando nuestro QNN.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../assets/qnn.jpeg" class="img-fluid figure-img"></p>
+<figcaption>QNN basic architecture</figcaption>
+</figure>
+</div>
+</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.algorithms.optimizers <span class="im">import</span> COBYLA</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.algorithms.classifiers <span class="im">import</span> NeuralNetworkClassifier</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_machine_learning.neural_networks <span class="im">import</span> EstimatorQNN</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># We append the estructure to the Estimator primitive</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>estimator_qnn <span class="op">=</span> EstimatorQNN(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    circuit<span class="op">=</span>qc, input_params<span class="op">=</span>feature_map.parameters, weight_params<span class="op">=</span>ansatz.parameters</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># construct neural network classifier</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>estimator_classifier <span class="op">=</span> NeuralNetworkClassifier(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    estimator_qnn, optimizer<span class="op">=</span>COBYLA(maxiter<span class="op">=</span><span class="dv">60</span>), callback<span class="op">=</span>callback_graph</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y componer un procedimiento de entrenamiento como a menudo se hace, llamando <em>.fit</em> función y evaluando la predicción.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>estimator_classifier.fit(features, labels)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>estimator_classifier.score(features, labels)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La clasificación de múltiples etiquetas también puede cubrirse pero en muchos casos se prefiere un stacked set of QNNs (one-vs-all) de modo que obtengamos un conjunto de <span class="math inline">\(N\)</span> redes especializadas parabalancear el voto para <span class="math inline">\(N\)</span> clases potenciales. En lugar de crear manualmente todos esos circuitos y datasets podemos simplemente invocar clases preparadas en frameworks como Qiskit que serán capaces de lidiar con esas complejidades internas. Hay que prestar atención aunque que entrenar varios modelos aumentará el número de iteraciones/ejecuciones del circuito necesario para el ajuste de parámetros (tantas veces como haya clases).</p>
+<p>Las tareas de regresión también pueden realizarse si consideramos el valor de expectación como el que mapea nuestro valor objetivo. En ese caso un simple cambio de función de evaluación haría el truco. Sabemos que en realidad es tan fácil como invocar pero, como ya sabemos, obtener el valor de expectación sobre muestreo de circuito simple puede requerir varias evaluaciones del circuito para obtener todas las changes de base para una evaluación adecuada del valor de expectación.</p>
+<section id="elegir-tus-mapas-de-características-y-ansätze" class="level2">
+<h2 class="anchored" data-anchor-id="elegir-tus-mapas-de-características-y-ansätze">Elegir tus mapas de características y ansätze</h2>
+<p>Ahora necesitamos decidir cuál es el mejor ansatz en nuestro caso. Hay varias características que nos gustaría considerar pero una de las más relevantes podría ser <strong>expressivity</strong>. <strong>Expressivity</strong> es un aspecto clave con cualquier approximador de funciones, como con las redes neuronales que son conocidas como aproximadoras universales <span class="citation" data-cites="kidger2020universal">(<a href="../references.html#ref-kidger2020universal" role="doc-biblioref">Kidger y Lyons 2020</a>)</span>. Se espera que las Quantum Neural Networks provean una capacidad similar como ya han sido evaluadas en términos similares <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia et&nbsp;al. 2023</a>)</span> pero esto estará limitado por la selección de ansatz. El ansatz es esencialmente donde una dada Quantum Neural Network producirá estados para un espacio de Hilbert particular y expressivity, en esos términos, se refiere a la capacidad de cubrir dicho espacio de Hilbert.</p>
+<p>Un sistema de 4 qubits representa un espacio de Hilbert de dimensión <span class="math inline">\(2^4 = 16\)</span> (<span class="math inline">\(\mathcal{H}\)</span>). ¿Cómo podemos medir qué tan expresivo es nuestro ansatz? Evaluar analíticamente la cobertura del espacio de Hilbert quizás no sea práctico, pero podríamos simplemente muestrear desde el circuito un número de veces y comparar los estados que obtenemos en términos de distancia para dicho espacio. <strong>Fidelity</strong> puede usarse para medir la <em>distance</em> entre dos estados como vimos <a href="../../parts/qml/kernels.html">antes</a>, así que lo obtenemos y lo comparamos con qué sería el escenario ideal, una distribución uniforme del space de fidelidad para maximal expressivity <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et&nbsp;al. 2019</a>)</span>. Si los estados generados por nuestro circuito pueden renderizar todas las distancias, desde el mismo estado (fidelity de uno) al caso ortogonal (fidelity de cero) entonces nuestro circuito puede cubrir el espectro completo de nuestro espacio de Hilbert. Puede leer más sobre el appendix sobre <a href="../../parts/appendix/quantumfeatures.html">quantum features</a>.</p>
+<p>El camino más fácil hacia adelante es mirar al trabajo anterior, de esa manera podemos ahorrar algunas esquinas y ir directo a las configuraciones que funcionaron para otros. Tenemos algunas referencias en la literatura pero las personas trabajando en sQUlearn ya han implementado muchas opciones para nosotro.</p>
+<p>Imagine que le gustaría probar el encoding en <em>Reduction of finite sampling noise in quantum neural networks</em> <span class="citation" data-cites="Kreplin_2024">(<a href="../references.html#ref-Kreplin_2024" role="doc-biblioref">Kreplin y Roth 2024</a>)</span>.</p>
+<div id="1fde92f1" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> ChebyshevPQC</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> ChebyshevPQC(num_qubits <span class="op">=</span> <span class="dv">4</span>, num_features <span class="op">=</span> <span class="dv">1</span>, num_layers <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pqc.draw(<span class="st">"mpl"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+<figure class="figure">
+<p><img src="qnns_files/figure-html/cell-2-output-1.png" width="850" height="291" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>¡Fácil! Igual que con otros como <em>Training Quantum Embedding Kernels on Near-Term Quantum Computers</em> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et&nbsp;al. 2022</a>)</span></p>
+<div id="f013d4ff" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> HubregtsenEncodingCircuit(num_qubits<span class="op">=</span><span class="dv">4</span>, num_features<span class="op">=</span><span class="dv">2</span>, num_layers<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pqc.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+<figure class="figure">
+<p><img src="qnns_files/figure-html/cell-3-output-1.png" width="912" height="291" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pero también puedes dejar fluir tu creatividad…</p>
+<div id="41a5aae5" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> LayeredEncodingCircuit</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit.layered_encoding_circuit <span class="im">import</span> Layer</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>encoding_circuit <span class="op">=</span> LayeredEncodingCircuit(num_qubits<span class="op">=</span><span class="dv">4</span>,num_features<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>encoding_circuit.H()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> Layer(encoding_circuit)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>layer.Rz(<span class="st">"x"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>layer.Ry(<span class="st">"p"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>layer.cx_entangling(<span class="st">"NN"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>encoding_circuit.add_layer(layer,num_layers<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>encoding_circuit.draw(output<span class="op">=</span><span class="st">"mpl"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+<figure class="figure">
+<p><img src="qnns_files/figure-html/cell-4-output-1.png" width="912" height="291" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Más sobre esto en la documentación de <a href="https://squlearn.github.io/user_guide/encoding_circuits.html">sQUlearn</a>. ¡No deje de revisarla!</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Hubregtsen_2022" class="csl-entry" role="listitem">
+Hubregtsen, Thomas, David Wierichs, Elies Gil-Fuster, Peter-Jan H. S. Derks, Paul K. Faehrmann, y Johannes Jakob Meyer. 2022. <span>«Training quantum embedding kernels on near-term quantum computers»</span>. <em>Physical Review A</em> 106 (4). <a href="https://doi.org/10.1103/physreva.106.042431">https://doi.org/10.1103/physreva.106.042431</a>.
+</div>
+<div id="ref-kidger2020universal" class="csl-entry" role="listitem">
+Kidger, Patrick, y Terry Lyons. 2020. <span>«Universal approximation with deep narrow networks»</span>. <em>Conference on learning theory</em>, 2306-27.
+</div>
+<div id="ref-Kreplin_2024" class="csl-entry" role="listitem">
+Kreplin, David A., y Marco Roth. 2024. <span>«Reduction of finite sampling noise in quantum neural networks»</span>. <em>Quantum</em> 8 (junio): 1385. <a href="https://doi.org/10.22331/q-2024-06-25-1385">https://doi.org/10.22331/q-2024-06-25-1385</a>.
+</div>
+<div id="ref-Pe_a_Tapia_2023" class="csl-entry" role="listitem">
+Peña Tapia, Elena, Giannicola Scarpa, y Alejandro Pozas-Kerstjens. 2023. <span>«A didactic approach to quantum machine learning with a single qubit»</span>. <em>Physica Scripta</em> 98 (5): 054001. <a href="https://doi.org/10.1088/1402-4896/acc5b8">https://doi.org/10.1088/1402-4896/acc5b8</a>.
+</div>
+<div id="ref-sim2019expressibility" class="csl-entry" role="listitem">
+Sim, Sukin, Peter D Johnson, y Alán Aspuru-Guzik. 2019. <span>«Expressibility and entangling capability of parameterized quantum circuits for hybrid quantum-classical algorithms»</span>. <em>Advanced Quantum Technologies</em> 2 (12): 1900070.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/iraitzm\.github\.io\/qc-handbook\/es\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Código desplazable","output":"Salida desplazable"};
+  </script>
+<nav class="page-navigation" aria-label="Página">
+  <div class="nav-page nav-page-previous">
+      <a href="../../parts/qml/svm.html" class="pagination-link" aria-label="QSVC cuántico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">QSVC cuántico</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../parts/qml/qnnexample.html" class="pagination-link" aria-label="Redes neuronales cuánticas">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Redes neuronales cuánticas</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Iraitz Montalbán</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/IraitzM">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/iraitzmontalban/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

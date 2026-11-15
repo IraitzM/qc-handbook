@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>La pila de computación cuántica – Manual de Computación Cuántica</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../parts/algorithms/complexity.html" rel="next">
+<link href="../../parts/computers/challenges.html" rel="prev">
+<link href="../../../cover.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a5968c2ab3cc7abb01282b12e24a0357.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MXHDHE1HP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MXHDHE1HP5');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PLKHBRCG');</script>
+<!-- End Google Tag Manager -->
+
+<meta name="keywords" content="Quantum Computing, Quantum Machine Learning, Quantum Annealing, Optimization">
+
+<!-- Language toggle (EN | ES) -->
+<style>
+.lang-toggle{display:inline-flex;align-items:center;gap:0;margin-left:.5rem;border:1px solid #637238;border-radius:999px;overflow:hidden;flex-shrink:0;font-size:.8rem;line-height:1}
+.lang-toggle a{padding:.35rem .6rem;color:#637238;text-decoration:none;font-weight:600}
+.lang-toggle a.active{background:#637238;color:#fff}
+.lang-toggle a:not(.active):hover{background:rgba(99,114,56,.12)}
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="La pila de computación cuántica – Manual de Computación Cuántica">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://iraitzm.github.io/qc-handbook/es/cover.png">
+<meta property="og:site_name" content="Manual de Computación Cuántica">
+</head>
+
+<body class="nav-sidebar docked quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Saltar al contenido principal</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Barra de herramientas">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Ordenadores cuánticos</a></li><li class="breadcrumb-item"><a href="../../parts/computers/stack.html">La pila de computación cuántica</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Sitio web">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Manual de Computación Cuántica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/IraitzM/qc-handbook" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=|url|" title="LinkedIn" class="quarto-navigation-tool px-1" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/gettingstarted/qc-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Primeros pasos</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Alternar sección: Primeros pasos">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Conceptos básicos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/gates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Puertas cuánticas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/simulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulaciones</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/phasekickback.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/gettingstarted/classicalqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Recursos clásicos</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Ordenadores cuánticos</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/firstrealizations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Primeras realizaciones</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/technology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tecnología</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/machinetypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tipos de máquinas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/serviceproviders.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proveedores de servicios</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/challenges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Desafíos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/computers/stack.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">La pila de computación cuántica</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Algoritmos</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/complexity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Complejidad</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/algorithms/optimization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">Optimización</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Alternar sección: Optimización">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/adiabatic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teorema Adiabático</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/aqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AQC en práctica</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Puesto del problema</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/quboformulations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Formulación QUBO</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/usingexistingframeworks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">D-Wave y su ecosistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/otherconsiderations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Otras consideraciones</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/algorithms/trainingcircuits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">Ajuste de circuitos</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Alternar sección: Ajuste de circuitos">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/digitizedaqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción a la digitalización</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AQC digitado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/variational.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">El enfoque variacional</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/vqe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variational Quantum Eigensolver</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/optimizingcircuits.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Optimizando circuitos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">algoritmo QAOA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/qaoaexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QAOA en la práctica</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/algorithms/extras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Observaciones finales</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../parts/qml/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Aprendizaje automático cuántico</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Alternar sección: Aprendizaje automático cuántico">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/embedding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Embedding de datos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/featuremaps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mapas de características</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/kernels.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kernels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/svm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QSVC cuántico</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Redes Neuronales Cuánticas</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/qnnexample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Redes neuronales cuánticas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/qml/challenges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resumen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Apéndices</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Paquetes de software</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/hybridsolvers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Solvers híbridos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/submit_circuit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Envío de circuitos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/appendix/quantumfeatures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Características interesantes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../parts/examples/tsp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Problema del viajante</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#agentes-abstracción" id="toc-agentes-abstracción" class="nav-link active" data-scroll-target="#agentes-abstracción">Agentes: abstracción</a></li>
+  <li><a href="#software-definición-y-reproducibilidad" id="toc-software-definición-y-reproducibilidad" class="nav-link" data-scroll-target="#software-definición-y-reproducibilidad">Software: definición y reproducibilidad</a></li>
+  <li><a href="#compiladores-y-transpiladores-optimización" id="toc-compiladores-y-transpiladores-optimización" class="nav-link" data-scroll-target="#compiladores-y-transpiladores-optimización">Compiladores y transpiladores: optimización</a></li>
+  <li><a href="#simulation-and-emulation-ground-truth" id="toc-simulation-and-emulation-ground-truth" class="nav-link" data-scroll-target="#simulation-and-emulation-ground-truth">Simulation and emulation: ground truth</a></li>
+  <li><a href="#runtime-and-execution-ejecución" id="toc-runtime-and-execution-ejecución" class="nav-link" data-scroll-target="#runtime-and-execution-ejecución">Runtime and execution: ejecución</a></li>
+  <li><a href="#hardware-calidad" id="toc-hardware-calidad" class="nav-link" data-scroll-target="#hardware-calidad">Hardware: calidad</a></li>
+  <li><a href="#leyendo-la-pila-en-la-práctica" id="toc-leyendo-la-pila-en-la-práctica" class="nav-link" data-scroll-target="#leyendo-la-pila-en-la-práctica">Leyendo la pila en la práctica</a></li>
+  <li><a href="#cuadro-sinóptico" id="toc-cuadro-sinóptico" class="nav-link" data-scroll-target="#cuadro-sinóptico">Cuadro sinóptico</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLKHBRCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Language toggle (EN | ES) -->
+<script>
+(function () {
+  var libs = document.querySelector('link[href*="site_libs/"], script[src*="site_libs/"]');
+  var libsHref = libs ? (libs.getAttribute("href") || libs.getAttribute("src")) : null;
+  var root = libsHref && libsHref.indexOf("site_libs/") >= 0
+    ? new URL(libsHref.slice(0, libsHref.indexOf("site_libs/")) || "./", window.location.href)
+    : new URL("./", window.location.href);
+  if (/\/es\/?$/.test(root.pathname)) {
+    root = new URL(root.pathname.replace(/es\/?$/, ""), root.origin);
+  }
+  var rel = window.location.pathname.slice(root.pathname.length);
+  var isEs = rel === "es" || rel.indexOf("es/") === 0;
+  var page = isEs ? rel.slice(3) : rel;
+  if (!page || page.charAt(page.length - 1) === "/") page += "index.html";
+  var enUrl = new URL(page, root).href + window.location.search;
+  var esUrl = new URL("es/" + page, root).href + window.location.search;
+  var esHome = new URL("es/index.html", root).href;
+  var nav = document.createElement("nav");
+  nav.className = "lang-toggle";
+  nav.setAttribute("aria-label", "Language / Idioma");
+  [["EN", enUrl, !isEs], ["ES", esUrl, isEs]].forEach(function (item) {
+    var a = document.createElement("a");
+    a.textContent = item[0];
+    a.href = item[1];
+    a.hreflang = item[0].toLowerCase();
+    if (item[2]) { a.className = "active"; a.setAttribute("aria-current", "true"); }
+    a.addEventListener("click", function (event) {
+      if (item[2]) { event.preventDefault(); return; }
+      event.preventDefault();
+      var target = item[1], fallback = item[0] === "ES" ? esHome : enUrl;
+      fetch(target.split("?")[0], { method: "HEAD" }).then(function (r) {
+        window.location.href = r.ok ? target : fallback;
+      }).catch(function () { window.location.href = target; });
+    });
+    nav.appendChild(a);
+  });
+  var tools = document.querySelector(".sidebar-tools-main");
+  var bar = document.querySelector(".quarto-secondary-nav .container-fluid");
+  var searchBtn = bar ? bar.querySelector(".quarto-search-button") : null;
+  if (tools) tools.appendChild(nav);
+  else if (bar && searchBtn) bar.insertBefore(nav, searchBtn);
+  else if (bar) bar.appendChild(nav);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/computers/firstrealizations.html">Ordenadores cuánticos</a></li><li class="breadcrumb-item"><a href="../../parts/computers/stack.html">La pila de computación cuántica</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">La pila de computación cuántica</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Hemos visto cómo se construyen estas máquinas, quiénes las alquilan a nosotros y qué falla cuando enviamos un circuito. Llegó el momento de alejarse y ver todo el asunto.</p>
+<p>La computación clásica se estableció en una pila hace mucho tiempo. Nadie que escriba una aplicación web piensa en el programador de instrucciones, y nadie diseñando un CPU se preocupa por JavaScript. Cada capa hizo una promesa, la cumplió y la capa de encima dejó de preocuparse. La computación cuántica está en medio de construir esa misma estructura, solo que las capas aún son visibles y con fugas, así que vale la pena saber en cuál estamos parado. La mayor frustración en este campo viene de culpar a la capa equivocada.</p>
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../../assets/qcstack.svg" class="img-fluid figure-img"></p>
+<figcaption>The quantum computing stack</figcaption>
+</figure>
+</div>
+</figure>
+<p>léalo de arriba hacia abajo si quiere seguir un problema en su camino hacia una máquina, o de abajo hacia arriba si quiere saber qué puede ofrecer la máquina. De cualquier manera, cada capa tiene exactamente un trabajo.</p>
+<section id="agentes-abstracción" class="level2">
+<h2 class="anchored" data-anchor-id="agentes-abstracción">Agentes: abstracción</h2>
+<p>En el muy arriba hay alguien que tiene un problema, y ese problema se declara en el lenguaje de su dominio. Una flota de entrega que tiene que visitar 60 direcciones. Una molécula cuya energía del estado fundamental alguien necesita. Un portafolio con restricciones sobre cuánto puede ir en cada sector. Ninguno de estos es un circuito cuántico aún.</p>
+<p>Convertir eso en algo que un algoritmo cuántico pueda consumir es el trabajo de esta capa: elegir una formulación (un QUBO, un Hamiltoniano, un map feature), elegir un algoritmo que encaje tanto la formulación como el hardware disponible, y enrolar el bucle clásico-cuántico alrededor. Durante la mayor parte de la corta historia de este campo ese trabajo perteneció a una persona, usualmente una cara y sigue siendo el principal cuello de botella para la adopción. No puedes contratar tu camino fuera de una escasez de talento.</p>
+<p>Lo que está cambiando es que esta capa se está automatizando parcialmente. No la física, el trabajo de traducción:</p>
+<ul>
+<li><strong>Asistentes de código</strong> entrenados o ajustados en los SDK, como el <a href="https://quantum.cloud.ibm.com/docs/en/guides/qiskit-code-assistant">Qiskit Code Assistant</a>, que convierten “construye un ansatz hardware-efficient para este Hamiltoniano” en algo que ejecuta.</li>
+<li><strong>Tool calling y MCP servers</strong> para que un modelo no tenga que adivinar. Puede consultar el mapa de acoplamiento de un backend, mirar su calibración actual, transpilate un candidato circuit y leer la cuenta de puertas de dos qubits antes de decidir cualquier cosa. Proveedores como <a href="https://docs.qbraid.com/">qBraid</a> ya exponen sus servicios de esta manera.</li>
+<li><strong>Frameworks de agentes</strong> que dividen el trabajo en formulación, implementación y verificación, de modo que la pieza que escribe el circuito no sea la misma que juzga si es correcta.</li>
+<li><strong>Retrieval sobre documentación y papers</strong>, lo cual importa más de lo que suena en un campo donde la forma recomendada de hacer algo cambia cada pocas lanzamientos.</li>
+</ul>
+<p>Ahora, una advertencia. Esta es la capa más joven y menos fiable del stack, y falla de una manera particularmente desagradable: produce código que ejecuta. Cuando <span class="citation" data-cites="vishwakarma2024qiskithumanevalevaluationbenchmark">(<a href="../references.html#ref-vishwakarma2024qiskithumanevalevaluationbenchmark" role="doc-biblioref">Vishwakarma et&nbsp;al. 2024</a>)</span> benchmarkó modelos en tareas de Qiskit escritas a mano, los modelos generaron código ejecutable, pero el éxito cayó bruscamente a medida que las tareas se complicaron, y “ejecutable” es un umbral muy bajo aquí. Un circuito construido sobre el Hamiltoniano incorrecto felizmente retornará un histograma, y ese histograma parecerá exactamente un resultado válido.</p>
+<p>Así que la regla para esta capa es simple: el agente propone, el stack verifica. La abstracción solo vale la pena cuando las capas inferiores pueden comprobar lo que vino de arriba, lo cual es una buena razón para cuidar la siguiente.</p>
+</section>
+<section id="software-definición-y-reproducibilidad" class="level2">
+<h2 class="anchored" data-anchor-id="software-definición-y-reproducibilidad">Software: definición y reproducibilidad</h2>
+<p>Esta es donde el algoritmo deja de ser un dibujo en una pizarra y se convierte en un objeto. Algo que puedes serializar, versionar, entregar a un colega y ejecutar nuevamente en seis meses.</p>
+<p>Python ganó esta capa, para mejor o peor, y el ecosistema creció alrededor:</p>
+<ul>
+<li><strong><a href="https://www.ibm.com/quantum/qiskit">Qiskit</a></strong> es el punto de referencia para trabajo based-gates, y aunque personas que apuntan a otros proveedores tienden a escribir en él y convertir después.</li>
+<li><strong><a href="https://pennylane.ai/">PennyLane</a></strong> trata los circuitos como funciones diferenciables, lo que lo convierte en la elección natural cuando el circuito está dentro de un bucle de entrenamiento.</li>
+<li><strong><a href="https://quantumai.google/cirq">Cirq</a></strong> para dispositivos Google, <strong><a href="https://aws.amazon.com/braket/">Braket SDK</a></strong> para el catálogo de AWS, <strong><a href="https://www.dwavequantum.com/solutions-and-products/ocean/">Ocean</a></strong> para annealing y formulaciones QUBO, <strong><a href="https://queracomputing.github.io/bloqade-analog/latest/">Bloqade</a></strong> para átomos neutrales y <strong><a href="https://qutip.org/">QuTiP</a></strong> cuando necesitas la dinámica en lugar de puertas.</li>
+<li><strong><a href="https://qibo.science/">Qibo</a></strong> sitúa ligeramente aparte, actuando como middleware entre una manera de escribir cosas y varios backends.</li>
+</ul>
+<p>Debajo del SDKs hay un nivel de intercambio que no recibe suficiente atención. <strong><a href="https://openqasm.com/">OpenQASM 3</a></strong> <span class="citation" data-cites="Cross_2022">(<a href="../references.html#ref-Cross_2022" role="doc-biblioref">Cross et&nbsp;al. 2022</a>)</span> describe circuitos incluyendo control clásico en tiempo real, timing y detalle a nivel de pulso, y <strong><a href="https://www.qir-alliance.org/">QIR</a></strong> toma el camino LLVM para que programas cuánticos puedan manejarse por herramienta que ya existe en el mundo del compilador. Estos formatos son la razón por la que un circuito escrito en un SDK puede ejecutarse por un proveedor que nunca haya oído hablar de ese SDK.</p>
+<p>Y luego está la parte que todos saltan. La reproducibilidad en computing cuántico es más difícil que en un proyecto Python normal porque el resultado depende de cosas fuera de tu código:</p>
+<ul>
+<li>Fije el entorno. Un lockfile y <code>uv sync</code> cuestan nada y ahorran una tarde. Los transpilers, en particular, cambian su salida entre versiones menores, por lo que “mismo script, diferente answer” es un martes normal.</li>
+<li>Fije las semillas. Shot sampling, optimizer initialization y la búsqueda de layout del transpiler son todos estocásticos.</li>
+<li>Grabe el backend <strong>y</strong> su captura de calibración. El mismo circuito en el mismo dispositivo dos días después no es el mismo experimento, y si no escribió qué qubits le fueron dados, no puede explicar la diferencia después.</li>
+<li>Serialice el circuito que fue realmente enviado, no el que escribió. Entre los dos hay un transpiler, y puede que haya cambiado bastante.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init my-quantum-experiment</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add qiskit qiskit-ibm-runtime pytket-qiskit</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> lock</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Aburrido, y la actividad de mayor retorno en todo el stack.</p>
+</section>
+<section id="compiladores-y-transpiladores-optimización" class="level2">
+<h2 class="anchored" data-anchor-id="compiladores-y-transpiladores-optimización">Compiladores y transpiladores: optimización</h2>
+<p>Ya conocimos la <a href="../../parts/computers/challenges.html">transpilación</a> cuando vimos que nuestro circuito lógico no cabe en el dispositivo en el que va a ejecutarse. Lo que importa aquí es que es una capa con implementaciones competitivas, y son intercambiables. No está obligado a usar el que venía con su SDK.</p>
+<p>Lo que se está optimizando, en orden roughly de cuánto duele:</p>
+<ul>
+<li><strong>Cuenta de puertas de dos qubits.</strong> Estas son de una a dos órdenes de magnitud más ruidosas que las puertas de un qubit. Es el número que hay que mirar primero, y a menudo el único que importa.</li>
+<li><strong>Profundidad</strong>, porque los qubits idle se decohieren mientras sus vecinos son operados.</li>
+<li><strong>Layout y routing</strong>, mapear qubits lógicos a físicos de modo que las interacciones que su algoritmo necesita coincidan con la conectividad que tiene el chip, e insertar SWAPs donde correspondan.</li>
+<li><strong>Non-Clifford count</strong>, el número de <span class="math inline">\(T\)</span> gates, que es irrelevante hoy y el costo dominante una vez llegue la corrección de errores, ya que esas son las más caras de implementar fault-tolerantly.</li>
+</ul>
+<p>Las herramientas vale la pena conocer:</p>
+<ul>
+<li><strong><a href="https://quantum.cloud.ibm.com/docs/en/guides/transpile">Qiskit’s transpiler</a></strong>, organizado como pass managers con niveles de optimización del 0 al 3, más los passes impulsados por IA ofrecidos a través de su servicio de transpiler. Maduro, bien documentado y el por defecto por una razón.</li>
+<li><strong><a href="https://tket.quantinuum.com/">pytket</a></strong>, el compilador TKET de Quantinuum <span class="citation" data-cites="Sivarajah_2020">(<a href="../references.html#ref-Sivarajah_2020" role="doc-biblioref">Sivarajah et&nbsp;al. 2020</a>)</span>. Estaba diseñado desde el inicio para ser retargetable y vendor-agnostic, y se acopla a los SDK, así que puede seguir escribiendo Qiskit y compilar con TKET a través de <code>pytket-qiskit</code> si los números salen mejor.</li>
+<li><strong><a href="https://zxcalculus.com/">ZX-calculus</a></strong> <span class="citation" data-cites="vandewetering2020zxcalculusworkingquantumcomputer">(<a href="../references.html#ref-vandewetering2020zxcalculusworkingquantumcomputer" role="doc-biblioref">Wetering 2020</a>)</span>, que es una idea diferente en absoluto. En lugar de tratar el circuito como una secuencia de gates, se reescribe como un gráfico donde la estructura de gates se disuelve, se simplifica con un pequeño conjunto de reglas de reescritura locales, y luego se extrae un circuito atrás. Porque el objeto intermedio no es un circuito, encuentra simplificaciones que la reescritura gate-by-gate no puede ver. <a href="https://github.com/zxcalc/pyzx">PyZX</a> es el punto de entrada usual, y este enfoque es particularmente fuerte en fase y <span class="math inline">\(T\)</span> count reduction, por lo que la comunidad de corrección de errores se preocupa por ello.</li>
+<li><strong><a href="https://bqskit.lbl.gov/">BQSKit</a></strong>, que toma resíntesis numérica: corte el circuito en bloques, compute la unitary de cada bloque, y busque una secuencia más corta que la reproduzca hasta una tolerancia que elija. Comerciar una cantidad controlada de precisión por un circuito más corto a menudo es un excelente trato en hardware ruidoso.</li>
+<li><strong><a href="https://superstaq.readthedocs.io/en/latest/">Superstaq</a></strong>, que compila device-aware a través de varios proveedores y felizmente bajará del nivel de gate cuando el hardware lo permita.</li>
+</ul>
+<p>Y debajo de las gates está el nivel de pulso, donde una gate se convierte en una señal de microondas o laser shaped. <a href="https://qiskit-community.github.io/qiskit-dynamics/">Qiskit Dynamics</a> y <a href="https://pulser.readthedocs.io/">Pulser</a> para dispositivos Pasqal viven aquí, junto con el control Hamiltonian analogical que vimos para átomos neutrales. La mayoría de la gente nunca necesita bajar allí, que es exactamente el punto de tener capas.</p>
+<p>Un hábito que construir: cuente las puertas de dos qubits antes y después de compilar, en cada ejecución. Toma una sola línea y es la mejor señal temprana que tendrá de que el resultado va a ser ruido.</p>
+</section>
+<section id="simulation-and-emulation-ground-truth" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-and-emulation-ground-truth">Simulation and emulation: ground truth</h2>
+<p>Esta capa no sitúa arriba o abajo, corre alongside the whole stack, y juega dos roles muy diferentes.</p>
+<p>El primero es depuración. Para instancias pequeñas puede conocer la respuesta exacta, lo que significa que puede decir si su formulación estaba equivocada, su circuito estaba equivocado o el hardware simplemente era ruidoso. Sin esto, todos los tres fallos se ven idénticos.</p>
+<p>El segundo papel es menos cómodo: esta es la competencia. Los métodos clásicos siguen mejorando, y la pregunta honesta antes de gastar créditos de hardware es si un método clásico ya resuelve su instancia. Cubrimos los métodos en <a href="../../parts/gettingstarted/classicalqc.html">recursos clásicos</a>, así que solo el mapa aquí:</p>
+<ul>
+<li><strong>State vector</strong> para circuitos exactos pequeños, aproximadamente hasta 25 a 30 qubits antes de que su memoria renuncie.</li>
+<li><strong>Density matrix</strong> cuando necesita ruido en la picture, a costo cuadrático.</li>
+<li><strong>Tensor networks</strong> para los casos donde el entrelazamiento se mantenga bounded.</li>
+<li><strong>Stabilizer simulation</strong> para Clifford circuits, donde <a href="https://github.com/quantumlib/Stim">Stim</a> <span class="citation" data-cites="gidney2021stimfaststabilizercircuit">(<a href="../references.html#ref-gidney2021stimfaststabilizercircuit" role="doc-biblioref">Gidney 2021</a>)</span> maneja millones de gates en segundos. Si trabaja en corrección de errores, esta es su herramienta principal en lugar de un fallback.</li>
+</ul>
+<p>Los tensor networks merecen la extraña oración. No representan el estado completo, representan las correlaciones, y solo pagan por el entrelazamiento que esté realmente presente. Un circuito poco profundo o débilmente entrelazado contrae mucho más allá de lo que un state vector podría alguna vez sostener, lo cual es precisamente por qué varias afirmaciones de ventaja cuántica se han dado marcha atrás después de que alguien los reprodujera clásicamente <span class="citation" data-cites="xu2023herculeantaskclassicalsimulation">(<a href="../references.html#ref-xu2023herculeantaskclassicalsimulation" role="doc-biblioref">Xu et&nbsp;al. 2023</a>)</span>. Las herramientas prácticas son <a href="https://quimb.readthedocs.io/en/latest/index.html">quimb</a>, <a href="https://developer.nvidia.com/cuquantum-sdk">NVIDIA cuQuantum</a> para contracción en GPU, <a href="https://www.quantumtea.it/">Quantum TEA</a> y <a href="https://joserapa98.github.io/tensorkrowch/_build/html/index.html">TensorKrowch</a>, más los backends MPS ya integrados en Aer y PennyLane.</p>
+<p>Así que la regla para esta capa: si un estado de producto de matrices (MPS) con un bond dimension modesto resuelve su instancia, no necesita un QPU aún. Eso no es una derrota, es un presupuesto ahorrado, y saber dónde sitúa ese límite para su problema es una de las cosas más valiosas que puede medir.</p>
+</section>
+<section id="runtime-and-execution-ejecución" class="level2">
+<h2 class="anchored" data-anchor-id="runtime-and-execution-ejecución">Runtime and execution: ejecución</h2>
+<p>Entre un circuito compilado y un chip hay una cola, una sesión, un ciclo de calibración y un scheduler, y esta capa es lo que convierte “Tengo un circuito” en “Tengo resultados”.</p>
+<p>Suele sonar plomería hasta que intenta ejecutar un algoritmo variacional. Mil iteraciones de optimización, cada una reencolada desde cero detrás de los trabajos de otros usuarios, no es un experimento, es un fin de semana. Eso es lo que esta capa le compra:</p>
+<ul>
+<li><strong><a href="https://quantum.cloud.ibm.com/docs/en/guides/primitives">Qiskit Runtime</a></strong> con sus primitivas Sampler y Estimator, sesiones que mantienen su lugar en la cola a través de un bucle, y mitigación de errores aplicada server side para que no tenga que implementar zero noise extrapolation usted mismo.</li>
+<li><strong><a href="https://docs.aws.amazon.com/braket/latest/developerguide/braket-jobs.html">Braket Hybrid Jobs</a></strong>, que colocan la parte clásica junto al QPU por la misma razón.</li>
+<li><strong>Aggregators</strong> como <a href="https://www.qbraid.com/">qBraid</a> y <a href="https://strangeworks.com/">Strangeworks</a>, que dan una interfaz única sobre muchos proveedores y absorben el manejo de credenciales.</li>
+<li><strong>HPC integration</strong>, hacia donde esto está yendo. <a href="https://developer.nvidia.com/cuda-q">CUDA-Q</a> y el <a href="https://www.munich-quantum-valley.de/research/consortia/q-dessi">Munich Quantum Software Stack</a> tratan el QPU como un acelerador sentado junto a GPUs en un centro de supercomputing, programado a través del mismo sistema de trabajos que todo lo demás. Dado cuánto de cada algoritmo cuántico es clásico, esta probablemente sea la forma que tomará el futuro.</li>
+</ul>
+</section>
+<section id="hardware-calidad" class="level2">
+<h2 class="anchored" data-anchor-id="hardware-calidad">Hardware: calidad</h2>
+<p>Todo lo anterior es una promesa. Esto es donde se conserva o no.</p>
+<p>El recuento de qubits es el número headline y el menos informativo. Lo que determina si su circuito produce algo son:</p>
+<ul>
+<li><strong><span class="math inline">\(T_1\)</span> y <span class="math inline">\(T_2\)</span></strong>, cuánto tiempo un qubit mantiene su estado y su fase.</li>
+<li><strong>Gate fidelity</strong>, single-qubit y, mucho más importante, two-qubit.</li>
+<li><strong>Readout error</strong>, que a menudo es la mayor contribución single y la más fácil de mitigar.</li>
+<li><strong>Connectividad</strong>, ya que un sparse coupling map significa SWAPs, y SWAPs significan más puertas de dos qubits.</li>
+<li><strong>Velocidad</strong>, medida como algo como CLOPS, que decide si un variational loop termina hoy o la próxima semana.</li>
+</ul>
+<p>Promedios de estos mienten, aunque suelen medirse en los mejores qubits en aislamiento. Quantum Volume mejoró en eso al probar ancho y profundidad juntos, pero aún premia el subconjunto de mayor calidad de un dispositivo. <strong>Layer fidelity</strong> y su error por layered derived gate (EPLG) <span class="citation" data-cites="McKay_2023">(<a href="../references.html#ref-McKay_2023" role="doc-biblioref">McKay et&nbsp;al. 2023</a>)</span> se introdujeron para medir qué sucede cuando muchos qubits se operan simultáneamente en todo el chip, que es el régimen en que cualquier algoritmo real se ejecuta. Al comparar dispositivos, ese es el número que debe preguntar.</p>
+<p>Las tecnologías, con los jugadores que construyen sobre cada una:</p>
+<ul>
+<li><strong>Superconducting</strong>: IBM, Google, Rigetti, IQM, OQC, y las variantes bosónicas de Alice &amp; Bob y Nord Quantique que construyen protección de errores en el propio qubit.</li>
+<li><strong>Trapped ions</strong>: IonQ, Quantinuum, AQT. Excelente fidelidad y conectividad all-to-all, pero gates más lentos y menos qubits.</li>
+<li><strong>Neutral atoms</strong>: Pasqal, QuEra, Atom Computing, planqc. Arreglos grandes, geometría reconfigurable, y el modo analogical que vimos antes.</li>
+<li><strong>Photonics</strong>: Xanadu, PsiQuantum, Quandela, ORCA. Operación a temperatura ambiente y un conjunto diferente de problemas enteramente.</li>
+<li><strong>Silicon spin</strong>: Diraq, Quantum Motion, SQC, Equal1, apostando que la base de manufactura de la industria semiconductor eventualmente gana.</li>
+<li><strong>Annealers</strong>: D-Wave, todavía los únicos con una década de operación comercial detrás.</li>
+</ul>
+<p>Todos se dirigen hacia el mismo destino, corrección de errores, donde un qubit lógico se construye a partir cientos o miles de físicos y las capas por encima finalmente dejan de preocuparse por el ruido. No estamos allí, que es por lo que <a href="../../parts/computers/challenges.html">existe el capítulo de desafíos</a>.</p>
+</section>
+<section id="leyendo-la-pila-en-la-práctica" class="level2">
+<h2 class="anchored" data-anchor-id="leyendo-la-pila-en-la-práctica">Leyendo la pila en la práctica</h2>
+<p>Tomemos el problema MaxCut del que siempre volvemos, y sigamos:</p>
+<ol type="1">
+<li><strong>Agents</strong> convierten “partition this network so that the cut is maximal” en un QUBO, eligen QAOA sobre VQE porque el cost Hamiltonian es diagonal, y escriben la primera versión del código.</li>
+<li><strong>Software</strong> fija exactamente qué eso significa: este grafo, este número de capas, este optimizer, estas semillas, esta versión de Qiskit, todo comprometido y reproducible.</li>
+<li><strong>Compilers</strong> toman el circuito resultante, que asume conectividad all-to-all que no obtendrá, y lo convierten en algo que el chip puede ejecutar, espero sin triplicar la cuenta de puertas de dos qubits.</li>
+<li><strong>Simulation</strong> ejecuta la misma cosa exactamente para un grafo pequeño, así sabemos cuál es la respuesta correcta, y ejecuta un solver clásico en el grafo completo, así sabemos contra qué competimos.</li>
+<li><strong>Runtime</strong> mantiene la sesión abierta a través del bucle de optimización y mitiga el error de readout en el camino de regreso.</li>
+<li><strong>Hardware</strong> decide si alguna de ello sobrevive.</li>
+</ol>
+<p>Si el resultado está mal, la capa que falló suele ser identifiable: un error de formulación se muestra en simulación también, un problema de compilación se muestra como una explosión en la cuenta de gates, y un problema de hardware se muestra como un resultado que se degrada a medida que añades capas. Diferentes fallos, diferentes arreglos, y esto es por qué mantener las capas separadas en tu cabeza merece el esfuerzo.</p>
+</section>
+<section id="cuadro-sinóptico" class="level2">
+<h2 class="anchored" data-anchor-id="cuadro-sinóptico">Cuadro sinóptico</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Capa</th>
+<th>Qué aporta</th>
+<th>Herramientas y técnicas</th>
+<th>Síntoma cuando es débil</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Agentes</td>
+<td>Abstracción</td>
+<td>Asistentes LLM, servidores MCP, tool calling, frameworks de agentes</td>
+<td>Código plausible resolviendo el problema incorrecto</td>
+</tr>
+<tr class="even">
+<td>Software</td>
+<td>Definición y reproducibilidad</td>
+<td>Python + Qiskit, PennyLane, Cirq, Ocean, Braket, QuTiP, Qibo, OpenQASM 3, QIR, uv</td>
+<td>Resultados que nadie puede reproducir, incluyéndote a ti</td>
+</tr>
+<tr class="odd">
+<td>Compiladores</td>
+<td>Optimización</td>
+<td>Qiskit passes, pytket (TKET), ZX-calculus (PyZX), BQSKit, Superstaq, control a nivel de pulso</td>
+<td>La profundidad del circuito explota, el output se vuelve ruido</td>
+</tr>
+<tr class="even">
+<td>Simulation</td>
+<td>Verdad baselínea y ground truth</td>
+<td>State vector, density matrix, tensor networks (quimb, cuQuantum, Quantum TEA), Stim</td>
+<td>Sin idea si el hardware o el código están equivocados</td>
+</tr>
+<tr class="odd">
+<td>Runtime</td>
+<td>Ejecución</td>
+<td>Qiskit Runtime, Braket Hybrid Jobs, Azure Quantum, CUDA-Q, qBraid, Strangeworks</td>
+<td>Variational loops que nunca terminan</td>
+</tr>
+<tr class="even">
+<td>Hardware</td>
+<td>Calidad</td>
+<td>Superconducting, ion traps, neutral atoms, photonics, spin qubits, annealers</td>
+<td>Todo lo anterior fue teatro</td>
+</tr>
+</tbody>
+</table>
+<p>Hoy en día la mayor parte del valor en este stack está en la mitad inferior, y es donde va el dinero. Pero la cosa interesante sobre las capas es qué sucede cuando las de abajo se vuelven suficientemente buenas como para dejar de preocuparse. Cada mejora en la parte inferior eleva el valor de la superior, porque el cuello de botella se mueve de “¿puede ejecutarse en absoluto” a “¿preguntó alguien la pregunta correcta”. Todavía no estamos ahí. Vale la pena construir el hábito ahora.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Cross_2022" class="csl-entry" role="listitem">
+Cross, Andrew W., Ali Javadi-Abhari, Thomas Alexander, et&nbsp;al. 2022. <span>«OpenQASM 3: A Broader and Deeper Quantum Assembly Language»</span>. <em>ACM Transactions on Quantum Computing</em> 3 (3): 1-50. <a href="https://doi.org/10.1145/3505636">https://doi.org/10.1145/3505636</a>.
+</div>
+<div id="ref-gidney2021stimfaststabilizercircuit" class="csl-entry" role="listitem">
+Gidney, Craig. 2021. <span>«Stim: a fast stabilizer circuit simulator»</span>. <em>Quantum</em> 5 (julio): 497. <a href="https://doi.org/10.22331/q-2021-07-06-497">https://doi.org/10.22331/q-2021-07-06-497</a>.
+</div>
+<div id="ref-McKay_2023" class="csl-entry" role="listitem">
+McKay, David C., Ian Hincks, Emily J. Pritchett, Malcolm Carroll, Luke C. G. Govia, y Seth T. Merkel. 2023. <em>Benchmarking Quantum Processor Performance at Scale</em>. <a href="https://arxiv.org/abs/2311.05933">https://arxiv.org/abs/2311.05933</a>.
+</div>
+<div id="ref-Sivarajah_2020" class="csl-entry" role="listitem">
+Sivarajah, Seyon, Silas Dilkes, Alexander Cowtan, Will Simmons, Alec Edgington, y Ross Duncan. 2020. <span>«t|ket⟩: a retargetable compiler for NISQ devices»</span>. <em>Quantum Science and Technology</em> 6 (1): 014003. <a href="https://doi.org/10.1088/2058-9565/ab8e92">https://doi.org/10.1088/2058-9565/ab8e92</a>.
+</div>
+<div id="ref-vishwakarma2024qiskithumanevalevaluationbenchmark" class="csl-entry" role="listitem">
+Vishwakarma, Sanjay, Francis Harkins, Siddharth Golecha, et&nbsp;al. 2024. <em>Qiskit HumanEval: An Evaluation Benchmark For Quantum Code Generative Models</em>. <a href="https://arxiv.org/abs/2406.14712">https://arxiv.org/abs/2406.14712</a>.
+</div>
+<div id="ref-vandewetering2020zxcalculusworkingquantumcomputer" class="csl-entry" role="listitem">
+Wetering, John van de. 2020. <em>ZX-calculus for the working quantum computer scientist</em>. <a href="https://arxiv.org/abs/2012.13966">https://arxiv.org/abs/2012.13966</a>.
+</div>
+<div id="ref-xu2023herculeantaskclassicalsimulation" class="csl-entry" role="listitem">
+Xu, Xiaosi, Simon Benjamin, Jinzhao Sun, Xiao Yuan, y Pan Zhang. 2023. <em>A Herculean task: Classical simulation of quantum computers</em>. <a href="https://arxiv.org/abs/2302.08880">https://arxiv.org/abs/2302.08880</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/iraitzm\.github\.io\/qc-handbook\/es\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Código desplazable","output":"Salida desplazable"};
+  </script>
+<nav class="page-navigation" aria-label="Página">
+  <div class="nav-page nav-page-previous">
+      <a href="../../parts/computers/challenges.html" class="pagination-link" aria-label="Desafíos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Desafíos</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../parts/algorithms/complexity.html" class="pagination-link" aria-label="Complejidad">
+        <span class="nav-page-text">Complejidad</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2025, Iraitz Montalbán</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/IraitzM">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/iraitzmontalban/">
+      <i class="bi bi-linkedin" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
