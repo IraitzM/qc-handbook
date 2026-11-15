@@ -1,0 +1,7 @@
+# Ajuste de circuitos
+
+Encontrar el conjunto adecuado de parámetros, como la función de programación correcta en el caso de los annealers, puede ser todo un reto. Sobre todo cuando sabemos poco sobre cómo evoluciona el propio problema.
+
+El teorema adiabático establece que la evolución debe ser lo bastante lenta en relación con la brecha energética relevante y con el ritmo de cambio del Hamiltoniano, de modo que las transiciones desde el estado fundamental a niveles de energía superiores sean poco probables. Una brecha pequeña hace que esta condición sea más exigente. ¿Cómo podemos diseñar la forma de la función de programación para que actúe en los puntos adecuados durante la evolución?
+
+Esto nos lleva a un campo que ha crecido de forma desbordante: el entrenamiento de circuitos cuánticos, o el uso de circuitos cuánticos parametrizados (PQC, por sus siglas en inglés) junto con técnicas de optimización para dar con la configuración de parámetros adecuada. Pero antes necesitamos ir más allá de lo que permite una máquina concreta. Ese será nuestro primer reto y también la primera ventaja de abstraernos con los ordenadores basados en puertas.

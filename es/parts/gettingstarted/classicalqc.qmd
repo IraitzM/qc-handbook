@@ -1,0 +1,86 @@
+# Recursos clásicos {.unnumbered}
+
+Ya sabes cómo funciona un simulador. En esencia realiza las operaciones matemáticas que esperamos que haga un ordenador cuántico, pero hay bastantes matices en la forma de hacerlo. Por ejemplo, usar un _simulador_ no es lo mismo que usar un _emulador_.
+
+Un _simulador_ realiza concretamente las acciones del marco matemático, sin restricciones ni casos especiales. Dicho de forma sencilla, es lo que debería hacer la máquina ideal. Un _emulador_, en cambio, realiza el mismo conjunto de acciones pero teniendo en cuenta algunas de las limitaciones que podría tener un dispositivo concreto. En esencia trata de mostrar cómo se verían esas mismas acciones realizadas por una máquina física.
+
+Y luego, por supuesto, está enviar el trabajo a un dispositivo real a través de un servicio como los que ofrece la [IBM Quantum Platform](https://quantum.cloud.ibm.com/). Tendrás que crear una cuenta, pero después podrás enviar a hardware real todos los circuitos que quieras. Mira [este ejemplo](https://iraitzm.github.io/qc-handbook/parts/appendix/submit_circuit.html).
+
+## Simuladores
+
+Las acciones que realizamos en el [ejercicio anterior](simulations.qmd) imitaban el vector de estado de nuestro sistema y realizaban las operaciones unitarias que dirigen el estado. Esto se conoce a menudo como simulador de **vector de estado** (¡obvio!) y es habitual en algunos de los SDK más usados. La capacidad de simular un circuito dado es proporcional a los recursos necesarios para manipular ese vector de estado.
+
+**El caso del estado GHZ**
+
+Tomemos como ejemplo un estado GHZ, un estado GHZ de 5 cúbits.
+
+$$
+|\psi\rangle = \frac{1}{\sqrt{2}}(|00000\rangle + |11111\rangle) 
+$$
+
+Un sistema de 5 cúbits requiere un vector de estado en un espacio de Hilbert de dimensión $2^5 = 32$. Cada amplitud es un número complejo, normalmente representado con doble precisión. Así que, haciendo un cálculo aproximado: $32$ amplitudes $\times$ $16$ bytes (8 bytes de parte real + 8 bytes de parte imaginaria) $= 512$ bytes.
+
+Más allá del vector de estado, un simulador cuántico necesita:
+
+* Puertas cuánticas ($H$ y $CX$ en este caso). Para 5 cúbits, las puertas de un cúbit son matrices 2×2 y las de dos cúbits son 4×4: ~1-2 KB por puerta.
+* Un búfer temporal para cálculos intermedios de tamaño parecido.
+* Sobrecarga del simulador para gestionar el circuito, las estructuras de datos y las conversiones: ~10-50 KB.
+
+Memoria mínima teórica: ~512 bytes + sobrecarga ≈ 50-100 KB. La mayor parte se va en el propio simulador más que en la simulación, pero a medida que ampliamos esos números, un simulador de 10 cúbits maneja vectores de estado de ~16 KB, uno de 20 cúbits ~16 MB y un sistema de 30 cúbits usa ~16 GB solo para la representación del vector de estado. Puede que te cueste pasar de 22-25 cúbits dependiendo de lo potente que sea tu máquina.
+
+Un enfoque menos habitual, dados los números que vimos antes, es el uso del simulador de **matriz de densidad**, que representa toda la evolución teniendo en cuenta el efecto del ruido y la posibilidad de obtener un estado mixto (lo cual en realidad pasa mucho, pero salvo que trabajemos intentando emular el trabajo de un dispositivo, podemos saltárnoslo). Esto no solo maneja un vector de estado, sino una evolución matricial en cada paso.
+
+El simulador de **estado de producto de matrices** (Matrix Product State) es un método derivado de las redes tensoriales, una forma de tratar con eficiencia operaciones matriciales grandes, al menos hasta cierta precisión. En muchos casos este método nos permite emular circuitos más grandes, ya que es el método más eficiente en recursos, aunque en algunos casos, salvo que uses simuladores de última generación, no ofrecen la opción de simulación de ruido.
+
+```{python}
+import numpy as np
+
+# Importar Qiskit
+from qiskit import QuantumCircuit, transpile
+from qiskit_aer import AerSimulator
+from qiskit.visualization import plot_histogram, plot_state_city
+import qiskit.quantum_info as qi
+
+# Crear el circuito
+circ = QuantumCircuit(2)
+circ.h(0)
+circ.cx(0, 1)
+circ.measure_all()
+
+# Aumentar los shots para reducir la varianza del muestreo
+shots = 10000
+
+# Método de simulación Statevector
+sim_statevector = AerSimulator(method='statevector')
+job_statevector = sim_statevector.run(circ, shots=shots)
+counts_statevector = job_statevector.result().get_counts(0)
+
+# Método de simulación Density Matrix
+sim_density = AerSimulator(method='density_matrix')
+job_density = sim_density.run(circ, shots=shots)
+counts_density = job_density.result().get_counts(0)
+
+# Método de simulación Matrix Product State
+sim_mps = AerSimulator(method='matrix_product_state')
+job_mps = sim_mps.run(circ, shots=shots)
+counts_mps = job_mps.result().get_counts(0)
+
+plot_histogram([counts_statevector, counts_density, counts_mps],
+               title='Cuentas para distintos métodos de simulación',
+               legend=[ 'statevector',
+                       'density_matrix',
+                       'matrix_product_state'])
+```
+
+Qiskit no es el único SDK que usaremos, así que es bueno saber que estas mismas técnicas de simulación existen cuando, por ejemplo, usando [PennyLane](https://pennylane.ai/) tendrás acceso a varios [dispositivos](https://pennylane.ai/devices/), entre ellos:
+
+* `default.qubit` para simulación de vector de estado
+* `default.mixed` para trabajar con estados mixtos
+* `default.tensor` para simulación de tipo MPS usando [QUIMB](https://quimb.readthedocs.io/en/latest/index.html) por debajo
+
+Y muchos más. También incluyen buenos simuladores para simulación en GPU, basados en [NVIDIA cuQuantum SDK](https://developer.nvidia.com/cuquantum-sdk) vía [Lightning](https://www.xanadu.ai/products/lightning/), que nos vendrán muy bien cuando empecemos a hablar de [circuitos de entrenamiento](https://iraitzm.github.io/qc-handbook/parts/algorithms/optimizingcircuits.html).
+
+Si te interesan las redes tensoriales, este no es el lugar, pero puedo recomendar algunos recursos como [TensorNetwork.org](https://tensornetwork.org/) para buscar recursos útiles y buenas referencias con las que profundizar en el campo [@biamonte2017tensornetworksnutshell].
+
+En cualquier caso, no es una tarea trivial. De hecho, algunos ya la han calificado de tarea hercúlea [@xu2023herculeantaskclassicalsimulation]. Hay una guía útil de Google sobre [cómo elegir tu hardware](https://quantumai.google/qsim/choose_hw). Quedémonos con lo sencillo por ahora y pasemos a las implementaciones de algoritmos.
+

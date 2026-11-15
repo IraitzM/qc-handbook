@@ -1,0 +1,121 @@
+# Fases {.unnumbered}
+
+Te estarás preguntando si usamos para algo la parte compleja. Hasta ahora no he visto ningún uso de ella. Pues sí que la usamos. De hecho es clave en muchos de los algoritmos que desbloqueamos con la computación cuántica. Moverse por el eje X de la esfera de Bloch y actuar sobre él.
+
+Tomemos un ejemplo sobre un estado superpuesto.
+
+```{python}
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(2, 2)
+qc.h(0)
+qc.h(1)
+
+qc.draw('mpl')
+```
+
+```{python}
+from qiskit.quantum_info import Statevector
+from qiskit.visualization import plot_bloch_multivector
+
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+¿Qué estado es ese? Podemos comprobar su formulación matemática, que resulta ser
+
+$$
+|\psi\rangle = \frac{1}{2}\left(|00\rangle + |01\rangle + |10\rangle +|11\rangle\right)
+$$
+
+```{python}
+from qiskit.visualization import array_to_latex
+
+array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
+```
+
+Venga, extiende el circuito... y comprueba qué pasa.
+```{python}
+import numpy as np
+
+qc.ry(np.pi/2, 1)
+
+qc.draw('mpl')
+```
+
+```{python}
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+```{python}
+from qiskit.visualization import array_to_latex
+
+array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
+```
+
+Vale, ahora tenemos la siguiente forma
+$$
+|\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + |1\rangle\right) = |1+\rangle
+$$
+
+que muestra un estado donde un cúbit está en el estado 1 (todo apuesta a leer el valor 1 en la base computacional), mientras que el otro cúbit parece seguir en superposición (50-50 de probabilidades de obtener 0 o 1 en la base computacional). Como mencionamos antes, este no es un estado [entrelazado](gates.qmd#entrelazamiento), porque es separable. De ahí el símbolo de producto tensorial.
+
+::: {.callout-warning collapse=true}
+# Orden de lectura de los cúbits
+¿Te resultó raro que el estado fuera $|1+\rangle$ en lugar de $|+1\rangle$? No eres el único, mira [esta entrada](https://lukaszpalt.com/behind-the-mystery-of-wrong-qubit-ordering-in-qiskit/) de Lukasz Palt para más aclaraciones.
+:::
+
+## Patada de fase
+
+Ahora, mira qué pasa cuando actuamos sobre el segundo cúbit controlado por el primero.
+
+```{python}
+import numpy as np
+
+qc.crz(np.pi, 0, 1)
+
+qc.draw('mpl')
+```
+
+```{python}
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+La rotación Z sobre el cúbit objetivo casi no tuvo efecto, pero ¿qué le pasó al de control? ¿Se movió?
+
+```{python}
+from qiskit.visualization import array_to_latex
+
+array_to_latex(array=psi, prefix='|\\psi\\rangle = ', max_size=(10,10))
+```
+
+Espera, ¿hay una $i$ ahí? Sí. Cambiamos la fase de uno de los elementos del cúbit de control. No solo está entre los polos 0 y 1, sino que también le hemos añadido una fase que se representa por la dirección del signo en el eje complejo.
+
+$$
+|\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1i\rangle
+$$
+
+```{python}
+np.round(psi.data,2)
+```
+
+Ese es entonces el efecto cuando se aplica la fase $e^{i\pi/2}$.
+
+```{python}
+
+np.round(np.exp(1j*np.pi/2)/np.sqrt(2), 2)
+```
+
+De lo más interesante. De hecho, este es el efecto que hay detrás de muchos de los trabajos teóricos relacionados con la aceleración de la resolución de sistemas de ecuaciones lineales, por ejemplo [@Harrow_2009].
+
+::: {.callout-tip collapse=true}
+# Patada de fase y más
+
+Este es un gran recurso que profundiza en algunos de los algoritmos que usan este efecto
+
+{{< video https://www.youtube.com/watch?v=455pmYaZXKw >}}
+
+Y para quienes prefieran PennyLane o leer sobre el tema, [este es un gran tutorial](https://pennylane.ai/qml/demos/tutorial_phase_kickback) sobre lo básico de cómo la fase nos permite identificar estados concretos en nuestro espacio de búsqueda.
+:::

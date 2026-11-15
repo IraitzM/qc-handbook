@@ -1,0 +1,33 @@
+---
+lang: es
+---
+
+# Prefacio {.unnumbered}
+
+Te estarás preguntando si hace falta otro libro sobre computación cuántica. ¿Más documentación? Si ya tenemos:
+
+* La [documentación de Qiskit](https://docs.quantum.ibm.com/guides/hello-world)
+* La documentación de D-Wave sobre [optimización](https://docs.dwavequantum.com/en/latest/index.html)
+* PennyLane para [QML y simulación](https://pennylane.ai/qml) y sus [codebooks](https://pennylane.ai/codebook/learning-paths)
+* Libros que también cubren la parte teórica en profundidad, como [este](https://kawaihome.link/jbooks/qcomp-short/cover.html)
+* E incluso trabajos relevantes que entran en detalle en todo esto, libros y demás [@dewolf2023quantumcomputinglecturenotes; @watrous2025understandingquantuminformationcomputation; @nielsen2010quantum; @yanofsky2008quantum]
+
+Pues bien, contarlo desde otra perspectiva puede ayudar a quienes vienen de otros campos, es decir, a quienes no son físicos, a hacerse una idea de en qué consiste la computación cuántica. Este es también un trabajo para mí, porque seguro que me ayudará a entender mejor algunos de los conceptos. He comprobado que explicar las cosas es la mejor manera de poner a prueba lo que uno sabe sobre un campo que está tratando de dominar.
+
+Además, no cuesta nada, así que no hace ningún daño. Los fragmentos de código son más fáciles de mantener, así que espero que todo funcione con las versiones más recientes. Espero que disfrutes leyéndolo tanto como yo he aprendido creándolo.
+
+## Sobre mí
+
+Me llamo Iraitz Montalbán. Mi formación es en informática y conocí la computación cuántica por casualidad durante unas prácticas en 2010. En aquel momento, un grupo de investigadores trabajaba en algo llamado computación cuántica que, por entonces, era más un marco matemático que una tecnología práctica.
+
+Aquella experiencia despertó mi interés por el campo y seguí de cerca su evolución. Con el tiempo cursé un máster en Tecnologías de Computación Cuántica en la UPM y pasé a trabajar con varias startups que desarrollan tecnologías de computación cuántica.
+
+Puedes contactar conmigo en [iraitz.info](https://iraitz.info/).
+
+::: {.callout-note}
+## Traducción en curso
+
+De momento están traducidos al español el prefacio, la introducción y toda la parte de primeros pasos. El resto del libro está pendiente de traducción y se irá incorporando poco a poco.
+
+Mientras tanto, puedes leer el libro completo en inglés. Usa el botón **EN** del selector de idioma, en la parte superior de la página, para ir a la versión en inglés, y el botón **ES** para volver aquí.
+:::

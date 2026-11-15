@@ -1,0 +1,108 @@
+# Mapas de características {.unnumbered}
+
+Los mapas de características son la forma en que los datos clásicos se transforman en estados cuánticos. Un buen punto de partida es usar plantillas existentes de bibliotecas como [Pennylane](https://docs.pennylane.ai/en/stable/introduction/templates.html).
+
+## Encoding en base
+
+El encoding en base podría ser una de las formas más simples de mapear datos clásicos a estados cuánticos. Requiere que nuestros datos estén compuestos de enteros y mapea su representación binaria al estado base que mapea el mismo string binario: $n = 4, \quad b_n = 1001, \quad |b_n\rangle = |1001\rangle$.
+
+$$
+|X\rangle = \frac{1}{\sqrt{M}}\sum_{m=1}^M |x^m \rangle
+$$
+
+No se usa con frecuencia ya que limita los datos que pueden incorporarse y requiere bastante recursos del lado cuántico que no se utilizan completamente.
+
+```{python}
+import pennylane as qml
+from qiskit.visualization import array_to_latex
+
+dev = qml.device('default.qubit', wires=3)
+
+@qml.qnode(dev)
+def feature_map(feature_vector):
+    qml.BasisEmbedding(features=feature_vector, wires=range(3))
+    return qml.state()
+
+X = [1,1,1]
+
+array_to_latex(array=feature_map(X).T, prefix='| \\psi \\rangle = ', max_size=(10,10))
+```
+
+## Encoding en ángulo
+
+El encoding en ángulo aprovecha la capacidad de incrustar ángulos de rotación en nuestras puertas para que podamos introducir nuestros datos numéricos como el ángulo de rotación de un qubit dado. Ejemplo, $x = [x_1, x_2,...,x_n]$ se mapearía a
+
+$$
+(R_z(x_1) \otimes R_z(x_2) \otimes \dots \otimes R_z(x_n))|0\rangle^{\otimes n}
+$$
+
+Los datos deben estar en el régimen donde esas rotaciones tienen efecto ($[0, 2\pi]$) y pueden ser más adecuados si una naturaleza cíclica ya está presente. La normalización de datos puede ser un paso relevante de preprocesamiento en este caso, pero también debemos prestar atención al eje de rotación, $Z$ en este caso.
+
+```{python}
+import pennylane as qml
+import pennylane.numpy as np
+
+dev = qml.device('default.qubit', wires=3)
+
+@qml.qnode(dev)
+def feature_map(feature_vector):
+    qml.AngleEmbedding(features=feature_vector, wires=range(3), rotation='Z')
+    return qml.state()
+
+X = [2*np.pi,0,np.pi]
+
+print(qml.draw(feature_map, level="device")(X))
+```
+
+## Encoding de amplitud
+
+El encoding de amplitud toma la amplitud de probabilidad de elementos de un array y los empareja con la posición en la que fueron colocados. Asumiendo que nuestros datos están compuestos de $n$ valores ($X = [x_0, x_1,...,x_n]$ ) su representación tomaría la forma
+
+$$
+|\phi\rangle = \frac{1}{\sqrt{\sum_k x_k^2}} \sum_{k=0}^{2 -1} x_k|k\rangle
+$$
+
+```{python}
+import pennylane as qml
+
+dev = qml.device('default.qubit', wires=2)
+
+@qml.qnode(dev)
+def feature_map(f):
+    qml.AmplitudeEmbedding(features=f, wires=range(2))
+    return qml.state()
+
+feature_map(f=[1/2, 1/2, 1/2, 1/2])
+```
+
+## Circuitos IQP
+
+Basado en algunos trabajos en el campo [@Havl_ek_2019], la familia de circuitos IQP fue propuesta como una transformación potencialmente buena dada su dureza cuando se trata de simulación clásica. Si hay algo cuántico que se añade a la mezcla, estos circuitos deben ser una buena manera de tener esos intrinsicamente añadidos.
+
+### ZZ feature map
+
+Esta es una versión particular del Pauli feature map que encontraremos en [Qiskit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZZFeatureMap). Realiza las mismas rotaciones que vimos en el encoding en ángulo pero con una interacción $ZZ$ extra entre puntos de datos para capturar las observaciones correlativas y reforzar aún más su representación. También podemos realizar varias repeticiones del mapping proporcionando una iteración más compleja.
+
+Dado que usa rotaciones $Z$ es común ver gates Hadamard precediendo a esas rotaciones para que mover nuestros estados $|0\rangle$ a $|+\rangle$ asegure que esas rotaciones tengan algún efecto significativo.
+
+```{python}
+from qiskit.circuit.library import ZZFeatureMap
+
+feature_map = ZZFeatureMap(3)
+feature_map.draw('mpl')
+```
+
+```{python}
+feature_map.decompose().draw('mpl', fold=-1)
+```
+
+El [caso general](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap) nos permite definir una especificación completa de rotaciones de Pauli y disposición de entrelazado de modo que uno pueda personalizar el feature map a sus especificaciones.
+
+```{python}
+from qiskit.circuit.library import PauliFeatureMap
+
+feature_map = PauliFeatureMap(3, paulis=["X", "YZ"], entanglement='linear')
+feature_map.decompose().draw('mpl', fold=-1)
+```
+
+¿Es bueno este mapping? ¿O malo? ¿Cuántas repeticiones hay que usar? Bueno, de hecho, algunos de los approaches no tienen un rationale particular detrás y son mucho más experimentales. Siempre podemos mirar a la literatura para papeles relevantes explorando las cualidades de cada feature map tratando de encontrar el que podría ser beneficioso para nuestro proyecto [@sim2019expressibility].

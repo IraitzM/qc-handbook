@@ -1,0 +1,143 @@
+# AQC en práctica {.unnumbered}
+
+Haremos un ejemplo simple para que el formalismo de este algoritmo sea claro para todo el mundo. Necesitaremos para este ejercicio:
+
+* Un Hamiltoniano inicial y su estado fundamental
+* Un Hamiltoniano final
+* Una función de programación que governe la evolución y la mezcla entre los dos
+
+Empecemos seleccionando nuestro Hamiltoniano inicial:
+
+$$
+H_{init} = - \sum_i^N \sigma_i^x
+$$
+
+```{python}
+N = 3 # 3 qubit system
+```
+
+```{python}
+import numpy as np
+
+sigma_x = np.matrix([[0, 1],
+                     [1, 0]])
+
+H_init = 0
+for j in range(N):
+    H_init += -1.0 * np.kron( np.kron(np.identity(2**j), sigma_x), np.identity(2**(N-j-1)) )
+
+H_init
+```
+
+Ahora usaremos algunas funciones para computar los Eigenspectra (conjunto de eigenvalues para un Hamiltoniano dado) y el estado fundamental (estado de energía mínima).
+
+```{python}
+from math import sqrt
+from numpy.linalg import eig
+
+def get_eigenspectra(h_mat):
+    """
+    Computes the eigenspectra
+    """
+    evals, evecs = eig(h_mat)
+    sort_index = np.argsort(evals)
+
+    return evals [sort_index], evecs[:, sort_index]
+
+def get_gs(h_mat):
+    """ Computes the ground state """
+    evals, evecs = eig(h_mat)
+    sort_index = np.argsort(evals)
+
+    stat_gs = evecs[:, sort_index[0]]
+    gs_val = evals[sort_index[0]]
+    
+    num = 1
+    for idx in sort_index[1:]:
+        if evals[idx] == gs_val:
+            stat_gs += evecs[:, idx]
+            num += 1
+        else:
+            break
+
+    return np.dot((1/sqrt(num)), stat_gs)
+```
+
+Así, al computar el estado fundamental de nuestro Hamiltoniano inicial podemos comprobar que es la superposición de todos los estados posibles con probabilidad igual.
+
+```{python}
+get_gs(H_init)
+```
+
+Ahora para nuestro Hamiltoniano objetivo seleccionaremos una instancia aleatoria del modelo Ising que se ve así:
+
+$$
+H_{problem} = \sum_j^N J_{j,j+1}\sigma_j^z\sigma_{j+1}^z
+$$
+
+```{python}
+J = -1
+
+sigma_z = np.matrix([[1, 0],
+                     [0, -1]])
+
+H_problem = 0
+for i in range(N-1):
+    H_problem = J* np.kron( np.kron(np.identity(2**i), sigma_z), np.identity(2**(N-i-1)) ) * np.kron( np.kron(np.identity(2**(i+1)), sigma_z), np.identity(2**(N-(i+1)-1)) )
+
+H_problem
+```
+
+```{python}
+get_gs(H_problem)
+```
+
+Podemos ver que nuestro modelo Ising tiene un estado fundamental que se ve así:
+
+$$
+|\psi\rangle = \frac{1}{2}|000\rangle + \frac{1}{2}|011\rangle + \frac{1}{2}|100\rangle + \frac{1}{2}|111\rangle
+$$
+
+Ahora solo necesitaríamos definir una función de programación para mezclar ambos Hamiltonianos. Solo por simplicidad utilizaremos una función de programación $\lambda(t)$ y su complementaria para el decaimiento del Hamiltoniano inicial.
+
+$$
+H(t) = (1-\lambda(t))H_{init} + \lambda(t)H_{problem}
+$$
+
+```{python}
+e0 = []
+e1 = []
+time_range = np.arange(0.0, 1.0, 0.1)
+
+for lambda_t in time_range:
+
+    H = (1-lambda_t)*H_init + lambda_t*H_problem
+
+    vals, stats = get_eigenspectra(H)
+    e0.append(vals[0])
+    e1.append(vals[1])
+```
+
+```{python}
+import matplotlib.pyplot as plt
+
+plt.plot(time_range, e0, time_range, e1)
+plt.show()
+```
+
+```{python}
+plt.plot(np.subtract(e1,e0))
+plt.show()
+```
+
+```{python}
+stats[:, 0]
+```
+
+Allí tienen, el estado obtenido corresponde al deseado
+
+$$
+|\psi\rangle = \frac{1}{2}|000\rangle + \frac{1}{2}|011\rangle + \frac{1}{2}|100\rangle + \frac{1}{2}|111\rangle.
+$$
+
+hasta una precisión.

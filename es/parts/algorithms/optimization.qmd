@@ -1,0 +1,31 @@
+# Optimización {.unnumbered}
+
+Optimización and research operativa (OR) son enfoques analíticos poderosos que ayudan a las empresas a tomar mejores decisiones encontrando las mejores soluciones a problemas complejos. En su núcleo, la optimización implica _maximizar_ o _minimizar_ un objetivo (como ganancia, costo o eficiencia) mientras se satisfacen diversas restricciones y limitaciones que situaciones empresariales del mundo real imponen.
+
+En el mundo empresarial, los problemas de optimización están en todas partes. Las empresas necesitan determinar la forma más rentable de distribuir productos entre varios almacenes, asignar presupuestos limitados entre canales de marketing, programar empleados para cumplir requisitos de servicio, o decidir qué productos fabricar dadas restricciones de recursos. La research operativa proporciona el marco matemático y herramientas computacionales para abordar estos desafíos de manera sistemática.
+
+El proposición de valor para las empresas es convincente: la optimización puede reducir costos, aumentar ingresos, mejorar el servicio al cliente y mejorar la eficiencia operativa. Por ejemplo, las aerolíneas usan optimización para fijar precios y gestionar inventario de asientos, empresas de logística optimizan rutas de entrega para minimizar costos de combustible y tiempo, y fabricantes optimizan programas de producción para maximizar el throughput mientras minimizan el desperdicio.
+
+## Tipos de Optimización
+
+Diferentes problemas empresariales requieren diferentes técnicas de optimización, cada una adecuada a estructuras matemáticas específicas. Estas se particularizan dependiendo de la forma del problema y sus restricciones.
+
+Por ejemplo, si nuestro problema tiene una forma convexa (es decir, se ve como un cuenco), entonces existe un entero dedicado a ello.
+
+* [Optimización Convexa](https://en.wikipedia.org/wiki/Convex_optimization): estudia el caso cuando la función objetivo es convexa (minimización) o cóncava (maximización) y el conjunto de restricciones es convexo. Esto puede verse como un caso particular de programación no lineal o como una generalización de la programación lineal o cuadrática convexas.
+    * [Programación Lineal](https://en.wikipedia.org/wiki/Linear_programming) (LP) maneja problemas donde tanto la función objetivo como las restricciones son relaciones lineales. Esto es ideal para problemas de asignación de recursos, como determinar la mezcla óptima de productos para maximizar la ganancia dada materias primas limitadas y capacidad de producción.
+    * [Programación Cuadrática](https://en.wikipedia.org/wiki/Quadratic_programming) (QP) aborda situaciones donde la función objetivo contiene términos cuadráticos, apareciendo a menudo en optimización de carteras donde el riesgo (medido como varianza) necesita equilibrarse contra los retornos esperados.
+* [Programación No Lineal](https://en.wikipedia.org/wiki/Nonlinear_programming) aborda problemas con funciones objetivas o restricciones no lineales, comunes en diseño de ingeniería, estrategias de precios y situaciones donde existen economías o diseconomías de escala.
+* [Programación Estocástica](https://en.wikipedia.org/wiki/Stochastic_programming) aborda la incertidumbre incorporando elementos probabilísticos, útil para planificación de cadena de suministro bajo incertidumbre de demanda o planificación financiera con volatilidad de mercado.
+
+Pero dependiendo de las variables a utilizarse, por ejemplo restringiendo a un conjunto específico de valores, otras especificaciones pueden encontrarse:
+
+* [Programación Entera](https://en.wikipedia.org/wiki/Integer_programming) (IP) donde todas las variables deben ser valores enteros.
+* [Programación Mi-Entera](https://en.wikipedia.org/wiki/Integer_programming) (MIP) combina variables continuas y discretas, lo que la hace perfecta para problemas que involucran decisiones sí/no junto con decisiones de cantidad. Ejemplos incluyen problemas de ubicación de instalaciones (si abrir un almacén) junto con decisiones de distribución (cuánto enviar).
+* [Optimización Binaria](https://en.wikipedia.org/wiki/Integer_programming) (BO) es un caso especial de programación entera donde solo se permiten dos valores para nuestras variables, 0 o 1, de ahí el nombre de binaria.
+
+Estos últimos problemas a menudo requieren una versión relajada del problema donde resolvemos usando solvers adecuados para técnicas anteriores y luego iteramos añadiendo restricciones para aproximar nuestro objetivo. Esta técnica se conoce como [Branch-and-Bound](https://en.wikipedia.org/wiki/Branch_and_bound).
+
+La elección del enfoque de optimización depende de la estructura del problema, disponibilidad de datos y requerimientos computacionales. Las empresas cada vez másdependen de estas técnicas como ventaja competitiva, usando sofisticado software y algoritmos para resolver problemas que serían impossibles de abordar mediante intuición o simples heurísticas. La clave es emparejar la herramienta de optimización correcta al desafío empresarial específico en cuestión.
+
+Optimización binaria es una tarea desafiante y los ordenadores cuánticos tomaron la oportunidad en ello, ya que los problemas binarios ya caen en su naturaleza.

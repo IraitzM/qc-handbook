@@ -1,0 +1,487 @@
+# Características interesantes
+
+## Expresividad
+
+Un enfoque sencillo es comparar la distribución de fidelidades obtenidas muestreando un PQC objetivo $n$ número de veces con parámetros al azar, contra la distribución de fidelidades que obtendríamos sobre el mismo dominio a partir de un ensemble de estados Haar aleatorios.
+
+Así,
+
+$$
+\text{Expr} = D_{KL}\left( \hat{P}_{PQC}(F; \theta) \| P_{Haar}(F)\right) = \sum_{j} \hat{P}_{PQC}(F_j; \theta)\log\left(\frac{\hat{P}_{PQC}(F_j; \theta)}{P_{\text{Haar}(F_j)}}\right)
+$$
+
+donde $\hat{P}_{PQC}(F; \theta)$ es la distribución de probabilidad estimada de fidelidades resultante de muestrear estados de un PQC con parámetros $\theta$. $F_j$ representa la fidelidad en el bin $j$.
+
+Así, necesitamos generar un _histogram_ de los elementos de $F$. La salida de este histogram es un conjunto de bins $B = \{(l_1, u_1), (l_2, u_2), \cdots \}$ donde $l_{j}$ ($u_j$) denota el límite inferior (superior) del bin $j$. También produce una función de distribución de probabilidad empírica $\mathrm{P}_{\text{PQC}}(j)$, que es simplemente la probabilidad de que un valor dado de $F$ caiga en el bin $j$.
+
+Tomemos el ansatz definido por un circuito idle como ejemplo.
+
+```{python}
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(1, 1)
+
+qc.draw('mpl')
+```
+
+```{python}
+from qiskit.quantum_info import Statevector
+from qiskit.visualization import plot_bloch_multivector
+
+psi  = Statevector.from_instruction(qc)
+plot_bloch_multivector(psi)
+```
+
+No importa qué hagamos, el ansatz no cambiará, por lo que su expresividad debería ser nula.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from qiskit_aer import AerSimulator
+
+# Size of our histogram
+dims = 100
+num_qubits = 1
+
+# Bin edges
+bins_list = []
+for i in range(dims):
+    bins_list.append((i) / (dims - 1))
+
+# Haar histogram
+p_haar_hist = []
+for i in range(dims - 1):
+    p_haar_hist.append(
+        (1 - bins_list[i]) ** (2**num_qubits - 1) - (1 - bins_list[i + 1]) ** (2**num_qubits - 1)
+    )
+
+# Select the AerSimulator from the Aer provider
+simulator = AerSimulator(method='matrix_product_state')
+
+# Sample from circuit
+nshot=1_024
+nsamples=1_000
+fidelities=[]    
+for _ in range(nsamples):
+    qc = QuantumCircuit(1, 1)
+    qc.measure(0,0)
+
+    job = simulator.run([qc], shots = nshot)
+    result = job.result()
+    count = result.get_counts()
+
+    # Fidelity
+    if '0' in count:
+        ratio=count['0']/nshot
+    else:
+        ratio=0
+    fidelities.append(ratio)
+
+weights = np.ones_like(fidelities) / float(len(fidelities))
+
+# Plot
+bins_x = []
+for i in range(dims - 1):
+    bins_x.append(bins_list[1] + bins_list[i])
+
+plt.hist(
+    fidelities,
+    bins=bins_list,
+    weights=weights,
+    label="Circuit",
+    range=[0, 1],
+)
+plt.plot(bins_x, p_haar_hist, label="Haar")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+### Cero significa máxima expresividad
+
+Podemos ver cómo todas las fidelidades tienen probabilidad cero excepto para la fidelidad 1, lo que significa que hay solo un estado que podemos renderizar con este circuito. El métrico funciona al revés: una distancia cero representa una landscape de fidelidad probabilística igual al Haar y por lo tanto todos los estados (puros) en el espacio de Hilbert pueden producirse con el conjunto correcto de parámetros ($\theta$). Nuestro circuito idle está en el extremo opuesto, volviendo toda su masa en un solo bin, por lo que la divergencia tomará el valor más grande que pueda tomar aquí, $\log N$ donde $N$ es el número de bins seleccionados para el histogram.
+
+```{python}
+from scipy.special import rel_entr # For entropy calculation
+
+pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
+```
+
+Esto coincide con el valor que anticipamos, teniendo en cuenta que `dims` cuenta los edges del histogram así que el número de bins es uno menos.
+
+```{python}
+np.log(dims - 1)
+```
+
+Siendo una distancia, el puntaje corre al revés de lo que se esperaría: 0 es lo mejor que podemos obtener, no el valor más grande.
+
+Podemos ver qué efecto tendría si introducimos una gate paramétrica en su lugar, algo más complejo con un parámetro libre como:
+
+```{python}
+from qiskit import QuantumCircuit
+from qiskit.circuit import Parameter
+
+a = Parameter('a')
+
+qc = QuantumCircuit(1, 1)
+qc.h(0)
+qc.rz(a, 0)
+
+qc.draw('mpl')
+```
+
+Para obtener una fidelidad a partir de dos elecciones de parámetros aleatorias $\theta$ y $\phi$ appendamos el inverse del circuito a sí mismo, de modo que ejecutemos $U^\dagger(\phi)U(\theta)$ y contemos cuánto menudo volvemos al estado inicial. Esa frecuencia es precisamente $F = |\langle 0 |U^\dagger(\phi)U(\theta)| 0 \rangle|^2$.
+
+```{python}
+from random import random
+
+# Bin edges
+bins_list = []
+for i in range(dims):
+    bins_list.append((i) / (dims - 1))
+
+# Haar histogram
+p_haar_hist = []
+for i in range(dims - 1):
+    p_haar_hist.append(
+        (1 - bins_list[i]) ** (2**num_qubits - 1) - (1 - bins_list[i + 1]) ** (2**num_qubits - 1)
+    )
+
+# Select the AerSimulator from the Aer provider
+simulator = AerSimulator(method='matrix_product_state')
+
+# Sample from circuit
+fidelities=[]    
+for _ in range(nsamples):
+    theta = 2 * np.pi * random()
+    phi = 2 * np.pi * random()
+
+    qc = QuantumCircuit(1, 1)
+    qc.h(0)
+    qc.rz(theta, 0)
+    # Inverse of the circuit, on a second independent set of parameters
+    qc.rz(-phi, 0)
+    qc.h(0)
+    qc.measure(0,0)
+
+    job = simulator.run([qc], shots = nshot)
+    result = job.result()
+    count = result.get_counts()
+
+    # Fidelity
+    if '0' in count:
+        ratio=count['0']/nshot
+    else:
+        ratio=0
+    fidelities.append(ratio)
+
+weights = np.ones_like(fidelities) / float(len(fidelities))
+
+# Plot
+bins_x = []
+for i in range(dims - 1):
+    bins_x.append(bins_list[1] + bins_list[i])
+
+plt.hist(
+    fidelities,
+    bins=bins_list,
+    weights=weights,
+    label="Circuit",
+    range=[0, 1],
+)
+plt.plot(bins_x, p_haar_hist, label="Haar")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+```{python}
+pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
+```
+
+Podemos extender esto actuando sobre más de un eje, lo que debería acabar cubriendo al máximo la esfera de Bloch en este caso de un solo qubit.
+
+```{python}
+from qiskit import QuantumCircuit
+from qiskit.circuit import Parameter
+
+a = Parameter('a')
+b = Parameter('b')
+
+qc = QuantumCircuit(1, 1)
+qc.h(0)
+qc.rz(a, 0)
+qc.rx(b, 0)
+
+qc.draw('mpl')
+```
+
+```{python}
+# Bin edges
+bins_list = []
+for i in range(dims):
+    bins_list.append((i) / (dims - 1))
+
+# Haar histogram
+p_haar_hist = []
+for i in range(dims - 1):
+    p_haar_hist.append(
+        (1 - bins_list[i]) ** (2**num_qubits - 1) - (1 - bins_list[i + 1]) ** (2**num_qubits - 1)
+    )
+
+# Select the AerSimulator from the Aer provider
+simulator = AerSimulator(method='matrix_product_state')
+
+# Sample from circuit
+fidelities=[]    
+for _ in range(nsamples):
+    theta, beta = 2 * np.pi * random(), 2 * np.pi * random()
+    phi, delta = 2 * np.pi * random(), 2 * np.pi * random()
+
+    qc = QuantumCircuit(1, 1)
+    qc.h(0)
+    qc.rz(theta, 0)
+    qc.rx(beta, 0)
+    # Inverse of the circuit, on a second independent set of parameters
+    qc.rx(-delta, 0)
+    qc.rz(-phi, 0)
+    qc.h(0)
+    qc.measure(0,0)
+
+    job = simulator.run([qc], shots = nshot)
+    result = job.result()
+    count = result.get_counts()
+
+    # Fidelity
+    if '0' in count:
+        ratio=count['0']/nshot
+    else:
+        ratio=0
+    fidelities.append(ratio)
+
+weights = np.ones_like(fidelities) / float(len(fidelities))
+
+# Plot
+bins_x = []
+for i in range(dims - 1):
+    bins_x.append(bins_list[1] + bins_list[i])
+
+plt.hist(
+    fidelities,
+    bins=bins_list,
+    weights=weights,
+    label="Circuit",
+    range=[0, 1],
+)
+plt.plot(bins_x, p_haar_hist, label="Haar")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+```{python}
+pi_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+print("Expr = ", sum(rel_entr(pi_hist, p_haar_hist)))
+```
+
+Deberían parecerse a los plots del trabajo original [@sim2019expressibility].
+
+## Capacidad de entrelazamiento
+
+La expresividad nos dice _cuánto_ del espacio de Hilbert nuestro ansatz puede alcanzar, pero no dice nada sobre el _tipo_ de estados que produce. Un circuito hecho solo de rotaciones de un qubit, una por cable, puede cubrir todos los estados producto que podamos imaginar y aun así ser simulable un qubit a la vez. Si esperamos alguna ventaja de nuestro circuito parametrizado también deberíamos preguntar cómo están correlacionados los estados que prepara.
+
+La métrica compañera propuesta en el mismo trabajo es la _capacidad de entrelazamiento_, construida sobre la medida de Meyer-Wallach $Q$ [@meyer2002global]. En la forma derivada por Brennen [@brennen2003observable] es simplemente un promedio sobre cómo se ve cada qubit una vez que se ignora el resto del registro
+
+$$
+Q(|\psi\rangle) = 2\left( 1 - \frac{1}{n}\sum_{k=1}^{n} \text{Tr}\left[\rho_k^2\right] \right)
+$$
+
+donde $\rho_k = \text{Tr}_{\bar{k}}\left(|\psi\rangle\langle\psi|\right)$ es la matriz de densidad reducida del qubit $k$ tras trazar todos los demás qubits, y $\text{Tr}[\rho_k^2]$ su _pureza_. Un estado producto deja cada qubit puro ($\text{Tr}[\rho_k^2] = 1$), así que $Q = 0$, mientras que un estado máximamente entrelazado deja cada qubit totalmente mixto ($\text{Tr}[\rho_k^2] = 1/2$) dando $Q = 1$.
+
+Como antes, es una propiedad de un solo estado y nuestro ansatz produce uno diferente para cada $\theta$. Así que promediamos sobre el espacio de parámetros
+
+$$
+\text{Ent} = \frac{1}{|S|}\sum_{\theta_i \in S} Q(|\psi_{\theta_i}\rangle)
+$$
+
+con $S$ el conjunto de vectores de parámetros muestreados. A diferencia de la expresividad, aquí la escala es la intuitiva: $0$ significa que el circuito nunca entrelaza nada y $1$ que siempre produce estados máximamente entrelazados.
+
+```{python}
+from qiskit.quantum_info import partial_trace
+
+def meyer_wallach(circuit):
+    """Q measure for the state prepared by an already bound circuit."""
+    n = circuit.num_qubits
+    psi = Statevector.from_instruction(circuit)
+
+    purities = 0
+    for k in range(n):
+        # Every qubit but k gets traced out
+        rho_k = partial_trace(psi, [q for q in range(n) if q != k])
+        purities += rho_k.purity().real
+
+    # Numerical noise may push the result marginally outside its [0, 1] range
+    return float(np.clip(2 * (1 - purities / n), 0, 1))
+```
+
+Comprobémoslo contra estados que ya conocemos la respuesta.
+
+```{python}
+# A product state, no interaction whatsoever
+product = QuantumCircuit(2)
+product.h(0)
+product.ry(np.pi / 3, 1)
+
+# A Bell pair
+bell = QuantumCircuit(2)
+bell.h(0)
+bell.cx(0, 1)
+
+# A GHZ state over four qubits
+ghz = QuantumCircuit(4)
+ghz.h(0)
+for q in range(3):
+    ghz.cx(q, q + 1)
+
+for name, circuit in [("Product", product), ("Bell", bell), ("GHZ", ghz)]:
+    print(f"Q({name}) = {meyer_wallach(circuit):.3f}")
+```
+
+### Promediar sobre el espacio de parámetros
+
+Ahora podemos hacer con la capacidad de entrelazamiento lo que hicimos con la expresividad: muestrear parámetros aleatorios y observar el resultado. Comparemos tres ansätze de dos qubits que difieren solo en cómo (o si) los cables hablan entre sí.
+
+```{python}
+def only_rotations(rng):
+    """Two independent qubits, nothing connects them."""
+    qc = QuantumCircuit(2)
+    for q in range(2):
+        qc.rx(rng.uniform(0, 2 * np.pi), q)
+        qc.rz(rng.uniform(0, 2 * np.pi), q)
+    return qc
+
+def with_cnot(rng):
+    qc = only_rotations(rng)
+    qc.cx(0, 1)
+    return qc
+
+def with_controlled_rotation(rng):
+    qc = only_rotations(rng)
+    qc.crx(rng.uniform(0, 2 * np.pi), 0, 1)
+    return qc
+```
+
+```{python}
+def entangling_capability(builder, nsamples=1_000, seed=1234):
+    rng = np.random.default_rng(seed)
+    return np.array([meyer_wallach(builder(rng)) for _ in range(nsamples)])
+
+samples = {
+    "Only rotations": entangling_capability(only_rotations),
+    "CNOT": entangling_capability(with_cnot),
+    "CRX": entangling_capability(with_controlled_rotation),
+}
+
+for label, q_values in samples.items():
+    plt.hist(
+        q_values,
+        bins=np.linspace(0, 1, 26),
+        histtype="step",
+        linewidth=2,
+        label=f"{label} (Ent = {q_values.mean():.3f})",
+    )
+plt.yscale("log")
+plt.xlabel("Q")
+plt.ylabel("Counts")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+El circuito sin una puerta de dos qubits se acumula en $Q = 0$, como es de esperar. La versión `CNOT` se extiende hasta estados máximamente entrelazados, y el `CRX` parametrizado se sitúa en medio: siempre que su ángulo esté cerca de $0$ o $2\pi$ la puerta apenas entrelaza, por lo que los valores bajos de $Q$ siguen siendo frecuentes.
+
+### Más capas, más entrelazamiento
+
+El parámetro habitual que ajustar es la profundidad. Repetir un bloque de rotaciones seguido de una escalera de entrelazamiento debería propagar progresivamente las correlaciones a través del registro.
+
+```{python}
+def hardware_efficient(rng, layers, num_qubits=4):
+    qc = QuantumCircuit(num_qubits)
+    for _ in range(layers):
+        for q in range(num_qubits):
+            qc.ry(rng.uniform(0, 2 * np.pi), q)
+            qc.rz(rng.uniform(0, 2 * np.pi), q)
+        for q in range(num_qubits - 1):
+            qc.cx(q, q + 1)
+    return qc
+
+hardware_efficient(np.random.default_rng(0), layers=2).draw('mpl')
+```
+
+```{python}
+layers = range(1, 6)
+ent_per_layer = [
+    entangling_capability(
+        lambda rng, d=depth: hardware_efficient(rng, d), nsamples=300
+    ).mean()
+    for depth in layers
+]
+
+plt.plot(list(layers), ent_per_layer, marker="o")
+plt.xlabel("Layers")
+plt.ylabel("Ent")
+plt.xticks(list(layers))
+plt.ylim(0, 1)
+plt.show()
+```
+
+La mayor parte de la ganancia proviene de las primeras capas y la curva se aplana rápidamente después, una observación recurrente al elegir un ansatz: más allá de cierta profundidad seguimos pagando en puertas, ruido y entrenabilidad sin obtener nada a cambio.
+
+### Ambas métricas cuentan historias distintas
+
+Es tentador asumir que un circuito que entrelaza mucho es automáticamente expresivo, pero las dos cantidades son lo suficientemente independientes como para merecer medirlas por separado. Podemos reutilizar la maquinaria anterior, esta vez calculando las fidelidades directamente a partir de los vectores de estado en lugar de muestrear shots. Es la misma cantidad que antes, solo que libre de ruido de muestreo.
+
+```{python}
+def expressivity(builder, num_qubits, nsamples=1_000, seed=1234):
+    rng = np.random.default_rng(seed)
+
+    bins_list = [i / (dims - 1) for i in range(dims)]
+    N = 2**num_qubits
+    p_haar_hist = [
+        (1 - bins_list[i]) ** (N - 1) - (1 - bins_list[i + 1]) ** (N - 1)
+        for i in range(dims - 1)
+    ]
+
+    fidelities = []
+    for _ in range(nsamples):
+        psi = Statevector.from_instruction(builder(rng))
+        phi = Statevector.from_instruction(builder(rng))
+        fidelities.append(np.abs(psi.inner(phi)) ** 2)
+
+    weights = np.ones(nsamples) / nsamples
+    pqc_hist = np.histogram(fidelities, bins=bins_list, weights=weights, range=[0, 1])[0]
+
+    return sum(rel_entr(pqc_hist, p_haar_hist))
+```
+
+```{python}
+ansatze = [
+    ("Only rotations", only_rotations),
+    ("CNOT", with_cnot),
+    ("CRX", with_controlled_rotation),
+    ("2 layers", lambda rng: hardware_efficient(rng, 2, num_qubits=2)),
+    ("3 layers", lambda rng: hardware_efficient(rng, 3, num_qubits=2)),
+]
+
+print(f"{'Ansatz':<18}{'Expr':>8}{'Ent':>8}")
+for label, builder in ansatze:
+    print(
+        f"{label:<18}"
+        f"{expressivity(builder, num_qubits=2):>8.3f}"
+        f"{entangling_capability(builder).mean():>8.3f}"
+    )
+```
+
+Recuerda que son estimaciones de muestra finita sobre un histograma con bins, así que el valor absoluto de `Expr` tiene un sesgo y solo la comparación entre filas es significativa. Dos cosas destacan.
+
+La primera es que `Only rotations` y `CNOT` comparten exactamente la misma expresividad mientras que su capacidad de entrelazamiento no podría ser más diferente. La razón es que el `CNOT` se sitúa al final del circuito, actuando como una unitaria fija común a cada muestra, y una unitaria común deja todos los solapamientos $|\langle\psi_{\theta_i}|\psi_{\theta_j}\rangle|^2$ intactos. La expresividad simplemente no puede verlo; la capacidad de entrelazamiento, sí.
+
+La segunda es que el ansatz `CRX` es más expresivo que el `CNOT` mientras que entrelaza aproximadamente la mitad. Añadir correlaciones y cubrir el espacio de Hilbert son objetivos relacionados pero diferentes, y un buen ansatz suele ser el que alcanza suficiente de ambos mientras se mantiene superficial, ya que empujar cualquiera de las métricas a su límite nos deja precisamente en el régimen donde empiezan a aparecer los barren plateaus [@mcclean2018barren].

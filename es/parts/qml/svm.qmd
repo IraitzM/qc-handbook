@@ -1,0 +1,248 @@
+# QSVC cuántico {.unnumbered}
+
+Vamos a ver cómo componer ese modelo particular, paso a paso. Probablemente [sQUlearn](https://squlearn.github.io/index.html) sea uno de los mejores recursos para simplificar nuestro código. Empezaremos cargando los datos. El famoso dataset iris (solo tomaremos los dos primeros valores).
+
+```{python}
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from sklearn import datasets
+from sklearn.decomposition import PCA
+
+# import some data to play with
+iris = datasets.load_iris()
+X = iris.data[:100, :2]  # only take the first two features.
+Y = iris.target[:100] # and first 100 samples
+
+plt.figure(2, figsize=(8, 6))
+plt.clf()
+
+# Plot the training points
+plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+```
+
+La tarea aquí es encontrar una buena proyección de esas características para poder separar mejor entre las tres clases (Setosa, Virginica y Versicolor). Algunos pasos clave son la partición para tener una métrica justa de evaluación y el escalado de las variables.
+
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    Y,
+    test_size=0.33,
+    random_state=42,
+)
+
+scaler = MinMaxScaler((-0.9, 0.9))
+
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+```
+
+Ahora necesitamos seleccionar un buen embedding... Bueno, probemos con un mapa de características Z simple.
+
+```{python}
+from qiskit.circuit.library import ZFeatureMap
+
+fmap = ZFeatureMap(X_train.shape[1], reps=1)
+fmap.decompose().draw('mpl')
+```
+
+Ahora sabemos dónde pondremos nuestros datos. Necesitamos componer un kernel con eso. El más simple,
+
+```{python}
+#| echo: false
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+```
+
+```{python}
+from qiskit_machine_learning.kernels import FidelityQuantumKernel
+from qiskit_algorithms.state_fidelities import ComputeUncompute
+from qiskit.primitives import Sampler
+
+# How to compute the fidelity between the states
+fidelity = ComputeUncompute(sampler=Sampler())
+
+# Feature map and quantum Kernel
+kernel = FidelityQuantumKernel(feature_map=fmap, fidelity=fidelity)
+kernel.evaluate(X_train[0,:], X_train[0,:])
+```
+
+Tiene sentido, una superposición completa entre las dos. ¿Qué pasa si usamos puntos de muestra diferentes.
+
+```{python}
+kernel.evaluate(X_train[1,:], X_train[0,:])
+```
+
+¿Qué tan buena es nuestro kernel?
+
+## Target Alignment
+
+Hay una métrica que podemos usar para eso, llamada Target Alignment [@Hubregtsen_2022]
+
+$$
+TA(K) = \frac{\sum_{ij}K(x_i,x_j)y_iy_j}{\sqrt{\sum_{ij}K(x_i,x_j)^2\sum_{ij}y_i^2y_j^2}}
+$$
+
+donde $K$ es nuestro kernel. Entonces podemos probar qué tan bueno es nuestro kernel después.
+
+
+```{python}
+import numpy as np
+
+def target_alignment(kernel, X, y_labels) -> float:
+
+    # Get estimated kernel matrix
+    kmatrix = kernel.evaluate(X)
+
+    # Scale y values to -1 and 1
+    nun_plus = np.count_nonzero(np.array(y_labels) == 1)
+    num_minus = len(y_labels) - nun_plus
+    _Y = np.array([y / nun_plus if y == 1 else y / num_minus for y in y_labels])
+
+    T = np.outer(_Y, _Y) # Y outer product
+
+    numerator = np.sum(kmatrix * T)
+    denominator = np.sqrt(np.sum(kmatrix * kmatrix) * np.sum(T * T))
+    return numerator / denominator
+
+target_alignment(kernel, X_train, y_train)
+```
+
+```{python}
+target_alignment(kernel, X_test, y_test)
+```
+
+No está mal, entonces podríamos obtener una estimación sobre la separabilidad de un kernel seleccionado con esta. Ahora que sabemos que nuestro kernel es suficientemente bueno, comprobemos cómo funciona junto con un Support Vector Classifier.
+
+```{python}
+from qiskit_machine_learning.algorithms import QSVC
+
+# QKernel + SVC
+qsvc = QSVC(quantum_kernel=kernel)
+qsvc.fit(X_train, y_train)
+qsvc.score(X_test, y_test)
+```
+
+¡Puntuación perfecta! Bueno, no fue tan difícil 😊
+
+## Papel del entrelazamiento
+
+Podemos probar con un mapa de características un poco más complejo. De hecho, el embedding $Z$ no tiene capacidad de entrelazamiento ya que está compuesto solo de rotaciones single-qubit independientes. Podemos añadir un poco de entrelazamiento a él y verificar si performs better (tiene entrelazamiento y eso es genial, así que debería funcionar mejor).
+
+```{python}
+# import some data to play with
+iris = datasets.load_iris()
+X = iris.data[50:150, :2]  # only take the last two features.
+Y = iris.target[50:] # and first 100 samples
+
+plt.figure(2, figsize=(8, 6))
+plt.clf()
+
+# Plot the training points
+plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired)
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+```
+
+Eso se ve más complejo. Comprobemos nuestro mapa de características anterior.
+
+```{python}
+# Train and test
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    Y,
+    test_size=0.33,
+    random_state=42,
+)
+
+# Scale
+scaler = MinMaxScaler((-0.9, 0.9))
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Feature map and kernel composition
+fmap = ZFeatureMap(X_train.shape[1], reps=1)
+fidelity = ComputeUncompute(sampler=Sampler())
+
+# Feature map and quantum Kernel
+kernel = FidelityQuantumKernel(feature_map=fmap, fidelity=fidelity)
+kernel.evaluate(X_train[0,:], X_train[0,:])
+
+# QKernel + SVC
+qsvc = QSVC(quantum_kernel=kernel)
+qsvc.fit(X_train, y_train)
+qsvc.score(X_test, y_test)
+```
+
+Bueno, tiene sentido que este sea más difícil.
+
+```{python}
+from sklearn.metrics import classification_report
+
+y_pred = qsvc.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+
+Podemos ver qué tan bien la representación en el esfera de Bloch separa los dos grupos.
+
+```{python}
+target_alignment(kernel, X_train, y_train)
+```
+
+```{python}
+target_alignment(kernel, X_test, y_test)
+```
+
+Curiosamente, el $TA$ es más alto en este caso, lo que significa que se separa mejor entre los dos grupos, sin embargo la clasificación es peor. Comprobemos con algún mapa de características más complejo.
+
+```{python}
+from qiskit.circuit.library import ZZFeatureMap
+
+# Feature map and kernel composition
+fmap = ZZFeatureMap(X_train.shape[1], reps=1)
+fmap.decompose().draw('mpl')
+```
+
+```{python}
+fidelity = ComputeUncompute(sampler=Sampler())
+
+# Feature map and quantum Kernel
+kernel = FidelityQuantumKernel(feature_map=fmap, fidelity=fidelity)
+kernel.evaluate(X_train[0,:], X_train[0,:])
+
+# QKernel + SVC
+qsvc = QSVC(quantum_kernel=kernel)
+qsvc.fit(X_train, y_train)
+qsvc.score(X_test, y_test)
+```
+
+Uff! Eso no se ve bien.
+
+```{python}
+y_pred = qsvc.predict(X_test)
+print(classification_report(y_test, y_pred))
+```
+
+```{python}
+target_alignment(kernel, X_train, y_train)
+```
+
+```{python}
+target_alignment(kernel, X_test, y_test)
+```
+
+Bueno, el $TA$ en este caso muestra que se separa peor en el espacio de datos latente [Hilbert](https://en.wikipedia.org/wiki/Hilbert_space) en el que se codifica, así que tendría sentido que empeore la predicción. Pero venga, añadimos entrelazamiento, esa es la salsa mágica de QC. Eso debería hacer su cosa, ¿verdad? Bueno, supongo que es por eso por lo que aún no se ha resuelto por qué y cómo QC mejorará ML para el caso general.

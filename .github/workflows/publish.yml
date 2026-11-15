@@ -25,9 +25,13 @@ jobs:
       - run: pip install jupyter
       - run: pip install -r requirements.txt
 
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
+      - name: Render English book
+        run: quarto render
+
+      - name: Render Spanish book
+        run: quarto render es
+
+      - name: Publish to GitHub Pages
+        run: quarto publish gh-pages --no-render
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

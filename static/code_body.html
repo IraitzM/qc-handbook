@@ -2,3 +2,49 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLKHBRCG"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- Language toggle (EN | ES) -->
+<script>
+(function () {
+  var libs = document.querySelector('link[href*="site_libs/"], script[src*="site_libs/"]');
+  var libsHref = libs ? (libs.getAttribute("href") || libs.getAttribute("src")) : null;
+  var root = libsHref && libsHref.indexOf("site_libs/") >= 0
+    ? new URL(libsHref.slice(0, libsHref.indexOf("site_libs/")) || "./", window.location.href)
+    : new URL("./", window.location.href);
+  if (/\/es\/?$/.test(root.pathname)) {
+    root = new URL(root.pathname.replace(/es\/?$/, ""), root.origin);
+  }
+  var rel = window.location.pathname.slice(root.pathname.length);
+  var isEs = rel === "es" || rel.indexOf("es/") === 0;
+  var page = isEs ? rel.slice(3) : rel;
+  if (!page || page.charAt(page.length - 1) === "/") page += "index.html";
+  var enUrl = new URL(page, root).href + window.location.search;
+  var esUrl = new URL("es/" + page, root).href + window.location.search;
+  var esHome = new URL("es/index.html", root).href;
+  var nav = document.createElement("nav");
+  nav.className = "lang-toggle";
+  nav.setAttribute("aria-label", "Language / Idioma");
+  [["EN", enUrl, !isEs], ["ES", esUrl, isEs]].forEach(function (item) {
+    var a = document.createElement("a");
+    a.textContent = item[0];
+    a.href = item[1];
+    a.hreflang = item[0].toLowerCase();
+    if (item[2]) { a.className = "active"; a.setAttribute("aria-current", "true"); }
+    a.addEventListener("click", function (event) {
+      if (item[2]) { event.preventDefault(); return; }
+      event.preventDefault();
+      var target = item[1], fallback = item[0] === "ES" ? esHome : enUrl;
+      fetch(target.split("?")[0], { method: "HEAD" }).then(function (r) {
+        window.location.href = r.ok ? target : fallback;
+      }).catch(function () { window.location.href = target; });
+    });
+    nav.appendChild(a);
+  });
+  var tools = document.querySelector(".sidebar-tools-main");
+  var bar = document.querySelector(".quarto-secondary-nav .container-fluid");
+  var searchBtn = bar ? bar.querySelector(".quarto-search-button") : null;
+  if (tools) tools.appendChild(nav);
+  else if (bar && searchBtn) bar.insertBefore(nav, searchBtn);
+  else if (bar) bar.appendChild(nav);
+})();
+</script>

@@ -1,0 +1,339 @@
+# AQC digitado {.unnumbered}
+
+Usaremos nuestro ejemplo anterior de MaxCut para mantenerlo simple.
+
+
+```{python}
+import networkx as nx
+
+# Create empty graph
+G = nx.Graph()
+
+# Add edges to the graph (also adds nodes)
+G.add_edges_from([(1,2),(1,3),(2,4),(3,4),(3,5),(4,5)])
+
+nx.draw(G)
+```
+
+```{python}
+from collections import defaultdict
+
+# Initialize our Q matrix
+Q = defaultdict(int)
+
+# Update Q matrix for every edge in the graph
+for i, j in G.edges:
+    Q[(i,i)]+= -1
+    Q[(j,j)]+= -1
+    Q[(i,j)]+= 2
+```
+
+```{python}
+from dimod import ExactSolver
+
+# Set up QPU parameters
+chainstrength = 8
+numruns = 10
+
+# Run the QUBO on the solver from your config file
+sampler = ExactSolver()
+response = sampler.sample_qubo(Q)
+```
+
+```{python}
+print('-' * 60)
+print('{:>15s}{:>15s}{:^15s}{:^15s}'.format('Set 0','Set 1','Energy','Cut Size'))
+print('-' * 60)
+for sample, E in response.data(fields=['sample','energy']):
+    S0 = [k for k,v in sample.items() if v == 0]
+    S1 = [k for k,v in sample.items() if v == 1]
+    print('{:>15s}{:>15s}{:^15s}{:^15s}'.format(str(S0),str(S1),str(E),str(int(-1*E))))
+```
+
+```{python}
+from qiskit.visualization import plot_histogram
+
+solution = {
+    '01101': 0.25,
+    '10010': 0.25,
+    '10011': 0.25,
+    '01100': 0.25,
+}
+
+plot_histogram(solution)
+```
+
+Ok, no siempre sabemos la solución con anticipación pero es importante para fines educativos. Tomemos las tres piezas de nuestro AQC digitado y Construyámoslas bloque por bloque, empezando por el estado cuántico fundamental de nuestro $H_{init}=-\sum_n \sigma_i^n$
+
+```{python}
+from qiskit import QuantumCircuit
+
+size = G.number_of_nodes()
+
+initial_state = QuantumCircuit(size)
+
+# Hadamard gate
+for qb_i in initial_state.qubits:
+    initial_state.h(qb_i)
+initial_state.draw('mpl')
+```
+
+Esto es simple y podemos comprobar la salida de ese circuito real. Compruebe cómo cambia la resolución de distribución dependiendo de los parámetros **shots**.
+
+```{python}
+from qiskit_aer import AerSimulator
+
+qc = QuantumCircuit(size, size)
+qc = qc.compose(initial_state)
+
+# Measures added
+qc.measure(range(size), range(size))
+
+# execute the quantum circuit
+backend = AerSimulator()
+result = backend.run(qc, shots=10000).result()
+counts  = result.get_counts(qc)
+
+plot_histogram(counts)
+```
+
+```{python}
+import qiskit.quantum_info as qi
+
+psi = qi.Statevector.from_instruction(initial_state)
+psi.draw('latex', prefix='|\\psi\\rangle = ')
+```
+
+```{python}
+from qiskit.visualization import plot_bloch_multivector
+
+plot_bloch_multivector(psi)
+```
+
+Ok así que el punto de partida es simplemente todas las soluciones potenciales: $|+\rangle^{\otimes n}$
+
+Ahora podemos añadir los bloques para $H_{init}$ y $H_{problem}$.
+
+```{python}
+from qiskit.circuit import Parameter
+
+# Create a parameter to instantiate
+beta = Parameter("$\\beta$")
+
+mixer = QuantumCircuit(size,size)
+for i in range(size):
+    mixer.rx(2*beta*(-1), i)
+    
+mixer.draw('mpl')
+```
+
+Este siguiente código es una versión particular del problema MaxCut como en un modelo Ising totalmente informado necesitaríamos añadir rotaciones $Z$ dependiendo del peso del _nodo_ y rotaciones $ZZ$ según la fuerza de cada arista. Pero dado que tenemos una matriz esparsa, podemos aprovechar eso.
+
+```{python}
+import numpy as np
+
+H_problem = np.zeros((size, size))
+
+for k, v in Q.items():
+    if not isinstance(k, int):
+        H_problem[k[0]-1][k[1]-1] = v
+
+H_problem
+```
+
+```{python}
+from qiskit.circuit import Parameter
+
+# Create a parameter to instantiate
+gamma = Parameter("$\\gamma$")
+
+problem = QuantumCircuit(size,size)
+
+for node in range(size):
+    problem.rz(2*gamma*H_problem[node][node], node)
+
+for node_i in range(size):
+    for node_j in range(node_i + 1, size):
+        if H_problem[node_i][node_j] > 0:
+            problem.rzz(2*gamma*H_problem[node_i][node_j], node_i, node_j)
+problem.draw('mpl')
+```
+
+Tenemos los tres bloques principales para configurar nuestra versión digitada del problema. Ahora necesitamos definir una composición para esos bloques donde:
+
+* $\beta$ : (1-$\lambda(t)$)/$n$
+* $\gamma$ : ($\lambda(t)$)/$n$
+
+Con $n$ siendo el número de pasos Trotter. Podemos hacer un primer enfoque con un enfoque stepwise lineal sencillo.
+
+```{python}
+maxcut = QuantumCircuit(size,size)
+maxcut.compose(initial_state, inplace=True)
+
+dt = 0.1
+
+for lt in np.arange(0.1, 1.1, dt):
+    maxcut.compose(problem.assign_parameters({gamma: lt}), inplace=True)
+    maxcut.compose(mixer.assign_parameters({beta: (1-lt)}), inplace=True)
+maxcut.measure(range(size), range(size))
+maxcut.draw('mpl', fold=500)
+```
+
+```{python}
+# execute the quantum circuit
+result = backend.run(maxcut, shots=10000).result()
+counts  = result.get_counts(maxcut)
+
+plot_histogram(counts)
+```
+
+```{python}
+import matplotlib.pyplot as plt
+
+energy = []
+success_probability = [] 
+
+for bit_string in counts:
+    solution = [int(char) for char in bit_string]
+    energy.append(np.dot(np.transpose(solution), np.dot(H_problem, solution)))
+    success_probability.append(counts[bit_string]/10000)
+
+plt.bar(energy, height=success_probability, label="Digitized AQC")
+plt.show()
+```
+
+Aumentemos el horario para que se considere una evolución más lenta.
+
+```{python}
+maxcut = QuantumCircuit(size,size)
+maxcut.compose(initial_state, inplace=True)
+
+dt = 0.01
+
+for lt in np.arange(0.1, 1.1, dt):
+    maxcut.compose(problem.assign_parameters({gamma: lt}), inplace=True)
+    maxcut.compose(mixer.assign_parameters({beta: (1-lt)}), inplace=True)
+maxcut.measure(range(size), range(size))
+maxcut.draw('mpl', fold=500)
+```
+
+```{python}
+result = backend.run(maxcut, shots=10000).result()
+counts  = result.get_counts(maxcut)
+
+plot_histogram(counts)
+```
+
+```{python}
+energy = []
+success_probability = [] 
+
+for bit_string in counts:
+    solution = [int(char) for char in bit_string]
+    energy.append(np.dot(np.transpose(solution), np.dot(H_problem, solution)))
+    success_probability.append(counts[bit_string]/10000)
+
+plt.bar(energy, height=success_probability, label="Digitized AQC")
+plt.show()
+```
+
+Podríamos seleccionar una función de programación más eficiente, pero deberíamos mirar la evolución de energía, el gap... hagamos una suposición salvaje.
+
+```{python}
+def scheduling_function(t, T):
+
+    return np.sin((np.pi/2)*np.sin((np.pi * t)/(2*T))**2)**2
+```
+
+```{python}
+T = 1.0
+dt = 0.1
+
+timeline = np.arange(0.1, T, dt)
+
+val = [scheduling_function(t, T) for t in timeline]
+
+plt.plot(timeline, val, label="Schedule")
+
+plt.show()
+```
+
+```{python}
+maxcut = QuantumCircuit(size,size)
+maxcut.compose(initial_state, inplace=True)
+
+T = 1.0
+dt = 0.1
+
+timeline = np.arange(0.1, T, dt)
+
+for t in np.arange(0.1, T, dt):
+    lambda_t = scheduling_function(t, T)
+    maxcut.compose(problem.assign_parameters({gamma: dt*lambda_t}), inplace=True)
+    maxcut.compose(mixer.assign_parameters({beta: dt*(1-lambda_t)}), inplace=True)
+maxcut.measure(range(size), range(size))
+maxcut.draw('mpl', fold=500)
+```
+
+```{python}
+result = backend.run(maxcut, shots=10000).result()
+counts  = result.get_counts(maxcut)
+
+plot_histogram(counts)
+```
+
+```{python}
+energy = []
+success_probability = [] 
+
+for bit_string in counts:
+    solution = [int(char) for char in bit_string]
+    energy.append(np.dot(np.transpose(solution), np.dot(H_problem, solution)))
+    success_probability.append(counts[bit_string]/10000)
+
+plt.bar(energy, height=success_probability, label="Digitized AQC")
+plt.show()
+```
+
+Getting close...
+
+```{python}
+maxcut = QuantumCircuit(size,size)
+maxcut.compose(initial_state, inplace=True)
+
+T = 5.0
+dt = 0.05
+
+timeline = np.arange(0.1, T, dt)
+
+for t in np.arange(0.1, T, dt):
+    lambda_t = scheduling_function(t, T)
+    maxcut.compose(problem.assign_parameters({gamma: dt*lambda_t}), inplace=True)
+    maxcut.compose(mixer.assign_parameters({beta: dt*(1-lambda_t)}), inplace=True)
+maxcut.measure(range(size), range(size))
+maxcut.draw('mpl', fold=500)
+```
+
+```{python}
+result = backend.run(maxcut, shots=10000).result()
+counts  = result.get_counts(maxcut)
+
+plot_histogram(counts)
+```
+
+```{python}
+energy = []
+success_probability = [] 
+
+for bit_string in counts:
+    solution = [int(char) for char in bit_string]
+    energy.append(np.dot(np.transpose(solution), np.dot(H_problem, solution)))
+    success_probability.append(counts[bit_string]/10000)
+
+plt.bar(energy, height=success_probability, label="Digitized AQC")
+plt.show()
+```
+
+Juguemos un poco con los parámetros de tiempo y ver si conseguimos una buena concentración de -5 estados de energía. Idealmente nuestra muestreo desde el estado fundamental debería ser menor a $2^5 = 32$ muestras, de lo contrario, la fuerza bruta sería más eficiente en estos casos. Pero en ausencia de conocimiento deberíamos adivinar un poco.
+
+Podemos confiar en técnicas conocidas para encontrar parámetros en un modelo. Sí, **techniques de machine learning**.
