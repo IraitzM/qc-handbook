@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>AQC digitado – Manual de Computación Cuántica</title>
+<title>AQC digitalizado – Manual de Computación Cuántica</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -170,7 +170,7 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="AQC digitado – Manual de Computación Cuántica">
+<meta property="og:title" content="AQC digitalizado – Manual de Computación Cuántica">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://iraitzm.github.io/qc-handbook/es/cover.png">
 <meta property="og:site_name" content="Manual de Computación Cuántica">
@@ -185,7 +185,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/examplesfordaqc.html">AQC digitado</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/examplesfordaqc.html">AQC digitalizado</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -349,7 +349,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -390,7 +390,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -414,7 +414,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -588,9 +588,9 @@ window.Quarto = {
 })();
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/examplesfordaqc.html">AQC digitado</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/examplesfordaqc.html">AQC digitalizado</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">AQC digitado</h1>
+<h1 class="title">AQC digitalizado</h1>
 </div>
 
 
@@ -608,7 +608,7 @@ window.Quarto = {
 
 
 <p>Usaremos nuestro ejemplo anterior de MaxCut para mantenerlo simple.</p>
-<div id="d3618dca" class="cell" data-execution_count="1">
+<div id="f6afaa58" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty graph</span></span>
@@ -626,7 +626,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="71a31623" class="cell" data-execution_count="2">
+<div id="a7b20ae5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize our Q matrix</span></span>
@@ -638,7 +638,7 @@ window.Quarto = {
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    Q[(j,j)]<span class="op">+=</span> <span class="op">-</span><span class="dv">1</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Q[(i,j)]<span class="op">+=</span> <span class="dv">2</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="35611664" class="cell" data-execution_count="3">
+<div id="8f3cffb4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dimod <span class="im">import</span> ExactSolver</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up QPU parameters</span></span>
@@ -649,7 +649,7 @@ window.Quarto = {
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>sampler <span class="op">=</span> ExactSolver()</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> sampler.sample_qubo(Q)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="924f440f" class="cell" data-execution_count="4">
+<div id="4392e261" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-'</span> <span class="op">*</span> <span class="dv">60</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="sc">{:&gt;15s}{:&gt;15s}{:^15s}{:^15s}</span><span class="st">'</span>.<span class="bu">format</span>(<span class="st">'Set 0'</span>,<span class="st">'Set 1'</span>,<span class="st">'Energy'</span>,<span class="st">'Cut Size'</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'-'</span> <span class="op">*</span> <span class="dv">60</span>)</span>
@@ -695,7 +695,7 @@ window.Quarto = {
              [][1, 2, 3, 4, 5]      0.0             0       </code></pre>
 </div>
 </div>
-<div id="916f8886" class="cell" data-execution_count="5">
+<div id="0792b841" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_histogram</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> {</span>
@@ -715,7 +715,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Ok, no siempre sabemos la solución con anticipación pero es importante para fines educativos. Tomemos las tres piezas de nuestro AQC digitado y Construyámoslas bloque por bloque, empezando por el estado cuántico fundamental de nuestro <span class="math inline">\(H_{init}=-\sum_n \sigma_i^n\)</span></p>
-<div id="f7733a10" class="cell" data-execution_count="6">
+<div id="26a9ccad" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>size <span class="op">=</span> G.number_of_nodes()</span>
@@ -735,7 +735,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Esto es simple y podemos comprobar la salida de ese circuito real. Compruebe cómo cambia la resolución de distribución dependiendo de los parámetros <strong>shots</strong>.</p>
-<div id="504a04e9" class="cell" data-execution_count="7">
+<div id="3a845e3c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit_aer <span class="im">import</span> AerSimulator</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(size, size)</span>
@@ -758,7 +758,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="e1240c0b" class="cell" data-execution_count="8">
+<div id="5fb005b2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qiskit.quantum_info <span class="im">as</span> qi</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>psi <span class="op">=</span> qi.Statevector.from_instruction(initial_state)</span>
@@ -767,7 +767,7 @@ window.Quarto = {
 <p><span class="math display">\[|\psi\rangle = 0.1767766953 |00000\rangle+0.1767766953 |00001\rangle+0.1767766953 |00010\rangle+0.1767766953 |00011\rangle+0.1767766953 |00100\rangle+0.1767766953 |00101\rangle + \ldots +0.1767766953 |11011\rangle+0.1767766953 |11100\rangle+0.1767766953 |11101\rangle+0.1767766953 |11110\rangle+0.1767766953 |11111\rangle\]</span></p>
 </div>
 </div>
-<div id="aaa143d9" class="cell" data-execution_count="9">
+<div id="27995814" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_bloch_multivector</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -781,7 +781,7 @@ window.Quarto = {
 </div>
 <p>Ok así que el punto de partida es simplemente todas las soluciones potenciales: <span class="math inline">\(|+\rangle^{\otimes n}\)</span></p>
 <p>Ahora podemos añadir los bloques para <span class="math inline">\(H_{init}\)</span> y <span class="math inline">\(H_{problem}\)</span>.</p>
-<div id="f7750f42" class="cell" data-execution_count="10">
+<div id="3030cfc2" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a parameter to instantiate</span></span>
@@ -801,7 +801,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Este siguiente código es una versión particular del problema MaxCut como en un modelo Ising totalmente informado necesitaríamos añadir rotaciones <span class="math inline">\(Z\)</span> dependiendo del peso del <em>nodo</em> y rotaciones <span class="math inline">\(ZZ\)</span> según la fuerza de cada arista. Pero dado que tenemos una matriz esparsa, podemos aprovechar eso.</p>
-<div id="fbe845af" class="cell" data-execution_count="11">
+<div id="024a9e06" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>H_problem <span class="op">=</span> np.zeros((size, size))</span>
@@ -819,7 +819,7 @@ window.Quarto = {
        [ 0.,  0.,  0.,  0., -2.]])</code></pre>
 </div>
 </div>
-<div id="07a1913b" class="cell" data-execution_count="12">
+<div id="777f1e05" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit <span class="im">import</span> Parameter</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a parameter to instantiate</span></span>
@@ -849,7 +849,7 @@ window.Quarto = {
 <li><span class="math inline">\(\gamma\)</span> : (<span class="math inline">\(\lambda(t)\)</span>)/<span class="math inline">\(n\)</span></li>
 </ul>
 <p>Con <span class="math inline">\(n\)</span> siendo el número de pasos Trotter. Podemos hacer un primer enfoque con un enfoque stepwise lineal sencillo.</p>
-<div id="8fee378d" class="cell" data-execution_count="13">
+<div id="34514bd4" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>maxcut <span class="op">=</span> QuantumCircuit(size,size)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>maxcut.compose(initial_state, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -868,7 +868,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="7f3360f2" class="cell" data-execution_count="14">
+<div id="06499a46" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the quantum circuit</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> backend.run(maxcut, shots<span class="op">=</span><span class="dv">10000</span>).result()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(maxcut)</span>
@@ -882,7 +882,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="1d634603" class="cell" data-execution_count="15">
+<div id="9cbf8770" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>energy <span class="op">=</span> []</span>
@@ -904,7 +904,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Aumentemos el horario para que se considere una evolución más lenta.</p>
-<div id="5da0eab3" class="cell" data-execution_count="16">
+<div id="fc8070e3" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>maxcut <span class="op">=</span> QuantumCircuit(size,size)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>maxcut.compose(initial_state, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -923,7 +923,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="fc507d4b" class="cell" data-execution_count="17">
+<div id="43eeebd5" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> backend.run(maxcut, shots<span class="op">=</span><span class="dv">10000</span>).result()</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(maxcut)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -936,7 +936,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="33b3fa56" class="cell" data-execution_count="18">
+<div id="634ad495" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>energy <span class="op">=</span> []</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>success_probability <span class="op">=</span> [] </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -956,12 +956,12 @@ window.Quarto = {
 </div>
 </div>
 <p>Podríamos seleccionar una función de programación más eficiente, pero deberíamos mirar la evolución de energía, el gap… hagamos una suposición salvaje.</p>
-<div id="9201f6d5" class="cell" data-execution_count="19">
+<div id="d6ce58c7" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> scheduling_function(t, T):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sin((np.pi<span class="op">/</span><span class="dv">2</span>)<span class="op">*</span>np.sin((np.pi <span class="op">*</span> t)<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>T))<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="452fbbf6" class="cell" data-execution_count="20">
+<div id="e6b7d310" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="fl">1.0</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.1</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -980,7 +980,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="a0925ba3" class="cell" data-execution_count="21">
+<div id="0fe4cca2" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>maxcut <span class="op">=</span> QuantumCircuit(size,size)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>maxcut.compose(initial_state, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1003,7 +1003,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="f878bf77" class="cell" data-execution_count="22">
+<div id="bfa4d400" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> backend.run(maxcut, shots<span class="op">=</span><span class="dv">10000</span>).result()</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(maxcut)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1016,7 +1016,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="0d452a0e" class="cell" data-execution_count="23">
+<div id="fcd5c8bb" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>energy <span class="op">=</span> []</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>success_probability <span class="op">=</span> [] </span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1036,7 +1036,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Getting close…</p>
-<div id="f51101c9" class="cell" data-execution_count="24">
+<div id="e2def1d6" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>maxcut <span class="op">=</span> QuantumCircuit(size,size)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>maxcut.compose(initial_state, inplace<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1059,7 +1059,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="f12d10f7" class="cell" data-execution_count="25">
+<div id="0ce6b723" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> backend.run(maxcut, shots<span class="op">=</span><span class="dv">10000</span>).result()</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>counts  <span class="op">=</span> result.get_counts(maxcut)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1072,7 +1072,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="03bc8165" class="cell" data-execution_count="26">
+<div id="1b63bed3" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>energy <span class="op">=</span> []</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>success_probability <span class="op">=</span> [] </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1086,13 +1086,13 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="examplesfordaqc_files/figure-html/cell-27-output-1.png" width="579" height="414" class="figure-img"></p>
+<p><img src="examplesfordaqc_files/figure-html/cell-27-output-1.png" width="579" height="415" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Juguemos un poco con los parámetros de tiempo y ver si conseguimos una buena concentración de -5 estados de energía. Idealmente nuestra muestreo desde el estado fundamental debería ser menor a <span class="math inline">\(2^5 = 32\)</span> muestras, de lo contrario, la fuerza bruta sería más eficiente en estos casos. Pero en ausencia de conocimiento deberíamos adivinar un poco.</p>
-<p>Podemos confiar en técnicas conocidas para encontrar parámetros en un modelo. Sí, <strong>techniques de machine learning</strong>.</p>
+<p>Podemos confiar en técnicas conocidas para encontrar parámetros en un modelo. Sí, <strong>técnicas de machine learning</strong>.</p>
 
 
 

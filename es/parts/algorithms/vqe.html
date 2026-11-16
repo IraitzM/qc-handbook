@@ -333,7 +333,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -374,7 +374,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -398,7 +398,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -614,11 +614,11 @@ H = \left[
 \end{array}
 \right]
 \]</span></p>
-<p>which can be decomposed into a linear combination of Pauli operators as</p>
+<p>que puede descomponerse en combinaciones lineales de operadores de Pauli tal que</p>
 <p><span class="math display">\[
 H = I + X + 2Z.
 \]</span></p>
-<p>Using the standard Pauli matrices in the computational basis,</p>
+<p>Usando las matrices estándar de Pauli,</p>
 <p><span class="math display">\[
 I = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix},
 \quad
@@ -626,7 +626,7 @@ X = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix},
 \quad
 Z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix},
 \]</span></p>
-<p>we recover the original matrix form</p>
+<p>podemos recuperar su forma original tal que</p>
 <p><span class="math display">\[
 H = I + X + 2Z =
 \begin{pmatrix}
@@ -717,7 +717,7 @@ E(\theta^*) = 1 - \sqrt{5} \approx -1.236.
 <p>Este es el energía del estado fundamental del Hamiltoniano y coincide con el valor propio más pequeño de <span class="math inline">\(H\)</span>. En un flujo de trabajo VQE realista, el optimizador evalúa el valor de expectación repetidamente, y cada evaluación puede requerir medir diferentes términos de Pauli en diferentes bases. El punto importante es que el bucle variational actualiza los parámetros hasta que la energía medida se minimiza, mientras que el optimizador clásico guía la búsqueda en el espacio de parámetros.</p>
 <p><strong>Carga híbrida</strong></p>
 <p>La forma de explorar las opciones es establecer una función de costo que nos ayude a impulsar el valor en la dirección correcta. Aquí, el valor de expectación es de gran ayuda ya que sabemos que nos proporcionará una aproximación al estado fundamental del sistema (dependiendo de la cantidad de tiempo que lo dejemos iterar).</p>
-<p>Esto es cuando los rutines de optimización tradicionales o clásicos resultan útiles. Podemos emplear métodos existentes de optimización clásica como Gradient Descent estocástico (SGD), el método de Powell o el método de Nelder-Mead buscando travesar eficientemente el espacio de solución potencial para todos los valores <span class="math inline">\(\theta\)</span> podrían tomar.</p>
+<p>Esto es cuando las rutinas de optimización tradicionales o clásicas resultan útiles. Podemos emplear métodos existentes de optimización clásica como Gradient Descent estocástico (SGD), el método de Powell o el método de Nelder-Mead buscando travesar eficientemente el espacio de solución potencial para todos los valores <span class="math inline">\(\theta\)</span> podrían tomar.</p>
 <p>También, dado el precedente decomposition podríamos ver fácilmente cómo estos cálculos podrían realizarse en paralelo maximizando el uso de recursos tanto del lado clásico como cuántico.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">

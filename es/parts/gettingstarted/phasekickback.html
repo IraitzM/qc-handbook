@@ -368,7 +368,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -409,7 +409,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,7 +433,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -557,7 +557,7 @@ window.Quarto = {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#patada-de-fase" id="toc-patada-de-fase" class="nav-link active" data-scroll-target="#patada-de-fase">Patada de fase</a></li>
+  <li><a href="#kickback-de-fase" id="toc-kickback-de-fase" class="nav-link active" data-scroll-target="#kickback-de-fase">Kickback de fase</a></li>
   </ul>
 </nav>
     </div>
@@ -634,7 +634,7 @@ window.Quarto = {
 
 <p>Te estarás preguntando si usamos para algo la parte compleja. Hasta ahora no he visto ningún uso de ella. Pues sí que la usamos. De hecho es clave en muchos de los algoritmos que desbloqueamos con la computación cuántica. Moverse por el eje X de la esfera de Bloch y actuar sobre él.</p>
 <p>Tomemos un ejemplo sobre un estado superpuesto.</p>
-<div id="903bc125" class="cell" data-execution_count="1">
+<div id="bcde5fe2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>qc <span class="op">=</span> QuantumCircuit(<span class="dv">2</span>, <span class="dv">2</span>)</span>
@@ -650,7 +650,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="ffd3f893" class="cell" data-execution_count="2">
+<div id="89b84677" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.quantum_info <span class="im">import</span> Statevector</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> plot_bloch_multivector</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -668,7 +668,7 @@ window.Quarto = {
 <p><span class="math display">\[
 |\psi\rangle = \frac{1}{2}\left(|00\rangle + |01\rangle + |10\rangle +|11\rangle\right)
 \]</span></p>
-<div id="a8468001" class="cell" data-execution_count="3">
+<div id="6b0efefb" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -682,7 +682,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Venga, extiende el circuito… y comprueba qué pasa.</p>
-<div id="bc24d428" class="cell" data-execution_count="4">
+<div id="a59dde96" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>qc.ry(np.pi<span class="op">/</span><span class="dv">2</span>, <span class="dv">1</span>)</span>
@@ -696,7 +696,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="a8888db3" class="cell" data-execution_count="5">
+<div id="c97671e1" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -707,7 +707,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="0c05d229" class="cell" data-execution_count="6">
+<div id="e1d62577" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -740,10 +740,10 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="patada-de-fase" class="level2">
-<h2 class="anchored" data-anchor-id="patada-de-fase">Patada de fase</h2>
+<section id="kickback-de-fase" class="level2">
+<h2 class="anchored" data-anchor-id="kickback-de-fase">Kickback de fase</h2>
 <p>Ahora, mira qué pasa cuando actuamos sobre el segundo cúbit controlado por el primero.</p>
-<div id="b0795fee" class="cell" data-execution_count="7">
+<div id="03f9d924" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>qc.crz(np.pi, <span class="dv">0</span>, <span class="dv">1</span>)</span>
@@ -757,7 +757,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="812e97fc" class="cell" data-execution_count="8">
+<div id="24d27988" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>psi  <span class="op">=</span> Statevector.from_instruction(qc)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plot_bloch_multivector(psi)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -769,7 +769,7 @@ window.Quarto = {
 </div>
 </div>
 <p>La rotación Z sobre el cúbit objetivo casi no tuvo efecto, pero ¿qué le pasó al de control? ¿Se movió?</p>
-<div id="7e5ce9ed" class="cell" data-execution_count="9">
+<div id="2f475a2c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>array_to_latex(array<span class="op">=</span>psi, prefix<span class="op">=</span><span class="st">'|</span><span class="ch">\\</span><span class="st">psi</span><span class="ch">\\</span><span class="st">rangle = '</span>, max_size<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -786,14 +786,14 @@ window.Quarto = {
 <p><span class="math display">\[
 |\psi\rangle = |1\rangle \otimes \frac{\sqrt{2}}{2}\left(|0\rangle + e^{i\pi/2}|1\rangle\right) = |1i\rangle
 \]</span></p>
-<div id="7ab32f10" class="cell" data-execution_count="10">
+<div id="aa923df4" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(psi.data,<span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>array([0.  +0.j  , 0.  -0.j  , 0.71+0.j  , 0.  +0.71j])</code></pre>
 </div>
 </div>
 <p>Ese es entonces el efecto cuando se aplica la fase <span class="math inline">\(e^{i\pi/2}\)</span>.</p>
-<div id="edab84b7" class="cell" data-execution_count="11">
+<div id="3844ccd0" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(np.exp(<span class="ot">1j</span><span class="op">*</span>np.pi<span class="op">/</span><span class="dv">2</span>)<span class="op">/</span>np.sqrt(<span class="dv">2</span>), <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>np.complex128(0.71j)</code></pre>
@@ -806,7 +806,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Patada de fase y más
+<span class="screen-reader-only">Tip</span>Kickback de fase y más
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>

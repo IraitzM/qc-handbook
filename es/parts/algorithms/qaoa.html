@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>algoritmo QAOA – Manual de Computación Cuántica</title>
+<title>Algoritmo QAOA – Manual de Computación Cuántica</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -189,7 +189,7 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="algoritmo QAOA – Manual de Computación Cuántica">
+<meta property="og:title" content="Algoritmo QAOA – Manual de Computación Cuántica">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://iraitzm.github.io/qc-handbook/es/cover.png">
 <meta property="og:site_name" content="Manual de Computación Cuántica">
@@ -204,7 +204,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/qaoa.html">algoritmo QAOA</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/qaoa.html">Algoritmo QAOA</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -368,7 +368,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -409,7 +409,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,7 +433,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -607,9 +607,9 @@ window.Quarto = {
 })();
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/qaoa.html">algoritmo QAOA</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Hilo de Ariadna"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../parts/algorithms/trainingcircuits.html">Ajuste de circuitos</a></li><li class="breadcrumb-item"><a href="../../parts/algorithms/qaoa.html">Algoritmo QAOA</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">algoritmo QAOA</h1>
+<h1 class="title">Algoritmo QAOA</h1>
 </div>
 
 
@@ -636,8 +636,8 @@ window.Quarto = {
 </div>
 </figure>
 <p>El Hamiltoniano inicial y final (<span class="math inline">\(H_i\)</span> y <span class="math inline">\(H_f\)</span>) son los que se propagan según la trotterization, la digitación del ciclo de mezcla. El desafío consistía en definir la mejor función de programación posible para que la evolución esté libre de cualquier transición del estado fundamental.</p>
-<p>Considerando algunos de los conceptos anteriores, podríamos liberar la función de programación y llegar a una mejor selección de parámetros que minimicen la longitud de esta evolución. Si tomamos un gran <span class="math inline">\(n\)</span> en nuestra aproximación Suzuki-Trotter podríamos movernos más allá del umbral coherente de una máquina y establecer lapsos de tiempo fijos para toda la evolución podría no ser el mejor enfoque para aproximar la evolución objetivo (que no conocemos del todo). Un punto crucial en el que los investigadores se concentran es generando la versión más superficial de esta evolución cuanto más corta sea, menos error se acumula (ver <a href="../../parts/computers/challenges.html#ruido-y-errores">Ruido y errores</a>). Nos referimos a la <strong>profundidad</strong> del circuito como la longitud máxima que alcanza considerando cada conjunto de gates que pueden ejecutarse dentro del mismo ciclo de ejecución como la unidad de profundidad.</p>
-<p>Si podríamos ingresar algunos placeholders y verificar cómo se comporta el circuito para un diferente set de parámetros podríamos tal vez encontrar una mejor solución que el conjunto canonical de pasos igualmente espaciados que coloca la evolución en puntos críticos de nuestra curva de programación.</p>
+<p>Considerando algunos de los conceptos anteriores, pudiéramos liberar la función de programación y llegar a una mejor selección de parámetros que minimicen la longitud de esta evolución. Si tomamos un gran <span class="math inline">\(n\)</span> en nuestra aproximación Suzuki-Trotter podríamos movernos más allá del umbral coherente de una máquina y establecer lapsos de tiempo fijos para toda la evolución podría no ser el mejor enfoque para aproximar la evolución objetivo (que no conocemos del todo). Un punto crucial en el que los investigadores se concentran es generando la versión más superficial de esta evolución cuanto más corta sea, menos error se acumula (ver <a href="../../parts/computers/challenges.html#ruido-y-errores">Ruido y errores</a>). Nos referimos a la <strong>profundidad</strong> del circuito como la longitud máxima que alcanza considerando cada conjunto de gates que pueden ejecutarse dentro del mismo ciclo de ejecución como la unidad de profundidad.</p>
+<p>Si pudiéramos ingresar algunos placeholders y verificar cómo se comporta el circuito para un diferente set de parámetros pudiéramos tal vez encontrar una mejor solución que el conjunto canonical de pasos igualmente espaciados que coloca la evolución en puntos críticos de nuestra curva de programación.</p>
 <figure class="figure">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -651,7 +651,7 @@ window.Quarto = {
 |\gamma, \beta\rangle = U(H_B,\beta_p)U(H_C, \gamma_p) \dots U(H_B,\beta_1)U(H_C, \gamma_1)|s\rangle
 \]</span></p>
 <p>donde <span class="math inline">\(|s\rangle\)</span> es nuestro estado inicial y <span class="math inline">\(U(H_m, \theta_m) = e^{-i\theta_mH_m}\)</span> es la transformación unitaria parametrizada para cada paso para un total de <span class="math inline">\(p\)</span> pasos.</p>
-<p>Podríamos configurar un circuito free-form para que podamos cambiar los valores de aquellas rotaciones según un criterio diferente al usado antes.</p>
+<p>Podríamos configurar un circuito de forma libre para que podamos cambiar los valores de aquellas rotaciones según un criterio diferente al usado antes.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>init_state <span class="op">=</span> QuantumCircuit(<span class="dv">3</span>)</span>
@@ -683,7 +683,7 @@ window.Quarto = {
 </div>
 </figure>
 <p>Esto es la base del Quantum Approximate Optimization Algorithm (QAOA). Solo necesitamos seleccionar el número de pasos (también llamados capas) para producir nuestro circuito template. Luego llega el momento de seleccionar los valores que deberían reemplazar los parámetros placeholder <span class="math inline">\(\gamma\)</span> y <span class="math inline">\(\beta\)</span>.</p>
-<p>La elección de mixer y Hamiltonianos de costo importa. Si el estado es un eigenstate del Hamiltoniano de costo, aplicar solo su unitary cambia el estado por una fase, no por su valor propio de energía: <span class="math inline">\(U(\theta)|\psi_{\lambda_1}\rangle = e^{-i\theta E_{\lambda_1}}|\psi_{\lambda_1}\rangle\)</span>. QAOA alterna esta evolución de costo con un mezclador, que puede mover amplitud entre eigenstates del Hamiltoniano de costo. Su optimización variacional no garantiza evitar óptimos locales o preparar el estado fundamental exacto a profundidad finita.</p>
+<p>La elección de mixer y Hamiltonianos de costo importa. Si el estado es un autovector del Hamiltoniano de costo, aplicar solo su unitary cambia el estado por una fase, no por su valor propio de energía: <span class="math inline">\(U(\theta)|\psi_{\lambda_1}\rangle = e^{-i\theta E_{\lambda_1}}|\psi_{\lambda_1}\rangle\)</span>. QAOA alterna esta evolución de costo con un mezclador, que puede mover amplitud entre autovectores del Hamiltoniano de costo. Su optimización variacional no garantiza evitar óptimos locales o preparar el estado fundamental exacto a profundidad finita.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

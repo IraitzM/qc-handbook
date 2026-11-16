@@ -368,7 +368,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -409,7 +409,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,7 +433,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -653,7 +653,7 @@ window.Quarto = {
 <p>Memoria mínima teórica: ~512 bytes + sobrecarga ≈ 50-100 KB. La mayor parte se va en el propio simulador más que en la simulación, pero a medida que ampliamos esos números, un simulador de 10 cúbits maneja vectores de estado de ~16 KB, uno de 20 cúbits ~16 MB y un sistema de 30 cúbits usa ~16 GB solo para la representación del vector de estado. Puede que te cueste pasar de 22-25 cúbits dependiendo de lo potente que sea tu máquina.</p>
 <p>Un enfoque menos habitual, dados los números que vimos antes, es el uso del simulador de <strong>matriz de densidad</strong>, que representa toda la evolución teniendo en cuenta el efecto del ruido y la posibilidad de obtener un estado mixto (lo cual en realidad pasa mucho, pero salvo que trabajemos intentando emular el trabajo de un dispositivo, podemos saltárnoslo). Esto no solo maneja un vector de estado, sino una evolución matricial en cada paso.</p>
 <p>El simulador de <strong>estado de producto de matrices</strong> (Matrix Product State) es un método derivado de las redes tensoriales, una forma de tratar con eficiencia operaciones matriciales grandes, al menos hasta cierta precisión. En muchos casos este método nos permite emular circuitos más grandes, ya que es el método más eficiente en recursos, aunque en algunos casos, salvo que uses simuladores de última generación, no ofrecen la opción de simulación de ruido.</p>
-<div id="5b8a2c38" class="cell" data-execution_count="1">
+<div id="0b7a527e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Importar Qiskit</span></span>

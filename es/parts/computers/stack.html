@@ -368,7 +368,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -409,7 +409,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,7 +433,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -760,14 +760,14 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="leyendo-la-pila-en-la-práctica">Leyendo la pila en la práctica</h2>
 <p>Tomemos el problema MaxCut del que siempre volvemos, y sigamos:</p>
 <ol type="1">
-<li><strong>Agents</strong> convierten “partition this network so that the cut is maximal” en un QUBO, eligen QAOA sobre VQE porque el cost Hamiltonian es diagonal, y escriben la primera versión del código.</li>
-<li><strong>Software</strong> fija exactamente qué eso significa: este grafo, este número de capas, este optimizer, estas semillas, esta versión de Qiskit, todo comprometido y reproducible.</li>
-<li><strong>Compilers</strong> toman el circuito resultante, que asume conectividad all-to-all que no obtendrá, y lo convierten en algo que el chip puede ejecutar, espero sin triplicar la cuenta de puertas de dos qubits.</li>
+<li><strong>Agents</strong> convierten “divide esta red de forma que el corte sea máximo” en un QUBO, eligen QAOA sobre VQE porque el Hamiltoniano de coste es diagonal, y escriben la primera versión del código.</li>
+<li><strong>Software</strong> fija exactamente qué significa nuestro problema: este grafo, este número de capas, este optimizador, estas semillas, esta versión de Qiskit, todo fijo y reproducible.</li>
+<li><strong>Compilers</strong> toman el circuito resultante, que asume conectividad todos-con-todos que no obtendrá, y lo convierten en algo que el chip puede ejecutar, esperando no triplicar la cuenta de puertas de dos qubits.</li>
 <li><strong>Simulation</strong> ejecuta la misma cosa exactamente para un grafo pequeño, así sabemos cuál es la respuesta correcta, y ejecuta un solver clásico en el grafo completo, así sabemos contra qué competimos.</li>
 <li><strong>Runtime</strong> mantiene la sesión abierta a través del bucle de optimización y mitiga el error de readout en el camino de regreso.</li>
-<li><strong>Hardware</strong> decide si alguna de ello sobrevive.</li>
+<li><strong>Hardware</strong> decide si algo sobrevive.</li>
 </ol>
-<p>Si el resultado está mal, la capa que falló suele ser identifiable: un error de formulación se muestra en simulación también, un problema de compilación se muestra como una explosión en la cuenta de gates, y un problema de hardware se muestra como un resultado que se degrada a medida que añades capas. Diferentes fallos, diferentes arreglos, y esto es por qué mantener las capas separadas en tu cabeza merece el esfuerzo.</p>
+<p>Si el resultado está mal, la capa que falló suele ser identifiable: un error de formulación se muestra en simulación también, un problema de compilación se muestra como una explosión en la cuenta de puertas, y un problema de hardware se muestra como un resultado que se degrada a medida que añades capas. Diferentes fallos, diferentes arreglos, y esto es por qué mantener las capas separadas en tu cabeza merece el esfuerzo.</p>
 </section>
 <section id="cuadro-sinóptico" class="level2">
 <h2 class="anchored" data-anchor-id="cuadro-sinóptico">Cuadro sinóptico</h2>

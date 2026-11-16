@@ -368,7 +368,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -409,7 +409,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,7 +433,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -646,7 +646,7 @@ window.Quarto = {
 |X\rangle = \frac{1}{\sqrt{M}}\sum_{m=1}^M |x^m \rangle
 \]</span></p>
 <p>No se usa con frecuencia ya que limita los datos que pueden incorporarse y requiere bastante recursos del lado cuántico que no se utilizan completamente.</p>
-<div id="84b2c21f" class="cell" data-execution_count="1">
+<div id="d980aa9a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.visualization <span class="im">import</span> array_to_latex</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -677,7 +677,7 @@ window.Quarto = {
 (R_z(x_1) \otimes R_z(x_2) \otimes \dots \otimes R_z(x_n))|0\rangle^{\otimes n}
 \]</span></p>
 <p>Los datos deben estar en el régimen donde esas rotaciones tienen efecto (<span class="math inline">\([0, 2\pi]\)</span>) y pueden ser más adecuados si una naturaleza cíclica ya está presente. La normalización de datos puede ser un paso relevante de preprocesamiento en este caso, pero también debemos prestar atención al eje de rotación, <span class="math inline">\(Z\)</span> en este caso.</p>
-<div id="49be3865" class="cell" data-execution_count="2">
+<div id="3094ba79" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane.numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -704,7 +704,7 @@ window.Quarto = {
 <p><span class="math display">\[
 |\phi\rangle = \frac{1}{\sqrt{\sum_k x_k^2}} \sum_{k=0}^{2 -1} x_k|k\rangle
 \]</span></p>
-<div id="3465b0ec" class="cell" data-execution_count="3">
+<div id="322f7de1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pennylane <span class="im">as</span> qml</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dev <span class="op">=</span> qml.device(<span class="st">'default.qubit'</span>, wires<span class="op">=</span><span class="dv">2</span>)</span>
@@ -727,7 +727,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="zz-feature-map">ZZ feature map</h3>
 <p>Esta es una versión particular del Pauli feature map que encontraremos en <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ZZFeatureMap">Qiskit</a>. Realiza las mismas rotaciones que vimos en el encoding en ángulo pero con una interacción <span class="math inline">\(ZZ\)</span> extra entre puntos de datos para capturar las observaciones correlativas y reforzar aún más su representación. También podemos realizar varias repeticiones del mapping proporcionando una iteración más compleja.</p>
 <p>Dado que usa rotaciones <span class="math inline">\(Z\)</span> es común ver gates Hadamard precediendo a esas rotaciones para que mover nuestros estados <span class="math inline">\(|0\rangle\)</span> a <span class="math inline">\(|+\rangle\)</span> asegure que esas rotaciones tengan algún efecto significativo.</p>
-<div id="d8a24abd" class="cell" data-execution_count="4">
+<div id="5491806c" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> ZZFeatureMap</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> ZZFeatureMap(<span class="dv">3</span>)</span>
@@ -740,7 +740,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="5b3f751e" class="cell" data-execution_count="5">
+<div id="96479b6d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>feature_map.decompose().draw(<span class="st">'mpl'</span>, fold<span class="op">=-</span><span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -751,7 +751,7 @@ window.Quarto = {
 </div>
 </div>
 <p>El <a href="https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliFeatureMap">caso general</a> nos permite definir una especificación completa de rotaciones de Pauli y disposición de entrelazado de modo que uno pueda personalizar el feature map a sus especificaciones.</p>
-<div id="edf8b55e" class="cell" data-execution_count="6">
+<div id="f700ab23" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.circuit.library <span class="im">import</span> PauliFeatureMap</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>feature_map <span class="op">=</span> PauliFeatureMap(<span class="dv">3</span>, paulis<span class="op">=</span>[<span class="st">"X"</span>, <span class="st">"YZ"</span>], entanglement<span class="op">=</span><span class="st">'linear'</span>)</span>

@@ -368,7 +368,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/problemposing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Puesto del problema</span></a>
+ <span class="menu-text">Formulación del problema</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -409,7 +409,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/examplesfordaqc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">AQC digitado</span></a>
+ <span class="menu-text">AQC digitalizado</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -433,7 +433,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../parts/algorithms/qaoa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">algoritmo QAOA</span></a>
+ <span class="menu-text">Algoritmo QAOA</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -717,11 +717,11 @@ window.Quarto = {
 <p>Las tareas de regresión también pueden realizarse si consideramos el valor de expectación como el que mapea nuestro valor objetivo. En ese caso un simple cambio de función de evaluación haría el truco. Sabemos que en realidad es tan fácil como invocar pero, como ya sabemos, obtener el valor de expectación sobre muestreo de circuito simple puede requerir varias evaluaciones del circuito para obtener todas las changes de base para una evaluación adecuada del valor de expectación.</p>
 <section id="elegir-tus-mapas-de-características-y-ansätze" class="level2">
 <h2 class="anchored" data-anchor-id="elegir-tus-mapas-de-características-y-ansätze">Elegir tus mapas de características y ansätze</h2>
-<p>Ahora necesitamos decidir cuál es el mejor ansatz en nuestro caso. Hay varias características que nos gustaría considerar pero una de las más relevantes podría ser <strong>expressivity</strong>. <strong>Expressivity</strong> es un aspecto clave con cualquier approximador de funciones, como con las redes neuronales que son conocidas como aproximadoras universales <span class="citation" data-cites="kidger2020universal">(<a href="../references.html#ref-kidger2020universal" role="doc-biblioref">Kidger y Lyons 2020</a>)</span>. Se espera que las Quantum Neural Networks provean una capacidad similar como ya han sido evaluadas en términos similares <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia et&nbsp;al. 2023</a>)</span> pero esto estará limitado por la selección de ansatz. El ansatz es esencialmente donde una dada Quantum Neural Network producirá estados para un espacio de Hilbert particular y expressivity, en esos términos, se refiere a la capacidad de cubrir dicho espacio de Hilbert.</p>
-<p>Un sistema de 4 qubits representa un espacio de Hilbert de dimensión <span class="math inline">\(2^4 = 16\)</span> (<span class="math inline">\(\mathcal{H}\)</span>). ¿Cómo podemos medir qué tan expresivo es nuestro ansatz? Evaluar analíticamente la cobertura del espacio de Hilbert quizás no sea práctico, pero podríamos simplemente muestrear desde el circuito un número de veces y comparar los estados que obtenemos en términos de distancia para dicho espacio. <strong>Fidelity</strong> puede usarse para medir la <em>distance</em> entre dos estados como vimos <a href="../../parts/qml/kernels.html">antes</a>, así que lo obtenemos y lo comparamos con qué sería el escenario ideal, una distribución uniforme del space de fidelidad para maximal expressivity <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et&nbsp;al. 2019</a>)</span>. Si los estados generados por nuestro circuito pueden renderizar todas las distancias, desde el mismo estado (fidelity de uno) al caso ortogonal (fidelity de cero) entonces nuestro circuito puede cubrir el espectro completo de nuestro espacio de Hilbert. Puede leer más sobre el appendix sobre <a href="../../parts/appendix/quantumfeatures.html">quantum features</a>.</p>
+<p>Ahora necesitamos decidir cuál es el mejor ansatz en nuestro caso. Hay varias características que nos gustaría considerar pero una de las más relevantes podría ser <strong>expressivity</strong>. <strong>Expressivity</strong> es un aspecto clave con cualquier aproximador de funciones, como con las redes neuronales que son conocidas como aproximadoras universales <span class="citation" data-cites="kidger2020universal">(<a href="../references.html#ref-kidger2020universal" role="doc-biblioref">Kidger y Lyons 2020</a>)</span>. Se espera que las Quantum Neural Networks provean una capacidad similar como ya han sido evaluadas en términos similares <span class="citation" data-cites="Pe_a_Tapia_2023">(<a href="../references.html#ref-Pe_a_Tapia_2023" role="doc-biblioref">Peña Tapia et&nbsp;al. 2023</a>)</span> pero esto estará limitado por la selección de ansatz. El ansatz es esencialmente donde una dada Quantum Neural Network producirá estados para un espacio de Hilbert particular y expressivity, en esos términos, se refiere a la capacidad de cubrir dicho espacio de Hilbert.</p>
+<p>Un sistema de 4 qubits representa un espacio de Hilbert de dimensión <span class="math inline">\(2^4 = 16\)</span> (<span class="math inline">\(\mathcal{H}\)</span>). ¿Cómo podemos medir qué tan expresivo es nuestro ansatz? Evaluar analíticamente la cobertura del espacio de Hilbert quizás no sea práctico, pero podríamos simplemente muestrear desde el circuito un número de veces y comparar los estados que obtenemos en términos de distancia para dicho espacio. <strong>Fidelity</strong> puede usarse para medir la _distancia__ entre dos estados como vimos <a href="../../parts/qml/kernels.html">antes</a>, así que lo obtenemos y lo comparamos con qué sería el escenario ideal, una distribución uniforme del space de fidelidad para maximal expressivity <span class="citation" data-cites="sim2019expressibility">(<a href="../references.html#ref-sim2019expressibility" role="doc-biblioref">Sim et&nbsp;al. 2019</a>)</span>. Si los estados generados por nuestro circuito pueden renderizar todas las distancias, desde el mismo estado (fidelity de uno) al caso ortogonal (fidelity de cero) entonces nuestro circuito puede cubrir el espectro completo de nuestro espacio de Hilbert. Puede leer más sobre el appendix sobre <a href="../../parts/appendix/quantumfeatures.html">quantum features</a>.</p>
 <p>El camino más fácil hacia adelante es mirar al trabajo anterior, de esa manera podemos ahorrar algunas esquinas y ir directo a las configuraciones que funcionaron para otros. Tenemos algunas referencias en la literatura pero las personas trabajando en sQUlearn ya han implementado muchas opciones para nosotro.</p>
 <p>Imagine que le gustaría probar el encoding en <em>Reduction of finite sampling noise in quantum neural networks</em> <span class="citation" data-cites="Kreplin_2024">(<a href="../references.html#ref-Kreplin_2024" role="doc-biblioref">Kreplin y Roth 2024</a>)</span>.</p>
-<div id="1fde92f1" class="cell" data-execution_count="1">
+<div id="891ec3cd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> ChebyshevPQC</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> ChebyshevPQC(num_qubits <span class="op">=</span> <span class="dv">4</span>, num_features <span class="op">=</span> <span class="dv">1</span>, num_layers <span class="op">=</span> <span class="dv">2</span>)</span>
@@ -735,7 +735,7 @@ window.Quarto = {
 </div>
 </div>
 <p>¡Fácil! Igual que con otros como <em>Training Quantum Embedding Kernels on Near-Term Quantum Computers</em> <span class="citation" data-cites="Hubregtsen_2022">(<a href="../references.html#ref-Hubregtsen_2022" role="doc-biblioref">Hubregtsen et&nbsp;al. 2022</a>)</span></p>
-<div id="f013d4ff" class="cell" data-execution_count="2">
+<div id="41ef4431" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> HubregtsenEncodingCircuit</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pqc <span class="op">=</span> HubregtsenEncodingCircuit(num_qubits<span class="op">=</span><span class="dv">4</span>, num_features<span class="op">=</span><span class="dv">2</span>, num_layers<span class="op">=</span><span class="dv">2</span>)</span>
@@ -749,7 +749,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Pero también puedes dejar fluir tu creatividad…</p>
-<div id="41a5aae5" class="cell" data-execution_count="3">
+<div id="dca2f28a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit <span class="im">import</span> LayeredEncodingCircuit</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> squlearn.encoding_circuit.layered_encoding_circuit <span class="im">import</span> Layer</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
