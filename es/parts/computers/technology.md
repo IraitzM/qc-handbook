@@ -31,7 +31,7 @@ Estos dispositivos pueden manejar hasta 433 qubits (la arquitectura Osprey de IB
 
 Para saber un poco más sobre el funcionamiento interno, diríjase a la explicación exhaustiva de Xanadu [https://pennylane.ai/qml/demos/tutorial_sc_qubits].
 
-## iones atrapados
+## Iones atrapados
 
 Inicialmente propuesto por Cirac y Zoller [@cirac1995quantum], iones están confinados en trampas que componen el ordenador cuántico.
 
@@ -65,7 +65,7 @@ Más información sobre sus especificaciones actuales se puede encontrar en sus 
 
 Más información detallada [gracias a Xanadu](https://pennylane.ai/qml/demos/tutorial_trapped_ions).
 
-## Átomos neutrales
+## Átomos neutros
 
 Propuesto alrededor de 2000, el concepto básico radica en usar átomos o metales alcalinos neutros como el Rubidio (Rb) atrapados en arreglos ópticos. Al enfriar los átomos en un array a temperaturas cercanas al cero absoluto usando refrigeración láser, trampas usando campos magnéticos o láseres permiten la reorganización de los átomos dentro de la red. La propia estructura del átomo representa el sistema de dos niveles que buscamos, por lo que se hace un mapeo uno a uno entre el átomo y el qubit que nos gustaría fabricar.
 

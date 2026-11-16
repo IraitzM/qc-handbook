@@ -1,4 +1,4 @@
-# AQC digitado {.unnumbered}
+# AQC digitalizado {.unnumbered}
 
 Usaremos nuestro ejemplo anterior de MaxCut para mantenerlo simple.
 
@@ -336,4 +336,4 @@ plt.show()
 
 Juguemos un poco con los parámetros de tiempo y ver si conseguimos una buena concentración de -5 estados de energía. Idealmente nuestra muestreo desde el estado fundamental debería ser menor a $2^5 = 32$ muestras, de lo contrario, la fuerza bruta sería más eficiente en estos casos. Pero en ausencia de conocimiento deberíamos adivinar un poco.
 
-Podemos confiar en técnicas conocidas para encontrar parámetros en un modelo. Sí, **techniques de machine learning**.
+Podemos confiar en técnicas conocidas para encontrar parámetros en un modelo. Sí, **técnicas de machine learning**.

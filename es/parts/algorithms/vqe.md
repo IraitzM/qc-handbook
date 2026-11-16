@@ -33,13 +33,13 @@ H = \left[
 \right]
 $$
 
-which can be decomposed into a linear combination of Pauli operators as
+que puede descomponerse en combinaciones lineales de operadores de Pauli tal que
 
 $$
 H = I + X + 2Z.
 $$
 
-Using the standard Pauli matrices in the computational basis,
+Usando las matrices estándar de Pauli,
 
 $$
 I = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},
@@ -49,7 +49,7 @@ X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},
 Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
 $$
 
-we recover the original matrix form
+podemos recuperar su forma original tal que
 
 $$
 H = I + X + 2Z =
@@ -160,7 +160,7 @@ Este es el energía del estado fundamental del Hamiltoniano y coincide con el va
 
 La forma de explorar las opciones es establecer una función de costo que nos ayude a impulsar el valor en la dirección correcta. Aquí, el valor de expectación es de gran ayuda ya que sabemos que nos proporcionará una aproximación al estado fundamental del sistema (dependiendo de la cantidad de tiempo que lo dejemos iterar).
 
-Esto es cuando los rutines de optimización tradicionales o clásicos resultan útiles. Podemos emplear métodos existentes de optimización clásica como Gradient Descent estocástico (SGD), el método de Powell o el método de Nelder-Mead buscando travesar eficientemente el espacio de solución potencial para todos los valores $\theta$ podrían tomar.
+Esto es cuando las rutinas de optimización tradicionales o clásicas resultan útiles. Podemos emplear métodos existentes de optimización clásica como Gradient Descent estocástico (SGD), el método de Powell o el método de Nelder-Mead buscando travesar eficientemente el espacio de solución potencial para todos los valores $\theta$ podrían tomar.
 
 También, dado el precedente decomposition podríamos ver fácilmente cómo estos cálculos podrían realizarse en paralelo maximizando el uso de recursos tanto del lado clásico como cuántico.
 

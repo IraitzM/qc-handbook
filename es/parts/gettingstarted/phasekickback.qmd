@@ -66,7 +66,7 @@ que muestra un estado donde un cúbit está en el estado 1 (todo apuesta a leer 
 ¿Te resultó raro que el estado fuera $|1+\rangle$ en lugar de $|+1\rangle$? No eres el único, mira [esta entrada](https://lukaszpalt.com/behind-the-mystery-of-wrong-qubit-ordering-in-qiskit/) de Lukasz Palt para más aclaraciones.
 :::
 
-## Patada de fase
+## Kickback de fase
 
 Ahora, mira qué pasa cuando actuamos sobre el segundo cúbit controlado por el primero.
 
@@ -111,7 +111,7 @@ np.round(np.exp(1j*np.pi/2)/np.sqrt(2), 2)
 De lo más interesante. De hecho, este es el efecto que hay detrás de muchos de los trabajos teóricos relacionados con la aceleración de la resolución de sistemas de ecuaciones lineales, por ejemplo [@Harrow_2009].
 
 ::: {.callout-tip collapse=true}
-# Patada de fase y más
+# Kickback de fase y más
 
 Este es un gran recurso que profundiza en algunos de los algoritmos que usan este efecto
 

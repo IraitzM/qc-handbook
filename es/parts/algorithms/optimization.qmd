@@ -1,6 +1,6 @@
 # Optimización {.unnumbered}
 
-Optimización and research operativa (OR) son enfoques analíticos poderosos que ayudan a las empresas a tomar mejores decisiones encontrando las mejores soluciones a problemas complejos. En su núcleo, la optimización implica _maximizar_ o _minimizar_ un objetivo (como ganancia, costo o eficiencia) mientras se satisfacen diversas restricciones y limitaciones que situaciones empresariales del mundo real imponen.
+Optimización e investigación operativa (OR) son enfoques analíticos poderosos que ayudan a las empresas a tomar mejores decisiones encontrando las mejores soluciones a problemas complejos. En su núcleo, la optimización implica _maximizar_ o _minimizar_ un objetivo (como ganancia, costo o eficiencia) mientras se satisfacen diversas restricciones y limitaciones que situaciones empresariales del mundo real imponen.
 
 En el mundo empresarial, los problemas de optimización están en todas partes. Las empresas necesitan determinar la forma más rentable de distribuir productos entre varios almacenes, asignar presupuestos limitados entre canales de marketing, programar empleados para cumplir requisitos de servicio, o decidir qué productos fabricar dadas restricciones de recursos. La research operativa proporciona el marco matemático y herramientas computacionales para abordar estos desafíos de manera sistemática.
 
@@ -26,6 +26,6 @@ Pero dependiendo de las variables a utilizarse, por ejemplo restringiendo a un c
 
 Estos últimos problemas a menudo requieren una versión relajada del problema donde resolvemos usando solvers adecuados para técnicas anteriores y luego iteramos añadiendo restricciones para aproximar nuestro objetivo. Esta técnica se conoce como [Branch-and-Bound](https://en.wikipedia.org/wiki/Branch_and_bound).
 
-La elección del enfoque de optimización depende de la estructura del problema, disponibilidad de datos y requerimientos computacionales. Las empresas cada vez másdependen de estas técnicas como ventaja competitiva, usando sofisticado software y algoritmos para resolver problemas que serían impossibles de abordar mediante intuición o simples heurísticas. La clave es emparejar la herramienta de optimización correcta al desafío empresarial específico en cuestión.
+La elección del enfoque de optimización depende de la estructura del problema, disponibilidad de datos y requerimientos computacionales. Las empresas cada vez más dependen de estas técnicas como ventaja competitiva, usando sofisticado software y algoritmos para resolver problemas que serían impossibles de abordar mediante intuición o simples heurísticas. La clave es emparejar la herramienta de optimización correcta al desafío empresarial específico en cuestión.
 
-Optimización binaria es una tarea desafiante y los ordenadores cuánticos tomaron la oportunidad en ello, ya que los problemas binarios ya caen en su naturaleza.
+La optimización binaria es una tarea desafiante y los ordenadores cuánticos tomaron la oportunidad como un reto, ya que los problemas binarios ya caen en su naturaleza.

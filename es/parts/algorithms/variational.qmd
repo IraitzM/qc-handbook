@@ -66,15 +66,15 @@ print(f"<Ry|X|Ry> : {eval.expectation_value(oper=op)}")
 print(f"Sin function: {np.sin(np.pi * val)}")
 ```
 
-Then we know we could calculate its derivative as $\pi\cos(\pi a)$. This may not be an option for when we go to hardware and we make the circuit much more complicated in terms of gates (in particular multiqubit gates). Enter numerical resolution of derivatives!
+Sabemos por tanto que podemos calcular su derivada como $\pi\cos(\pi a)$. Puede que esto no sea una opción cuando vamos al hardware o hacemos el circuito mucho más complicado (con muchas pueras). Veamos si la resolución numérica nos da un aproximado útil a estos cálculos.
 
-Podemos producir una aproximación a nuestro target aprovechando diferencias finitas para aproximación numérica, teniendo en cuenta el límite:
+Podemos producir una aproximación a nuestro objetivo aprovechando diferencias finitas para aproximación numérica, teniendo en cuenta el límite:
 
 $$
 f^{'}(a) = \lim_{h \rightarrow 0} \frac{f(a + h) - f(a)}{h}
 $$
 
-which essentially only requiere two evaluations of our function.
+Que esencialmente requiere solo dos evaluaciones de la misma función.
 
 ```{python}
 state = Statevector(init)
@@ -139,9 +139,9 @@ Un problema con calcular gradients así es que ahora tenemos que evaluar nuestra
 
 En muchos casos veremos cómo los métodos basados en gradientes no están disponibles para evitar el uso extensivo de hardware cuántico.
 
-## Valor de expectación
+## Valor esperado
 
-La luz guía al entrenar circuitos usando el principio variational es definir con precisión las **funciones objetivo** y **de costo**. ¿Qué estamos buscando? ¿Cómo podemos medir el progreso? En general, se entiende que la minimización de energía, buscando el estado cuántico que renderiza un valor de expectación mínimo, puede ser tractable y una buena medida de mejora. Así, el **valor de expectación** descrito como
+La luz guía al entrenar circuitos usando el principio variational es definir con precisión las **funciones objetivo** y **de costo**. ¿Qué estamos buscando? ¿Cómo podemos medir el progreso? En general, se entiende que la minimización de energía, buscando el estado cuántico que renderiza un valor de expectación mínimo, puede ser tractable y una buena medida de mejora. Así, el **valor esperado** descrito como
 
 $$
 \langle \psi |H|\psi\rangle
@@ -153,10 +153,10 @@ $$
 \langle H \rangle_{\psi} = \sum_j \lambda_j |\langle \psi|\lambda_j\rangle|^2.
 $$
 
-Representa la suma de todos los eigenvalues condicionados por su probabilidad de outcome dado el estado $|\psi\rangle$. Esa caracteriza la naturaleza matemática de este valor y es evidente que el valor mínimo se alcanza cuando hay una superposición perfecta entre $|\psi\rangle$ y el eigenstate de valor mínimo ($H|\lambda_0\rangle = \lambda_0|\lambda_0\rangle$).
+Representa la suma de todos los eigenvalues condicionados por su probabilidad de outcome dado el estado $|\psi\rangle$. Esa caracteriza la naturaleza matemática de este valor y es evidente que el valor mínimo se alcanza cuando hay una superposición perfecta entre $|\psi\rangle$ y el autovector de valor mínimo ($H|\lambda_0\rangle = \lambda_0|\lambda_0\rangle$).
 
 En principio, si puede obtener un número infinito de pasos y elegir ángulos que exactamente imiten el camino adiabático, obtendrá los resultados correctos. Por lo tanto, la principal limitación es definir un circuito y encontrar el conjunto de parámetros que realmente hagan el trabajo. Pero, ya mencionado [en la literatura](https://arxiv.org/abs/2004.09002):
 
 > "No one knows if a quantum computer running a quantum algorithm will be able to outperform a classical computer on a combinatorial search problem."
 
-[Variational Quantum Eigensolver (VQE)](vqe.md) y [Quantum Approximate Optimization Algorithm (QAOA)](qaoa.md) son probablemente las dos técnicas más conocidas en este régimen así que los exploraremos para mejor entender qué sus pros y contras son. Verá cómo la mayoría de la fundación ya establecida por la digitación del procedimiento de annealing pagará mientras intenta entender esas técnicas _state-of-the-art_.
+[Variational Quantum Eigensolver (VQE)](vqe.md) y [Quantum Approximate Optimization Algorithm (QAOA)](qaoa.md) son probablemente las dos técnicas más conocidas en este régimen así que los exploraremos para mejor entender qué sus pros y contras son. Verá cómo la mayoría de la fundación ya establecida por la digitalización del procedimiento de annealing pagará mientras intenta entender esas técnicas _state-of-the-art_.

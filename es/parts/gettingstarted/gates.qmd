@@ -45,7 +45,7 @@ $$
 aquí $\hat{H}$ es un operador autoadjunto también conocido como hamiltoniano. $\hat{H}$ es un observable asociado a la energía del sistema y gobierna la dinámica de un estado dado, relacionándose con el $U$ mencionado antes como $U(t) = e^{-(i/\hbar)t\hat{H}}$ siguiendo el teorema de Stone.
 :::
 
-## La sala de las puertas
+## La Hall de las puertas
 
 Como en la computación clásica, hay algunas puertas clave que hay que conocer. Siendo $NAND$ una puerta universal de la lógica booleana, porque puede crear todas las demás opciones necesarias para representar la lógica booleana, deberíamos presentar algunas de las puertas fundamentales al hablar de computación cuántica y de la universalidad de esas puertas.
 

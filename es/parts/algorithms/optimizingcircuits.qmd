@@ -200,7 +200,7 @@ counts  = result.get_counts(circ)
 plot_histogram([counts, solution], legend=["VQE", "Ideal"])
 ```
 
-No está mal en términos de valor de expectación pero probablemente podríamos encontrar mejores opciones para el ansatz para que sea más fácil encontrar el estado objetivo. ¿Alguna猜测?
+No está mal en términos de valor esperado pero probablemente podríamos encontrar mejores opciones para el ansatz para que sea más fácil encontrar el estado objetivo. ¿Alguna sugerencia?
 
 Bueno entonces hagamos lo mismo del modo ML (machine learning) y probemos las opciones disponibles:
 

@@ -27,7 +27,7 @@ Puedes contactar conmigo en [iraitz.info](https://iraitz.info/).
 ::: {.callout-note}
 ## Traducción en curso
 
-De momento están traducidos al español el prefacio, la introducción y toda la parte de primeros pasos. El resto del libro está pendiente de traducción y se irá incorporando poco a poco.
+La traducción del libro en Español es reciente así que espere alguna errata :)
 
 Mientras tanto, puedes leer el libro completo en inglés. Usa el botón **EN** del selector de idioma, en la parte superior de la página, para ir a la versión en inglés, y el botón **ES** para volver aquí.
 :::

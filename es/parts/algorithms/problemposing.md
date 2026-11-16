@@ -1,4 +1,4 @@
-# Puesto del problema {.unnumbered}
+# Formulación del problema {.unnumbered}
 
 Vamos a explorar un poco cómo D-Wave proporciona este servicio a escala. La tecnología de D-Wave se basa en qubits superconducting, por lo que deben mantener sus máquinas a una temperatura de 12mk para mantener la _quantumness_ del sistema. Sus máquinas están gobernadas por un Hamiltoniano ya fijado que se ve así:
 

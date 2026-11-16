@@ -135,14 +135,14 @@ Todos se dirigen hacia el mismo destino, corrección de errores, donde un qubit 
 
 Tomemos el problema MaxCut del que siempre volvemos, y sigamos:
 
-1. **Agents** convierten "partition this network so that the cut is maximal" en un QUBO, eligen QAOA sobre VQE porque el cost Hamiltonian es diagonal, y escriben la primera versión del código.
-2. **Software** fija exactamente qué eso significa: este grafo, este número de capas, este optimizer, estas semillas, esta versión de Qiskit, todo comprometido y reproducible.
-3. **Compilers** toman el circuito resultante, que asume conectividad all-to-all que no obtendrá, y lo convierten en algo que el chip puede ejecutar, espero sin triplicar la cuenta de puertas de dos qubits.
+1. **Agents** convierten "divide esta red de forma que el corte sea máximo" en un QUBO, eligen QAOA sobre VQE porque el Hamiltoniano de coste es diagonal, y escriben la primera versión del código.
+2. **Software** fija exactamente qué significa nuestro problema: este grafo, este número de capas, este optimizador, estas semillas, esta versión de Qiskit, todo fijo y reproducible.
+3. **Compilers** toman el circuito resultante, que asume conectividad todos-con-todos que no obtendrá, y lo convierten en algo que el chip puede ejecutar, esperando no triplicar la cuenta de puertas de dos qubits.
 4. **Simulation** ejecuta la misma cosa exactamente para un grafo pequeño, así sabemos cuál es la respuesta correcta, y ejecuta un solver clásico en el grafo completo, así sabemos contra qué competimos.
 5. **Runtime** mantiene la sesión abierta a través del bucle de optimización y mitiga el error de readout en el camino de regreso.
-6. **Hardware** decide si alguna de ello sobrevive.
+6. **Hardware** decide si algo sobrevive.
 
-Si el resultado está mal, la capa que falló suele ser identifiable: un error de formulación se muestra en simulación también, un problema de compilación se muestra como una explosión en la cuenta de gates, y un problema de hardware se muestra como un resultado que se degrada a medida que añades capas. Diferentes fallos, diferentes arreglos, y esto es por qué mantener las capas separadas en tu cabeza merece el esfuerzo.
+Si el resultado está mal, la capa que falló suele ser identifiable: un error de formulación se muestra en simulación también, un problema de compilación se muestra como una explosión en la cuenta de puertas, y un problema de hardware se muestra como un resultado que se degrada a medida que añades capas. Diferentes fallos, diferentes arreglos, y esto es por qué mantener las capas separadas en tu cabeza merece el esfuerzo.
 
 ## Cuadro sinóptico
 

@@ -10,7 +10,7 @@ $$
 
 Para que la máquina sea consciente de nuestros datos clásicos deberíamos encontrar la acción inversa, necesitaríamos introducir nuestros datos en el dispositivo cuántico creando un estado que sea significativo para nuestra tarea. Lo más probable es que también requiera una representación más compleja que bits simples, ya que utilizaremos diferentes representaciones de datos en nuestros datasets clásicos (variables booleanas, categóricas y continuas entre otras).
 
-Un tipo especial de circuitos existe para este paso en particular. Esta acción se realiza por **mapas de características**, y el nombre viene de la acción de mapping entre el espacio de datos original $\in \mathbb{R}^n$ a un nuevo espacio de características de diferente dimensión y complejidad ($\in \mathbb{C}^m).
+Un tipo especial de circuitos existe para este paso en particular. Esta acción se realiza por **mapas de características**, y el nombre viene de la acción de mapping entre el espacio de datos original $\in \mathbb{R}^n$ a un nuevo espacio de características de diferente dimensión y complejidad ($\in \mathbb{C}^m$).
 
 Muchos métodos en el dominio clásico usan esta técnica, mapeando a una dimensión mayor para que los datos sean fácilmente separables. Esto se realiza principalmente mediante la definición de [kernels](https://en.wikipedia.org/wiki/Kernel_method) en técnicas como [Support Vector Machines](https://scikit-learn.org/stable/modules/svm.html).
 

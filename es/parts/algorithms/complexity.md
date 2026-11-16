@@ -1,6 +1,6 @@
 # Complejidad {.unnumbered}
 
-La complejidad algorítmica en computación cuántica estudia los recursos necesarios para resolver problemas usando ordenadores cuánticos. A diferencia de la computación clásica, donde nos enfocamos en pasos temporales, en computing cuántico consideramos la número de qubits, la profundidad del circuito y la complejidad de las puertas.
+La complejidad algorítmica en computación cuántica estudia los recursos necesarios para resolver problemas usando ordenadores cuánticos. A diferencia de la computación clásica, donde nos enfocamos en pasos temporales, en cómputo cuántico consideramos el número de qubits, la profundidad del circuito y la complejidad de las puertas.
 
 ## Clasificación de problemas
 
